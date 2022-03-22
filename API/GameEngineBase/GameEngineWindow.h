@@ -4,11 +4,10 @@
 #include "GameEngineMath.h"
 #include "GameEngineDebug.h"
 
-// 설명 :
 class GameEngineWindow
 {
 private:
-	static GameEngineWindow* Inst_;
+	static GameEngineWindow* Inst_; // 객체를 생성하지 않고 바로 사용
 
 public:
 	inline static GameEngineWindow& GetInst()
@@ -26,9 +25,9 @@ public:
 	}
 
 public:
-	void RegClass(HINSTANCE _hInst);
-	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title);
-	void ShowGameWindow();
+	void RegClass(HINSTANCE _hInst); // window 생성을 위한 기본 설정
+	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title); // window 생성
+	void ShowGameWindow(); // 생성된 window 표출
 	void MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)());
 
 	void SetWindowScaleAndPosition(float4 _Pos, float4 _Scale);

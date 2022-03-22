@@ -4,7 +4,8 @@
 #include <GameEngineBase/GameEngineDebug.h>
 
 // 게임엔진이란 게임 그자체의 시작점과 끝점 실행중을 담당하는 녀석이다.
-// 설명 :
+
+// 전방선언
 class GameEngineImage;
 class GameEngineLevel;
 class GameEngine
@@ -13,7 +14,6 @@ public:
 	GameEngine();
 	~GameEngine();
 
-	// delete Function
 	GameEngine(const GameEngine& _Other) = delete;
 	GameEngine(GameEngine&& _Other) noexcept = delete;
 	GameEngine& operator=(const GameEngine& _Other) = delete;
@@ -75,17 +75,10 @@ private:
 	static GameEngineImage* WindowMainImage_; // 그려지면 화면에 진짜 나오게 되는 이미지
 	static GameEngineImage* BackBufferImage_; // 깜빡임을 해결하려고 버퍼로 사용하는 이미지
 
-	static void WindowCreate();
-	static void EngineInit();
-	static void EngineLoop();
-	static void EngineEnd();
+	static void WindowCreate(); 
+	static void EngineInit(); // 무조건 구현하기
+	static void EngineLoop(); // 무조건 구현하기
+	static void EngineEnd(); // 무조건 구현하기
 
 
 };
-
-//class IGameEngineInstance
-//{
-//	virtual void GameInit() = 0;
-//	virtual void GameLoop() = 0;
-//	virtual void GameEnd() = 0;
-//};

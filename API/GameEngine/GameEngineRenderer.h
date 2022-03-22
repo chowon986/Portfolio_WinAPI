@@ -1,20 +1,28 @@
 #pragma once
-#include "GameEngineImage.h"
 #include "GameEngineEnum.h"
+#include "GameEngineActorSubObject.h"
 
-// 설명 :
-class GameEngineRenderer
+class GameEngineImage;
+class GameEngineRenderer : public GameEngineActorSubObject
+
 {
+	friend GameEngineActor;
+
 public:
 	// constrcuter destructer
 	GameEngineRenderer();
-	~GameEngineRenderer();
+	virtual ~GameEngineRenderer();
 
 	// delete Function
 	GameEngineRenderer(const GameEngineRenderer& _Other) = delete;
 	GameEngineRenderer(GameEngineRenderer&& _Other) noexcept = delete;
 	GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
 	GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
+
+	inline void SetPivot(const float4& _Pos)
+	{
+		RenderPivot_ = _Pos;
+	}
 
 	inline void SetType(const RenderPivot& _Type)
 	{
@@ -28,7 +36,7 @@ protected:
 
 private:
 	GameEngineImage* Image_;
-	RenderPivot PivotType;
-
+	RenderPivot PivotType; // 센터, bot
+	float4 RenderPivot_;
 };
 

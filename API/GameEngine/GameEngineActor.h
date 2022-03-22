@@ -70,8 +70,12 @@ public:
 	// 가장 빠를겁니다.
 	// 디폴트 인자는 선언에서만 지정 가능합니다.
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+	void Renderering ();
 
 private:
+	// 사용 x 함수 스택 줄이려고 멤버 변수로 둔 것. 이터레이터
 	std::list<GameEngineRenderer*> RenderList_;
+	std::list<GameEngineRenderer*>::iterator StartRenderIter;
+	std::list<GameEngineRenderer*>::iterator EndRenderIter;
 };
 

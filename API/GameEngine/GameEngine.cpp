@@ -41,7 +41,7 @@ void GameEngine::GameEnd()
 
 void GameEngine::WindowCreate()
 {
-    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "GameWindow");
+    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Kirby Squeak Squad");
     GameEngineWindow::GetInst().ShowGameWindow();
     GameEngineWindow::GetInst().MessageLoop(EngineInit, EngineLoop);
 }

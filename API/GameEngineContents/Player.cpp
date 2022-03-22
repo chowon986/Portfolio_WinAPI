@@ -17,16 +17,14 @@ void Player::Start()
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale({ 100, 100 });
 
-	CreateRenderer("Idle.bmp");
+	CreateRenderer("Background.bmp");
 
 
 }
 
 void Player::Render()
 {
-	// DebugRectRender();
-
-	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find("Idle.bmp");
+	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find("Background.bmp");
 	if (nullptr == FindImage)
 	{
 		MsgBoxAssert("CCCCC!");
