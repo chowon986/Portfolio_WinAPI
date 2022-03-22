@@ -17,10 +17,7 @@ void Kirby::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
 
-	// 리소스를 다 로드하지 못하는 상황이 올수가 없다.
-
-	GameEngineImageManager::GetInst()->Load("C:\\Background.bmp", "Background.bmp");
-
+	GameEngineImageManager::GetInst()->Load("C:\\R\\BackgroundE.bmp", "BackgroundE.bmp");
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");

@@ -1,5 +1,6 @@
 #include "Monster.h"
 
+
 Monster::Monster()
 {
 }
@@ -7,3 +8,5 @@ Monster::Monster()
 Monster::~Monster()
 {
 }
+
+

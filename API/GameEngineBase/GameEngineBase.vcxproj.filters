@@ -16,6 +16,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{bc3a61b5-4a19-446c-a606-1b353ffc62fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{8daeae6a-a957-42be-a949-9c8cf9db8341}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h">
@@ -30,6 +33,9 @@
     <ClInclude Include="GameEngineWindow.h">
       <Filter>Platform</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineString.h">
+      <Filter>String</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">
@@ -43,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineWindow.cpp">
       <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineString.cpp">
+      <Filter>String</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

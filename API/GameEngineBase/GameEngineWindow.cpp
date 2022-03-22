@@ -6,7 +6,7 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
     {
     case WM_DESTROY:
         GameEngineWindow::GetInst().Off();
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        break;
 
     case WM_PAINT:
     {
@@ -14,13 +14,21 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
         HDC hdc = BeginPaint(hWnd, &ps);
         // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    default:
         break;
     }
 
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    case WM_CLOSE:
+    {
+        GameEngineWindow::GetInst().Off();
+        break;
+    }
+
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+
+    }
+
+    return 0;
 }
 
 GameEngineWindow* GameEngineWindow::Inst_ = new GameEngineWindow();
