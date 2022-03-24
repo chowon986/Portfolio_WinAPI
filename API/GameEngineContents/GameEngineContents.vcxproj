@@ -127,6 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,6 +164,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="IntroLevel0.h" />
+    <ClInclude Include="IntroLevel1.h" />
+    <ClInclude Include="IntroLevel2.h" />
+    <ClInclude Include="IntroLevel3.h" />
+    <ClInclude Include="IntroLevel4.h" />
     <ClInclude Include="Kirby.h">
       <SubType>
       </SubType>
@@ -179,15 +185,37 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TitleBackGround.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="PlayLevel0.h" />
+    <ClInclude Include="PlayLevel1.h" />
+    <ClInclude Include="PlayLevel10.h" />
+    <ClInclude Include="PlayLevel11.h" />
+    <ClInclude Include="PlayLevel12.h" />
+    <ClInclude Include="PlayLevel13.h" />
+    <ClInclude Include="PlayLevel14.h" />
+    <ClInclude Include="PlayLevel15.h" />
+    <ClInclude Include="PlayLevel16.h" />
+    <ClInclude Include="PlayLevel17.h" />
+    <ClInclude Include="PlayLevel18.h" />
+    <ClInclude Include="PlayLevel19.h" />
+    <ClInclude Include="PlayLevel2.h" />
+    <ClInclude Include="PlayLevel20.h" />
+    <ClInclude Include="PlayLevel21.h" />
+    <ClInclude Include="PlayLevel22.h" />
+    <ClInclude Include="PlayLevel23.h" />
+    <ClInclude Include="PlayLevel24.h" />
+    <ClInclude Include="PlayLevel25.h" />
+    <ClInclude Include="PlayLevel26.h" />
+    <ClInclude Include="PlayLevel27.h" />
+    <ClInclude Include="PlayLevel28.h" />
+    <ClInclude Include="PlayLevel29.h" />
+    <ClInclude Include="PlayLevel3.h" />
+    <ClInclude Include="PlayLevel4.h" />
+    <ClInclude Include="PlayLevel5.h" />
+    <ClInclude Include="PlayLevel6.h" />
+    <ClInclude Include="PlayLevel7.h" />
+    <ClInclude Include="PlayLevel8.h" />
+    <ClInclude Include="PlayLevel9.h" />
     <ClInclude Include="TitleLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TitleLogo.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -205,6 +233,11 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="IntroLevel0.cpp" />
+    <ClCompile Include="IntroLevel1.cpp" />
+    <ClCompile Include="IntroLevel2.cpp" />
+    <ClCompile Include="IntroLevel3.cpp" />
+    <ClCompile Include="IntroLevel4.cpp" />
     <ClCompile Include="Kirby.cpp">
       <SubType>
       </SubType>
@@ -221,15 +254,37 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="PlayLevel0.cpp" />
+    <ClCompile Include="PlayLevel1.cpp" />
+    <ClCompile Include="PlayLevel10.cpp" />
+    <ClCompile Include="PlayLevel11.cpp" />
+    <ClCompile Include="PlayLevel12.cpp" />
+    <ClCompile Include="PlayLevel13.cpp" />
+    <ClCompile Include="PlayLevel14.cpp" />
+    <ClCompile Include="PlayLevel15.cpp" />
+    <ClCompile Include="PlayLevel16.cpp" />
+    <ClCompile Include="PlayLevel17.cpp" />
+    <ClCompile Include="PlayLevel18.cpp" />
+    <ClCompile Include="PlayLevel19.cpp" />
+    <ClCompile Include="PlayLevel2.cpp" />
+    <ClCompile Include="PlayLevel20.cpp" />
+    <ClCompile Include="PlayLevel21.cpp" />
+    <ClCompile Include="PlayLevel22.cpp" />
+    <ClCompile Include="PlayLevel23.cpp" />
+    <ClCompile Include="PlayLevel24.cpp" />
+    <ClCompile Include="PlayLevel25.cpp" />
+    <ClCompile Include="PlayLevel26.cpp" />
+    <ClCompile Include="PlayLevel27.cpp" />
+    <ClCompile Include="PlayLevel28.cpp" />
+    <ClCompile Include="PlayLevel29.cpp" />
+    <ClCompile Include="PlayLevel3.cpp" />
+    <ClCompile Include="PlayLevel4.cpp" />
+    <ClCompile Include="PlayLevel5.cpp" />
+    <ClCompile Include="PlayLevel6.cpp" />
+    <ClCompile Include="PlayLevel7.cpp" />
+    <ClCompile Include="PlayLevel8.cpp" />
+    <ClCompile Include="PlayLevel9.cpp" />
     <ClCompile Include="TitleLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
       <SubType>
       </SubType>
     </ClCompile>

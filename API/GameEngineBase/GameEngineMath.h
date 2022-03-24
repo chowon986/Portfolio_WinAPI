@@ -86,21 +86,29 @@ public:
 	}
 
 public:
+
+	// 인자를 받지 않고 생성하면 0.0f로 초기화 
 	float4()
 		: x(0.0f), y(0.0f), z(0.0f), w(1.0f)
 	{
 
 	}
+
+	// x와 y인자를 받으면 그 인자값으로 x,y값 초기화
 	float4(float _x, float _y)
 		: x(_x), y(_y), z(0.0f), w(1.0f)
 	{
 
 	}
+
+	// x, y z 인자를 받으면 그 인자값으로 x,y,z값 초기화
 	float4(float _x, float _y, float _z)
 		: x(_x), y(_y), z(_z), w(1.0f)
 	{
 
 	}
+
+	// x, y z,w 인자를 받으면 그 인자값으로 x,y,z,w값 초기화
 	float4(float _x, float _y, float _z, float _w)
 		: x(_x), y(_y), z(_z), w(_w)
 	{
@@ -117,21 +125,26 @@ public:
 	float4 Scale;
 
 public:
+
+	// 왼쪽으로 반만큼 이동
 	int CenterLeft()
 	{
 		return Pos.ix() - Scale.hix();
 	}
 
+	// 오른쪽으로 반만큼 이동
 	int CenterRight()
 	{
 		return Pos.ix() + Scale.hix();
 	}
 
+	// 위쪽으로 반만큼 이동
 	int CenterTop()
 	{
 		return Pos.iy() - Scale.hiy();
 	}
 
+	// 아래쪽으로 반만큼 이동
 	int CenterBot()
 	{
 		return Pos.iy() + Scale.hiy();

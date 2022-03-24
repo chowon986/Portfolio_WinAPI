@@ -7,7 +7,7 @@
 class GameEngineDebug
 {
 public:
-	static void LeakCheckOn();
+	static void LeakCheckOn(); // 릭 체크
 
 protected:
 
@@ -21,11 +21,12 @@ private:
 	GameEngineDebug& operator=(GameEngineDebug&& _Other) noexcept = delete;
 };
 
-// 매크로 설정 c_str()과 text의 차이 :
+// char*만 가능
 #define MsgBoxAssert(Text) 	MessageBeep(0); \
 MessageBoxA(nullptr, Text, "Error", MB_OK); \
 assert(false); 
 
+// string을 char로
 #define MsgBoxAssertString(Text) 	MessageBeep(0); \
 MessageBoxA(nullptr, (Text).c_str(), "Error", MB_OK); \
 assert(false); 

@@ -69,7 +69,10 @@ public:
 	// 벡터의 값
 	// 가장 빠를겁니다.
 	// 디폴트 인자는 선언에서만 지정 가능합니다.
+	// 랜더러의 역할 : 화면에 표시를 해주는 객체
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& Scale, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+
 	void Renderering ();
 
 private:

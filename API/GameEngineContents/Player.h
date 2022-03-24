@@ -5,6 +5,8 @@
 class Player : public GameEngineActor
 {
 public:
+	int LifeCount_;
+	int HP_;
 	// constrcuter destructer
 	Player();
 	~Player();
@@ -20,5 +22,19 @@ protected:
 private:
 	void Start() override;
 	void Render() override;
+	void Walk();
+	void Run();
+	void GoUp();
+	void GoDown();
+	void GetNewAbility();
+	void Swim();
+	void Attack();
+	void RideWarpStar();
+	void Throwaway();
+	void Sliding();
+	void Sit();
+	void Hovering();
+	void Blotting();
+	void UseDoor();
 };
 

@@ -8,9 +8,9 @@ class GameEngineActorSubObject
 	friend GameEngineActor;
 
 public:
-	//생성자, 소멸자, 복사 생성자, Rvalue 복사 생성자, 대입 연산자, Rvalue 대입 연산자
 	GameEngineActorSubObject();
-	~GameEngineActorSubObject();
+	virtual ~GameEngineActorSubObject(); // vitual로 만들었으면 상속을 하겠다는거에요
+
 
 	GameEngineActorSubObject(const GameEngineActorSubObject& _other) = delete;
 	GameEngineActorSubObject(GameEngineActorSubObject&& _other) = delete;

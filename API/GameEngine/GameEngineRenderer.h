@@ -26,17 +26,27 @@ public:
 
 	inline void SetPivot(const float4& _Pos)
 	{
+		// 점 하나를 잡은거
 		RenderPivot_ = _Pos;
 	}
 
 	inline void SetType(const RenderPivot& _Type)
 	{
+		// bot, center 중 선택
 		PivotType_ = _Type;
 	}
 
 	inline void SetScaleMode(const RenderScaleMode& _Mode)
 	{
 		ScaleMode_ = _Mode;
+	}
+
+	void SetImageScale(); // image
+
+	void SetScale(const float4& _Scale) // 이미지 크기 그대로 잘 나오는데 왜 scale을 넣어주는가? 크기를 조절하려고 pivottype:user
+	{
+		ScaleMode_ = RenderScaleMode::User;
+		RenderScale_ = _Scale;
 	}
 
 	void SetImage(const std::string& _Name);

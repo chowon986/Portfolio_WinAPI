@@ -1,14 +1,17 @@
 #pragma once
+#include <GameEngineBase/GameEngineMath.h>
 
 // Ό³Έν :
 class Monster
 {
+public: 
+	int HP_;
+	float4 Pos_;
+
 public:
-	// constrcuter destructer
 	Monster();
 	~Monster();
 
-	// delete Function
 	Monster(const Monster& _Other) = delete;
 	Monster(Monster&& _Other) noexcept = delete;
 	Monster& operator=(const Monster& _Other) = delete;
@@ -17,6 +20,10 @@ public:
 protected:
 
 private:
-
+	void Walk();
+	void Jump();
+	bool IsDie();
+	void attack();
+	void GetPos(float4 _Pos);
 };
 

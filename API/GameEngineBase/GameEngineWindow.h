@@ -7,12 +7,14 @@
 class GameEngineWindow
 {
 private:
-	static GameEngineWindow* Inst_; // 객체를 생성하지 않고 바로 사용
+	static GameEngineWindow* Inst_; 
 
 public:
+	// 싱글톤 : 단 한개만 만들 수 있다.
+	// 생성자, 멤버 변수가 private이기 때문에 생성 불가
 	inline static GameEngineWindow& GetInst()
 	{
-		return *Inst_;
+		return *Inst_; // 값
 	}
 
 	static void Destroy()

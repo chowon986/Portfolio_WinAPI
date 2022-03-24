@@ -54,6 +54,21 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	return NewRenderer;
 }
 
+GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _Image, const float4& Scale, RenderPivot _PivotType, const float4& _PivotPos)
+{
+	// HP 바 처럼 크기 조절이 필요한 경우 사용
+	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
+
+	NewRenderer->SetActor(this);
+	NewRenderer->SetImage(_Image);
+	NewRenderer->SetImageScale();
+	NewRenderer->SetPivot(_PivotPos);
+	NewRenderer->SetType(_PivotType);
+
+	RenderList_.push_back(NewRenderer);
+	return NewRenderer;
+}
+
 void GameEngineActor::Renderering()
 {
 	StartRenderIter = RenderList_.begin();

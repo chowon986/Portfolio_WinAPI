@@ -1,7 +1,11 @@
 #include "TitleLevel.h"
 #include "GameEngine/GameEngine.h"
-#include "TitleLogo.h"
-#include "TitleBackGround.h"
+#include "IntroLevel0.h"
+#include "IntroLevel1.h"
+#include "IntroLevel2.h"
+#include "IntroLevel3.h"
+#include "IntroLevel4.h"
+
 
 
 TitleLevel::TitleLevel()
@@ -14,12 +18,15 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
-	// 회사마다 다를수있겠지만
-	// Actor를 만들어야죠?
+	CreateActor<IntroLevel0>("IntroLevel0", 0);
+	CreateActor<IntroLevel1>("IntroLevel1", 1);
+	CreateActor<IntroLevel2>("IntroLevel1", 2);
+	CreateActor<IntroLevel3>("IntroLevel1", 3);
+	CreateActor<IntroLevel4>("IntroLevel1", 4);
+}
 
-	CreateActor<TitleBackGround>("TitleLogo", 0);
-
-	CreateActor<TitleLogo>("TitleLogo", 1);
+void TitleLevel::LevelChangeStart()
+{
 
 }
 

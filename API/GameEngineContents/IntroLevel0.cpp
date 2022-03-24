@@ -1,22 +1,24 @@
-#include "TitleBackGround.h"
+// Nintendo ¿Â∏È
+
+#include "IntroLevel0.h"
 #include <GameEngineBase/GameEngineWindow.h>
 
-TitleBackGround::TitleBackGround()
+IntroLevel0::IntroLevel0()
 {
 	// Level_ = nullptr;
 }
 
-TitleBackGround::~TitleBackGround()
+IntroLevel0::~IntroLevel0()
 {
 }
 
-void TitleBackGround::Start()
+void IntroLevel0::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale(GameEngineWindow::GetScale());
 }
 
-void TitleBackGround::Render()
+void IntroLevel0::Render()
 {
 	DebugRectRender();
 }

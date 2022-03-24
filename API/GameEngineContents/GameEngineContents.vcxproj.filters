@@ -16,15 +16,15 @@
     <Filter Include="Play\Global">
       <UniqueIdentifier>{a2c75bf8-c9a7-45f4-8a2c-bc3a9920f741}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Title\Background">
+      <UniqueIdentifier>{ead959a7-db33-4669-9ee0-0d7e5f370f3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Background">
+      <UniqueIdentifier>{6de6653d-bd35-4b90-94b5-338c162301a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kirby.h" />
-    <ClInclude Include="TitleBackGround.h">
-      <Filter>Title</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Title</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Play</Filter>
     </ClInclude>
@@ -46,15 +46,114 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="IntroLevel0.h">
+      <Filter>Title\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel1.h">
+      <Filter>Title\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel2.h">
+      <Filter>Title\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel3.h">
+      <Filter>Title\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel4.h">
+      <Filter>Title\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel0.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel1.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel2.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel3.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel4.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel5.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel6.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel29.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel7.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel8.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel9.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel10.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel11.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel12.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel13.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel14.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel15.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel16.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel17.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel18.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel19.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel20.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel21.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel22.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel23.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel24.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel25.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel26.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel27.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel28.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Kirby.cpp" />
-    <ClCompile Include="TitleBackGround.cpp">
-      <Filter>Title</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Title</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Play</Filter>
     </ClCompile>
@@ -75,6 +174,111 @@
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel0.cpp">
+      <Filter>Title\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel1.cpp">
+      <Filter>Title\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel2.cpp">
+      <Filter>Title\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel3.cpp">
+      <Filter>Title\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel4.cpp">
+      <Filter>Title\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel0.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel1.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel2.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel3.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel4.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel5.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel6.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel7.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel8.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel9.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel10.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel11.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel12.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel13.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel14.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel15.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel16.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel17.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel18.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel19.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel20.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel21.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel22.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel23.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel24.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel25.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel26.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel27.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel28.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel29.cpp">
+      <Filter>Play\Background</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
