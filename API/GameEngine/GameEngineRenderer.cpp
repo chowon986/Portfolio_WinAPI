@@ -1,6 +1,5 @@
 #include "GameEngineRenderer.h"
 #include "GameEngineImageManager.h"
-#include "GameEngineImage.h"
 #include "GameEngine.h"
 #include <GameEngineBase/GameEngineDebug.h>
 

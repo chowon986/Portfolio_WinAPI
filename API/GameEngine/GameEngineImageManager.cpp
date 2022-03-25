@@ -24,7 +24,6 @@ GameEngineImageManager::~GameEngineImageManager()
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////////////
 GameEngineImage* GameEngineImageManager::Find(const std::string& _Name)
 {
 	std::string EngineName = GameEngineString::ToUpperReturn(_Name);

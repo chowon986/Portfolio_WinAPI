@@ -25,9 +25,6 @@ bool GameEnginePath::IsExits()
 	return std::filesystem::exists(Path_);
 }
 
-
-/// /////////////////////////////////////2222
-
 std::string GameEnginePath::GetExtension()
 {
 	return Path_.extension().string();

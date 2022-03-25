@@ -46,6 +46,9 @@
     <ClInclude Include="GameEngineActorSubObject.h">
       <Filter>Object\Actor\SubObject</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineUpdateObject.h">
+      <Filter>Object\Actor\SubObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineImageManager.cpp">
@@ -68,6 +71,9 @@
       <Filter>Object\Actor\SubObject</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineActorSubObject.cpp">
+      <Filter>Object\Actor\SubObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineUpdateObject.cpp">
       <Filter>Object\Actor\SubObject</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "PlayLevel.h"
 #include "EndingLevel.h"
 #include "TitleLevel.h"
+#include "IntroLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -17,9 +18,8 @@ Kirby::~Kirby()
 
 void Kirby::GameInit()
 {
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition({0, 0 }, { 1024, 576 });
 
-	// 현재 폴더
 	GameEngineDirectory ResourcesDir;
 	ResourcesDir.MoveParent("Portfolio_WinAPI");
 	ResourcesDir.Move("AllResources");
@@ -32,10 +32,12 @@ void Kirby::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	CreateLevel<IntroLevel>("Intro");
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Play");
+	ChangeLevel("Intro");
+	//ChangeLevel("Play");
 }
 
 void Kirby::GameLoop()

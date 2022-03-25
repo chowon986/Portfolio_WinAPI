@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "GameEngine\GameEngine.vcxproj", "{EACE59C3-D182-4968-BC33-1A9287DEC408}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level0", "Level0", "{F5158566-625F-4913-B87D-DF2329C2C51E}"
-	ProjectSection(SolutionItems) = preProject
-		GameEngine\GameEngineImageManager.h = GameEngine\GameEngineImageManager.h
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level1", "Level1", "{CC650D3B-BB00-42FA-AD40-A3C771350B08}"
 EndProject

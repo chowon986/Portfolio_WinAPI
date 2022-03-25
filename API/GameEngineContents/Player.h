@@ -7,6 +7,7 @@ class Player : public GameEngineActor
 public:
 	int LifeCount_;
 	int HP_;
+	
 	// constrcuter destructer
 	Player();
 	~Player();
@@ -22,6 +23,7 @@ protected:
 private:
 	void Start() override;
 	void Render() override;
+	void Update() override;
 	void Walk();
 	void Run();
 	void GoUp();

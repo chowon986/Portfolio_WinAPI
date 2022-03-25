@@ -32,10 +32,16 @@ public:
 		return Scale_;
 	}
 
+	inline void SetMove(float4 _Value)
+	{
+		Position_ += _Value;
+	}
+
 	inline void SetPosition(float4 _Value)
 	{
 		Position_ = _Value;
 	}
+
 	inline void SetScale(float4 _Value)
 	{
 		Scale_ = _Value;
@@ -72,7 +78,8 @@ public:
 	// 랜더러의 역할 : 화면에 표시를 해주는 객체
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& Scale, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-
+	// 초
+	GameEngineRenderer* CreateRendererToColor(const std::string& _Image, RenderPivot _PivotType, const unsigned int& _TransColor);
 	void Renderering ();
 
 private:

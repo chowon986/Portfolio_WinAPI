@@ -1,14 +1,11 @@
 #pragma once
 
-// 설명 :
 class GameEngineMath
 {
 private:
-	// constrcuter destructer
 	GameEngineMath();
 	~GameEngineMath();
 
-	// delete Function
 	GameEngineMath(const GameEngineMath& _Other) = delete;
 	GameEngineMath(GameEngineMath&& _Other) noexcept = delete;
 	GameEngineMath& operator=(const GameEngineMath& _Other) = delete;
@@ -23,6 +20,11 @@ private:
 class float4
 {
 public:
+	static float4 LEFT;
+	static float4 RIGHT;
+	static float4 UP;
+	static float4 DOWN;
+
 	float x;
 	float y;
 	float z;
@@ -85,6 +87,21 @@ public:
 		return { x + _Other.x, y + _Other.y, z + _Other.z, 1.0f };
 	}
 
+	float4 operator*(const float4& _Other) const
+	{
+		return { x * _Other.x, y * _Other.y, z * _Other.z, 1.0f };
+	}
+
+
+	float4& operator+=(const float4& _Other)
+	{
+		x += _Other.x;
+		y += _Other.y;
+		z += _Other.z;
+
+		return *this;
+	}
+
 public:
 
 	// 인자를 받지 않고 생성하면 0.0f로 초기화 
@@ -114,6 +131,7 @@ public:
 	{
 
 	}
+
 
 
 };

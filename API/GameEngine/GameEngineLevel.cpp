@@ -56,6 +56,7 @@ void GameEngineLevel::ActorUpdate()
 		}
 	}
 }
+
 void GameEngineLevel::ActorRender()
 {
 	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;

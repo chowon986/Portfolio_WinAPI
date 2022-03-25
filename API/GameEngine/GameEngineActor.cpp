@@ -16,6 +16,10 @@ GameEngineActor::~GameEngineActor()
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (nullptr == (*StartIter))
+		{
+			continue;
+		}
 		delete (*StartIter);
 		(*StartIter) = nullptr;
 	}
@@ -47,24 +51,10 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	
 	NewRenderer->SetActor(this);
 	NewRenderer->SetImage(_Image);
-	NewRenderer->SetPivot(_PivotPos);
-	NewRenderer->SetType(_PivotType);
-	
-	RenderList_.push_back(NewRenderer);
-	return NewRenderer;
-}
-
-GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _Image, const float4& Scale, RenderPivot _PivotType, const float4& _PivotPos)
-{
-	// HP 바 처럼 크기 조절이 필요한 경우 사용
-	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
-
-	NewRenderer->SetActor(this);
-	NewRenderer->SetImage(_Image);
 	NewRenderer->SetImageScale();
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetType(_PivotType);
-
+	
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
@@ -78,4 +68,34 @@ void GameEngineActor::Renderering()
 	{
 		(*StartRenderIter)->Render();
 	}
+}
+
+GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _Image, const float4& _Scale, RenderPivot _PivotType /*= RenderPivot::CENTER*/, const float4& _PivotPos /*= { 0,0 }*/
+) {
+	// HP 바 처럼 크기 조절이 필요한 경우 사용
+	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
+
+	NewRenderer->SetActor(this);
+	NewRenderer->SetImage(_Image);
+	NewRenderer->SetScale(_Scale);
+	NewRenderer->SetPivot(_PivotPos);
+	NewRenderer->SetType(_PivotType);
+
+	RenderList_.push_back(NewRenderer);
+	return NewRenderer;
+}
+
+GameEngineRenderer* GameEngineActor::CreateRendererToColor(const std::string& _Image, RenderPivot _PivotType , const unsigned int& _TransColor)
+{
+	// 초
+	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
+
+	NewRenderer->SetActor(this);
+	NewRenderer->SetImage(_Image);
+	NewRenderer->SetImageScale();
+	NewRenderer->SetType(_PivotType);
+	NewRenderer->SetTransColor(_TransColor);
+
+	RenderList_.push_back(NewRenderer);
+	return NewRenderer;
 }
