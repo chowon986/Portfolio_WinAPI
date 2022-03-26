@@ -26,7 +26,7 @@ public:
 	std::vector<GameEngineFile> GetAllFile(const std::string& _Ext = "");
 
 protected:
-
+	
 
 private:
 

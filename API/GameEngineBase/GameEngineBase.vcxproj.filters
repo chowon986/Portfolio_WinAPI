@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Debug">
-      <UniqueIdentifier>{ee1eaa9c-81f2-43f8-a7fd-0aa3db5ee05e}</UniqueIdentifier>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{cf28bdad-935a-4032-86ae-7cb1df27596f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{86d66eb9-03b9-4d26-8e36-4d9ad26dfeb7}</UniqueIdentifier>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{c1e10807-f6a3-4081-bf90-0629b983262d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object">
-      <UniqueIdentifier>{6a16828d-611a-4307-863c-98e0edb1d7ae}</UniqueIdentifier>
+      <UniqueIdentifier>{25168f90-db51-4ae5-aa60-e0b9eba09281}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform">
-      <UniqueIdentifier>{d2a4fecf-323b-425a-a29d-a3c43333b513}</UniqueIdentifier>
+    <Filter Include="Math">
+      <UniqueIdentifier>{84a66b57-bf9c-4794-b333-c44a858aa6b8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sound">
-      <UniqueIdentifier>{bc3a61b5-4a19-446c-a606-1b353ffc62fc}</UniqueIdentifier>
+      <UniqueIdentifier>{fcdc289e-e38f-4557-94de-e54bdfb50bdd}</UniqueIdentifier>
     </Filter>
     <Filter Include="String">
-      <UniqueIdentifier>{8daeae6a-a957-42be-a949-9c8cf9db8341}</UniqueIdentifier>
+      <UniqueIdentifier>{407b6aa1-8a67-4d98-a13b-69940cfc8eeb}</UniqueIdentifier>
     </Filter>
     <Filter Include="IO">
-      <UniqueIdentifier>{2af62078-5d9e-460f-9409-045c2d15178a}</UniqueIdentifier>
+      <UniqueIdentifier>{45afdc2f-2427-49fc-a567-4e25e9fed586}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameEngineWindow.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
     <ClInclude Include="GameEngineDebug.h">
       <Filter>Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="GameEngineMath.h">
-      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineNameObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineWindow.h">
-      <Filter>Platform</Filter>
+    <ClInclude Include="GameEngineMath.h">
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineString.h">
       <Filter>String</Filter>
@@ -48,10 +48,10 @@
     <ClInclude Include="GameEnginePath.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineInput.h">
+    <ClInclude Include="GameEngineTime.h">
       <Filter>Platform</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineTime.h">
+    <ClInclude Include="GameEngineInput.h">
       <Filter>Platform</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineUpdateObject.h">
@@ -59,17 +59,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameEngineWindow.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
     <ClCompile Include="GameEngineDebug.cpp">
       <Filter>Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineMath.cpp">
-      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineNameObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineWindow.cpp">
-      <Filter>Platform</Filter>
+    <ClCompile Include="GameEngineMath.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineString.cpp">
       <Filter>String</Filter>
@@ -83,10 +83,10 @@
     <ClCompile Include="GameEnginePath.cpp">
       <Filter>IO</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineInput.cpp">
+    <ClCompile Include="GameEngineTime.cpp">
       <Filter>Platform</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineTime.cpp">
+    <ClCompile Include="GameEngineInput.cpp">
       <Filter>Platform</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineUpdateObject.cpp">

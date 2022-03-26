@@ -4,17 +4,19 @@
 #include "GameEngineMath.h"
 #include "GameEngineDebug.h"
 
+// 설명 :
 class GameEngineWindow
 {
 private:
-	static GameEngineWindow* Inst_; 
+	static GameEngineWindow* Inst_;
 
 public:
+
 	// 싱글톤 : 단 한개만 만들 수 있다.
-	// 생성자, 멤버 변수가 private이기 때문에 생성 불가
-	inline static GameEngineWindow& GetInst()
+// 생성자, 멤버 변수가 private이기 때문에 생성 불가
+	inline static GameEngineWindow& GetInst() 
 	{
-		return *Inst_; // 값
+		return *Inst_;
 	}
 
 	static void Destroy()
@@ -28,8 +30,8 @@ public:
 
 public:
 	void RegClass(HINSTANCE _hInst); // window 생성을 위한 기본 설정
-	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title); // window 생성
-	void ShowGameWindow(); // 생성된 window 표출
+	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title);// window 생성
+	void ShowGameWindow();// 생성된 window 표출
 	void MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)());
 
 	void SetWindowScaleAndPosition(float4 _Pos, float4 _Scale);

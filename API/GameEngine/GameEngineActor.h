@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineBase/GameEngineNameObject.h>
+#include <GameEngineBase/GameEngineUpdateObject.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include "GameEngineEnum.h"
 #include <list>
@@ -7,9 +8,9 @@
 // 설명 :
 class GameEngineRenderer;
 class GameEngineLevel;
-class GameEngineActor : public GameEngineNameObject
+class GameEngineActor : public GameEngineNameObject, public GameEngineUpdateObject
 {
-	//// ActorBase
+//// ActorBase
 public:
 	friend GameEngineLevel;
 
@@ -23,6 +24,11 @@ public:
 	GameEngineActor& operator=(const GameEngineActor& _Other) = delete;
 	GameEngineActor& operator=(GameEngineActor&& _Other) noexcept = delete;
 
+	inline GameEngineLevel* GetLevel() 
+	{
+		return Level_;
+	}
+
 	inline float4 GetPosition()
 	{
 		return Position_;
@@ -31,6 +37,7 @@ public:
 	{
 		return Scale_;
 	}
+
 
 	inline void SetMove(float4 _Value)
 	{
@@ -41,7 +48,6 @@ public:
 	{
 		Position_ = _Value;
 	}
-
 	inline void SetScale(float4 _Value)
 	{
 		Scale_ = _Value;
@@ -69,23 +75,23 @@ private:
 		Level_ = _Level;
 	}
 
-
 	/////////////////////////////////////////////////// Render
 public:
 	// 벡터의 값
 	// 가장 빠를겁니다.
 	// 디폴트 인자는 선언에서만 지정 가능합니다.
-	// 랜더러의 역할 : 화면에 표시를 해주는 객체
-	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& Scale, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-	// 초
-	GameEngineRenderer* CreateRendererToColor(const std::string& _Image, RenderPivot _PivotType, const unsigned int& _TransColor);
-	void Renderering ();
+		// 랜더러의 역할 : 화면에 표시를 해주는 객체
+	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = {0,0});
+
+	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& _Scale, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+
+	void Renderering();
 
 private:
-	// 사용 x 함수 스택 줄이려고 멤버 변수로 둔 것. 이터레이터
-	std::list<GameEngineRenderer*> RenderList_;
+	// 이터레이터
 	std::list<GameEngineRenderer*>::iterator StartRenderIter;
 	std::list<GameEngineRenderer*>::iterator EndRenderIter;
+
+	std::list<GameEngineRenderer*> RenderList_;
 };
 

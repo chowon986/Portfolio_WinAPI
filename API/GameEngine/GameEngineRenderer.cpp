@@ -3,18 +3,21 @@
 #include "GameEngine.h"
 #include <GameEngineBase/GameEngineDebug.h>
 
-#pragma comment(lib, "msimg32.lib") // 기본 그래픽 처리에 대한 라이브러리
+// 
+// 11111111 00000000 11111111
 
-GameEngineRenderer::GameEngineRenderer()
+#pragma comment(lib, "msimg32.lib")// 기본 그래픽 처리에 대한 라이브러리
+
+GameEngineRenderer::GameEngineRenderer() 
 	: Image_(nullptr)
 	, PivotType_(RenderPivot::CENTER)
 	, ScaleMode_(RenderScaleMode::Image)
-	, TransColor_(RGB(255, 0, 255))
-	// A는 투명도, 지금 상태에선 255를 나타냄 (불투명)
+	, TransColor_(RGB(255, 0, 255)) 	// A는 투명도, 지금 상태에선 255를 나타냄 (불투명)
+	, RenderImagePivot_({0,0})
 {
 }
 
-GameEngineRenderer::~GameEngineRenderer()
+GameEngineRenderer::~GameEngineRenderer() 
 {
 }
 
@@ -25,11 +28,14 @@ void GameEngineRenderer::SetImageScale()
 		MsgBoxAssert("존재하지 않는 이미지로 크기를 조절하려고 했습니다.");
 		return;
 	}
+
 	ScaleMode_ = RenderScaleMode::Image;
 	RenderScale_ = Image_->GetScale();
+	RenderImageScale_= Image_->GetScale();
 }
 
-void GameEngineRenderer::SetImage(const std::string& _Name)
+
+void GameEngineRenderer::SetImage(const std::string& _Name) 
 {
 	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Name);
 	if (nullptr == FindImage)// 세팅 안하고 크기 조절하려 했다.
@@ -41,11 +47,11 @@ void GameEngineRenderer::SetImage(const std::string& _Name)
 	Image_ = FindImage;
 }
 
-void GameEngineRenderer::Render()
+void GameEngineRenderer::Render() 
 {
 	if (nullptr == Image_)
 	{
-		MsgBoxAssert("랜더러에 이미지가 세팅되어 있지 않으면 랭더링이 불가합니다.");
+		MsgBoxAssert("랜더러에 이미지가 세팅되어 있지 않으면 랜더링이 안됩니다.");
 		return;
 	}
 
@@ -54,13 +60,26 @@ void GameEngineRenderer::Render()
 	switch (PivotType_)
 	{
 	case RenderPivot::CENTER:
-		GameEngine::BackBufferImage()->TransCopyCenterScale(Image_, RenderPos, RenderScale_, TransColor_);
+		GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - RenderScale_.Half(), RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
-		// 센터만 사용할거면 주석
-		// 아니면 주석 풀기 GameEngine::BackBufferImage()->BitCopyBot(Image_, RenderPos);
+		// GameEngine::BackBufferImage()->TransCopyCenterScale(Image_, RenderPos, RenderScale, TransColor_);
+		// 센터만 사용할거면 주석 아니면 주석 풀기
 		break;
 	default:
 		break;
 	}
+}
+
+void GameEngineRenderer::SetIndex(size_t _Index) //아마 애니메이션
+{
+	if (false == Image_->IsCut())
+	{
+		MsgBoxAssert("이미지를 부분적으로 사용할수 있게 잘려지있지 않은 이미지 입니다.");
+		return;
+	}
+
+	RenderImagePivot_ = Image_->GetCutPivot(_Index);
+	RenderScale_ = Image_->GetCutScale(_Index);
+	RenderImageScale_ = Image_->GetCutScale(_Index);
 }

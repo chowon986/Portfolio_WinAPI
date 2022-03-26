@@ -2,10 +2,11 @@
 #include <string>
 #include <algorithm>
 
-class GameEngineString // string과 관련된 문자열 처리 함수 모음
+// 설명 :
+class GameEngineString// string과 관련된 문자열 처리 함수 모음
 {
 public:
-	static void ToUpper(std::string& _Text)
+	static void ToUpper(std::string& _Text) 
 	{
 		for (size_t i = 0; i < _Text.size(); i++)
 		{
@@ -25,15 +26,19 @@ public:
 		return NewText;
 	}
 
+protected:
 
 private:
+	// constrcuter destructer
 	GameEngineString();
 	~GameEngineString();
 
-	GameEngineString(const GameEngineString& _other) = delete;
-	GameEngineString(GameEngineString&& _other) = delete;
-	GameEngineString& operator=(const GameEngineString& _other) = delete;
-	GameEngineString& operator=(GameEngineString&& _other) noexcept = delete;
+	// delete Function
+	GameEngineString(const GameEngineString& _Other) = delete;
+	GameEngineString(GameEngineString&& _Other) noexcept = delete;
+	GameEngineString& operator=(const GameEngineString& _Other) = delete;
+	GameEngineString& operator=(GameEngineString&& _Other) noexcept = delete;
+
 
 };
 

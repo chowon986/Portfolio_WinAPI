@@ -1,11 +1,14 @@
 #pragma once
 
+// 설명 :
 class GameEngineMath
 {
 private:
+	// constrcuter destructer
 	GameEngineMath();
 	~GameEngineMath();
 
+	// delete Function
 	GameEngineMath(const GameEngineMath& _Other) = delete;
 	GameEngineMath(GameEngineMath&& _Other) noexcept = delete;
 	GameEngineMath& operator=(const GameEngineMath& _Other) = delete;
@@ -17,7 +20,7 @@ private:
 
 };
 
-class float4
+class float4 
 {
 public:
 	static float4 LEFT;
@@ -25,6 +28,7 @@ public:
 	static float4 UP;
 	static float4 DOWN;
 
+public:
 	float x;
 	float y;
 	float z;
@@ -74,7 +78,7 @@ public:
 
 	float4 Half() const
 	{
-		return { x * 0.5f, y * 0.5f , z * 0.5f, 1.0f };
+		return {x * 0.5f, y * 0.5f , z * 0.5f, 1.0f};
 	}
 
 	float4 operator-(const float4& _Other) const
@@ -87,13 +91,13 @@ public:
 		return { x + _Other.x, y + _Other.y, z + _Other.z, 1.0f };
 	}
 
-	float4 operator*(const float4& _Other) const
+	float4 operator*(const float _Value) const
 	{
-		return { x * _Other.x, y * _Other.y, z * _Other.z, 1.0f };
+		return { x * _Value, y * _Value, z * _Value, 1.0f };
 	}
 
 
-	float4& operator+=(const float4& _Other)
+	float4& operator+=(const float4& _Other) 
 	{
 		x += _Other.x;
 		y += _Other.y;
@@ -102,36 +106,28 @@ public:
 		return *this;
 	}
 
-public:
 
-	// 인자를 받지 않고 생성하면 0.0f로 초기화 
-	float4()
+public:
+	float4() 
 		: x(0.0f), y(0.0f), z(0.0f), w(1.0f)
 	{
 
 	}
-
-	// x와 y인자를 받으면 그 인자값으로 x,y값 초기화
 	float4(float _x, float _y)
 		: x(_x), y(_y), z(0.0f), w(1.0f)
 	{
 
 	}
-
-	// x, y z 인자를 받으면 그 인자값으로 x,y,z값 초기화
 	float4(float _x, float _y, float _z)
 		: x(_x), y(_y), z(_z), w(1.0f)
 	{
 
 	}
-
-	// x, y z,w 인자를 받으면 그 인자값으로 x,y,z,w값 초기화
 	float4(float _x, float _y, float _z, float _w)
 		: x(_x), y(_y), z(_z), w(_w)
 	{
 
 	}
-
 
 
 };
@@ -143,26 +139,21 @@ public:
 	float4 Scale;
 
 public:
-
-	// 왼쪽으로 반만큼 이동
-	int CenterLeft()
+	int CenterLeft() 
 	{
 		return Pos.ix() - Scale.hix();
 	}
 
-	// 오른쪽으로 반만큼 이동
 	int CenterRight()
 	{
 		return Pos.ix() + Scale.hix();
 	}
 
-	// 위쪽으로 반만큼 이동
 	int CenterTop()
 	{
 		return Pos.iy() - Scale.hiy();
 	}
 
-	// 아래쪽으로 반만큼 이동
 	int CenterBot()
 	{
 		return Pos.iy() + Scale.hiy();

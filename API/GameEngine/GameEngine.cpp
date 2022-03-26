@@ -17,31 +17,31 @@ HDC GameEngine::BackBufferDC()
     return BackBufferImage_->ImageDC();
 }
 
-GameEngine::GameEngine()
+GameEngine::GameEngine() 
 {
 }
 
-GameEngine::~GameEngine()
-{
-
-}
-
-void GameEngine::GameInit()
+GameEngine::~GameEngine() 
 {
 
 }
 
-void GameEngine::GameLoop()
+void GameEngine::GameInit() 
 {
 
 }
 
-void GameEngine::GameEnd()
+void GameEngine::GameLoop() 
 {
 
 }
 
-void GameEngine::WindowCreate()
+void GameEngine::GameEnd() 
+{
+
+}
+
+void GameEngine::WindowCreate() 
 {
     GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Kirby Mouse Attack");
     GameEngineWindow::GetInst().ShowGameWindow();
@@ -58,8 +58,10 @@ void GameEngine::EngineInit()
     BackBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 
 }
-void GameEngine::EngineLoop()
+void GameEngine::EngineLoop() 
 {
+    GameEngineTime::GetInst()->Update();
+
     // 엔진수준에서 매 프레임마다 체크하고 싶은거
     UserContents_->GameLoop();
 
@@ -97,9 +99,11 @@ void GameEngine::EngineLoop()
     CurrentLevel_->ActorRender();
     WindowMainImage_->BitCopy(BackBufferImage_);
 
+    CurrentLevel_->ActorRelease();
+
 }
 
-void GameEngine::EngineEnd()
+void GameEngine::EngineEnd() 
 {
     UserContents_->GameEnd();
 
@@ -115,10 +119,11 @@ void GameEngine::EngineEnd()
         delete StartIter->second;
     }
 
+
     GameEngineImageManager::Destroy();
-    GameEngineWindow::Destroy();
     GameEngineInput::Destroy();
     GameEngineTime::Destroy();
+    GameEngineWindow::Destroy();
 }
 
 void GameEngine::ChangeLevel(const std::string& _Name)

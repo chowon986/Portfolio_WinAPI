@@ -12,7 +12,10 @@ private:
 	class GameEngineKey
 	{
 		friend GameEngineInput;
-
+	
+		// 선생님이 만든 변수.
+		// winapi GetAsyncKeyState 함수로 키가 눌렸다는 것을 확인하고
+		// 변수를 세팅한다. (업데이트한다.)
 		bool Down_; // 최초 키를 눌렀을때
 		bool Press_; // 그 이후로 지속적으로 누르고 있을때.
 		bool Up_; // 누르다가 땠을때 
@@ -20,19 +23,19 @@ private:
 
 		int Key_; // 이키가 눌렸다면 
 
-		bool KeyCheck()
+		bool KeyCheck() 
 		{
 			return 0 != GetAsyncKeyState(Key_);
 		}
 
 		void Update();
 
-		void Reset()
+		void Reset() 
 		{
 			Down_ = false;
 			Press_ = false;
 			Up_ = false;
-			Free_ = true;
+			Free_ =true;
 		}
 
 		//GameEngineKey(int _Key) 
@@ -50,12 +53,12 @@ private:
 	static GameEngineInput* Inst_;
 
 public:
-	static GameEngineInput* GetInst()
+	static GameEngineInput* GetInst() 
 	{
 		return Inst_;
 	}
 
-	static void Destroy()
+	static void Destroy() 
 	{
 		if (nullptr != Inst_)
 		{
@@ -68,11 +71,11 @@ public:
 	void Update();
 	void CreateKey(const std::string& _Name, int _Key);
 
-	bool IsDown(std::string _Name);
-	bool IsUp(std::string _Name);
-	bool IsPress(std::string _Name);
-	bool IsFree(std::string _Name);
-	bool IsKey(std::string _Name);
+	bool IsDown(const std::string& _Name);
+	bool IsUp(const std::string& _Name);
+	bool IsPress(const std::string& _Name);
+	bool IsFree(const std::string& _Name);
+	bool IsKey(const std::string& _Name);
 
 protected:
 

@@ -3,16 +3,16 @@
 #include "GameEngineFile.h"
 #include "GameEngineString.h"
 
-GameEngineDirectory::GameEngineDirectory()
+GameEngineDirectory::GameEngineDirectory() 
 {
 	SetCurrentPath();
 }
 
-GameEngineDirectory::~GameEngineDirectory()
+GameEngineDirectory::~GameEngineDirectory() 
 {
 }
 
-void GameEngineDirectory::MoveParent()
+void GameEngineDirectory::MoveParent() 
 {
 	Path_ = Path_.parent_path();
 }
@@ -35,7 +35,7 @@ void GameEngineDirectory::MoveParent(const std::string& _Name)
 	}
 }
 
-void GameEngineDirectory::Move(const std::string& _Name)
+void GameEngineDirectory::Move(const std::string& _Name) 
 {
 	std::filesystem::path CheckPath = Path_;
 
@@ -49,21 +49,20 @@ void GameEngineDirectory::Move(const std::string& _Name)
 
 	Path_ = CheckPath;
 }
-
 //특정 확장자를 리턴
-std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _Ext)
+std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _Ext) 
 {
 	// iterator는 순환
-	// startIter EndIter
+// startIter EndIter
 	std::filesystem::directory_iterator DirIter(Path_);
 
 	std::string Ext = _Ext;
 
-	if (Ext != "") //bmp 
+	if (Ext != "")//bmp 
 	{
 		GameEngineString::ToUpper(Ext); // BMP
-		if (std::string::npos == Ext.find(".")) // 있으면 .의 위치
-												// 없으면 npos를 반환 
+		if (std::string::npos == Ext.find("."))// 있으면 .의 위치
+											   // 없으면 npos를 반환 
 		{
 			Ext = "." + Ext; //.BMP
 		}
@@ -71,7 +70,7 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 
 	std::vector<GameEngineFile> Return;
 	// 디렉토리까지 다나오니까 File
-	for (const std::filesystem::directory_entry& Entry : DirIter) // ranged for
+	for (const std::filesystem::directory_entry& Entry : DirIter)
 	{
 		if (true == Entry.is_directory())
 		{
@@ -90,7 +89,11 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _
 				continue;
 			}
 		}
+
 		Return.push_back(GameEngineFile(Entry.path()));
+		
 	}
+
 	return Return;
+
 }

@@ -4,21 +4,28 @@
 #include <assert.h>
 #include <Windows.h>
 
+// 설명 :
 class GameEngineDebug
 {
 public:
-	static void LeakCheckOn(); // 릭 체크
+	static void LeakCheckOn();
+
+	// 보기 좋은 안전한 함수.
+	// static void MsgBoxAssert(const std::string& _Text);
 
 protected:
 
 private:
+	// constrcuter destructer
 	GameEngineDebug();
 	~GameEngineDebug();
 
+	// delete Function
 	GameEngineDebug(const GameEngineDebug& _Other) = delete;
 	GameEngineDebug(GameEngineDebug&& _Other) noexcept = delete;
 	GameEngineDebug& operator=(const GameEngineDebug& _Other) = delete;
 	GameEngineDebug& operator=(GameEngineDebug&& _Other) noexcept = delete;
+
 };
 
 // char*만 가능

@@ -13,7 +13,9 @@ public:
 		return Inst_;
 	}
 
-	static void Destroy() // 마지막에 지우더라도 내가 의도한 순서대로 지우고 싶기 때문에
+	// 마지막에 지우더라도 내가 의도한 순서에서 지우고 싶기 때문에
+	// pointer로 삭제하는 겁니다.
+	static void Destroy()
 	{
 		if (nullptr != Inst_)
 		{
@@ -26,9 +28,14 @@ public:
 	void Reset();
 	void Update();
 
-	static inline float GetDeltaTime()
+	static inline float GetDeltaTime()  // 무조건 단 한개만 존재하게 할 거니까 
 	{
-		return Inst_->DeltaTime_; // 무조건 단 한개만 존재하게 할 거니까 
+		//if (nullptr == Inst_)
+		//{
+		//	Inst_ = new GameEngineTime();
+		//}
+
+		return Inst_->DeltaTime_;
 	}
 
 
