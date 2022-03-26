@@ -22,11 +22,8 @@
     <Filter Include="Play\Background">
       <UniqueIdentifier>{6de6653d-bd35-4b90-94b5-338c162301a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Intro">
-      <UniqueIdentifier>{ba3c8b87-f734-4f14-8ab4-acf496deec3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intro\Background">
-      <UniqueIdentifier>{a7765858-b852-4741-b72b-209d8bacbf52}</UniqueIdentifier>
+    <Filter Include="Title\Character">
+      <UniqueIdentifier>{80169ce8-df61-4712-ac4c-185df4b59bdb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,11 +52,17 @@
     <ClInclude Include="Bullet.h">
       <Filter>Play\Global</Filter>
     </ClInclude>
-    <ClInclude Include="IntroLevel.h">
+    <ClInclude Include="IntroBackground.h">
+      <Filter>Title\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroCharacter.h">
+      <Filter>Title\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroStoryLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="IntroBackground.h">
-      <Filter>Intro\Background</Filter>
+    <ClInclude Include="EndingStoryLevel.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -88,11 +91,17 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Play\Global</Filter>
     </ClCompile>
-    <ClCompile Include="IntroLevel.cpp">
+    <ClCompile Include="IntroBackground.cpp">
+      <Filter>Title\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroCharacter.cpp">
+      <Filter>Title\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroStoryLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="IntroBackground.cpp">
-      <Filter>Intro\Background</Filter>
+    <ClCompile Include="EndingStoryLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

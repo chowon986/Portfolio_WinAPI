@@ -13,9 +13,8 @@ IntroBackground::~IntroBackground()
 
 void IntroBackground::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale(GameEngineWindow::GetScale());
-
+	SetPosition(GameEngineWindow::GetScale().Half()); // 위치는 중앙 {1280, 720} {1024, 576}
+	//////////////초///// SetScale(GameEngineWindow::GetScale()); // 엑터의 크기 -> 해당 부분 알아보기
 	GameEngineRenderer* a = CreateRenderer("BackgroundB.bmp");
 }
 
