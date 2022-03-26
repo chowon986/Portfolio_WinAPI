@@ -25,6 +25,9 @@
     <Filter Include="Title\Character">
       <UniqueIdentifier>{80169ce8-df61-4712-ac4c-185df4b59bdb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Play\Base">
+      <UniqueIdentifier>{3e593a2d-8d92-4a82-be36-8d3f8f5d9f89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kirby.h" />
@@ -64,6 +67,9 @@
     <ClInclude Include="EndingStoryLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterBase.h">
+      <Filter>Play\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Kirby.cpp" />
@@ -102,6 +108,9 @@
     </ClCompile>
     <ClCompile Include="EndingStoryLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterBase.cpp">
+      <Filter>Play\Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

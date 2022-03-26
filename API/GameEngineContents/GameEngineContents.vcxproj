@@ -157,6 +157,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CharacterBase.h" />
     <ClInclude Include="EndingCredit.h">
       <SubType>
       </SubType>
@@ -196,6 +197,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="EndingCredit.cpp">
       <SubType>
       </SubType>

@@ -1,18 +1,14 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include "CharacterBase.h"
 
 // Ό³Έν :
-class Player : public GameEngineActor
+class Player : public CharacterBase
 {
 public:
-	int LifeCount_;
-	int HP_;
-	
-	// constrcuter destructer
 	Player();
 	~Player();
 
-	// delete Function
 	Player(const Player& _Other) = delete;
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
@@ -24,19 +20,17 @@ private:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-	void Walk();
-	void Run();
-	void GoUp();
-	void GoDown();
-	void GetNewAbility();
-	void Swim();
-	void Attack();
-	void RideWarpStar();
-	void Throwaway();
-	void Sliding();
-	void Sit();
-	void Hovering();
-	void Blotting();
-	void UseDoor();
+
+	virtual float GetSpeed() override;
+
+	virtual bool CanWalk() override;
+	virtual bool CanRun() override;
+	virtual bool CanJump() override;
+
+	virtual void Walk() override;
+	virtual void Run() override;
+	/*virtual void Attack() override;
+	virtual void Die() override;*/
+	virtual void Jump() override;
 };
 

@@ -39,7 +39,7 @@ void Kirby::GameInit()
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
 	CreateLevel<IntroStoryLevel>("IntroStory");
-	ChangeLevel("Title");
+	ChangeLevel("Play");
 	//ChangeLevel("Play");
 }
 
