@@ -1,22 +1,22 @@
-#include "EndingLevel.h"
+#include "Cannon.h"
 #include "GameEngineBase/GameEngineInput.h"
 #include "GameEngine/GameEngine.h"
 
-EndingLevel::EndingLevel()
+Cannon::Cannon()
 {
 }
 
-EndingLevel::~EndingLevel()
+Cannon::~Cannon()
 {
 }
 
 
-void EndingLevel::Loading()
+void Cannon::Loading()
 {
 
 }
 
-void EndingLevel::Update()
+void Cannon::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{

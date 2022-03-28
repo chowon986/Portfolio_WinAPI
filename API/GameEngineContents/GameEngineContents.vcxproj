@@ -152,84 +152,124 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animal.h" />
+    <ClInclude Include="BeforeTitleLevel.h" />
+    <ClInclude Include="BigBomb.h" />
+    <ClInclude Include="BigWaddledi.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="BotUI.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Brontobert.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Cannon.h" />
     <ClInclude Include="CharacterBase.h" />
+    <ClInclude Include="DanceStage.h" />
+    <ClInclude Include="Dedede.h" />
+    <ClInclude Include="Doc.h" />
+    <ClInclude Include="Doroach.h" />
     <ClInclude Include="EndingCredit.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EndingLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="EndingStoryLevel.h" />
+    <ClInclude Include="EndingLevel.h" />
+    <ClInclude Include="EndingStory.h" />
+    <ClInclude Include="Fire.h" />
+    <ClInclude Include="Frosty.h" />
     <ClInclude Include="IntroBackground.h" />
-    <ClInclude Include="IntroCharacter.h" />
-    <ClInclude Include="IntroStoryLevel.h" />
+    <ClInclude Include="IntroStory.h" />
     <ClInclude Include="Kirby.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Level1.h" />
+    <ClInclude Include="Level2.h" />
+    <ClInclude Include="Level3.h" />
+    <ClInclude Include="Level4.h" />
+    <ClInclude Include="Mice.h" />
     <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Monster1.h" />
+    <ClInclude Include="Monster2.h" />
+    <ClInclude Include="Monster3.h" />
+    <ClInclude Include="Moon.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="Sparky.h" />
+    <ClInclude Include="Spinni.h" />
+    <ClInclude Include="Storo.h" />
+    <ClInclude Include="Sword.h" />
+    <ClInclude Include="Tiktik.h" />
+    <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="Waddledi.h" />
+    <ClInclude Include="Waddledu.h" />
+    <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animal.cpp" />
+    <ClCompile Include="BeforeTitleLevel.cpp" />
+    <ClCompile Include="BigBomb.cpp" />
+    <ClCompile Include="BigWaddledi.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BotUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Brontobert.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="CharacterBase.cpp" />
+    <ClCompile Include="DanceStage.cpp" />
+    <ClCompile Include="Dedede.cpp" />
+    <ClCompile Include="Doc.cpp" />
+    <ClCompile Include="Doroach.cpp" />
     <ClCompile Include="EndingCredit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EndingStoryLevel.cpp" />
+    <ClCompile Include="EndingLevel.cpp" />
+    <ClCompile Include="EndingStory.cpp" />
+    <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="Frosty.cpp" />
     <ClCompile Include="IntroBackground.cpp" />
-    <ClCompile Include="IntroCharacter.cpp" />
-    <ClCompile Include="IntroStoryLevel.cpp" />
+    <ClCompile Include="IntroStory.cpp" />
     <ClCompile Include="Kirby.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="Level3.cpp" />
+    <ClCompile Include="Level4.cpp" />
+    <ClCompile Include="Mice.cpp" />
     <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Monster1.cpp" />
+    <ClCompile Include="Monster2.cpp" />
+    <ClCompile Include="Monster3.cpp" />
+    <ClCompile Include="Moon.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="Sparky.cpp" />
+    <ClCompile Include="Spinni.cpp" />
+    <ClCompile Include="Storo.cpp" />
+    <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="Tiktik.cpp" />
+    <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="Waddledi.cpp" />
+    <ClCompile Include="Waddledu.cpp" />
+    <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngineBase\GameEngineBase.vcxproj">

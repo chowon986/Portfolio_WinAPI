@@ -1,14 +1,23 @@
 #include "Kirby.h"
-#include "PlayLevel.h"
-#include "EndingLevel.h"
-#include "IntroStoryLevel.h"
-#include "EndingStoryLevel.h"
-
+#include "BeforeTitleLevel.h"
 #include "TitleLevel.h"
+#include "IntroStory.h"
+#include "Level1.h"
+#include "Level2.h"
+#include "Level3.h"
+#include "Level4.h"
+#include "Boss.h"
+#include "Cannon.h"
+#include "DanceStage.h"
+#include "WorldMap.h"
+#include "EndingLevel.h"
+#include "EndingStory.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngine.h>
 
 
 Kirby::Kirby()
@@ -27,7 +36,6 @@ void Kirby::GameInit()
 	ResourcesDir.MoveParent("Portfolio_WinAPI");
 	ResourcesDir.Move("AllResources");
 
-	// 모든 파일들을 가져와라(자식 경로까지는 찾지 않음)
 	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
@@ -35,12 +43,32 @@ void Kirby::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
+	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
+	{
+		GameEngineInput::GetInst()->CreateKey("LevelChange", VK_RETURN);
+		GameEngineInput::GetInst()->CreateKey("Level1", '1');
+		GameEngineInput::GetInst()->CreateKey("Level2", '2');
+		GameEngineInput::GetInst()->CreateKey("Level3", '3');
+		GameEngineInput::GetInst()->CreateKey("Level4", '4');
+		GameEngineInput::GetInst()->CreateKey("Boss", '5');
+	}
+
+	CreateLevel<BeforeTitleLevel>("BeforeTitle");
 	CreateLevel<TitleLevel>("Title");
-	CreateLevel<PlayLevel>("Play");
+	CreateLevel<IntroStory>("IntroStory");
+	CreateLevel<Level1>("Level1");
+	CreateLevel<Cannon>("Cannon");
+	CreateLevel<DanceStage>("DanceStage");
+	CreateLevel<WorldMap>("WorldMap");
+	CreateLevel<Level2>("Level2");
+	CreateLevel<Level3>("Level3");
+	CreateLevel<Level4>("Level4");
+	CreateLevel<Boss>("Boss");
+	CreateLevel<EndingStory>("EndingStory");
 	CreateLevel<EndingLevel>("Ending");
-	CreateLevel<IntroStoryLevel>("IntroStory");
-	ChangeLevel("Play");
-	//ChangeLevel("Play");
+
+	ChangeLevel("BeforeTitle");
+
 }
 
 void Kirby::GameLoop()

@@ -84,7 +84,6 @@ bool GameEngineImage::Load(const std::string& _Path)
 		MsgBoxAssertString(_Path + " 이미지 로드에 실패했습니다. 여러분들이 살펴봐야할 문제 1. 경로는 제대로 됐나요? 2. 디버깅은 제대로 봤나요");
 	}
 
-	// 비어있지가 않아요
 	ImageDC_ = CreateCompatibleDC(nullptr);
 
 	if (nullptr == ImageDC_)

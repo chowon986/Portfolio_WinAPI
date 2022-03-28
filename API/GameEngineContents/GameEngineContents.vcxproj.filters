@@ -22,35 +22,31 @@
     <Filter Include="Play\Background">
       <UniqueIdentifier>{6de6653d-bd35-4b90-94b5-338c162301a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Title\Character">
-      <UniqueIdentifier>{80169ce8-df61-4712-ac4c-185df4b59bdb}</UniqueIdentifier>
+    <Filter Include="Level\03 Ending">
+      <UniqueIdentifier>{df948fe2-98c6-429e-94f0-92e7405c6725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\02 Play">
+      <UniqueIdentifier>{ea7e2263-b59d-4841-8737-28a80c3d87dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\01 Title">
+      <UniqueIdentifier>{7f55e9d3-900c-4959-88f4-c8dc696d1653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Monster">
+      <UniqueIdentifier>{4cfa8086-2877-4ebe-aff3-c60ae6d32923}</UniqueIdentifier>
     </Filter>
     <Filter Include="Play\Base">
       <UniqueIdentifier>{3e593a2d-8d92-4a82-be36-8d3f8f5d9f89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Play\Monster\Parent">
+      <UniqueIdentifier>{6b83067f-a760-4dfb-b8c0-ee4a2b32e8e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Kirby.h" />
-    <ClInclude Include="Monster.h">
-      <Filter>Play</Filter>
-    </ClInclude>
     <ClInclude Include="BotUI.h">
-      <Filter>Play\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Play\Global</Filter>
     </ClInclude>
     <ClInclude Include="EndingCredit.h">
       <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="EndingLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Play\Global</Filter>
@@ -58,41 +54,128 @@
     <ClInclude Include="IntroBackground.h">
       <Filter>Title\Background</Filter>
     </ClInclude>
-    <ClInclude Include="IntroCharacter.h">
-      <Filter>Title\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroStoryLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="EndingStoryLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterBase.h">
       <Filter>Play\Base</Filter>
     </ClInclude>
+    <ClInclude Include="BeforeTitleLevel.h">
+      <Filter>Level\01 Title</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroStory.h">
+      <Filter>Level\01 Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level\01 Title</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>Level\03 Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingStory.h">
+      <Filter>Level\03 Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceStage.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level4.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level3.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Dedede.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Frosty.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Waddledu.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BigBomb.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BigWaddledi.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Brontobert.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Doc.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Doroach.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Mice.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster1.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster2.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster3.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Moon.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Sparky.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Spinni.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Storo.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiktik.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Waddledi.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Kirby.h" />
+    <ClInclude Include="Monster.h">
+      <Filter>Play\Monster\Parent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Kirby.cpp" />
-    <ClCompile Include="Monster.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
     <ClCompile Include="BotUI.cpp">
-      <Filter>Play\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>Play\Global</Filter>
     </ClCompile>
     <ClCompile Include="EndingCredit.cpp">
       <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Play\Global</Filter>
@@ -100,17 +183,120 @@
     <ClCompile Include="IntroBackground.cpp">
       <Filter>Title\Background</Filter>
     </ClCompile>
-    <ClCompile Include="IntroCharacter.cpp">
-      <Filter>Title\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="IntroStoryLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingStoryLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterBase.cpp">
       <Filter>Play\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BeforeTitleLevel.cpp">
+      <Filter>Level\01 Title</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroStory.cpp">
+      <Filter>Level\01 Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level\01 Title</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>Level\03 Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingStory.cpp">
+      <Filter>Level\03 Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceStage.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level3.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level4.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Dedede.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Frosty.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BigBomb.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BigWaddledi.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Brontobert.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Doc.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Doroach.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Mice.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster1.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster2.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster3.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Moon.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Sparky.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Spinni.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Storo.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Tiktik.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Waddledi.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Waddledu.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Kirby.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Play\Monster\Parent</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
