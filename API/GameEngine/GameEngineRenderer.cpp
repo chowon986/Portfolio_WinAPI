@@ -6,13 +6,14 @@
 // 
 // 11111111 00000000 11111111
 
-#pragma comment(lib, "msimg32.lib")// 기본 그래픽 처리에 대한 라이브러리
+#pragma comment(lib, "msimg32.lib") // 기본 그래픽 처리에 대한 라이브러리
+
 
 GameEngineRenderer::GameEngineRenderer() 
 	: Image_(nullptr)
 	, PivotType_(RenderPivot::CENTER)
 	, ScaleMode_(RenderScaleMode::Image)
-	, TransColor_(RGB(255, 0, 255)) 	// A는 투명도, 지금 상태에선 255를 나타냄 (불투명)
+	, TransColor_(RGB(255, 0, 255)) // A는 투명도, 지금 상태에선 255를 나타냄 (불투명)
 	, RenderImagePivot_({0,0})
 {
 }
@@ -38,13 +39,14 @@ void GameEngineRenderer::SetImageScale()
 void GameEngineRenderer::SetImage(const std::string& _Name) 
 {
 	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Name);
-	if (nullptr == FindImage)// 세팅 안하고 크기 조절하려 했다.
+	if (nullptr == FindImage) // 세팅 안하고 크기 조절하려 했다.
 	{
 		MsgBoxAssertString(_Name + "존재하지 않는 이미지를 랜더러에 세팅하려고 했습니다.");
 		return;
 	}
 
 	Image_ = FindImage;
+	SetImageScale();
 }
 
 void GameEngineRenderer::Render() 
@@ -64,14 +66,13 @@ void GameEngineRenderer::Render()
 		break;
 	case RenderPivot::BOT:
 		// GameEngine::BackBufferImage()->TransCopyCenterScale(Image_, RenderPos, RenderScale, TransColor_);
-		// 센터만 사용할거면 주석 아니면 주석 풀기
 		break;
 	default:
 		break;
 	}
 }
 
-void GameEngineRenderer::SetIndex(size_t _Index) //아마 애니메이션
+void GameEngineRenderer::SetIndex(size_t _Index, float4 _Scale) //아마 애니메이션?
 {
 	if (false == Image_->IsCut())
 	{
@@ -80,6 +81,16 @@ void GameEngineRenderer::SetIndex(size_t _Index) //아마 애니메이션
 	}
 
 	RenderImagePivot_ = Image_->GetCutPivot(_Index);
-	RenderScale_ = Image_->GetCutScale(_Index);
+	if (-1.0f == _Scale.x ||
+		-1.0f == _Scale.y)
+	{
+		RenderScale_ = Image_->GetCutScale(_Index);
+	}
+	else 
+	{
+		RenderScale_ = _Scale;
+	}
+
+
 	RenderImageScale_ = Image_->GetCutScale(_Index);
 }

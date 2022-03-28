@@ -1,7 +1,6 @@
 #pragma once
 #include "GameEngineActorSubObject.h"
 #include "GameEngineEnum.h"
-
 class GameEngineImage;
 class GameEngineRenderer : public GameEngineActorSubObject
 {
@@ -23,12 +22,13 @@ public:
 		TransColor_ = _Color;
 	}
 
-	inline void SetPivot(const float4& _Pos)		// 점 하나를 잡은거
+	inline void SetPivot(const float4& _Pos) // 점 하나를 잡은거
 	{
 		RenderPivot_ = _Pos;
 	}
 
-	inline void SetType(const RenderPivot& _Type) 		// bot, center 중 선택
+	inline void SetType(const RenderPivot& _Type) // bot, center 중 선택
+	
 	{
 		PivotType_ = _Type;
 	}
@@ -51,7 +51,8 @@ public:
 
 	void SetImage(const std::string& _Name);
 
-	void SetIndex(size_t _Index);
+	// Scale에 아무것도 넣지 않으면 -1로 설정하기 위해서
+	void SetIndex(size_t _Index, float4 _Scale = {-1.0f, -1.0f});
 
 protected:
 	void Render();
@@ -63,11 +64,10 @@ private:
 
 
 	float4 RenderPivot_;
-
-
-	// 
+	// 화면에 그려지는 크기
 	float4 RenderScale_;
 
+	// 이미지에서 잘라내는 크기
 	float4 RenderImageScale_;
 	float4 RenderImagePivot_;
 

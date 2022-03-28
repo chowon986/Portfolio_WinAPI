@@ -43,7 +43,7 @@ void GameEngine::GameEnd()
 
 void GameEngine::WindowCreate() 
 {
-    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Kirby Mouse Attack");
+    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Kirby Squeak squad");
     GameEngineWindow::GetInst().ShowGameWindow();
     GameEngineWindow::GetInst().MessageLoop(EngineInit, EngineLoop);
 }
@@ -83,6 +83,10 @@ void GameEngine::EngineLoop()
 
         NextLevel_ = nullptr;
         GameEngineTime::GetInst()->Reset();
+
+        // 다른 Level로 옮겼을 때 이전에 그려진 Level Image삭제
+        Rectangle(WindowMainImage_->ImageDC(), 0, 0, WindowMainImage_->GetScale().ix(), WindowMainImage_->GetScale().iy());
+        Rectangle(BackBufferImage_->ImageDC(), 0, 0, BackBufferImage_->GetScale().ix(), BackBufferImage_->GetScale().iy());
     }
 
     if (nullptr == CurrentLevel_)

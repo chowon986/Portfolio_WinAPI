@@ -1,7 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
-// 엑터가 먼저 -> 랜더러가 그 다음
 class GameEngineActorSubObject 
 {
 	friend GameEngineActor;
@@ -9,7 +8,7 @@ class GameEngineActorSubObject
 public:
 	// constrcuter destructer
 	GameEngineActorSubObject();
-	virtual ~GameEngineActorSubObject();// vitual로 만들었으면 상속을 하겠다는거에요
+	virtual ~GameEngineActorSubObject(); // vitual로 만들었으면 상속을 하겠다는거에요
 
 	// delete Function
 	GameEngineActorSubObject(const GameEngineActorSubObject& _Other) = delete;

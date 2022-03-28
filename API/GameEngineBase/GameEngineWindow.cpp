@@ -8,7 +8,7 @@
 
 LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message) // 윈도우가 파괴될 때
+    switch (message)  // 윈도우가 파괴될 때
     {
     case WM_DESTROY:
     {
@@ -125,6 +125,7 @@ void GameEngineWindow::ShowGameWindow()
 // 함수포인터 : 함수포인터를 집어넣을 수 있다.
 // 상속이나 헤더를 받지 않은 클래스에 있는 함수를 사용하고 싶을 때
 
+
 void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)())
 {
     // 윈도우는 다 준비되었다.
@@ -147,7 +148,6 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
 
     while (WindowOn_)
     {
-        // 배열 안에 있는 하나를 꺼내와서 인자의 msg에 저장된다
         if (0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);

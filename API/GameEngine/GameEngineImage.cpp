@@ -170,8 +170,9 @@ void GameEngineImage::TransCopy(GameEngineImage* _Other, const float4& _CopyPos,
 	// TransCopy(_Other, _CopyPos - _RenderScale.Half(), _RenderScale, _RenderPivot, _Other->GetScale(), _TransColor);
 
 
-	// 윈도우에서 지원해주는 일반적인 dc vs dc의 복사함수입니다.
-	TransparentBlt(	// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=power2845&logNo=50147965306 참고
+	// 윈도우에서 지원해주는 일반적인 dc vs dc의 복사함수입니다. 
+	// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=power2845&logNo=50147965306 참고
+	TransparentBlt(
 		ImageDC_, // 여기에 복사해라.
 		_CopyPos.ix(), // 내 이미지의 이 부분 x
 		_CopyPos.iy(), // 내 이미지의 이 부분 y 에 복사해라

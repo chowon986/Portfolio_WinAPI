@@ -28,7 +28,7 @@ public:
 	void Reset();
 	void Update();
 
-	static inline float GetDeltaTime()  // 무조건 단 한개만 존재하게 할 거니까 
+	static inline float GetDeltaTime() // 무조건 단 한개만 존재하게 할 거니까 
 	{
 		//if (nullptr == Inst_)
 		//{

@@ -51,7 +51,6 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 
 	NewRenderer->SetActor(this);
 	NewRenderer->SetImage(_Image);
-	NewRenderer->SetImageScale();
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetType(_PivotType);
 	

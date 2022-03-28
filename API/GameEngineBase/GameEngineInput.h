@@ -13,9 +13,6 @@ private:
 	{
 		friend GameEngineInput;
 	
-		// 선생님이 만든 변수.
-		// winapi GetAsyncKeyState 함수로 키가 눌렸다는 것을 확인하고
-		// 변수를 세팅한다. (업데이트한다.)
 		bool Down_; // 최초 키를 눌렀을때
 		bool Press_; // 그 이후로 지속적으로 누르고 있을때.
 		bool Up_; // 누르다가 땠을때 
