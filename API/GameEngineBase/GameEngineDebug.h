@@ -28,12 +28,10 @@ private:
 
 };
 
-// char*만 가능
 #define MsgBoxAssert(Text) 	MessageBeep(0); \
 MessageBoxA(nullptr, Text, "Error", MB_OK); \
 assert(false); 
 
-// string을 char로
 #define MsgBoxAssertString(Text) 	MessageBeep(0); \
 MessageBoxA(nullptr, (Text).c_str(), "Error", MB_OK); \
 assert(false); 

@@ -1,6 +1,10 @@
 #pragma once
 #include "GameEngineActorSubObject.h"
 #include "GameEngineEnum.h"
+#include <map>
+
+
+// 설명 : 그리는걸 도와주는 클래스
 class GameEngineImage;
 class GameEngineRenderer : public GameEngineActorSubObject
 {
@@ -22,13 +26,12 @@ public:
 		TransColor_ = _Color;
 	}
 
-	inline void SetPivot(const float4& _Pos) // 점 하나를 잡은거
+	inline void SetPivot(const float4& _Pos)
 	{
 		RenderPivot_ = _Pos;
 	}
 
-	inline void SetType(const RenderPivot& _Type) // bot, center 중 선택
-	
+	inline void SetType(const RenderPivot& _Type)
 	{
 		PivotType_ = _Type;
 	}
@@ -38,40 +41,94 @@ public:
 		ScaleMode_ = _Mode;
 	}
 
-	void SetImageScale(); // image
+	// 렌더러 스케일 뿐 아니라 이미지 스케일도 같이 맞춰줌
+	void SetImageScale();
 
-	inline void SetScale(const float4& _Scale) // 이미지 크기 그대로 잘 나오는데 왜 scale을 넣어주는가? 크기를 조절하려고 pivottype:user
+	inline void SetScale(const float4& _Scale)
 	{
 		ScaleMode_ = RenderScaleMode::User;
 		RenderScale_ = _Scale;
 	}
 
-	
-
+	inline GameEngineImage* GetImage()
+	{
+		return Image_;
+	}
 
 	void SetImage(const std::string& _Name);
+	
+	// 
+	void SetIndex(size_t _Index);
 
-	// Scale에 아무것도 넣지 않으면 -1로 설정하기 위해서
-	void SetIndex(size_t _Index, float4 _Scale = {-1.0f, -1.0f});
+
 
 protected:
 	void Render();
 
 private:
+	friend class FrameAnimation;
+
 	GameEngineImage* Image_;
-	RenderPivot PivotType_; // 센터, bot
+	RenderPivot PivotType_; // 센터 / bot
 	RenderScaleMode ScaleMode_;
-
-
 	float4 RenderPivot_;
-	// 화면에 그려지는 크기
 	float4 RenderScale_;
-
-	// 이미지에서 잘라내는 크기
 	float4 RenderImageScale_;
 	float4 RenderImagePivot_;
-
 	unsigned int TransColor_;
 
-};
 
+
+///////////////////////////////////////////////////////////////// 애니메이션
+
+private:
+	class FrameAnimation
+	{
+	public:
+		GameEngineRenderer* Renderer_;
+		GameEngineImage* Image_;
+		int CurrentFrame_;
+		int StartFrame_;
+		int EndFrame_;
+		float CurrentInterTime_;
+		float InterTime_;
+		bool Loop_;
+
+	public:
+		FrameAnimation() 
+			: Image_(nullptr),
+		CurrentFrame_(-1),
+		StartFrame_(-1),
+		EndFrame_(-1),
+		CurrentInterTime_(0.1f),
+		InterTime_(0.1f),
+		Loop_(true)
+
+		{
+
+		}
+
+	public:
+		void Update();
+
+		void Reset() 
+		{
+			CurrentFrame_ = StartFrame_;
+			CurrentInterTime_ = InterTime_;
+		}
+	};
+
+public:
+	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+
+	// 옵션을 
+	void ChangeAnimation(const std::string& _Name);
+
+
+private:
+	std::map<std::string, FrameAnimation> Animations_;
+	FrameAnimation* CurrentAnimation_;
+	
+
+
+};

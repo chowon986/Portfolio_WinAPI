@@ -15,8 +15,8 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
-	CreateActor<Background>((int)ORDER::BACKGROUND);
-
+	Background* Title = CreateActor<Background>((int)ORDER::BACKGROUND);
+	Title->CreateRenderer("Title.bmp");
 }
 
 void TitleLevel::Update()

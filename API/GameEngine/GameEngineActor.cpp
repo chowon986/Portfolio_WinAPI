@@ -3,13 +3,13 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 
-GameEngineActor::GameEngineActor() 
+GameEngineActor::GameEngineActor()
 	: Level_(nullptr)
 {
 	// delete this;
 }
 
-GameEngineActor::~GameEngineActor() 
+GameEngineActor::~GameEngineActor()
 {
 	std::list<GameEngineRenderer*>::iterator StartIter = RenderList_.begin();
 	std::list<GameEngineRenderer*>::iterator EndIter = RenderList_.end();
@@ -42,8 +42,8 @@ void GameEngineActor::DebugRectRender()
 }
 
 GameEngineRenderer* GameEngineActor::CreateRenderer(
-	const std::string& _Image, 
-	RenderPivot _PivotType /*= RenderPivot::CENTER*/, 
+	const std::string& _Image,
+	RenderPivot _PivotType /*= RenderPivot::CENTER*/,
 	const float4& _PivotPos /*= { 0,0 }*/
 )
 {
@@ -53,12 +53,12 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	NewRenderer->SetImage(_Image);
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetType(_PivotType);
-	
+
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
 
-void GameEngineActor::Renderering() 
+void GameEngineActor::Renderering()
 {
 	StartRenderIter = RenderList_.begin();
 	EndRenderIter = RenderList_.end();
@@ -70,11 +70,10 @@ void GameEngineActor::Renderering()
 }
 
 GameEngineRenderer* GameEngineActor::CreateRendererToScale(
-	const std::string& _Image, const float4& _Scale, 
+	const std::string& _Image, const float4& _Scale,
 	RenderPivot _PivotType /*= RenderPivot::CENTER*/, const float4& _PivotPos /*= { 0,0 }*/
-) 
+)
 {
-	// HP 바 처럼 크기 조절이 필요한 경우 사용
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);

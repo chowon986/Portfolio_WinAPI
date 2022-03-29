@@ -8,14 +8,14 @@
 
 LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)  // 윈도우가 파괴될 때
+    switch (message)
     {
     case WM_DESTROY:
     {
         GameEngineWindow::GetInst().Off();
         break;
     }
-    case WM_PAINT: // 윈도우가 그려질 때
+    case WM_PAINT:
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
@@ -121,9 +121,6 @@ void GameEngineWindow::ShowGameWindow()
     ShowWindow(hWnd_, SW_SHOW);
     UpdateWindow(hWnd_);
 }
-
-// 함수포인터 : 함수포인터를 집어넣을 수 있다.
-// 상속이나 헤더를 받지 않은 클래스에 있는 함수를 사용하고 싶을 때
 
 
 void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)())

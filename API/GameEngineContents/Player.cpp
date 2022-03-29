@@ -18,9 +18,9 @@ Player::~Player()
 void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale({ 500, 500 });
+	//SetScale({ 500, 500 });
 
-	CreateRenderer("sparkkirby.bmp");
+	//CreateRenderer("sparkkirby.bmp");
 
 	//CreateRendererToScale("logoc.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
 

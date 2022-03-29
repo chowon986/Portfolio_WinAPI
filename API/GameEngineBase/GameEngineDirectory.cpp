@@ -50,19 +50,18 @@ void GameEngineDirectory::Move(const std::string& _Name)
 	Path_ = CheckPath;
 }
 
-//특정 확장자를 리턴
 std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _Ext) 
 {
 	std::filesystem::directory_iterator DirIter(Path_);
 
 	std::string Ext = _Ext;
 
-	if (Ext != "") // bmp
+	if (Ext != "")
 	{
-		GameEngineString::ToUpper(Ext); // BMP
-		if (std::string::npos == Ext.find(".")) // .이 있으면 . 위치 / 없으면 npos 반환
+		GameEngineString::ToUpper(Ext);
+		if (std::string::npos == Ext.find("."))
 		{
-			Ext = "." + Ext; //.BMP
+			Ext = "." + Ext;
 		}
 	}
 

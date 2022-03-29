@@ -3,7 +3,7 @@
 #include <algorithm>
 
 // 설명 :
-class GameEngineString // string과 관련된 문자열 처리 함수 모음
+class GameEngineString
 {
 public:
 	static void ToUpper(std::string& _Text) 

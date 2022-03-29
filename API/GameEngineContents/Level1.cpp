@@ -29,28 +29,30 @@ Level1::~Level1()
 void Level1::Loading()
 {
 	//Ä¿ºñ
-	Background* Back = CreateActor<Background>((int)ORDER::BACKGROUND);
+	Player* Kirby = CreateActor<Player>((int)ORDER::PLAYER);
+	Kirby->CreateRenderer("MoveDown");
 
-	CreateActor<Player>((int)ORDER::PLAYER); 
-	CreateActor<Waddledi>((int)ORDER::MONSTER);
-	CreateActor<Waddledu>((int)ORDER::MONSTER);
-	CreateActor<Sparky>((int)ORDER::MONSTER);
+	//Background* Back = CreateActor<Background>((int)ORDER::BACKGROUND);
+
+	//CreateActor<Waddledi>((int)ORDER::MONSTER);
+	//CreateActor<Waddledu>((int)ORDER::MONSTER);
+	//CreateActor<Sparky>((int)ORDER::MONSTER);
+	//////////////////////////////
+	//CreateActor<Background>((int)ORDER::BACKGROUND);
+	//CreateActor<Box>((int)ORDER::MONSTER);
+	//CreateActor<Fire>((int)ORDER::MONSTER);
+	//CreateActor<Box>((int)ORDER::MONSTER); // 1 x 5
+	//CreateActor<Brontobert>((int)ORDER::MONSTER);
+	//CreateActor<BigBox>((int)ORDER::MONSTER);
+	//CreateActor<Monster1>((int)ORDER::MONSTER);
 	////////////////////////////
-	CreateActor<Background>((int)ORDER::BACKGROUND);
-	CreateActor<Box>((int)ORDER::MONSTER);
-	CreateActor<Fire>((int)ORDER::MONSTER);
-	CreateActor<Box>((int)ORDER::MONSTER); // 1 x 5
-	CreateActor<Brontobert>((int)ORDER::MONSTER);
-	CreateActor<BigBox>((int)ORDER::MONSTER);
-	CreateActor<Monster1>((int)ORDER::MONSTER);
-	//////////////////////////
-	CreateActor<Box>((int)ORDER::MONSTER);
-	CreateActor<Fire>((int)ORDER::MONSTER);
-	CreateActor<Tomato>((int)ORDER::MONSTER);
-	CreateActor<Waddledi>((int)ORDER::MONSTER);
-	CreateActor<Monster1>((int)ORDER::MONSTER);
-	CreateActor<Bomb>((int)ORDER::MONSTER);
-	CreateActor<Box>((int)ORDER::MONSTER); // 5 x 5
+	//CreateActor<Box>((int)ORDER::MONSTER);
+	//CreateActor<Fire>((int)ORDER::MONSTER);
+	//CreateActor<Tomato>((int)ORDER::MONSTER);
+	//CreateActor<Waddledi>((int)ORDER::MONSTER);
+	//CreateActor<Monster1>((int)ORDER::MONSTER);
+	//CreateActor<Bomb>((int)ORDER::MONSTER);
+	//CreateActor<Box>((int)ORDER::MONSTER); // 5 x 5
 }
 
 void Level1::Update()

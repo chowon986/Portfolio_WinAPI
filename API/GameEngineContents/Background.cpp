@@ -13,7 +13,6 @@ Background::~Background()
 void Background::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale(GameEngineWindow::GetScale());
 }
 
 void Background::Render()

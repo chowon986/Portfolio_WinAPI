@@ -8,7 +8,7 @@ class GameEngineActorSubObject
 public:
 	// constrcuter destructer
 	GameEngineActorSubObject();
-	virtual ~GameEngineActorSubObject(); // vitual로 만들었으면 상속을 하겠다는거에요
+	virtual ~GameEngineActorSubObject();
 
 	// delete Function
 	GameEngineActorSubObject(const GameEngineActorSubObject& _Other) = delete;

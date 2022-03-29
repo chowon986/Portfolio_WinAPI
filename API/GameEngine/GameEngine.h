@@ -4,6 +4,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 
 // 게임엔진이란 게임 그자체의 시작점과 끝점 실행중을 담당하는 녀석이다.
+// 설명 :
 class GameEngineImage;
 class GameEngineLevel;
 class GameEngine
