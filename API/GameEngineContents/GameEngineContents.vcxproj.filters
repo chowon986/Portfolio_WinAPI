@@ -40,6 +40,9 @@
     <Filter Include="Play\Monster\Parent">
       <UniqueIdentifier>{6b83067f-a760-4dfb-b8c0-ee4a2b32e8e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{8eb29cef-cd29-4f6f-8c3a-fc44923b82c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BotUI.h">
@@ -169,6 +172,28 @@
     <ClInclude Include="Monster.h">
       <Filter>Play\Monster\Parent</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Play\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="BigBox.h" />
+    <ClInclude Include="Tomato.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TreasureChest.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HPUp.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="FireItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BigTresureChest.h" />
+    <ClInclude Include="ContentsEnum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotUI.cpp">
@@ -298,5 +323,26 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Play\Monster\Parent</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Play\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="BigBox.cpp" />
+    <ClCompile Include="SwordItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Tomato.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="TreasureChest.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HPUp.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="FireItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BigTresureChest.cpp" />
   </ItemGroup>
 </Project>

@@ -153,8 +153,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animal.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BeforeTitleLevel.h" />
     <ClInclude Include="BigBomb.h" />
+    <ClInclude Include="BigBox.h" />
+    <ClInclude Include="BigTresureChest.h" />
     <ClInclude Include="BigWaddledi.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Boss.h" />
@@ -162,10 +165,12 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Brontobert.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Cannon.h" />
     <ClInclude Include="CharacterBase.h" />
+    <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="DanceStage.h" />
     <ClInclude Include="Dedede.h" />
     <ClInclude Include="Doc.h" />
@@ -177,7 +182,9 @@
     <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="EndingStory.h" />
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="FireItem.h" />
     <ClInclude Include="Frosty.h" />
+    <ClInclude Include="HPUp.h" />
     <ClInclude Include="IntroBackground.h" />
     <ClInclude Include="IntroStory.h" />
     <ClInclude Include="Kirby.h">
@@ -205,16 +212,22 @@
     <ClInclude Include="Spinni.h" />
     <ClInclude Include="Storo.h" />
     <ClInclude Include="Sword.h" />
+    <ClInclude Include="SwordItem.h" />
     <ClInclude Include="Tiktik.h" />
     <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="Tomato.h" />
+    <ClInclude Include="TreasureChest.h" />
     <ClInclude Include="Waddledi.h" />
     <ClInclude Include="Waddledu.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animal.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BeforeTitleLevel.cpp" />
     <ClCompile Include="BigBomb.cpp" />
+    <ClCompile Include="BigBox.cpp" />
+    <ClCompile Include="BigTresureChest.cpp" />
     <ClCompile Include="BigWaddledi.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Boss.cpp" />
@@ -222,6 +235,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Brontobert.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Cannon.cpp" />
@@ -237,7 +251,9 @@
     <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="EndingStory.cpp" />
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="FireItem.cpp" />
     <ClCompile Include="Frosty.cpp" />
+    <ClCompile Include="HPUp.cpp" />
     <ClCompile Include="IntroBackground.cpp" />
     <ClCompile Include="IntroStory.cpp" />
     <ClCompile Include="Kirby.cpp">
@@ -265,8 +281,11 @@
     <ClCompile Include="Spinni.cpp" />
     <ClCompile Include="Storo.cpp" />
     <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="SwordItem.cpp" />
     <ClCompile Include="Tiktik.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="Tomato.cpp" />
+    <ClCompile Include="TreasureChest.cpp" />
     <ClCompile Include="Waddledi.cpp" />
     <ClCompile Include="Waddledu.cpp" />
     <ClCompile Include="WorldMap.cpp" />

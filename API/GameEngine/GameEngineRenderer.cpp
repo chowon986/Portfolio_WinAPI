@@ -3,9 +3,6 @@
 #include "GameEngine.h"
 #include <GameEngineBase/GameEngineDebug.h>
 
-// 
-// 11111111 00000000 11111111
-
 #pragma comment(lib, "msimg32.lib") // 기본 그래픽 처리에 대한 라이브러리
 
 

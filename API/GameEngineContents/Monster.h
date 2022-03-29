@@ -1,8 +1,7 @@
 #pragma once
-#include <GameEngineBase/GameEngineMath.h>
-#include "CharacterBase.h"
+#include <GameEngine/GameEngineActor.h>
 
-class Monster : public CharacterBase
+class Monster : public GameEngineActor
 {
 public: 
 	int HP_;

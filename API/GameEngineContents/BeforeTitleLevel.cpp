@@ -13,6 +13,7 @@ BeforeTitleLevel::~BeforeTitleLevel()
 
 void BeforeTitleLevel::Loading()
 {
+
 }
 
 void BeforeTitleLevel::Update()

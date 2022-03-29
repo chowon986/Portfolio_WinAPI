@@ -13,7 +13,7 @@ public:
 	IntroBackground& operator=(IntroBackground&& _Other) noexcept = delete;
 
 protected:
-	void Start() override;
+	void Start();
 	void Update() override;
 	void Render() override;
 
