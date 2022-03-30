@@ -1,6 +1,7 @@
 #include "GameEngineRenderer.h"
 #include "GameEngineImageManager.h"
 #include "GameEngine.h"
+#include "GameEngineLevel.h"
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineTime.h>
 
@@ -15,6 +16,7 @@ GameEngineRenderer::GameEngineRenderer()
 	, ScaleMode_(RenderScaleMode::Image)
 	, TransColor_(RGB(255, 0, 255))
 	, RenderImagePivot_({ 0,0 })
+	, IsCameraEffect_(true)
 {
 }
 
@@ -64,29 +66,45 @@ void GameEngineRenderer::Render()
 
 	float4 RenderPos = GetActor()->GetPosition() + RenderPivot_;
 
+	if (true == IsCameraEffect_)
+	{
+		RenderPos -= GetActor()->GetLevel()->GetCameraPos();
+	}
+
 	switch (PivotType_)
 	{
 	case RenderPivot::CENTER:
 		GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - RenderScale_.Half(), RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
-		// GameEngine::BackBufferImage()->TransCopyCenterScale(Image_, RenderPos, RenderScale, TransColor_);
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.y *= 2.0f;
+		GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		break;
+	}
 	default:
 		break;
 	}
 }
 
-void GameEngineRenderer::SetIndex(size_t _Index)
+void GameEngineRenderer::SetIndex(size_t _Index, const float4& _Scale /*= {-1, -1}*/)
 {
 	if (false == Image_->IsCut())
 	{
 		MsgBoxAssert("이미지를 부분적으로 사용할수 있게 잘려지있지 않은 이미지 입니다.");
 		return;
 	}
+	if (_Scale.x <= 0 || _Scale.y <= 0)
+	{
+		RenderScale_ = Image_->GetCutScale(_Index);
+	}
+	else
+	{
+		RenderScale_ = _Scale;
+	}
 
 	RenderImagePivot_ = Image_->GetCutPivot(_Index);
-	RenderScale_ = Image_->GetCutScale(_Index);
 	RenderImageScale_ = Image_->GetCutScale(_Index);
 }
 
@@ -112,7 +130,7 @@ void GameEngineRenderer::CreateAnimation(
 	int _StartIndex,
 	int _EndIndex,
 	float _InterTime,
-	bool _Loop /*= true*/) 
+	bool _Loop /*= true*/)
 {
 	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Image);
 
@@ -143,7 +161,7 @@ void GameEngineRenderer::CreateAnimation(
 
 }
 
-void GameEngineRenderer::FrameAnimation::Update() 
+void GameEngineRenderer::FrameAnimation::Update()
 {
 	CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
 	if (0 >= CurrentInterTime_)
@@ -157,7 +175,7 @@ void GameEngineRenderer::FrameAnimation::Update()
 			{
 				CurrentFrame_ = StartFrame_;
 			}
-			else 
+			else
 			{
 				CurrentFrame_ = EndFrame_;
 			}

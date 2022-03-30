@@ -192,6 +192,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Level1.h" />
+    <ClInclude Include="Level1_2.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="Level3.h" />
     <ClInclude Include="Level4.h" />
@@ -210,6 +211,7 @@
     </ClInclude>
     <ClInclude Include="Sparky.h" />
     <ClInclude Include="Spinni.h" />
+    <ClInclude Include="Stage1_3.h" />
     <ClInclude Include="Storo.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="SwordItem.h" />
@@ -261,6 +263,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level1_2.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Level3.cpp" />
     <ClCompile Include="Level4.cpp" />
@@ -279,6 +282,7 @@
     </ClCompile>
     <ClCompile Include="Sparky.cpp" />
     <ClCompile Include="Spinni.cpp" />
+    <ClCompile Include="Stage1_3.cpp" />
     <ClCompile Include="Storo.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SwordItem.cpp" />

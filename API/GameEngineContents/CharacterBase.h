@@ -9,6 +9,8 @@ enum class CharacterState
 	ATTACK,
 	DIE,
 	JUMP,
+	Up,
+	Down,
 };
 
 class CharacterBase : public GameEngineActor

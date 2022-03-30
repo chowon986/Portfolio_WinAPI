@@ -57,17 +57,22 @@ public:
 
 	void CutCount(int _x, int _y);
 
-	bool IsCut()
+	inline bool IsCut()
 	{
 		return 0 != CutPivot_.size();
 	}
 
-	float4 GetCutPivot(size_t _Index)
+	inline size_t GetCutCount()
 	{
-		return CutPivot_[_Index];
+		return CutPivot_.size();
 	}
 
-	float4 GetCutScale(size_t _Index)
+	inline float4 GetCutPivot(size_t _Index)
+	{
+		return CutScale_[_Index];
+	}
+
+	inline float4 GetCutScale(size_t _Index)
 	{
 		return CutScale_[_Index];
 	}
@@ -77,6 +82,13 @@ public:
 		CutPivot_.push_back(_CutPos);
 		CutScale_.push_back(_CutScale);
 	}
+
+	inline int GetImagePixel(const float4& _Pos)
+	{
+		return GetImagePixel(_Pos.ix(), _Pos.iy());
+	}
+
+	int GetImagePixel(int _x, int _y);
 
 protected:
 

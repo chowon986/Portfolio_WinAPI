@@ -3,38 +3,38 @@
 #include <map>
 #include <string>
 
-// 
-
-// 설명 :
 class GameEngineInput
 {
 private:
+
 	class GameEngineKey
 	{
 		friend GameEngineInput;
-	
-		bool Down_; // 최초 키를 눌렀을때
-		bool Press_; // 그 이후로 지속적으로 누르고 있을때.
-		bool Up_; // 누르다가 땠을때 
+
+		bool Down_; // 최초로 키를 눌렀을때
+		bool Press_; // 계속 누르는중
+		bool Up_; // 막 뗐을때
 		bool Free_; // 안누르고 있을때.
 
-		int Key_; // 이키가 눌렸다면 
+		float Time_;
+		int Key_; // 이키가 눌렸다면,, 
 
-		bool KeyCheck() 
+		bool KeyCheck()
 		{
 			return 0 != GetAsyncKeyState(Key_);
 		}
 
-		void Update();
+		void Update(float _DeltaTime);
 
-		void Reset() 
+		void Reset()
 		{
 			Down_ = false;
 			Press_ = false;
 			Up_ = false;
-			Free_ =true;
+			Free_ = true;
 		}
 
+		// 생성자 주석걸어두기
 		//GameEngineKey(int _Key) 
 		//	: Key_(_Key)
 		//	, Down_(false)
@@ -42,7 +42,6 @@ private:
 		//	, Up_(false)
 		//	, Free_(true)
 		//{
-
 		//}
 	};
 
@@ -50,12 +49,12 @@ private:
 	static GameEngineInput* Inst_;
 
 public:
-	static GameEngineInput* GetInst() 
+	static GameEngineInput* GetInst()
 	{
 		return Inst_;
 	}
 
-	static void Destroy() 
+	static void Destroy()
 	{
 		if (nullptr != Inst_)
 		{
@@ -65,9 +64,10 @@ public:
 	}
 
 public:
-	void Update();
+	void Update(float _DeltaTime = 0.0f);
 	void CreateKey(const std::string& _Name, int _Key);
 
+	float GetTime(const std::string& _Name);
 	bool IsDown(const std::string& _Name);
 	bool IsUp(const std::string& _Name);
 	bool IsPress(const std::string& _Name);

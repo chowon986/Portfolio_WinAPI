@@ -17,6 +17,8 @@ public:
 protected:
 
 private:
+	float Speed_;
+
 	void Start() override;
 	void Render() override;
 	void Update() override;
@@ -26,11 +28,15 @@ private:
 	virtual bool CanWalk() override;
 	virtual bool CanRun() override;
 	virtual bool CanJump() override;
+	bool CanMoveUp();
+	bool CanMoveDown();
 
 	virtual void Walk() override;
 	virtual void Run() override;
 	/*virtual void Attack() override;
 	virtual void Die() override;*/
 	virtual void Jump() override;
+	void MoveUp();
+	void MoveDown();
 };
 

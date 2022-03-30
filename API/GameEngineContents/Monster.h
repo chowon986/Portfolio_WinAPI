@@ -24,5 +24,10 @@ private:
 	bool IsDie();
 	void attack();
 	void GetPos(float4 _Pos);
+	void Start();
+	void Update();
+	// 지속적으로 게임이 실행될때 호출된다.
+	void Render();
+
 };
 

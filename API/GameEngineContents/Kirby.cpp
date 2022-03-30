@@ -3,6 +3,7 @@
 #include "TitleLevel.h"
 #include "IntroStory.h"
 #include "Level1.h"
+#include "Level1_2.h"
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
@@ -30,13 +31,40 @@ Kirby::~Kirby()
 
 void Kirby::GameInit()
 {
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({0, 0 }, { 1280, 720}); // 내 화면 크기는 1024,576
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 0, 0 }, { 256, 192}); // 내 화면 크기는 1024,576
 	
+	//{
+	//	GameEngineDirectory ResourcesDir;
+	//	ResourcesDir.MoveParent("API");
+	//	ResourcesDir.Move("Resources");
+	//	ResourcesDir.Move("Story");
+
+	//	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	//	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	//	{
+	//		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	//	}
+	//}
+
+	//{
+	//	GameEngineDirectory ResourcesDir;
+	//	ResourcesDir.MoveParent("API");
+	//	ResourcesDir.Move("Resources");
+	//	ResourcesDir.Move("Title");
+
+	//	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+	//	for (size_t i = 0; i < AllImageFileList.size(); i++)
+	//	{
+	//		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	//	}
+	//}
+
 	{
 		GameEngineDirectory ResourcesDir;
 		ResourcesDir.MoveParent("API");
 		ResourcesDir.Move("Resources");
-		ResourcesDir.Move("Story");
 
 		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
@@ -44,40 +72,22 @@ void Kirby::GameInit()
 		{
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
-	}
 
-	{
-		GameEngineDirectory ResourcesDir;
-		ResourcesDir.MoveParent("API");
-		ResourcesDir.Move("Resources");
-		ResourcesDir.Move("Title");
-
-		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
-
-		for (size_t i = 0; i < AllImageFileList.size(); i++)
 		{
-			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
-		}
-	}
+			// 애니메이션은 하나라도 만들면 재생된다.
+			GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("star.bmp");
+			Image->CutCount(2, 1);
 
-	{
-		GameEngineDirectory ResourcesDir;
-		ResourcesDir.MoveParent("API");
-		ResourcesDir.Move("Resources");
-		ResourcesDir.Move("Play");
+			/*GameEngineRenderer* Render = GameEngineImageManager::GetInst()->Find("star.bmp");
+			Render->CreateAnimation("star.bmp", "star", 0, 1);*/
 
-		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
-
-		for (size_t i = 0; i < AllImageFileList.size(); i++)
-		{
-			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
 	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
 	{
 		GameEngineInput::GetInst()->CreateKey("LevelChange", VK_RETURN);
-		GameEngineInput::GetInst()->CreateKey("Level1", '1');
+		GameEngineInput::GetInst()->CreateKey("Level1", 'O');
 		GameEngineInput::GetInst()->CreateKey("Level2", '2');
 		GameEngineInput::GetInst()->CreateKey("Level3", '3');
 		GameEngineInput::GetInst()->CreateKey("Level4", '4');
@@ -88,6 +98,7 @@ void Kirby::GameInit()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<IntroStory>("IntroStory");
 	CreateLevel<Level1>("Level1");
+	CreateLevel<Level1_2>("Level1_2");
 	CreateLevel<Cannon>("Cannon");
 	CreateLevel<DanceStage>("DanceStage");
 	CreateLevel<WorldMap>("WorldMap");

@@ -4,9 +4,11 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineMath.h>
 
 Player::Player()
 	:CharacterBase()
+	,Speed_(1)
 {
 }
 
@@ -18,6 +20,9 @@ Player::~Player()
 void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
+
+	GameEngineRenderer* Render = CreateRenderer("star.bmp");
+	//Render->CreateAnimation("move.bmp", "move", 0, 1, 0.1f, true);
 	//SetScale({ 500, 500 });
 
 	//CreateRenderer("sparkkirby.bmp");
@@ -66,17 +71,26 @@ void Player::Update()
 		Jump();
 	}
 
+	if (CanMoveUp())
+	{
+		MoveUp();
+	}
 
-	//if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
-	//{
-	//	SetMove(float4::UP * GameEngineTime::GetDeltaTime() * GetSpeed());
-	//}
+	if (CanMoveDown())
+	{
+		MoveDown();
+	}
 
-	//if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
-	//{
-	//	SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * GetSpeed());
-	//}
+}
 
+bool Player::CanMoveUp()
+{
+	return GameEngineInput::GetInst()->IsPress("MoveUp");
+}
+
+bool Player::CanMoveDown()
+{
+	return GameEngineInput::GetInst()->IsPress("MoveDown");
 }
 
 float Player::GetSpeed()
@@ -135,7 +149,25 @@ void Player::Jump()
 	float desiredHeight = GetPosition().y * GameEngineTime::GetDeltaTime() * 30;/*GetJumpSpeed();*/
 	// 점프 스피드
 	float4 direction = desiredHeight - GetJumpHeight() < GetJumpMaxHeight() ? float4::UP : float4::DOWN;
-	SetMove(direction * GameEngineTime::GetDeltaTime() * 30/**/);
+	SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_/**/);
+}
+
+void Player::MoveUp()
+{
+	SetState(CharacterState::Up);
+	if (GameEngineInput::GetInst()->IsPress("MoveUp"))
+	{
+		SetMove(float4::UP * GameEngineTime::GetDeltaTime() * GetSpeed());
+	}
+}
+
+void Player::MoveDown()
+{
+	SetState(CharacterState::Down);
+	if (GameEngineInput::GetInst()->IsPress("MoveDown"))
+	{
+		SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * GetSpeed());
+	}
 }
 
 void Player::Render()

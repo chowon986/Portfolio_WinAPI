@@ -165,9 +165,6 @@
     <ClInclude Include="Tiktik.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Waddledi.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Kirby.h" />
     <ClInclude Include="Monster.h">
       <Filter>Play\Monster\Parent</Filter>
@@ -194,6 +191,13 @@
     </ClInclude>
     <ClInclude Include="BigTresureChest.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="Waddledi.h" />
+    <ClInclude Include="Level1_2.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_3.h">
+      <Filter>Level\02 Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotUI.cpp">
@@ -310,9 +314,6 @@
     <ClCompile Include="Tiktik.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Waddledi.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Waddledu.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
@@ -344,5 +345,12 @@
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="BigTresureChest.cpp" />
+    <ClCompile Include="Waddledi.cpp" />
+    <ClCompile Include="Level1_2.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_3.cpp">
+      <Filter>Level\02 Play</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

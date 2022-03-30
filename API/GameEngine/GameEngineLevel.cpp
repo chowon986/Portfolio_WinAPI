@@ -1,11 +1,13 @@
 #include "GameEngineLevel.h"
 #include "GameEngineActor.h"
 
-GameEngineLevel::GameEngineLevel() 
+
+GameEngineLevel::GameEngineLevel()
+	: CameraPos_(float4::ZERO)
 {
 }
 
-GameEngineLevel::~GameEngineLevel() 
+GameEngineLevel::~GameEngineLevel()
 {
 	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
 	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
@@ -27,9 +29,7 @@ GameEngineLevel::~GameEngineLevel()
 			(*StartActor) = nullptr;
 		}
 	}
-
 }
-
 
 void GameEngineLevel::ActorUpdate()
 {
@@ -63,43 +63,7 @@ void GameEngineLevel::ActorUpdate()
 	}
 }
 
-void GameEngineLevel::ActorRelease() 
-{
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd;
 
-	std::list<GameEngineActor*>::iterator StartActor;
-	std::list<GameEngineActor*>::iterator EndActor;
-
-	GroupStart = AllActor_.begin();
-	GroupEnd = AllActor_.end();
-
-	for (; GroupStart != GroupEnd; ++GroupStart)
-	{
-		std::list<GameEngineActor*>& Group = GroupStart->second;
-
-
-		//       
-		// i
-		// 3?????
-		//       i
-		// 0 1 2 4 5 
-		//       d
-		StartActor = Group.begin();
-		EndActor = Group.end();
-		for (; StartActor != EndActor; )
-		{
-			if (true == (*StartActor)->IsDeath())
-			{
-				delete *StartActor;
-				StartActor = Group.erase(StartActor);
-				continue;
-			}
-
-			++StartActor;
-		}
-	}
-}
 void GameEngineLevel::ActorRender()
 {
 	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;
@@ -125,13 +89,13 @@ void GameEngineLevel::ActorRender()
 			{
 				continue;
 			}
-
 			(*StartActor)->Renderering();
 		}
 
 
 		StartActor = Group.begin();
 		EndActor = Group.end();
+
 
 		for (; StartActor != EndActor; ++StartActor)
 		{
@@ -141,6 +105,37 @@ void GameEngineLevel::ActorRender()
 			}
 
 			(*StartActor)->Render();
+		}
+	}
+}
+
+void GameEngineLevel::ActorRelease()
+{
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart;
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd;
+
+	std::list<GameEngineActor*>::iterator StartActor;
+	std::list<GameEngineActor*>::iterator EndActor;
+
+	GroupStart = AllActor_.begin();
+	GroupEnd = AllActor_.end();
+
+	for (; GroupStart != GroupEnd; ++GroupStart)
+	{
+		std::list<GameEngineActor*>& Group = GroupStart->second;
+
+		StartActor = Group.begin();
+		EndActor = Group.end();
+		for (; StartActor != EndActor; )
+		{
+			if (true == (*StartActor)->IsDeath())
+			{
+				delete* StartActor;
+				StartActor = Group.erase(StartActor);
+				continue;
+			}
+
+			++StartActor;
 		}
 	}
 }

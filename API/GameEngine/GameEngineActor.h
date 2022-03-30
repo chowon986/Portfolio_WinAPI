@@ -10,7 +10,7 @@ class GameEngineRenderer;
 class GameEngineLevel;
 class GameEngineActor : public GameEngineNameObject, public GameEngineUpdateObject
 {
-//// ActorBase
+	//// ActorBase
 public:
 	friend GameEngineLevel;
 
@@ -24,7 +24,7 @@ public:
 	GameEngineActor& operator=(const GameEngineActor& _Other) = delete;
 	GameEngineActor& operator=(GameEngineActor&& _Other) noexcept = delete;
 
-	inline GameEngineLevel* GetLevel() 
+	inline GameEngineLevel* GetLevel()
 	{
 		return Level_;
 	}
@@ -37,7 +37,6 @@ public:
 	{
 		return Scale_;
 	}
-
 
 	inline void SetMove(float4 _Value)
 	{
@@ -78,9 +77,11 @@ private:
 	/////////////////////////////////////////////////// Render
 public:
 	// 벡터의 값
+	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+
 	// 가장 빠를겁니다.
 	// 디폴트 인자는 선언에서만 지정 가능합니다.
-	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = {0,0});
+	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 
 	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, const float4& _Scale, RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 

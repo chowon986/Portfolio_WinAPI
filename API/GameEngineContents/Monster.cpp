@@ -31,3 +31,15 @@ void Monster::attack()
 void Monster::GetPos(float4 _Pos)
 {
 }
+
+void Monster::Start()
+{
+}
+
+void Monster::Update()
+{
+}
+
+void Monster::Render()
+{
+}

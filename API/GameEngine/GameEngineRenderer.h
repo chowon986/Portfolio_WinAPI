@@ -31,7 +31,7 @@ public:
 		RenderPivot_ = _Pos;
 	}
 
-	inline void SetType(const RenderPivot& _Type)
+	inline void SetPivotType(const RenderPivot& _Type)
 	{
 		PivotType_ = _Type;
 	}
@@ -56,9 +56,9 @@ public:
 	}
 
 	void SetImage(const std::string& _Name);
-	
+
 	// 
-	void SetIndex(size_t _Index);
+	void SetIndex(size_t _Index, const float4& _Scale = { -1, -1 });
 
 
 
@@ -77,9 +77,11 @@ private:
 	float4 RenderImagePivot_;
 	unsigned int TransColor_;
 
+	bool IsCameraEffect_;
 
 
-///////////////////////////////////////////////////////////////// 애니메이션
+
+	///////////////////////////////////////////////////////////////// 애니메이션
 
 private:
 	class FrameAnimation
@@ -95,15 +97,14 @@ private:
 		bool Loop_;
 
 	public:
-		FrameAnimation() 
+		FrameAnimation()
 			: Image_(nullptr),
-		CurrentFrame_(-1),
-		StartFrame_(-1),
-		EndFrame_(-1),
-		CurrentInterTime_(0.1f),
-		InterTime_(0.1f),
-		Loop_(true)
-
+			CurrentFrame_(-1),
+			StartFrame_(-1),
+			EndFrame_(-1),
+			CurrentInterTime_(0.1f),
+			InterTime_(0.1f),
+			Loop_(true)
 		{
 
 		}
@@ -111,7 +112,7 @@ private:
 	public:
 		void Update();
 
-		void Reset() 
+		void Reset()
 		{
 			CurrentFrame_ = StartFrame_;
 			CurrentInterTime_ = InterTime_;
@@ -128,7 +129,7 @@ public:
 private:
 	std::map<std::string, FrameAnimation> Animations_;
 	FrameAnimation* CurrentAnimation_;
-	
+
 
 
 };
