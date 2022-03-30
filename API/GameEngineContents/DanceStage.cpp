@@ -26,3 +26,7 @@ void DanceStage::Update()
 		GameEngine::GlobalEngine().ChangeLevel("WorldMap");
 	}
 }
+
+void DanceStage::LevelChangeStart()
+{
+}

@@ -19,6 +19,7 @@
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 
 Kirby::Kirby()
@@ -71,16 +72,6 @@ void Kirby::GameInit()
 		for (size_t i = 0; i < AllImageFileList.size(); i++)
 		{
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
-		}
-
-		{
-			// 애니메이션은 하나라도 만들면 재생된다.
-			GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("star.bmp");
-			Image->CutCount(2, 1);
-
-			/*GameEngineRenderer* Render = GameEngineImageManager::GetInst()->Find("star.bmp");
-			Render->CreateAnimation("star.bmp", "star", 0, 1);*/
-
 		}
 	}
 

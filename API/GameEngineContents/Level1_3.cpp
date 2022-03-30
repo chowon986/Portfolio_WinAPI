@@ -1,4 +1,4 @@
-#include "Level1_2.h"
+#include "Level1_3.h"
 #include "GameEngineBase/GameEngineInput.h"
 #include "GameEngine/GameEngine.h"
 #include <GameEngine/GameEngineRenderer.h>
@@ -18,18 +18,29 @@
 //#include "Background.h"
 #include "ContentsEnum.h"
 
-Level1_2::Level1_2()
+Level1_3::Level1_3()
 {
 }
 
-Level1_2::~Level1_2()
+Level1_3::~Level1_3()
 {
 }
 
 
-void Level1_2::Loading()
+void Level1_3::Loading()
 {
+}
+
+void Level1_3::Update()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
+		GameEngine::GlobalEngine().ChangeLevel("Level1_4");
+	}
+}
+
+void Level1_3::LevelChangeStart()
+{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		Stage1_2->CreateRendererToScale("stage1_3.bmp", float4(256.0f, 384.0f), RenderPivot::CENTER, float4(0.0f, -96.0f));
 
@@ -51,13 +62,4 @@ void Level1_2::Loading()
 		//Monster* Boxes2 = CreateActor<Monster>((int)ORDER::MONSTER); // 5x5
 		//Boxes2->CreateRendererToScale("Boxes2.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
 
-	}
-}
-
-void Level1_2::Update()
-{
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Level1_4");
-	}
 }

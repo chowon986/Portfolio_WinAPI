@@ -5,10 +5,11 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 Player::Player()
 	:CharacterBase()
-	,Speed_(1)
+	, Speed_(1)
 {
 }
 
@@ -21,22 +22,29 @@ void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 
+	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("star.bmp");
+	Image->CutCount(2, 1);
+
 	GameEngineRenderer* Render = CreateRenderer("star.bmp");
-	//Render->CreateAnimation("move.bmp", "move", 0, 1, 0.1f, true);
-	//SetScale({ 500, 500 });
+	Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);
+	Render->ChangeAnimation("star");
 
-	//CreateRenderer("sparkkirby.bmp");
+	/*	GameEngineRenderer* Render = CreateRenderer("star.bmp");
+		Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);*/ // 불완전한형식 -> 타입을 모른다.
+		//SetScale({ 500, 500 });
 
-	//CreateRendererToScale("logoc.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
+		//CreateRenderer("sparkkirby.bmp");
 
-	// CreateRendererToScale("12345.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
-	// CreateRendererToScale("sparkkirby.bmp", float4(102.0f, 98.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
+		//CreateRendererToScale("logoc.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
 
-	// CreateRenderer("testkirby.bmp");
-	// CreateRenderer("BackgroundB.bmp");
-	// CreateRenderer("LogoC.bmp");
-	//CreateRendererToScale("BackgroundE.bmp", float4(300.0f, 20.0f), RenderPivot::CENTER, float4(0.0f, -100.0f));
-	//CreateRenderer("monster.bmp", RenderPivot::CENTER, { 0,-1000 }); // 위쪽으로 100 올려 그려라
+		// CreateRendererToScale("12345.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
+		// CreateRendererToScale("sparkkirby.bmp", float4(102.0f, 98.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
+
+		// CreateRenderer("testkirby.bmp");
+		// CreateRenderer("BackgroundB.bmp");
+		// CreateRenderer("LogoC.bmp");
+		//CreateRendererToScale("BackgroundE.bmp", float4(300.0f, 20.0f), RenderPivot::CENTER, float4(0.0f, -100.0f));
+		//CreateRenderer("monster.bmp", RenderPivot::CENTER, { 0,-1000 }); // 위쪽으로 100 올려 그려라
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft")) // moveleft가 없으면 만들어줘
 	{
@@ -51,7 +59,9 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("RunRight", 'E');
 		// VK_LBUTTON;
 	}
-
+	//Render->SetIndex(0);
+	//Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);
+	//Render->SetIndex(0);
 }
 
 void Player::Update()

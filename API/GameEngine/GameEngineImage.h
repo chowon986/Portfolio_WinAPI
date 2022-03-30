@@ -69,7 +69,7 @@ public:
 
 	inline float4 GetCutPivot(size_t _Index)
 	{
-		return CutScale_[_Index];
+		return CutPivot_[_Index];
 	}
 
 	inline float4 GetCutScale(size_t _Index)

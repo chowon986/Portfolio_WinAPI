@@ -195,7 +195,7 @@
     <ClInclude Include="Level1_2.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
-    <ClInclude Include="Stage1_3.h">
+    <ClInclude Include="Level1_3.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
   </ItemGroup>
@@ -349,7 +349,7 @@
     <ClCompile Include="Level1_2.cpp">
       <Filter>Level\02 Play</Filter>
     </ClCompile>
-    <ClCompile Include="Stage1_3.cpp">
+    <ClCompile Include="Level1_3.cpp">
       <Filter>Level\02 Play</Filter>
     </ClCompile>
   </ItemGroup>

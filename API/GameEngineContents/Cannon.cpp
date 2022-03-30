@@ -25,3 +25,7 @@ void Cannon::Update()
 		GameEngine::GlobalEngine().ChangeLevel("DanceStage");
 	}
 }
+
+void Cannon::LevelChangeStart()
+{
+}

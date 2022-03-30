@@ -40,3 +40,7 @@ void WorldMap::Update()
 	}
 
 }
+
+void WorldMap::LevelChangeStart()
+{
+}

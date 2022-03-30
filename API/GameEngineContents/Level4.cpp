@@ -16,11 +16,6 @@ Level4::~Level4()
 
 void Level4::Loading()
 {
-	// 커비
-	// 워프스타
-	CreateActor<Background>((int)ORDER::BACKGROUND);
-	CreateActor<Background>((int)ORDER::BACKGROUND);
-	CreateActor<Waddledi>((int)ORDER::MONSTER);
 
 }
 
@@ -30,4 +25,13 @@ void Level4::Update()
 	{
 		GameEngine::GlobalEngine().ChangeLevel("Boss");
 	}
+}
+
+void Level4::LevelChangeStart()
+{
+	// 커비
+// 워프스타
+	CreateActor<Background>((int)ORDER::BACKGROUND);
+	CreateActor<Background>((int)ORDER::BACKGROUND);
+	CreateActor<Waddledi>((int)ORDER::MONSTER);
 }

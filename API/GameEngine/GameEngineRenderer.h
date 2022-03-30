@@ -125,7 +125,6 @@ public:
 	// ¿É¼ÇÀ» 
 	void ChangeAnimation(const std::string& _Name);
 
-
 private:
 	std::map<std::string, FrameAnimation> Animations_;
 	FrameAnimation* CurrentAnimation_;

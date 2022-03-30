@@ -35,6 +35,19 @@ Level3::~Level3()
 
 void Level3::Loading()
 {
+
+}
+
+void Level3::Update()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	{
+		GameEngine::GlobalEngine().ChangeLevel("Cannon");
+	}
+}
+
+void Level3::LevelChangeStart()
+{
 	//kirby
 	CreateActor<Bomb>((int)ORDER::MONSTER);
 	CreateActor<Bomb>((int)ORDER::MONSTER);
@@ -77,12 +90,4 @@ void Level3::Loading()
 	CreateActor<Storo>((int)ORDER::MONSTER);
 
 
-}
-
-void Level3::Update()
-{
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Cannon");
-	}
 }

@@ -27,3 +27,7 @@ void Boss::Update()
 		GameEngine::GlobalEngine().ChangeLevel("EndingStory");
 	}
 }
+
+void Boss::LevelChangeStart()
+{
+}

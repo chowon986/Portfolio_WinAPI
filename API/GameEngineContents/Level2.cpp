@@ -23,6 +23,19 @@ Level2::~Level2()
 
 void Level2::Loading()
 {
+
+}
+
+void Level2::Update()
+{
+	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	{
+		GameEngine::GlobalEngine().ChangeLevel("Cannon");
+	}
+}
+
+void Level2::LevelChangeStart()
+{
 	//Ä¿ºñ
 	CreateActor<SwordItem>((int)ORDER::MONSTER);
 	CreateActor<Waddledi>((int)ORDER::MONSTER);
@@ -35,12 +48,4 @@ void Level2::Loading()
 	CreateActor<Monster1>((int)ORDER::MONSTER); // cut
 	CreateActor<Monster2>((int)ORDER::MONSTER);
 	CreateActor<Tiktik>((int)ORDER::MONSTER);
-}
-
-void Level2::Update()
-{
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Cannon");
-	}
 }
