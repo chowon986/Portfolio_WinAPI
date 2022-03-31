@@ -45,7 +45,7 @@ void Level1::LevelChangeStart()
 {
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1->CreateRendererToScale("stage1.bmp", float4(1536.0f, 192.0f), RenderPivot::CENTER, float4(640.0f, 0.0f));
+		Stage1->CreateRendererToScale("stage1.bmp", float4(4608.0f, 576.0f), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{
@@ -62,7 +62,11 @@ void Level1::LevelChangeStart()
 	
 
 	Monster* Waddledu = CreateActor<Monster>((int)ORDER::MONSTER);
-	Waddledu->CreateRendererToScale("waddledu.bmp", float4(150.0f, 100.0f), RenderPivot::CENTER, float4(500.0f, 100.0f));
+	GameEngineRenderer* WaddleduRenderer= Waddledu->CreateRendererToScale("waddledu.bmp", float4(150.0f, 100.0f), RenderPivot::CENTER, float4(500.0f, 100.0f));
+	GameEngineImage* WaddleduImage = WaddleduRenderer->GetImage();
+	//WaddleduImage->CutCount();
+	//WaddleduRenderer->CreateAnimation();
+	//WaddleduRenderer->ChangeAnimation();
 
 	Monster* Sparky = CreateActor<Monster>((int)ORDER::MONSTER);
 	Sparky->CreateRendererToScale("Sparky.bmp", float4(141.0f, 122.0f), RenderPivot::CENTER, float4(128.0f, 80.0f));

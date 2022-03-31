@@ -32,7 +32,7 @@ Kirby::~Kirby()
 
 void Kirby::GameInit()
 {
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 0, 0 }, { 256, 192}); // 내 화면 크기는 1024,576
+	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 0, 0 }, { 768, 576 }); // 내 화면 크기는 1024,576
 	
 	//{
 	//	GameEngineDirectory ResourcesDir;
@@ -100,7 +100,7 @@ void Kirby::GameInit()
 	CreateLevel<EndingStory>("EndingStory");
 	CreateLevel<EndingLevel>("Ending");
 
-	ChangeLevel("Level1");
+	ChangeLevel("Stage1");
 
 }
 
