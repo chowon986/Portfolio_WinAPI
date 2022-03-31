@@ -4,6 +4,7 @@
 #include "IntroStory.h"
 #include "Level1.h"
 #include "Level1_2.h"
+#include "Level1_3.h"
 #include "Level2.h"
 #include "Level3.h"
 #include "Level4.h"
@@ -90,6 +91,7 @@ void Kirby::GameInit()
 	CreateLevel<IntroStory>("IntroStory");
 	CreateLevel<Level1>("Level1");
 	CreateLevel<Level1_2>("Level1_2");
+	CreateLevel<Level1_3>("Level1_3");
 	CreateLevel<Cannon>("Cannon");
 	CreateLevel<DanceStage>("DanceStage");
 	CreateLevel<WorldMap>("WorldMap");
@@ -100,7 +102,7 @@ void Kirby::GameInit()
 	CreateLevel<EndingStory>("EndingStory");
 	CreateLevel<EndingLevel>("Ending");
 
-	ChangeLevel("Stage1");
+	ChangeLevel("Level1");
 
 }
 

@@ -6,10 +6,10 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineLevel.h>
 
 Player::Player()
-	:CharacterBase()
-	, Speed_(1)
+	: CharacterBase()
 {
 }
 
@@ -91,6 +91,50 @@ void Player::Update()
 		MoveDown();
 	}
 
+	// 카메라 위치 -> Background로 옮기기
+	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
+
+	if (0 > GetLevel()->GetCameraPos().x)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+
+	if (0 > GetLevel()->GetCameraPos().y)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+	float MapSizeX = 4608;
+	float MapSizeY = 576;
+	float CameraRectX = 768;
+	float CameraRectY = 576;
+
+	if (MapSizeX <= GetLevel()->GetCameraPos().x + CameraRectX)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapSizeX);
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+	if (MapSizeY <= GetLevel()->GetCameraPos().y + CameraRectY)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = GetLevel()->GetCameraPos().y-(GetLevel()->GetCameraPos().y + CameraRectY - MapSizeY);
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+	ColMapImage_ = GameEngineImageManager::GetInst()->Find("Stage1ColMap.bmp");
+	
+	if (ColMapImage_ == nullptr)
+	{
+		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
+	}
+
 }
 
 bool Player::CanMoveUp()
@@ -159,7 +203,7 @@ void Player::Jump()
 	float desiredHeight = GetPosition().y * GameEngineTime::GetDeltaTime() * 30;/*GetJumpSpeed();*/
 	// 점프 스피드
 	float4 direction = desiredHeight - GetJumpHeight() < GetJumpMaxHeight() ? float4::UP : float4::DOWN;
-	SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_/**/);
+	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed()/**/);
 }
 
 void Player::MoveUp()
@@ -179,6 +223,15 @@ void Player::MoveDown()
 		SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * GetSpeed());
 	}
 }
+
+/*
+	int Color = ColMapImage_->GetImagePixel(GetPosition());
+	if (RGB(0, 0, 0) == Color)
+	{
+		Gravity_ =  0.0f;
+	}
+*/
+
 
 void Player::Render()
 {

@@ -23,6 +23,6 @@ void TitleLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("IntroStory");
+		GameEngine::GlobalEngine().ChangeLevel("Level1");
 	}
 }

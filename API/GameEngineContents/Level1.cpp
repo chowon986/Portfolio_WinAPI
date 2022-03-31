@@ -18,6 +18,7 @@
 //#include "Background.h"
 #include "ContentsEnum.h"
 #include "GameEngine/GameEngineImage.h"
+#include <GameEngine/GameEngineLevel.h>
 
 Level1::Level1()
 {
@@ -39,13 +40,14 @@ void Level1::Update()
 	{
 		GameEngine::GlobalEngine().ChangeLevel("Level1_2");
 	}
+
 }
 
 void Level1::LevelChangeStart()
 {
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1->CreateRendererToScale("stage1.bmp", float4(4608.0f, 576.0f), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Stage1->CreateRendererToScale("Stage1.bmp", float4(4608.0f, 576.0f), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{

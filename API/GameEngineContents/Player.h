@@ -2,7 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include "CharacterBase.h"
 
-// Ό³Έν :
+class GameEngineImage;
 class Player : public CharacterBase
 {
 public:
@@ -17,7 +17,8 @@ public:
 protected:
 
 private:
-	float Speed_;
+	GameEngineImage* ColMapImage_;
+	float Gravity_;
 
 	void Start() override;
 	void Render() override;

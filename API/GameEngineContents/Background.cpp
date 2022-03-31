@@ -12,7 +12,6 @@ Background::~Background()
 
 void Background::Start()
 {
-	// 크기 조절 모르겠음
 	SetPosition(GameEngineWindow::GetScale().Half() + float4(0, GetScale().y));
 }
 

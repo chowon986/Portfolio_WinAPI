@@ -57,10 +57,17 @@ public:
 
 	void SetImage(const std::string& _Name);
 
-	// 
 	void SetIndex(size_t _Index, const float4& _Scale = { -1, -1 });
-
-
+	
+	void CameraEffectOff()
+	{
+		IsCameraEffect_ = false;
+	}
+	
+	void CameraEffectOn()
+	{
+		IsCameraEffect_ = true;
+	}
 
 protected:
 	void Render();
