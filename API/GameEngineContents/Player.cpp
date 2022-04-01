@@ -91,43 +91,41 @@ void Player::Update()
 		MoveDown();
 	}
 
-	// 카메라 위치 -> Background로 옮기기
-	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
+	//GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
-	if (0 > GetLevel()->GetCameraPos().x)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = 0;
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
+	//if (0 > GetLevel()->GetCameraPos().x)
+	//{
+	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
+	//	CurCameraPos.x = 0;
+	//	GetLevel()->SetCameraPos(CurCameraPos);
+	//}
 
 
-	if (0 > GetLevel()->GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = 0;
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
+	//if (0 > GetLevel()->GetCameraPos().y)
+	//{
+	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
+	//	CurCameraPos.y = 0;
+	//	GetLevel()->SetCameraPos(CurCameraPos);
+	//}
 
-	float MapSizeX = 4608;
-	float MapSizeY = 576;
-	float CameraRectX = 768;
-	float CameraRectY = 576;
+	//float MapSizeX = 4608;
+	//float MapSizeY = 576;
+	//float CameraRectX = 768;
+	//float CameraRectY = 576;
 
-	if (MapSizeX <= GetLevel()->GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapSizeX);
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
+	//if (MapSizeX <= GetLevel()->GetCameraPos().x + CameraRectX)
+	//{
+	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
+	//	CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapSizeX);
+	//	GetLevel()->SetCameraPos(CurCameraPos);
+	//}
 
-	if (MapSizeY <= GetLevel()->GetCameraPos().y + CameraRectY)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = GetLevel()->GetCameraPos().y-(GetLevel()->GetCameraPos().y + CameraRectY - MapSizeY);
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-
+	//if (MapSizeY <= GetLevel()->GetCameraPos().y + CameraRectY)
+	//{
+	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
+	//	CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapSizeY);
+	//	GetLevel()->SetCameraPos(CurCameraPos);
+	//}
 	ColMapImage_ = GameEngineImageManager::GetInst()->Find("Stage1ColMap.bmp");
 	
 	if (ColMapImage_ == nullptr)

@@ -198,6 +198,7 @@
     <ClInclude Include="Level1_3.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotUI.cpp">
@@ -352,5 +353,6 @@
     <ClCompile Include="Level1_3.cpp">
       <Filter>Level\02 Play</Filter>
     </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
 </Project>

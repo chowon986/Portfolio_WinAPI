@@ -19,9 +19,14 @@
 #include "ContentsEnum.h"
 #include "GameEngine/GameEngineImage.h"
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineWindow.h>
 
 Level1::Level1()
+	:MapSizeX_(4608)
+	,MapSizeY_(576)
+	,Player_(nullptr)
 {
+
 }
 
 Level1::~Level1()
@@ -41,18 +46,51 @@ void Level1::Update()
 		GameEngine::GlobalEngine().ChangeLevel("Level1_2");
 	}
 
+	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
+
+	if (0 > GetCameraPos().x)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.x = 0;
+		SetCameraPos(CurCameraPos);
+	}
+
+
+	if (0 > GetCameraPos().y)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.y = 0;
+		SetCameraPos(CurCameraPos);
+	}
+
+
+	float CameraRectX = 768;
+	float CameraRectY = 576;
+
+	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		SetCameraPos(CurCameraPos);
+	}
+
+	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		SetCameraPos(CurCameraPos);
+	}
 }
 
 void Level1::LevelChangeStart()
 {
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1->CreateRendererToScale("Stage1.bmp", float4(4608.0f, 576.0f), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Stage1->CreateRendererToScale("Stage1.bmp",float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{
-		CreateActor<Player>((int)ORDER::PLAYER);
-
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 	}
 
 	Monster* Waddledi = CreateActor<Monster>((int)ORDER::MONSTER);
