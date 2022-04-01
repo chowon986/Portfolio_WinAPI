@@ -1,6 +1,7 @@
 #include "EndingStory.h"
 #include "GameEngine/GameEngine.h"
 #include <GameEngineBase/GameEngineInput.h>
+#include "VideoPlayer.h"
 
 EndingStory::EndingStory()
 {
@@ -14,14 +15,12 @@ void EndingStory::Loading()
 {
 }
 
-// void EndingStory::LevelChangeStart()
-//CreateActor<EndingBackground>((int)ORDER::BACKGROUND, "Ending"); // 엔딩 스토리 추가
-
-
 void EndingStory::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Ending");
-	}
+}
+
+void EndingStory::LevelChangeStart()
+{
+	VideoPlayer* EndingVideo = CreateActor<VideoPlayer>();
+	EndingVideo->SetInfo("ending_frame_", 0, 1030, 60);
 }

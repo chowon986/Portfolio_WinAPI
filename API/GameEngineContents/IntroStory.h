@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+class VideoPlayer;
 class IntroStory : public GameEngineLevel
 {
 public:
@@ -15,8 +16,9 @@ public:
 protected:
 	void Loading() override;
 	void Update() override;
+	void LevelChangeStart() override;
 
 private:
-
+	VideoPlayer* IntroVideo_;
 };
 

@@ -185,7 +185,6 @@
     <ClInclude Include="FireItem.h" />
     <ClInclude Include="Frosty.h" />
     <ClInclude Include="HPUp.h" />
-    <ClInclude Include="IntroBackground.h" />
     <ClInclude Include="IntroStory.h" />
     <ClInclude Include="Kirby.h">
       <SubType>
@@ -219,6 +218,7 @@
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="Tomato.h" />
     <ClInclude Include="TreasureChest.h" />
+    <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="Waddledi.h" />
     <ClInclude Include="Waddledu.h" />
     <ClInclude Include="WorldMap.h" />
@@ -256,7 +256,6 @@
     <ClCompile Include="FireItem.cpp" />
     <ClCompile Include="Frosty.cpp" />
     <ClCompile Include="HPUp.cpp" />
-    <ClCompile Include="IntroBackground.cpp" />
     <ClCompile Include="IntroStory.cpp" />
     <ClCompile Include="Kirby.cpp">
       <SubType>
@@ -290,6 +289,7 @@
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="Tomato.cpp" />
     <ClCompile Include="TreasureChest.cpp" />
+    <ClCompile Include="VideoPlayer.cpp" />
     <ClCompile Include="Waddledi.cpp" />
     <ClCompile Include="Waddledu.cpp" />
     <ClCompile Include="WorldMap.cpp" />

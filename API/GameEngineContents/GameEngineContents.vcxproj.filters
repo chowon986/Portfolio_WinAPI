@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Title">
-      <UniqueIdentifier>{eed8f05d-e859-4a0f-b922-177cd30be544}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Play">
       <UniqueIdentifier>{7a4ef85f-32e9-4737-b3a7-bbd0bc5e0bab}</UniqueIdentifier>
     </Filter>
@@ -15,9 +12,6 @@
     </Filter>
     <Filter Include="Play\Global">
       <UniqueIdentifier>{a2c75bf8-c9a7-45f4-8a2c-bc3a9920f741}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Title\Background">
-      <UniqueIdentifier>{ead959a7-db33-4669-9ee0-0d7e5f370f3e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Play\Background">
       <UniqueIdentifier>{6de6653d-bd35-4b90-94b5-338c162301a6}</UniqueIdentifier>
@@ -53,9 +47,6 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Play\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroBackground.h">
-      <Filter>Title\Background</Filter>
     </ClInclude>
     <ClInclude Include="CharacterBase.h">
       <Filter>Play\Base</Filter>
@@ -198,6 +189,7 @@
     <ClInclude Include="Level1_3.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotUI.cpp">
@@ -208,9 +200,6 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Play\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="IntroBackground.cpp">
-      <Filter>Title\Background</Filter>
     </ClCompile>
     <ClCompile Include="CharacterBase.cpp">
       <Filter>Play\Base</Filter>
@@ -352,5 +341,6 @@
     <ClCompile Include="Level1_3.cpp">
       <Filter>Level\02 Play</Filter>
     </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
 </Project>

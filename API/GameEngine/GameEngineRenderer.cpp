@@ -17,6 +17,7 @@ GameEngineRenderer::GameEngineRenderer()
 	, TransColor_(RGB(255, 0, 255))
 	, RenderImagePivot_({ 0,0 })
 	, IsCameraEffect_(true)
+	, CurrentAnimation_(nullptr)
 {
 }
 

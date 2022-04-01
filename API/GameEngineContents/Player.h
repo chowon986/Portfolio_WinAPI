@@ -19,6 +19,8 @@ protected:
 private:
 	GameEngineImage* ColMapImage_;
 	float Gravity_;
+	float AccGravity_;
+	int Speed_;
 
 	void Start() override;
 	void Render() override;

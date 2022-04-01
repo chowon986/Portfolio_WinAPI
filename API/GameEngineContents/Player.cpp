@@ -9,7 +9,10 @@
 #include <GameEngine/GameEngineLevel.h>
 
 Player::Player()
-	: CharacterBase()
+	: ColMapImage_(nullptr)
+	, Gravity_(1.00f)
+	, AccGravity_(1.0f)
+	, Speed_(5)
 {
 }
 
@@ -76,17 +79,17 @@ void Player::Update()
 		Walk();
 	}
 
-	if (CanJump()) // Shift
+	if (true == CanJump()) // Shift
 	{
 		Jump();
 	}
 
-	if (CanMoveUp())
+	if (true == CanMoveUp())
 	{
 		MoveUp();
 	}
 
-	if (CanMoveDown())
+	if (true == CanMoveDown())
 	{
 		MoveDown();
 	}
@@ -135,7 +138,7 @@ void Player::Update()
 		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
 	}
 
-}
+} ///////////////////////////need to chk
 
 bool Player::CanMoveUp()
 {
@@ -173,17 +176,29 @@ void Player::Walk()
 {
 	SetState(CharacterState::WALK);
 	float4 direction = GameEngineInput::GetInst()->IsPress("MoveLeft") ? float4::LEFT : float4::RIGHT;
-	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
-
-	// 나중에 애니메이션 구현하기
-	// if (GetState() == CharacterState::WALK) {걷는 애니메이션}
+	float4 NextPos = GetPosition() + (direction * GameEngineTime::GetDeltaTime() * GetSpeed());
+	int Color = ColMapImage_->GetImagePixel(NextPos);
+	if (RGB(0, 0, 0) != Color)
+	{
+		AccGravity_ = 0.05f;
+		SetMove(direction * AccGravity_ * GetSpeed());
+	}
+	else if (RGB(0, 0, 0) == Color)
+	{
+		AccGravity_ = 0.0f;
+	}
 }
 
 void Player::Run()
 {
 	SetState(CharacterState::RUN);
 	float4 direction = GameEngineInput::GetInst()->IsPress("RunLeft") ? float4::LEFT : float4::RIGHT;
-	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
+	float4 NextPos = GetPosition() + (direction * GameEngineTime::GetDeltaTime() * GetSpeed());
+	int Color = ColMapImage_->GetImagePixel(NextPos);
+	if (RGB(0, 0, 0) != Color)
+	{
+		SetMove(direction * AccGravity_ * GetSpeed());
+	}
 }
 
 void Player::Jump()
@@ -208,19 +223,21 @@ void Player::Jump()
 
 void Player::MoveUp()
 {
+	///////////////////////////////////////////////need chk
 	SetState(CharacterState::Up);
 	if (GameEngineInput::GetInst()->IsPress("MoveUp"))
 	{
-		SetMove(float4::UP * GameEngineTime::GetDeltaTime() * GetSpeed());
-	}
+		SetMove(float4::UP * AccGravity_ * static_cast<float>(Speed_));
+	} // need to chk
 }
+
 
 void Player::MoveDown()
 {
 	SetState(CharacterState::Down);
 	if (GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
-		SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * GetSpeed());
+		SetMove(float4::DOWN * AccGravity_ * static_cast<float>(Speed_));
 	}
 }
 
@@ -231,7 +248,6 @@ void Player::MoveDown()
 		Gravity_ =  0.0f;
 	}
 */
-
 
 void Player::Render()
 {
