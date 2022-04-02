@@ -136,6 +136,7 @@
     <ClInclude Include="WorldMap.h">
       <Filter>Level\02 Play\Global</Filter>
     </ClInclude>
+    <ClInclude Include="VideoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotUI.cpp">
@@ -228,5 +229,6 @@
     <ClCompile Include="WorldMap.cpp">
       <Filter>Level\02 Play\Global</Filter>
     </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp" />
   </ItemGroup>
 </Project>
