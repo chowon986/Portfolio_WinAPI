@@ -18,6 +18,5 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-
 };
 

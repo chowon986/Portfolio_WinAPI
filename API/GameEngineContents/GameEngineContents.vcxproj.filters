@@ -37,6 +37,12 @@
     <Filter Include="Item">
       <UniqueIdentifier>{8eb29cef-cd29-4f6f-8c3a-fc44923b82c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\02 Play\Level1">
+      <UniqueIdentifier>{d7daae6a-fda0-4cf5-8a1c-1bf97e50f4e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\02 Play\Global">
+      <UniqueIdentifier>{ef734702-0bf7-409d-92e0-46c3fc191faa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BotUI.h">
@@ -72,15 +78,6 @@
     <ClInclude Include="Boss.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
-    <ClInclude Include="Cannon.h">
-      <Filter>Level\02 Play</Filter>
-    </ClInclude>
-    <ClInclude Include="DanceStage.h">
-      <Filter>Level\02 Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1.h">
-      <Filter>Level\02 Play</Filter>
-    </ClInclude>
     <ClInclude Include="Level4.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
@@ -89,72 +86,6 @@
     </ClInclude>
     <ClInclude Include="Level3.h">
       <Filter>Level\02 Play</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldMap.h">
-      <Filter>Level\02 Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Dedede.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Frosty.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Waddledu.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Animal.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="BigBomb.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="BigWaddledi.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Brontobert.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Doc.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Doroach.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Fire.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Mice.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster1.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster2.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster3.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Moon.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Sparky.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Spinni.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Storo.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Sword.h">
-      <Filter>Play\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Tiktik.h">
-      <Filter>Play\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Kirby.h" />
     <ClInclude Include="Monster.h">
@@ -183,13 +114,28 @@
     <ClInclude Include="BigTresureChest.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Waddledi.h" />
+    <ClInclude Include="VideoPlayer.h" />
+    <ClInclude Include="Level1.h">
+      <Filter>Level\02 Play\Level1</Filter>
+    </ClInclude>
     <ClInclude Include="Level1_2.h">
-      <Filter>Level\02 Play</Filter>
+      <Filter>Level\02 Play\Level1</Filter>
     </ClInclude>
     <ClInclude Include="Level1_3.h">
-      <Filter>Level\02 Play</Filter>
+      <Filter>Level\02 Play\Level1</Filter>
     </ClInclude>
-    <ClInclude Include="VideoPlayer.h" />
+    <ClInclude Include="Level1_4.h">
+      <Filter>Level\02 Play\Level1</Filter>
+    </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>Level\02 Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceStage.h">
+      <Filter>Level\02 Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Level\02 Play\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BotUI.cpp">
@@ -222,15 +168,6 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Level\02 Play</Filter>
     </ClCompile>
-    <ClCompile Include="Cannon.cpp">
-      <Filter>Level\02 Play</Filter>
-    </ClCompile>
-    <ClCompile Include="DanceStage.cpp">
-      <Filter>Level\02 Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1.cpp">
-      <Filter>Level\02 Play</Filter>
-    </ClCompile>
     <ClCompile Include="Level2.cpp">
       <Filter>Level\02 Play</Filter>
     </ClCompile>
@@ -239,72 +176,6 @@
     </ClCompile>
     <ClCompile Include="Level4.cpp">
       <Filter>Level\02 Play</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldMap.cpp">
-      <Filter>Level\02 Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Dedede.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Frosty.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Animal.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="BigBomb.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="BigWaddledi.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Brontobert.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Doc.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Doroach.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Fire.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Mice.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster1.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster2.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster3.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Moon.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Sparky.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Spinni.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Storo.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Sword.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Tiktik.cpp">
-      <Filter>Play\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Waddledu.cpp">
-      <Filter>Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Kirby.cpp" />
     <ClCompile Include="Player.cpp">
@@ -335,12 +206,27 @@
     </ClCompile>
     <ClCompile Include="BigTresureChest.cpp" />
     <ClCompile Include="Waddledi.cpp" />
+    <ClCompile Include="VideoPlayer.cpp" />
+    <ClCompile Include="Level1.cpp">
+      <Filter>Level\02 Play\Level1</Filter>
+    </ClCompile>
     <ClCompile Include="Level1_2.cpp">
-      <Filter>Level\02 Play</Filter>
+      <Filter>Level\02 Play\Level1</Filter>
     </ClCompile>
     <ClCompile Include="Level1_3.cpp">
-      <Filter>Level\02 Play</Filter>
+      <Filter>Level\02 Play\Level1</Filter>
     </ClCompile>
-    <ClCompile Include="VideoPlayer.cpp" />
+    <ClCompile Include="Level1_4.cpp">
+      <Filter>Level\02 Play\Level1</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Level\02 Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceStage.cpp">
+      <Filter>Level\02 Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap.cpp">
+      <Filter>Level\02 Play\Global</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

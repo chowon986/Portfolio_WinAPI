@@ -5,17 +5,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Monster.h"
-////#include "Waddledi.h"
-//#include "Waddledu.h"
-//#include "Sparky.h"
-//#include "Box.h"
-//#include "Fire.h"
-//#include "Brontobert.h"
-//#include "BigBox.h"
-//#include "Monster1.h"
-//#include "Tomato.h"
-//#include "Bomb.h"
-//#include "Background.h"
+#include "BotUI.h"
 #include "ContentsEnum.h"
 #include "GameEngine/GameEngineImage.h"
 #include <GameEngine/GameEngineLevel.h>
@@ -100,25 +90,55 @@ void Level1::LevelChangeStart()
 	}
 
 	{
-		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Background* Grass2 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* Grass2Renderer = Grass2->CreateRenderer("grass2.bmp", RenderPivot::CENTER, float4(2078.0f, -45.0f));
+		GameEngineImage* Grass2Image = Grass2Renderer->GetImage();
+		Grass2Image->CutCount(2, 2);
+		Grass2Renderer->CreateAnimation("grass2.bmp", "grass2", 0, 3, 0.5f, true);
+		Grass2Renderer->ChangeAnimation("grass2");
 	}
 
-	Monster* Waddledi = CreateActor<Monster>((int)ORDER::MONSTER);
-	GameEngineRenderer* WaddlediRenderer = Waddledi->CreateRendererToScale("walkwaddledi.bmp", float4(115.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 150.0f));
-	GameEngineImage* WaddlediImage = WaddlediRenderer->GetImage();
-	WaddlediImage->CutCount(5, 1);
-	WaddlediRenderer->CreateAnimation("walkwaddledi.bmp", "WalkWaddledi", 0, 4, 0.1f, true);
-	WaddlediRenderer->ChangeAnimation("WalkWaddledi");
+	{
+		Background* Grass3 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* Grass3Renderer = Grass3->CreateRenderer("grass3.bmp", RenderPivot::CENTER, float4(3545.0f, 97.0f));
+		GameEngineImage* Grass3Image = Grass3Renderer->GetImage();
+		Grass3Image->CutCount(2, 2);
+		Grass3Renderer->CreateAnimation("grass3.bmp", "grass3", 0, 3, 0.5f, true);
+		Grass3Renderer->ChangeAnimation("grass3");
+	}
+
+
+	{
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+	}
+
+	{
+		Monster* Waddledi = CreateActor<Monster>((int)ORDER::MONSTER);
+		GameEngineRenderer* WaddlediRenderer = Waddledi->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(1200.0f, 430.0f));
+		GameEngineImage* WaddlediImage = WaddlediRenderer->GetImage();
+		WaddlediImage->CutCount(10, 26);
+		WaddlediRenderer->CreateAnimation("monster0.bmp", "WaddlediIdel", 7, 13, 0.3f, true);
+		WaddlediRenderer->ChangeAnimation("WaddlediIdel");
+	}
 	
+	{
+		Monster* WaddleDoo = CreateActor<Monster>((int)ORDER::MONSTER);
+		GameEngineRenderer* WaddleDooRenderer = WaddleDoo->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(2820.0f, 370.0f));
+		GameEngineImage* WaddleDooImage = WaddleDooRenderer->GetImage();
+		WaddleDooImage->CutCount(10, 26);
+		WaddleDooRenderer->CreateAnimation("monster0.bmp", "WaddleDooIdel", 17, 21, 0.3f, true);
+		WaddleDooRenderer->ChangeAnimation("WaddleDooIdel");
+	}
 
-	Monster* Waddledu = CreateActor<Monster>((int)ORDER::MONSTER);
-	GameEngineRenderer* WaddleduRenderer= Waddledu->CreateRendererToScale("waddledu.bmp", float4(150.0f, 100.0f), RenderPivot::CENTER, float4(500.0f, 100.0f));
-	GameEngineImage* WaddleduImage = WaddleduRenderer->GetImage();
-	//WaddleduImage->CutCount();
-	//WaddleduRenderer->CreateAnimation();
-	//WaddleduRenderer->ChangeAnimation();
 
-	Monster* Sparky = CreateActor<Monster>((int)ORDER::MONSTER);
-	Sparky->CreateRendererToScale("Sparky.bmp", float4(141.0f, 122.0f), RenderPivot::CENTER, float4(128.0f, 80.0f));
+	{
+		Monster* Sparky = CreateActor<Monster>((int)ORDER::MONSTER);
+		GameEngineRenderer* SparkyRenderer = Sparky->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(3780.0f, 380.0f));
+		GameEngineImage* SparkyImage = SparkyRenderer->GetImage();
+		SparkyImage->CutCount(10, 26);
+		SparkyRenderer->CreateAnimation("monster0.bmp", "SparkyIdel", 108, 111, 0.3f, true);
+		SparkyRenderer->ChangeAnimation("SparkyIdel");
+	}
 
 }

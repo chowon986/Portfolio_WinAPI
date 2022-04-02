@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+class BotUI;
 class WorldMap : public GameEngineLevel
 {
 public:
@@ -18,6 +19,6 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-
+	BotUI* PlayerUI_;
 };
 

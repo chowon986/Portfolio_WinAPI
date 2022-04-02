@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+class Player;
+class GameEngineRenderer;
 class Level1_2 : public GameEngineLevel
 {
 public:
@@ -18,6 +20,10 @@ protected:
 	void LevelChangeStart() override;
 
 private:
+	Player* Player_;
+	float MapSizeX_;
+	float MapSizeY_;
+	GameEngineRenderer* MonsterRenderer_;
 
 };
 

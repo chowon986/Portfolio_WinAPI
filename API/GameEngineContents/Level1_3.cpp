@@ -5,20 +5,13 @@
 #include "Background.h"
 #include "Player.h"
 #include "Monster.h"
-////#include "Waddledi.h"
-//#include "Waddledu.h"
-//#include "Sparky.h"
-//#include "Box.h"
-//#include "Fire.h"
-//#include "Brontobert.h"
-//#include "BigBox.h"
-//#include "Monster1.h"
-//#include "Tomato.h"
-//#include "Bomb.h"
-//#include "Background.h"
 #include "ContentsEnum.h"
+#include <GameEngineBase/GameEngineWindow.h>
 
 Level1_3::Level1_3()
+	: Player_(nullptr)
+	, MapSizeX_(768)
+	, MapSizeY_(1152)
 {
 }
 
@@ -37,29 +30,60 @@ void Level1_3::Update()
 	{
 		GameEngine::GlobalEngine().ChangeLevel("Level1_4");
 	}
+
+
+	// CHK : CAMERA SETTING
+	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
+
+	if (0 > GetCameraPos().x)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.x = 0;
+		SetCameraPos(CurCameraPos);
+	}
+
+
+	if (0 > GetCameraPos().y)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.y = 0;
+		SetCameraPos(CurCameraPos);
+	}
+
+
+	float CameraRectX = 768;
+	float CameraRectY = 576;
+
+	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		SetCameraPos(CurCameraPos);
+	}
+
+	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	{
+		float4 CurCameraPos = GetCameraPos();
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		SetCameraPos(CurCameraPos);
+	}
 }
 
 void Level1_3::LevelChangeStart()
 {
+	{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_2->CreateRendererToScale("stage1_3.bmp", float4(256.0f, 384.0f), RenderPivot::CENTER, float4(0.0f, -96.0f));
+		Stage1_2->CreateRendererToScale("Stage1_3.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(0.0f, -96.0f));
+	}
 
-		CreateActor<Player>((int)ORDER::PLAYER);
+	{
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+	}
 
-		//Monster* Box = CreateActor<Monster>((int)ORDER::MONSTER);
-		//Box->CreateRendererToScale("Box.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f,120.0f ));
-
-		//Monster* Fire = CreateActor<Monster>((int)ORDER::MONSTER);
-		//Fire->CreateRendererToScale("Fire.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
-		//Monster* Tomato = CreateActor<Monster>((int)ORDER::MONSTER);
-		//Tomato->CreateRendererToScale("Tomato.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
-		//Monster* Waddledi = CreateActor<Monster>((int)ORDER::MONSTER);
-		//Waddledi->CreateRendererToScale("Waddledi.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
-		//Monster* Monster1 = CreateActor<Monster>((int)ORDER::MONSTER);
-		//Monster1->CreateRendererToScale("Monster1.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
-		//Monster* Bomb = CreateActor<Monster>((int)ORDER::MONSTER);
-		//Bomb->CreateRendererToScale("Bomb.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
-		//Monster* Boxes2 = CreateActor<Monster>((int)ORDER::MONSTER); // 5x5
-		//Boxes2->CreateRendererToScale("Boxes2.bmp", float4(130.0f, 24.0f), RenderPivot::CENTER, float4(128.0f, 120.0f));
+	{
+		// 아이템 생성
+		Monster* HPUP = CreateActor<Monster>((int)ORDER::MONSTER);
+		HPUP->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 26));
+	}
 
 }

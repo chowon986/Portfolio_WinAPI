@@ -12,7 +12,7 @@ Player::Player()
 	: ColMapImage_(nullptr)
 	, Gravity_(1.00f)
 	, AccGravity_(1.0f)
-	, Speed_(5)
+	, Speed_(1)
 {
 }
 
