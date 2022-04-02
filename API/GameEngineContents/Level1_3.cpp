@@ -5,6 +5,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Monster.h"
+#include "BotUI.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 
@@ -78,6 +79,7 @@ void Level1_3::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 
 	{

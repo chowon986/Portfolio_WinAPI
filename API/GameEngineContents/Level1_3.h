@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineLevel.h>
 
 class Player;
+class BotUI;
 class Level1_3 : public GameEngineLevel
 {
 public:
@@ -20,6 +21,7 @@ protected:
 
 private:
 	Player* Player_;
+	BotUI* PlayerUI_;
 	float MapSizeX_;
 	float MapSizeY_;
 };

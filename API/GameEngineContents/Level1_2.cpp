@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include "Background.h"
 #include "Player.h"
+#include "BotUI.h"
 #include "Monster.h"
 ////#include "Waddledi.h"
 //#include "Waddledu.h"
@@ -96,6 +97,7 @@ void Level1_2::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 
 	{
