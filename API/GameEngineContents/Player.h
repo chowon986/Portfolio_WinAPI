@@ -3,6 +3,7 @@
 #include "CharacterBase.h"
 
 class GameEngineImage;
+class GameEngineRenderer;
 class Player : public CharacterBase
 {
 public:
@@ -18,9 +19,10 @@ protected:
 
 private:
 	GameEngineImage* ColMapImage_;
+	GameEngineRenderer* Renderer_;
 	float Gravity_;
 	float AccGravity_;
-	int Speed_;
+	float4 PrevPos_;
 
 	void Start() override;
 	void Render() override;
@@ -41,5 +43,7 @@ private:
 	virtual void Jump() override;
 	void MoveUp();
 	void MoveDown();
+
+	bool CheckMapCollision();
 };
 

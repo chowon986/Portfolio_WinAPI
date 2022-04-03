@@ -10,9 +10,9 @@
 
 Player::Player()
 	: ColMapImage_(nullptr)
+	, Renderer_(nullptr)
 	, Gravity_(1.00f)
 	, AccGravity_(1.0f)
-	, Speed_(1)
 {
 }
 
@@ -28,9 +28,9 @@ void Player::Start()
 	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("star.bmp");
 	Image->CutCount(2, 1);
 
-	GameEngineRenderer* Render = CreateRenderer("star.bmp");
-	Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);
-	Render->ChangeAnimation("star");
+	Renderer_ = CreateRenderer("star.bmp");
+	Renderer_->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);
+	Renderer_->ChangeAnimation("star");
 
 	/*	GameEngineRenderer* Render = CreateRenderer("star.bmp");
 		Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);*/ // 불완전한형식 -> 타입을 모른다.
@@ -48,6 +48,12 @@ void Player::Start()
 		// CreateRenderer("LogoC.bmp");
 		//CreateRendererToScale("BackgroundE.bmp", float4(300.0f, 20.0f), RenderPivot::CENTER, float4(0.0f, -100.0f));
 		//CreateRenderer("monster.bmp", RenderPivot::CENTER, { 0,-1000 }); // 위쪽으로 100 올려 그려라
+	ColMapImage_ = GameEngineImageManager::GetInst()->Find("Stage1ColMap.bmp");
+
+	if (ColMapImage_ == nullptr)
+	{
+		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
+	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft")) // moveleft가 없으면 만들어줘
 	{
@@ -62,13 +68,12 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("RunRight", 'E');
 		// VK_LBUTTON;
 	}
-	//Render->SetIndex(0);
-	//Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);
-	//Render->SetIndex(0);
 }
 
 void Player::Update()
 {
+	PrevPos_ = GetPosition();
+
 	if (true == CanRun())
 	{
 		Run();
@@ -94,46 +99,9 @@ void Player::Update()
 		MoveDown();
 	}
 
-	//GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
-
-	//if (0 > GetLevel()->GetCameraPos().x)
-	//{
-	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
-	//	CurCameraPos.x = 0;
-	//	GetLevel()->SetCameraPos(CurCameraPos);
-	//}
-
-
-	//if (0 > GetLevel()->GetCameraPos().y)
-	//{
-	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
-	//	CurCameraPos.y = 0;
-	//	GetLevel()->SetCameraPos(CurCameraPos);
-	//}
-
-	//float MapSizeX = 4608;
-	//float MapSizeY = 576;
-	//float CameraRectX = 768;
-	//float CameraRectY = 576;
-
-	//if (MapSizeX <= GetLevel()->GetCameraPos().x + CameraRectX)
-	//{
-	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
-	//	CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapSizeX);
-	//	GetLevel()->SetCameraPos(CurCameraPos);
-	//}
-
-	//if (MapSizeY <= GetLevel()->GetCameraPos().y + CameraRectY)
-	//{
-	//	float4 CurCameraPos = GetLevel()->GetCameraPos();
-	//	CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapSizeY);
-	//	GetLevel()->SetCameraPos(CurCameraPos);
-	//}
-	ColMapImage_ = GameEngineImageManager::GetInst()->Find("Stage1ColMap.bmp");
-	
-	if (ColMapImage_ == nullptr)
+	if (true == CheckMapCollision())
 	{
-		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
+		SetPosition(PrevPos_);
 	}
 
 } ///////////////////////////need to chk
@@ -150,7 +118,13 @@ bool Player::CanMoveDown()
 
 float Player::GetSpeed()
 {
-	return GetState() == CharacterState::WALK ? CharacterBase::GetSpeed() : CharacterBase::GetSpeed() * 2;
+	switch (GetState())
+	{
+	case CharacterState::RUN:
+		return CharacterBase::GetSpeed() * 2;
+	default:
+		return CharacterBase::GetSpeed();
+	}
 }
 
 bool Player::CanWalk()
@@ -174,29 +148,14 @@ void Player::Walk()
 {
 	SetState(CharacterState::WALK);
 	float4 direction = GameEngineInput::GetInst()->IsPress("MoveLeft") ? float4::LEFT : float4::RIGHT;
-	float4 NextPos = GetPosition() + (direction * GameEngineTime::GetDeltaTime() * GetSpeed());
-	int Color = ColMapImage_->GetImagePixel(NextPos);
-	if (RGB(0, 0, 0) != Color)
-	{
-		AccGravity_ = 0.05f;
-		SetMove(direction * AccGravity_ * GetSpeed());
-	}
-	else if (RGB(0, 0, 0) == Color)
-	{
-		AccGravity_ = 0.0f;
-	}
+	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
 
 void Player::Run()
 {
 	SetState(CharacterState::RUN);
 	float4 direction = GameEngineInput::GetInst()->IsPress("RunLeft") ? float4::LEFT : float4::RIGHT;
-	float4 NextPos = GetPosition() + (direction * GameEngineTime::GetDeltaTime() * GetSpeed());
-	int Color = ColMapImage_->GetImagePixel(NextPos);
-	if (RGB(0, 0, 0) != Color)
-	{
-		SetMove(direction * AccGravity_ * GetSpeed());
-	}
+	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
 
 void Player::Jump()
@@ -221,22 +180,43 @@ void Player::Jump()
 
 void Player::MoveUp()
 {
-	///////////////////////////////////////////////need chk
 	SetState(CharacterState::Up);
-	if (GameEngineInput::GetInst()->IsPress("MoveUp"))
-	{
-		SetMove(float4::UP * AccGravity_ * static_cast<float>(Speed_));
-	} // need to chk
+	SetMove(float4::UP * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
 }
 
 
 void Player::MoveDown()
 {
 	SetState(CharacterState::Down);
-	if (GameEngineInput::GetInst()->IsPress("MoveDown"))
+	SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
+}
+
+bool Player::CheckMapCollision()
+{
+	int Color = RGB(255, 255, 255);
+	if (nullptr != ColMapImage_)
 	{
-		SetMove(float4::DOWN * AccGravity_ * static_cast<float>(Speed_));
+		float4 Pos = GetPosition();
+
+		// cut 2번 하는거 같다. 찾아보기 
+		float4 Scale = Renderer_->GetImage()->GetCutScale(0);
+		float4 HalfWidth(Scale.x * 0.5, 0);
+		float4 HalfHeight(0, Scale.y * 0.5);
+		
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos + HalfWidth))
+			return true;
+
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos - HalfWidth))
+			return true;
+
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos + HalfHeight))
+			return true;
+
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos - HalfHeight))
+			return true;
 	}
+
+	return RGB(0, 0, 0) == Color;
 }
 
 /*

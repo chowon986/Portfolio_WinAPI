@@ -31,10 +31,10 @@ void Level1::Loading()
 
 void Level1::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	/*if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
 		GameEngine::GlobalEngine().ChangeLevel("Level1_2");
-	}
+	}*/
 
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -77,7 +77,8 @@ void Level1::LevelChangeStart()
 {
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1->CreateRendererToScale("Stage1.bmp",float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		//Stage1->CreateRendererToScale("Stage1.bmp",float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Stage1->CreateRendererToScale("Stage1ColMap.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{

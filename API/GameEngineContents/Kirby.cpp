@@ -87,11 +87,11 @@ void Kirby::GameInit()
 		GameEngineInput::GetInst()->CreateKey("Boss", '5');
 	}
 
-	CreateLevel<BeforeTitleLevel>("BeforeTitle");
+	/*CreateLevel<BeforeTitleLevel>("BeforeTitle");
 	CreateLevel<TitleLevel>("Title");
-	CreateLevel<IntroStory>("IntroStory");
+	CreateLevel<IntroStory>("IntroStory");*/
 	CreateLevel<Level1>("Level1");
-	CreateLevel<Level1_2>("Level1_2");
+	/*CreateLevel<Level1_2>("Level1_2");
 	CreateLevel<Level1_3>("Level1_3");
 	CreateLevel<Level1_4>("Level1_4");
 	CreateLevel<Cannon>("Cannon");
@@ -102,7 +102,7 @@ void Kirby::GameInit()
 	CreateLevel<Level4>("Level4");
 	CreateLevel<Boss>("Boss");
 	CreateLevel<EndingStory>("EndingStory");
-	CreateLevel<EndingLevel>("Ending");
+	CreateLevel<EndingLevel>("Ending");*/
 
 	ChangeLevel("Level1");
 

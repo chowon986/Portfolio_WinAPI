@@ -41,10 +41,10 @@ void Level1_2::Loading()
 
 void Level1_2::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	/*if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
 		GameEngine::GlobalEngine().ChangeLevel("Level1_3");
-	}
+	}*/
 
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
