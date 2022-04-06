@@ -20,12 +20,12 @@ void Boss::Loading()
 
 void Boss::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("EndingStory");
-	}
 }
 
 void Boss::LevelChangeStart()
 {
+	{
+		Background* Boss = CreateActor<Background>((int)ORDER::BACKGROUND);
+		Boss->CreateRenderer(".bmp", RenderPivot::CENTER, float4(1920.0f, 0.0f));
+	}
 }

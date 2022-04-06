@@ -1,4 +1,5 @@
 #pragma once
+#include "GameEngineLevel.h"
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineUpdateObject.h>
 #include <GameEngineBase/GameEngineMath.h>
@@ -6,8 +7,9 @@
 #include <list>
 
 // 설명 :
-class GameEngineRenderer;
 class GameEngineLevel;
+class GameEngineRenderer;
+class GameEngineCollision;
 class GameEngineActor : public GameEngineNameObject, public GameEngineUpdateObject
 {
 	//// ActorBase
@@ -29,10 +31,16 @@ public:
 		return Level_;
 	}
 
+	inline float4 GetCameraEffectPosition()
+	{
+		return Position_ - GetLevel()->GetCameraPos();
+	}
+
 	inline float4 GetPosition()
 	{
 		return Position_;
 	}
+
 	inline float4 GetScale()
 	{
 		return Scale_;
@@ -60,6 +68,8 @@ protected:
 	virtual void Update() {}
 	// 지속적으로 게임이 실행될때 호출된다.
 	virtual void Render() {}
+
+	void Release();
 
 	void DebugRectRender();
 
@@ -93,5 +103,17 @@ private:
 	std::list<GameEngineRenderer*>::iterator EndRenderIter;
 
 	std::list<GameEngineRenderer*> RenderList_;
+
+
+	////////////////////////////////////////////////////////// Collision
+
+public:
+	GameEngineCollision* CreateCollision(const std::string& _GroupName, float4 _Scale, float4 _Pivot = { 0, 0 });
+
+	// 
+
+private:
+	// 이터레이터
+	std::list<GameEngineCollision*> CollisionList_;
 };
 

@@ -23,7 +23,7 @@ void Level4::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Boss");
+		//GameEngine::GlobalEngine().ChangeLevel("Boss");
 	}
 }
 

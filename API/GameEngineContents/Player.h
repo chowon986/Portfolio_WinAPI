@@ -4,9 +4,12 @@
 
 class GameEngineImage;
 class GameEngineRenderer;
+class GameEngineCollision;
+class GameEngineLevel;
 class Player : public CharacterBase
 {
 public:
+	float4 PrevPos_;
 	Player();
 	~Player();
 
@@ -16,16 +19,19 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 protected:
+	GameEngineCollision* KirbyCol_;
 
 private:
-	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
+
 	float Gravity_;
 	float AccGravity_;
-	float4 PrevPos_;
+	float Time_;
+	float Speed_;
+	GameEngineImage* ColMapImage_;
+	GameEngineLevel* Level_;
 
 	void Start() override;
-	void Render() override;
 	void Update() override;
 
 	virtual float GetSpeed() override;
@@ -43,7 +49,6 @@ private:
 	virtual void Jump() override;
 	void MoveUp();
 	void MoveDown();
-
 	bool CheckMapCollision();
 };
 

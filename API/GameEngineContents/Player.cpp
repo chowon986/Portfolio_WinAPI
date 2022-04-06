@@ -7,12 +7,21 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngine/GameEngineImage.h>
+#include <GameEngine/GameEngineCollision.h>
+#include "Level1.h"
+#include "Level1_2.h"
+#include "Level1_3.h"
+#include "Level1_4.h"
+#include "Level2.h"
+#include "Level2_2.h"
 
 Player::Player()
-	: ColMapImage_(nullptr)
-	, Renderer_(nullptr)
+	: Renderer_(nullptr)
 	, Gravity_(1.00f)
 	, AccGravity_(1.0f)
+	, Time_(3.0f)
+	, Level_(nullptr)
 {
 }
 
@@ -23,41 +32,19 @@ Player::~Player()
 
 void Player::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
+	Level_ = GetLevel();
+	ColMapImage_ = Level_->GetColMapImage();
+	KirbyCol_ = CreateCollision("KirbyCol", float4(50, 50), float4(0, -25));
+	Renderer_ = CreateRenderer("NormalKirby.bmp");
+	SetHP(9);
+	GameEngineImage* Image = Renderer_->GetImage();
+	Image->CutCount(10, 16);
+	Renderer_->CreateAnimation("NormalKirby.bmp", "WalkKirby", 10, 19, 0.1f, true);
+	Renderer_->ChangeAnimation("WalkKirby");
+	Renderer_->CreateAnimation("NormalKirby.bmp", "RunKirby", 21, 28, 0.1f, true);
 
-	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("star.bmp");
-	Image->CutCount(2, 1);
-
-	Renderer_ = CreateRenderer("star.bmp");
-	Renderer_->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);
-	Renderer_->ChangeAnimation("star");
-
-	/*	GameEngineRenderer* Render = CreateRenderer("star.bmp");
-		Render->CreateAnimation("star.bmp", "star", 0, 1, 0.1f, true);*/ // 불완전한형식 -> 타입을 모른다.
-		//SetScale({ 500, 500 });
-
-		//CreateRenderer("sparkkirby.bmp");
-
-		//CreateRendererToScale("logoc.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
-
-		// CreateRendererToScale("12345.bmp", float4(508.0f, 467.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
-		// CreateRendererToScale("sparkkirby.bmp", float4(102.0f, 98.0f), RenderPivot::CENTER, float4(0.0f, 180.0f));
-
-		// CreateRenderer("testkirby.bmp");
-		// CreateRenderer("BackgroundB.bmp");
-		// CreateRenderer("LogoC.bmp");
-		//CreateRendererToScale("BackgroundE.bmp", float4(300.0f, 20.0f), RenderPivot::CENTER, float4(0.0f, -100.0f));
-		//CreateRenderer("monster.bmp", RenderPivot::CENTER, { 0,-1000 }); // 위쪽으로 100 올려 그려라
-	ColMapImage_ = GameEngineImageManager::GetInst()->Find("Stage1ColMap.bmp");
-
-	if (ColMapImage_ == nullptr)
+	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
-		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
-	}
-
-	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft")) // moveleft가 없으면 만들어줘
-	{
-		// 이때 대문자여야 합니다.
 		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
 		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
 		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
@@ -104,7 +91,39 @@ void Player::Update()
 		SetPosition(PrevPos_);
 	}
 
-} ///////////////////////////need to chk
+	Time_ += GameEngineTime::GetDeltaTime();
+	if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
+	{
+		GameEngine::GetInst().ChangeLevel("Level1_2"); 
+	}
+
+	if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect))
+	{
+		GameEngine::GetInst().ChangeLevel("Level1_3"); 
+	}
+
+	if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect))
+	{
+		GameEngine::GetInst().ChangeLevel("Level1_4"); 
+	}
+
+	if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect))
+	{
+		GameEngine::GetInst().ChangeLevel("Cannon"); 
+	}
+
+	if (true == KirbyCol_->CollisionCheck("DorrCol2_2", CollisionType::Rect, CollisionType::Rect))
+	{
+		GameEngine::GetInst().ChangeLevel("Level2_2"); 
+	}
+
+
+	if (true == KirbyCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect) && Time_ >= 3)
+	{
+		Time_ = 0;
+		SetHP(GetHP() - 1);
+	}
+}
 
 bool Player::CanMoveUp()
 {
@@ -147,6 +166,7 @@ bool Player::CanJump() //"Jump", VK_LSHIFT
 void Player::Walk()
 {
 	SetState(CharacterState::WALK);
+	Renderer_->ChangeAnimation("WalkKirby");
 	float4 direction = GameEngineInput::GetInst()->IsPress("MoveLeft") ? float4::LEFT : float4::RIGHT;
 	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
@@ -154,28 +174,31 @@ void Player::Walk()
 void Player::Run()
 {
 	SetState(CharacterState::RUN);
+	Renderer_->ChangeAnimation("RunKirby");
 	float4 direction = GameEngineInput::GetInst()->IsPress("RunLeft") ? float4::LEFT : float4::RIGHT;
 	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
 
 void Player::Jump()
 {
-	if (GetJumpHeight() == GetPosition().y)
-	{
-		SetState(CharacterState::IDLE);
-		return;
-	}
+	//float4 JumpStartHeight = GetPosition();
 
-	if (GetState() != CharacterState::JUMP)
-	{
-		SetState(CharacterState::JUMP);
-		SetJumpHeight(GetPosition().y); // SaveHeight로 이름 변경하기
-	}
+	//if (GetJumpHeight() == GetPosition().y)
+	//{
+	//	SetState(CharacterState::IDLE);
+	//	return;
+	//}
 
-	float desiredHeight = GetPosition().y * GameEngineTime::GetDeltaTime() * 30;/*GetJumpSpeed();*/
-	// 점프 스피드
-	float4 direction = desiredHeight - GetJumpHeight() < GetJumpMaxHeight() ? float4::UP : float4::DOWN;
-	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed()/**/);
+	//if (GetState() != CharacterState::JUMP)
+	//{
+	//	float JumpTime_ = 0.0f;
+	//	JumpTime_+= GameEngineTime::GetDeltaTime();
+	//	for (GetPosition();JumpTime_ < 3;GetPosition().y -10)
+	//	{
+	//		SetMove(float4(0.0f, GetPosition().y));
+	//	}
+	//}
+
 }
 
 void Player::MoveUp()
@@ -193,41 +216,27 @@ void Player::MoveDown()
 
 bool Player::CheckMapCollision()
 {
-	int Color = RGB(255, 255, 255);
 	if (nullptr != ColMapImage_)
 	{
-		float4 Pos = GetPosition();
-
-		// cut 2번 하는거 같다. 찾아보기 
-		float4 Scale = Renderer_->GetImage()->GetCutScale(0);
-		float4 HalfWidth(Scale.x * 0.5, 0);
-		float4 HalfHeight(0, Scale.y * 0.5);
-		
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos + HalfWidth))
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
+		{
 			return true;
+		}
 
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos - HalfWidth))
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
+		{
 			return true;
+		}
 
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos + HalfHeight))
-			return true;
+		//if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y - 40))
+		//{
+		//	return true;
+		//}
 
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Pos - HalfHeight))
+		//왼쪽, 오른쪽, 위쪽으로 이동 금지 -> 맵마다 다름
+		if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50)
+		{
 			return true;
+		}
 	}
-
-	return RGB(0, 0, 0) == Color;
-}
-
-/*
-	int Color = ColMapImage_->GetImagePixel(GetPosition());
-	if (RGB(0, 0, 0) == Color)
-	{
-		Gravity_ =  0.0f;
-	}
-*/
-
-void Player::Render()
-{
-
 }

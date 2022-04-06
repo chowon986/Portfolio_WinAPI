@@ -27,11 +27,6 @@ void Level1_3::Loading()
 
 void Level1_3::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Level1_4");
-	}
-
 
 	// CHK : CAMERA SETTING
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
@@ -72,20 +67,44 @@ void Level1_3::Update()
 
 void Level1_3::LevelChangeStart()
 {
+	// 이미지 문제
+	SetColMapImage("Stage1_3ColMap.bmp");
+	ColMapImage_ = GetColMapImage();
+
+	if (ColMapImage_ == nullptr)
 	{
-		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_2->CreateRendererToScale("Stage1_3.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(0.0f, -96.0f));
+		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
+	}
+
+	{
+		Background* Stage1_3 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		Stage1_3->CreateRenderer("Stage1_3.bmp", RenderPivot::CENTER, float4(0.0f,280.0f));
 	}
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player_->SetPosition(float4(45, 960));
 		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 
 	{
 		// 아이템 생성
 		Monster* HPUP = CreateActor<Monster>((int)ORDER::MONSTER);
-		HPUP->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 26));
+		HPUP->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 400));
 	}
 
+	{
+		// Door 위치 조정 필요
+		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		DoorCol1_4 = Door->CreateCollision("DoorCol1_4", float4(48.0f, 64.0f), float4(312.0f, -36.0f));
+	}
+}
+float Level1_3::GetMapSizeY()
+{
+	return MapSizeY_;
+}
+
+float Level1_3::GetMapSizeX()
+{
+	return MapSizeX_;
 }

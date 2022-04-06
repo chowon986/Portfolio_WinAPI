@@ -14,8 +14,7 @@ Background::~Background()
 
 void Background::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half()/* + float4(0, GetScale().y)*/);
-
+	SetPosition(GameEngineWindow::GetScale().Half());
 }
 
 void Background::Render()

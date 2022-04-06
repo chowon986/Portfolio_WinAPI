@@ -3,9 +3,13 @@
 
 class Player;
 class BotUI;
+class GameEngineCollision;
+class GameEngineImage;
 class Level1 : public GameEngineLevel
 {
 public:
+	float GetMapSizeX() override;
+	float GetMapSizeY() override;
 	Level1();
 	~Level1();
 
@@ -23,6 +27,10 @@ private:
 	Player* Player_;
 	float MapSizeX_;
 	float MapSizeY_;
-	BotUI* PlayerUI_;
+	BotUI* PlayerStatus_;
+	GameEngineCollision* DoorCol1_2;
+	GameEngineImage* ColMapImage_;
+
+private:
 };
 

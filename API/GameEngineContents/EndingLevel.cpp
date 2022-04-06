@@ -20,6 +20,6 @@ void EndingLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("DanceStage");
+		//GameEngine::GlobalEngine().ChangeLevel("DanceStage");
 	}
 }

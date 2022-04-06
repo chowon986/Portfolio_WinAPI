@@ -27,22 +27,22 @@ void WorldMap::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("Level1"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Level1");
+		GameEngine::GetInst().ChangeLevel("Level1");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("Level2"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Level2");
+		GameEngine::GetInst().ChangeLevel("Level2");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("Level3"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Level3");
+		GameEngine::GetInst().ChangeLevel("Level3");
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("Level4"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Level4");
+		GameEngine::GetInst().ChangeLevel("Level4");
 	}
 
 }
@@ -69,7 +69,6 @@ void WorldMap::LevelChangeStart()
 	}
 
 	{
-		// UI 이미지들을 애니메이션처럼 []에 넣고 꺼내 쓸 수 없을까?
 		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 }

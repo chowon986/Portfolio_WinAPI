@@ -4,7 +4,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include "Background.h"
 #include "Player.h"
-#include "Monster.h"
+#include "Monster1.h"
+#include "Fire.h"
+#include "Waddledi.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImage.h>
@@ -27,10 +29,10 @@ void Level1_4::Loading()
 
 void Level1_4::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Cannon");
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	//{
+	//	GameEngine::GlobalEngine().ChangeLevel("Cannon");
+	//}
 
 
 	// CHK : CAMERA SETTING
@@ -68,10 +70,19 @@ void Level1_4::Update()
 		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
 		SetCameraPos(CurCameraPos);
 	}
+
 }
 
 void Level1_4::LevelChangeStart()
 {
+	SetColMapImage("Stage1_4ColMap.bmp");
+	ColMapImage_ = GetColMapImage();
+
+	if (ColMapImage_ == nullptr)
+	{
+		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
+	}
+
 	{
 		Background* Stage1_4 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		Stage1_4->CreateRendererToScale("Stage1_4.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
@@ -79,6 +90,7 @@ void Level1_4::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player_->SetPosition(float4(205.0f, 430.0f));
 	}
 
 	{
@@ -86,23 +98,16 @@ void Level1_4::LevelChangeStart()
 		Box->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(890.0f, 350.0f));
 	}
 
-
 	{
-		Monster* Fire = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* FireRenderer = Fire->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(950.0f, 380.0f));
-		GameEngineImage* FireImage = FireRenderer->GetImage();
-		FireImage->CutCount(10, 26);
-		FireRenderer->CreateAnimation("monster0.bmp", "FireIdel", 160, 164, 0.3f, true);
-		FireRenderer->ChangeAnimation("FireIdel");
+		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
+		Fire_->SetPosition(float4(950.0f, 380.0f));
+		GameEngineCollision* FireCol = Fire_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
-		Monster* Monster1 = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* Monster1Renderer = Monster1->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(1500.0f, 380.0f));
-		GameEngineImage* Monster1Image = Monster1Renderer->GetImage();
-		Monster1Image->CutCount(10, 26);
-		Monster1Renderer->CreateAnimation("monster0.bmp", "Monster1Idel", 216, 219, 0.3f, true);
-		Monster1Renderer->ChangeAnimation("Monster1Idel");
+		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
+		Monster1_->SetPosition(float4(1500.0f, 380.0f));
+		GameEngineCollision* Monster1Col = Monster1_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
@@ -120,22 +125,16 @@ void Level1_4::LevelChangeStart()
 	}
 
 	{
-		// 물에 빠지게 하기
-		Monster* Waddledi = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* WaddlediRenderer = Waddledi->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(2480.0f, 290.0f));
-		GameEngineImage* WaddlediImage = WaddlediRenderer->GetImage();
-		WaddlediImage->CutCount(10, 26);
-		WaddlediRenderer->CreateAnimation("monster0.bmp", "WaddlediIdel", 7, 13, 0.3f, true);
-		WaddlediRenderer->ChangeAnimation("WaddlediIdel");
+		// 물에 빠지게 하기 (왼쪽 이동)
+		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
+		Waddledi_->SetPosition(float4(2480.0f, 290.0f));
+		GameEngineCollision* WaddlediCol = Waddledi_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
-		Monster* Monster1 = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* Monster1Renderer = Monster1->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(2900.0f, 190.0f));
-		GameEngineImage* Monster1Image = Monster1Renderer->GetImage();
-		Monster1Image->CutCount(10, 26);
-		Monster1Renderer->CreateAnimation("monster0.bmp", "Monster1Idel", 216, 219, 0.3f, true);
-		Monster1Renderer->ChangeAnimation("Monster1Idel");
+		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
+		Monster1_->SetPosition(float4(2900.0f, 190.0f));
+		GameEngineCollision* Monster1Col = Monster1_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
@@ -195,4 +194,17 @@ void Level1_4::LevelChangeStart()
 		Monster* BombBox25 = CreateActor<Monster>((int)ORDER::MONSTER);
 		BombBox25->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4145.0f, 30.0f));
 	}
+
+	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+	Cannon_ = Door->CreateCollision("Cannon", float4(90.0f, 70.0f), float4(4120.0f, -87.0f));
+}
+
+float Level1_4::GetMapSizeX()
+{
+	return MapSizeX_;
+}
+
+float Level1_4::GetMapSizeY()
+{
+	return MapSizeY_;
 }

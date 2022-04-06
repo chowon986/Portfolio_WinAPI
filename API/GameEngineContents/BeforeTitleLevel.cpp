@@ -3,6 +3,7 @@
 #include "GameEngine/GameEngine.h"
 #include "Background.h"
 #include "VideoPlayer.h"
+#include <GameEngineBase/GameEngineWindow.h>
 
 BeforeTitleLevel::BeforeTitleLevel()
 	:BeforeTitleVideo_(nullptr)
@@ -30,6 +31,6 @@ void BeforeTitleLevel::Update()
 {
 	if (true == BeforeTitleVideo_->IsVideoFinished())
 	{
-			GameEngine::GlobalEngine().ChangeLevel("Title");
+			GameEngine::GetInst().ChangeLevel("Title");
 	}
 }

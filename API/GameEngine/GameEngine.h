@@ -3,8 +3,7 @@
 #include <string>
 #include <GameEngineBase/GameEngineDebug.h>
 
-// 게임엔진이란 게임 그자체의 시작점과 끝점 실행중을 담당하는 녀석이다.
-// 설명 :
+// 설명 : 게임엔진이란 게임 그자체의 시작점과 끝점 실행중을 담당
 class GameEngineImage;
 class GameEngineLevel;
 class GameEngine
@@ -19,7 +18,7 @@ public:
 	GameEngine& operator=(const GameEngine& _Other) = delete;
 	GameEngine& operator=(GameEngine&& _Other) noexcept = delete;
 
-	static inline GameEngineImage* BackBufferImage() 
+	static inline GameEngineImage* BackBufferImage()
 	{
 		return BackBufferImage_;
 	}
@@ -31,7 +30,7 @@ public:
 	virtual void GameEnd() = 0;
 
 	template<typename GameType>
-	static void Start() 
+	static void Start()
 	{
 		GameEngineDebug::LeakCheckOn();
 
@@ -42,11 +41,11 @@ public:
 		EngineEnd();
 	}
 
-	static GameEngine& GlobalEngine() 
+	static GameEngine& GetInst()
 	{
 		if (nullptr == UserContents_)
 		{
-			MsgBoxAssert("GEngine ERROR Engine Is Not Start ");
+			MsgBoxAssert("Gengine ERROR Engine Is Not Start ");
 		}
 
 		return *UserContents_;
@@ -83,9 +82,3 @@ private:
 
 };
 
-//class IGameEngineInstance
-//{
-//	virtual void GameInit() = 0;
-//	virtual void GameLoop() = 0;
-//	virtual void GameEnd() = 0;
-//};

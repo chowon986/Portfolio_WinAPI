@@ -1,6 +1,10 @@
 #pragma once
 #include "Monster.h"
 
+class GameEngineImage;
+class GameEngineCollision;
+class GameEngineRenderer;
+class GameEngineLevel;
 class Waddledi : public Monster
 {
 public:
@@ -13,10 +17,19 @@ public:
 	Waddledi& operator=(Waddledi&& _Other) noexcept = delete;
 
 public:
-	void Start();
-
+	void Start() override;
+	void Render() override;
+	void Update() override;
 protected:
 
 private:
+	int HP_;
+	float4 PrevPos_;
+	bool CheckMapCollision();
+	GameEngineImage* ColMapImage_;
+	GameEngineCollision* WaddlediCol_;
+	GameEngineRenderer* WaddlediRenderer_;
+	GameEngineLevel* Level_;
 
+private:
 };

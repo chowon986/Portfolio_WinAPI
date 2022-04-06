@@ -6,9 +6,14 @@
 
 class GameEngine;
 class GameEngineActor;
+class GameEngineCollision;
+class GameEngineImage;
 class GameEngineLevel : public GameEngineNameObject
 {
 	friend GameEngine;
+	friend GameEngineActor;
+	friend GameEngineCollision;
+
 public:
 	// constrcuter destructer
 	GameEngineLevel();
@@ -68,6 +73,15 @@ public:
 		CameraPos_ = _Value;
 	}
 
+	virtual float GetMapSizeX() { return MapSizeX_; }
+	virtual float GetMapSizeY() { return MapSizeY_; }
+
+public:
+	void SetColMapImage(std::string _name);
+	virtual GameEngineImage* GetColMapImage();
+
+protected:
+	GameEngineImage* ColMapImage_;
 
 protected:
 	// 시점함수
@@ -88,5 +102,15 @@ private:
 
 	void ActorUpdate();
 	void ActorRender();
+	void CollisionDebugRender();
 	void ActorRelease();
+	float MapSizeX_;
+	float MapSizeY_;
+
+private:
+	// 삭제는 액터가 하지만 실제 사용은 Level
+	// 여기서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
+	std::map<std::string, std::list<GameEngineCollision*>> AllCollision_;
+
+	void AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision);
 };

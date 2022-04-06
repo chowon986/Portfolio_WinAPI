@@ -1,12 +1,9 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include "CharacterBase.h"
 
-class Monster : public GameEngineActor
+class Monster : public CharacterBase
 {
-public: 
-	int HP_;
-	float4 Pos_;
-
 public:
 	Monster();
 	~Monster();
@@ -17,6 +14,12 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
 protected:
+	int HP_;
+	float4 Pos_;
+
+private:
+	int Speed_;
+	GameEngineRenderer* WaddlediRenderer_;
 
 private:
 	void Walk();
@@ -28,6 +31,8 @@ private:
 	void Update();
 	// 지속적으로 게임이 실행될때 호출된다.
 	void Render();
+
+public:
 
 };
 

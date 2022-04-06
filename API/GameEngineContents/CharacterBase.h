@@ -35,10 +35,10 @@ protected:
 protected:
 
 public:
-	void SetHP(int _HP) { HP_ = _HP; }
-	void SetSpeed(float _Speed) { Speed_ = _Speed; }
+	virtual void SetHP(int _HP) { HP_ = _HP; }
 	void SetState(CharacterState _State) { State_ = _State; }
 	void SetJumpHeight(float _JumpHeight) { JumpHeight_ = _JumpHeight; }
+	void SetSpeed(float _Speed) { Speed_ = _Speed; }
 	void SetJumpDirection(float4 _JumpDirection)
 	{
 		// if (_JumpDirection == float4::UP || _JumpDirection == float4::DOWN)

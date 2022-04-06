@@ -17,33 +17,33 @@ HDC GameEngine::BackBufferDC()
     return BackBufferImage_->ImageDC();
 }
 
-GameEngine::GameEngine() 
+GameEngine::GameEngine()
 {
 }
 
-GameEngine::~GameEngine() 
-{
-
-}
-
-void GameEngine::GameInit() 
+GameEngine::~GameEngine()
 {
 
 }
 
-void GameEngine::GameLoop() 
+void GameEngine::GameInit()
 {
 
 }
 
-void GameEngine::GameEnd() 
+void GameEngine::GameLoop()
 {
 
 }
 
-void GameEngine::WindowCreate() 
+void GameEngine::GameEnd()
 {
-    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "GameWindow");
+
+}
+
+void GameEngine::WindowCreate()
+{
+    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Kirby Squeak Squad");
     GameEngineWindow::GetInst().ShowGameWindow();
     GameEngineWindow::GetInst().MessageLoop(EngineInit, EngineLoop);
 }
@@ -58,7 +58,7 @@ void GameEngine::EngineInit()
     BackBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 
 }
-void GameEngine::EngineLoop() 
+void GameEngine::EngineLoop()
 {
     GameEngineTime::GetInst()->Update();
 
@@ -100,13 +100,14 @@ void GameEngine::EngineLoop()
     CurrentLevel_->Update();
     CurrentLevel_->ActorUpdate();
     CurrentLevel_->ActorRender();
+    CurrentLevel_->CollisionDebugRender();
     WindowMainImage_->BitCopy(BackBufferImage_);
 
     CurrentLevel_->ActorRelease();
 
 }
 
-void GameEngine::EngineEnd() 
+void GameEngine::EngineEnd()
 {
     UserContents_->GameEnd();
 

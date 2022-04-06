@@ -27,7 +27,7 @@ void DanceStage::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("WorldMap");
+		GameEngine::GetInst().ChangeLevel("WorldMap");
 	}
 }
 

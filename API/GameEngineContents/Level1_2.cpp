@@ -6,14 +6,14 @@
 #include "Player.h"
 #include "BotUI.h"
 #include "Monster.h"
-////#include "Waddledi.h"
+#include "Waddledi.h"
 //#include "Waddledu.h"
 //#include "Sparky.h"
 //#include "Box.h"
-//#include "Fire.h"
-//#include "Brontobert.h"
+#include "Fire.h"
+#include "Brontobert.h"
 //#include "BigBox.h"
-//#include "Monster1.h"
+#include "Monster1.h"
 //#include "Tomato.h"
 //#include "Bomb.h"
 //#include "Background.h"
@@ -41,10 +41,11 @@ void Level1_2::Loading()
 
 void Level1_2::Update()
 {
-	/*if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Level1_3");
-	}*/
+
+	//if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	//{
+	//	GameEngine::GlobalEngine().ChangeLevel("Level1_3");
+	//}
 
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -83,12 +84,19 @@ void Level1_2::Update()
 
 	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("Level1_3");
+		//GameEngine::GlobalEngine().ChangeLevel("Level1_3");
 	}
 }
 
 void Level1_2::LevelChangeStart()
 {
+	SetColMapImage("Stage1_2ColMap.bmp");
+	ColMapImage_ = GetColMapImage();
+
+	if (ColMapImage_ == nullptr)
+	{
+		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
+	}
 
 	{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
@@ -97,25 +105,25 @@ void Level1_2::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player_->SetPosition(float4(180.0f, 436.0f));
+
 		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 
 	{
+		/////////////////////////////////////////////////////////////////////////////
 		Monster* Box = CreateActor<Monster>((int)ORDER::MONSTER);
 		Box->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(982.0f, 305.0f));
-
 	}
 
 	{
-		Monster* Fire = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* FireRenderer = Fire->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(1400.0f, 440.0f));
-		GameEngineImage* FireImage = FireRenderer->GetImage();
-		FireImage->CutCount(10, 26);
-		FireRenderer->CreateAnimation("monster0.bmp", "FireIdel", 160, 164, 0.3f, true);
-		FireRenderer->ChangeAnimation("FireIdel");
+		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
+		Fire_->SetPosition(float4(1410.0f, 430.0f));
+		GameEngineCollision* FireCol = Fire_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
+		/////////////////////////////////////////////////////////////////////////////
 		Monster* Box1 = CreateActor<Monster>((int)ORDER::MONSTER);
 		Monster* Box2 = CreateActor<Monster>((int)ORDER::MONSTER);
 		Monster* Box3 = CreateActor<Monster>((int)ORDER::MONSTER);
@@ -129,57 +137,50 @@ void Level1_2::LevelChangeStart()
 	}
 
 	{
-		Monster* Brontobert = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* BrontobertRenderer = Brontobert->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(2980.0f, 240.0f));
-		GameEngineImage* BrontobertImage = BrontobertRenderer->GetImage();
-		BrontobertImage->CutCount(10, 26);
-		BrontobertRenderer->CreateAnimation("monster0.bmp", "BrontobertIdel", 33, 34, 0.3f, true);
-		BrontobertRenderer->ChangeAnimation("BrontobertIdel");
+		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
+		Fire_->SetPosition(float4(1410.0f, 430.0f));
+		GameEngineCollision* FireCol = Fire_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
+	}
+	{
+		Brontobert* Brontobert_ = CreateActor<Brontobert>((int)ORDER::MONSTER);
+		Brontobert_->SetPosition(float4(2980.0f, 240.0f));
+		GameEngineCollision* BrontobertCol = Brontobert_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
+		/////////////////////////////////////////////////////////////////////////////
 		Monster* BigBox = CreateActor<Monster>((int)ORDER::MONSTER);
 		BigBox->CreateRenderer("BigBox.bmp", RenderPivot::CENTER, float4(3555.0f, 380.0f));
 	}
 
 	{
-		Monster* Monster1 = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* Monster1Renderer = Monster1->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(3630.0f, 420.0f));
-		GameEngineImage* Monster1Image = Monster1Renderer->GetImage();
-		Monster1Image->CutCount(10, 26);
-		Monster1Renderer->CreateAnimation("monster0.bmp", "Monster1Idel", 216, 219, 0.3f, true);
-		Monster1Renderer->ChangeAnimation("Monster1Idel");
+		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
+		Monster1_->SetPosition(float4(3630.0f, 380.0f));
+		GameEngineCollision* Monster1Col = Monster1_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
 		Background* Grass4 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* Grass4Renderer = Grass4->CreateRenderer("grass4.bmp", RenderPivot::CENTER, float4(-95.0f, 147.0f));
+		GameEngineRenderer* Grass4Renderer = Grass4->CreateRenderer("grass4.bmp", RenderPivot::CENTER, float4(-95.0f, 147.5f));
 		GameEngineImage* Grass4Image = Grass4Renderer->GetImage();
 		Grass4Image->CutCount(2, 2);
 		Grass4Renderer->CreateAnimation("grass4.bmp", "grass4", 0, 3, 0.5f, true);
 		Grass4Renderer->ChangeAnimation("grass4");
-	}
 
-	{
 		Background* grass5 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* Grass5Renderer = grass5->CreateRenderer("grass5.bmp", RenderPivot::CENTER, float4(1300.0f, 147.0f));
+		GameEngineRenderer* Grass5Renderer = grass5->CreateRenderer("grass5.bmp", RenderPivot::CENTER, float4(1297.0f, 147.0f));
 		GameEngineImage* Grass5Image = Grass5Renderer->GetImage();
 		Grass5Image->CutCount(2, 2);
 		Grass5Renderer->CreateAnimation("grass5.bmp", "grass5", 0, 3, 0.5f, true);
 		Grass5Renderer->ChangeAnimation("grass5");
-	}
 
-	{
 		Background* grass6 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameEngineRenderer* Grass6Renderer = grass6->CreateRenderer("grass6.bmp", RenderPivot::CENTER, float4(2880.0f, 147.0f));
 		GameEngineImage* Grass6Image = Grass6Renderer->GetImage();
 		Grass6Image->CutCount(2, 2);
 		Grass6Renderer->CreateAnimation("grass6.bmp", "grass6", 0, 3, 0.5f, true);
 		Grass6Renderer->ChangeAnimation("grass6");
-	}
 
-	{
-		// CHK : CAMERA SET
 		Background* grass7 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameEngineRenderer* Grass7Renderer = grass7->CreateRenderer("grass7.bmp", RenderPivot::CENTER, float4(3841.0f, 53.0f));
 		GameEngineImage* Grass7Image = Grass7Renderer->GetImage();
@@ -187,4 +188,20 @@ void Level1_2::LevelChangeStart()
 		Grass7Renderer->CreateAnimation("grass7.bmp", "grass7", 0, 3, 0.5f, true);
 		Grass7Renderer->ChangeAnimation("grass7");
 	}
+
+	{
+		// Door
+		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		DoorCol1_3 = Door->CreateCollision("DoorCol1_3", float4(44.0f, 64.0f), float4(3870.0f, 20.0f));
+	}
+}
+
+float Level1_2::GetMapSizeY()
+{
+	return MapSizeY_;
+}
+
+float Level1_2::GetMapSizeX()
+{
+	return MapSizeX_;
 }

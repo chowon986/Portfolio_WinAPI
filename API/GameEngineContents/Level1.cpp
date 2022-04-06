@@ -5,16 +5,24 @@
 #include "Background.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Waddledi.h"
+#include "Waddledoo.h"
+#include "Sparky.h"
 #include "BotUI.h"
 #include "ContentsEnum.h"
 #include "GameEngine/GameEngineImage.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineCollision.h>
+#include <GameEngine/GameEngineImageManager.h>
+
 
 Level1::Level1()
-	:MapSizeX_(4608)
-	,MapSizeY_(576)
-	,Player_(nullptr)
+	: MapSizeX_(4608)
+	, MapSizeY_(576)
+	, Player_(nullptr)
+	, PlayerStatus_(nullptr)
+	, ColMapImage_(nullptr)
 {
 
 }
@@ -45,14 +53,12 @@ void Level1::Update()
 		SetCameraPos(CurCameraPos);
 	}
 
-
 	if (0 > GetCameraPos().y)
 	{
 		float4 CurCameraPos = GetCameraPos();
 		CurCameraPos.y = 0;
 		SetCameraPos(CurCameraPos);
 	}
-
 
 	float CameraRectX = 768;
 	float CameraRectY = 576;
@@ -75,12 +81,23 @@ void Level1::Update()
 
 void Level1::LevelChangeStart()
 {
+	SetColMapImage("Stage1ColMap.bmp");
+	ColMapImage_ = GetColMapImage();
+
+	if (ColMapImage_ == nullptr)
 	{
-		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		//Stage1->CreateRendererToScale("Stage1.bmp",float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
-		Stage1->CreateRendererToScale("Stage1ColMap.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
 	}
 
+	{
+		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		Stage1->CreateRenderer("Stage1.bmp", RenderPivot::CENTER, float4(1920.0f, 0.0f));
+	}
+
+	{
+		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		DoorCol1_2 = Door->CreateCollision("DoorCol1_2", float4(44.0f, 64.0f), float4(4153.0f,60.0f));
+	}
 	{
 		Background* Grass1 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameEngineRenderer* Grass1Renderer = Grass1->CreateRenderer("grass1.bmp", RenderPivot::CENTER, float4(245.0f, 150.0f));
@@ -108,38 +125,37 @@ void Level1::LevelChangeStart()
 		Grass3Renderer->ChangeAnimation("grass3");
 	}
 
-
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		Player_->SetPosition(float4(205.0f, 436.0f));
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 
 	{
-		Monster* Waddledi = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* WaddlediRenderer = Waddledi->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(1200.0f, 430.0f));
-		GameEngineImage* WaddlediImage = WaddlediRenderer->GetImage();
-		WaddlediImage->CutCount(10, 26);
-		WaddlediRenderer->CreateAnimation("monster0.bmp", "WaddlediIdel", 7, 13, 0.3f, true);
-		WaddlediRenderer->ChangeAnimation("WaddlediIdel");
+		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
+		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
 	}
-	
-	{
-		Monster* WaddleDoo = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* WaddleDooRenderer = WaddleDoo->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(2820.0f, 370.0f));
-		GameEngineImage* WaddleDooImage = WaddleDooRenderer->GetImage();
-		WaddleDooImage->CutCount(10, 26);
-		WaddleDooRenderer->CreateAnimation("monster0.bmp", "WaddleDooIdel", 17, 21, 0.3f, true);
-		WaddleDooRenderer->ChangeAnimation("WaddleDooIdel");
-	}
-
 
 	{
-		Monster* Sparky = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* SparkyRenderer = Sparky->CreateRenderer("monster0.bmp", RenderPivot::CENTER, float4(3780.0f, 380.0f));
-		GameEngineImage* SparkyImage = SparkyRenderer->GetImage();
-		SparkyImage->CutCount(10, 26);
-		SparkyRenderer->CreateAnimation("monster0.bmp", "SparkyIdel", 108, 111, 0.3f, true);
-		SparkyRenderer->ChangeAnimation("SparkyIdel");
+		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
+		Waddledoo_->SetPosition(float4(2837.0f, 377.0f));
+		GameEngineCollision* WaddledooCol = Waddledoo_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
+	{
+		Monster* Sparky_ = CreateActor<Sparky>((int)ORDER::MONSTER);
+		Sparky_->SetPosition(float4(3780.0f, 380.0f));
+		GameEngineCollision* SparkyCol = Sparky_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
+	}
+}
+
+
+float Level1::GetMapSizeY()
+{
+	return MapSizeY_;
+}
+
+float Level1::GetMapSizeX()
+{
+	return MapSizeX_;
 }

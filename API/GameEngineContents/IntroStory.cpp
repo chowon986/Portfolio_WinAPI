@@ -22,10 +22,7 @@ void IntroStory::Update()
 {
 	if (true == IntroVideo_->IsVideoFinished())
 	{
-		if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-		{
-			GameEngine::GlobalEngine().ChangeLevel("EndingStory");
-		}
+			GameEngine::GetInst().ChangeLevel("Level1");
 	}
 }
 
