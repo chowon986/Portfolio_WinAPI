@@ -56,7 +56,7 @@ void WorldMap::LevelChangeStart()
 
 	{
 		Background* WorldMapStar = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* WorldMapStarRenderer = WorldMapStar->CreateRenderer("WorldMapStar.bmp", RenderPivot::CENTER, float4(-100,100));
+		GameEngineRenderer* WorldMapStarRenderer = WorldMapStar->CreateRenderer("WorldMapStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-100,100));
 		GameEngineImage* WorldMapStarImage = WorldMapStarRenderer->GetImage();
 		WorldMapStarImage->CutCount(6, 2);
 		WorldMapStarRenderer->CreateAnimation("WorldMapStar.bmp", "WorldMapStar", 0, 11, 0.08f, true);
@@ -65,7 +65,7 @@ void WorldMap::LevelChangeStart()
 
 	{
 		Background* WorldMapUI = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* WorldMapUIRenderer = WorldMapUI->CreateRenderer("WorldMapUI.bmp", RenderPivot::CENTER, float4(-100,-240));
+		GameEngineRenderer* WorldMapUIRenderer = WorldMapUI->CreateRenderer("WorldMapUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-100,-240));
 	}
 
 	{

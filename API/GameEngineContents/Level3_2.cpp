@@ -78,7 +78,7 @@ void Level3_2::LevelChangeStart()
 	}
 
 	HPUp* HPUp_ = CreateActor<HPUp>((int)ORDER::MONSTER);
-	HPUp_->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 400));
+	HPUp_->CreateRenderer("HPUP.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(145, 400));
 
 
 	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);

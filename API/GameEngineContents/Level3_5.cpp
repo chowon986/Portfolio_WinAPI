@@ -102,13 +102,13 @@ void Level3_5::LevelChangeStart()
 	Waddledi_->SetPosition(float4(300.0f, 300.0f));
 
 	HPUp* HPUp_ = CreateActor<HPUp>((int)ORDER::MONSTER);
-	HPUp_->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(600.0f, 600.0f));
+	HPUp_->CreateRenderer("HPUP.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(600.0f, 600.0f));
 
 	Animal* Animal_2 = CreateActor<Animal>((int)ORDER::MONSTER);
 	Animal_2->SetPosition(float4(300.0f, 300.0f));
 
 	Monster* TreasureChest = CreateActor<Monster>((int)ORDER::MONSTER);
-	TreasureChest->CreateRenderer("TreasureChest.bmp", RenderPivot::CENTER, float4(600.0f, 600.0f));
+	TreasureChest->CreateRenderer("TreasureChest.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(600.0f, 600.0f));
 
 	BigWaddledee* BigWaddledee_ = CreateActor<BigWaddledee>((int)ORDER::MONSTER);
 	BigWaddledee_->SetPosition(float4(200.0f, 150.0f));

@@ -26,6 +26,6 @@ void Boss::LevelChangeStart()
 {
 	{
 		Background* Boss = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Boss->CreateRenderer(".bmp", RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Boss->CreateRenderer(".bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 }

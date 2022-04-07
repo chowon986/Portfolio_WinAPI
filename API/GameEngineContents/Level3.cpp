@@ -79,19 +79,19 @@ void Level3::LevelChangeStart()
 	}
 
 	Monster* Bomb1 = CreateActor<Monster>((int)ORDER::MONSTER);
-	Bomb1->CreateRenderer("Bomb.bmp", RenderPivot::CENTER, float4(2140.0f, 100));
+	Bomb1->CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2140.0f, 100));
 
 	Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
 	Waddledi_->SetPosition(float4(100.0f, 100.0f));
 
 	Monster* Bomb2 = CreateActor<Monster>((int)ORDER::MONSTER);
-	Bomb2->CreateRenderer("Bomb.bmp", RenderPivot::CENTER, float4(2140.0f, 100));
+	Bomb2->CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2140.0f, 100));
 
 	BigWaddledee* BigWaddledee_1 = CreateActor<BigWaddledee>((int)ORDER::MONSTER);
 	BigWaddledee_1->SetPosition(float4(100.0f, 100.0f));
 
 	Monster* Bomb3 = CreateActor<Monster>((int)ORDER::MONSTER);
-	Bomb3->CreateRenderer("Bomb.bmp", RenderPivot::CENTER, float4(2140.0f, 100));
+	Bomb3->CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2140.0f, 100));
 
 	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
 	Level3_2 = Door->CreateCollision("Level3_2", float4(90.0f, 70.0f), float4(4120.0f, -87.0f));

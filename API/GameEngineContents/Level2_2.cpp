@@ -76,7 +76,7 @@ void Level2_2::LevelChangeStart()
 
 	{
 		Background* Stage2_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage2_2->CreateRenderer("Stage2_2.bmp", RenderPivot::CENTER, float4(723.0f, 0.0f));
+		Stage2_2->CreateRenderer("Stage2_2.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(723.0f, 0.0f));
 	}
 
 	{

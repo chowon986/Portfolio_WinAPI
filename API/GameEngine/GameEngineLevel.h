@@ -7,12 +7,14 @@
 class GameEngine;
 class GameEngineActor;
 class GameEngineCollision;
+class GameEngineRenderer;
 class GameEngineImage;
 class GameEngineLevel : public GameEngineNameObject
 {
 	friend GameEngine;
 	friend GameEngineActor;
 	friend GameEngineCollision;
+	friend GameEngineRenderer;
 
 public:
 	// constrcuter destructer
@@ -33,6 +35,7 @@ public:
 	{
 		ActorType* NewActor = new ActorType();
 		GameEngineActor* StartActor = NewActor;
+		NewActor->SetOrder(_Order);
 		NewActor->SetName(_Name);
 		NewActor->SetLevel(this);
 		StartActor->Start();
@@ -58,7 +61,7 @@ public:
 		return NewActor;
 	}
 
-	inline float4 GetCameraPos()
+	inline float4 GetCameraPos() 
 	{
 		return CameraPos_;
 	}
@@ -68,10 +71,11 @@ public:
 		CameraPos_ += _Value;
 	}
 
-	inline void SetCameraPos(const float4& _Value)
+	inline void SetCameraPos(const float4& _Value )
 	{
-		CameraPos_ = _Value;
+		CameraPos_  = _Value;
 	}
+
 
 	virtual float GetMapSizeX() { return MapSizeX_; }
 	virtual float GetMapSizeY() { return MapSizeY_; }
@@ -99,13 +103,22 @@ private:
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
 
 	float4 CameraPos_;
+	float MapSizeX_;
+	float MapSizeY_;
 
 	void ActorUpdate();
 	void ActorRender();
 	void CollisionDebugRender();
 	void ActorRelease();
-	float MapSizeX_;
-	float MapSizeY_;
+
+
+private:
+	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
+
+	void AddRenderer(GameEngineRenderer* _Renderer);
+
+	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);
+
 
 private:
 	// 삭제는 액터가 하지만 실제 사용은 Level

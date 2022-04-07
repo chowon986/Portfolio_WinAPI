@@ -85,7 +85,7 @@ void Level3_3::LevelChangeStart()
 	Monster1_->SetPosition(float4(100.0f, 100.0f));
 
 	Monster* FireItem = CreateActor<Monster1>((int)ORDER::MONSTER);
-	FireItem->CreateRenderer("FireItem", RenderPivot::CENTER, float4(200.0f, 200.0f));
+	FireItem->CreateRenderer("FireItem", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(200.0f, 200.0f));
 
 	Frosty* Frosty_ = CreateActor<Frosty>((int)ORDER::MONSTER);
 	Frosty_->SetPosition(float4(600.0f, 600.0f));

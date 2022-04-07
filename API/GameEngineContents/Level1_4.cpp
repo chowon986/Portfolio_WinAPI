@@ -89,7 +89,7 @@ void Level1_4::LevelChangeStart()
 
 	{
 		Background* Stage1_4 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_4->CreateRendererToScale("Stage1_4.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Stage1_4->CreateRendererToScale("Stage1_4.bmp", float4(MapSizeX_, MapSizeY_), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{
@@ -99,7 +99,7 @@ void Level1_4::LevelChangeStart()
 
 	{
 		Box* Box_ = CreateActor<Box>((int)ORDER::OBSTRUCTION);
-		Box_->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(890.0f, 350.0f));
+		Box_->CreateRenderer("Box.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(890.0f, 350.0f));
 	}
 
 	{
@@ -121,7 +121,7 @@ void Level1_4::LevelChangeStart()
 
 	{
 		Background* Wave = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* WaveRenderer = Wave->CreateRenderer("Wave.bmp", RenderPivot::CENTER, float4(1751.0f, 80.0f));
+		GameEngineRenderer* WaveRenderer = Wave->CreateRenderer("Wave.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1751.0f, 80.0f));
 		GameEngineImage* WaveImage = WaveRenderer->GetImage();
 		WaveImage->CutCount(2, 2);
 		WaveRenderer->CreateAnimation("Wave.bmp", "Wave", 0, 3, 0.5f, true);
@@ -200,11 +200,11 @@ void Level1_4::LevelChangeStart()
 	}
 
 	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
-	GameEngineRenderer* DoorRenderer = Door->CreateRenderer("BigDoor.bmp", RenderPivot::CENTER, float4(4120.0f, -117.0f));
+	GameEngineRenderer* DoorRenderer = Door->CreateRenderer("BigDoor.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(4120.0f, -117.0f));
 	Cannon_ = Door->CreateCollision("Cannon", float4(90.0f, 70.0f), float4(4120.0f, -87.0f));
 
 	Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
-	GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("BigDoorStar.bmp", RenderPivot::CENTER, float4(4120.0f, -140.0f));
+	GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("BigDoorStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(4120.0f, -140.0f));
 	GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
 	DoorStarImage->CutCount(6, 2);
 	DoorStarRenderer->CreateAnimation("BigDoorStar.bmp", "BigDoorStar", 0, 11, 0.05f, true);

@@ -100,7 +100,7 @@ void Level1_2::LevelChangeStart()
 
 	{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1776.0f, 0.0f));
+		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(MapSizeX_, MapSizeY_), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1776.0f, 0.0f));
 
 	}
 
@@ -151,28 +151,28 @@ void Level1_2::LevelChangeStart()
 
 	{
 		Background* Grass4 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* Grass4Renderer = Grass4->CreateRenderer("grass4.bmp", RenderPivot::CENTER, float4(-95.0f, 147.5f));
+		GameEngineRenderer* Grass4Renderer = Grass4->CreateRenderer("grass4.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-95.0f, 147.5f));
 		GameEngineImage* Grass4Image = Grass4Renderer->GetImage();
 		Grass4Image->CutCount(2, 2);
 		Grass4Renderer->CreateAnimation("grass4.bmp", "grass4", 0, 3, 0.5f, true);
 		Grass4Renderer->ChangeAnimation("grass4");
 
 		Background* grass5 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* Grass5Renderer = grass5->CreateRenderer("grass5.bmp", RenderPivot::CENTER, float4(1297.0f, 147.0f));
+		GameEngineRenderer* Grass5Renderer = grass5->CreateRenderer("grass5.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1297.0f, 147.0f));
 		GameEngineImage* Grass5Image = Grass5Renderer->GetImage();
 		Grass5Image->CutCount(2, 2);
 		Grass5Renderer->CreateAnimation("grass5.bmp", "grass5", 0, 3, 0.5f, true);
 		Grass5Renderer->ChangeAnimation("grass5");
 
 		Background* grass6 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* Grass6Renderer = grass6->CreateRenderer("grass6.bmp", RenderPivot::CENTER, float4(2880.0f, 147.0f));
+		GameEngineRenderer* Grass6Renderer = grass6->CreateRenderer("grass6.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2880.0f, 147.0f));
 		GameEngineImage* Grass6Image = Grass6Renderer->GetImage();
 		Grass6Image->CutCount(2, 2);
 		Grass6Renderer->CreateAnimation("grass6.bmp", "grass6", 0, 3, 0.5f, true);
 		Grass6Renderer->ChangeAnimation("grass6");
 
 		Background* grass7 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* Grass7Renderer = grass7->CreateRenderer("grass7.bmp", RenderPivot::CENTER, float4(3841.0f, 53.0f));
+		GameEngineRenderer* Grass7Renderer = grass7->CreateRenderer("grass7.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(3841.0f, 53.0f));
 		GameEngineImage* Grass7Image = Grass7Renderer->GetImage();
 		Grass7Image->CutCount(2, 2);
 		Grass7Renderer->CreateAnimation("grass7.bmp", "grass7", 0, 3, 0.5f, true);
@@ -182,11 +182,11 @@ void Level1_2::LevelChangeStart()
 	{
 		// Door
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", RenderPivot::CENTER, float4(3870.0f, 10.0f));
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(3870.0f, 10.0f));
 		DoorCol1_3 = Door->CreateCollision("DoorCol1_3", float4(44.0f, 64.0f), float4(3870.0f, 20.0f));
 
 		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", RenderPivot::CENTER, float4(3870.0f, -20.0f));
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(3870.0f, -20.0f));
 		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
 		DoorStarImage->CutCount(6, 2);
 		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);

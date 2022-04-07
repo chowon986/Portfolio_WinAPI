@@ -41,7 +41,7 @@ void Cannon::LevelChangeStart()
 
 	{
 		Background* Can = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* CanRenderer = Can->CreateRenderer("can.bmp",RenderPivot::CENTER, float4(0.0f, 20.0f));
+		GameEngineRenderer* CanRenderer = Can->CreateRenderer("can.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
 		GameEngineImage* CanImage = CanRenderer->GetImage();
 		CanImage->CutCount(4, 2);
 		CanRenderer->CreateAnimation("can.bmp", "Can", 0, 7, 0.05f, true);

@@ -81,7 +81,7 @@ void Level1_3::LevelChangeStart()
 
 	{
 		Background* Stage1_3 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_3->CreateRenderer("Stage1_3.bmp", RenderPivot::CENTER, float4(0.0f,280.0f));
+		Stage1_3->CreateRenderer("Stage1_3.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f,280.0f));
 	}
 
 	{
@@ -98,11 +98,11 @@ void Level1_3::LevelChangeStart()
 
 	{
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", RenderPivot::CENTER, float4(312.0f, -36.0f));
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(312.0f, -36.0f));
 		DoorCol1_4 = Door->CreateCollision("DoorCol1_4", float4(48.0f, 64.0f), float4(312.0f, -36.0f));
 
 		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", RenderPivot::CENTER, float4(312.0f, -80.0f));
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(312.0f, -80.0f));
 		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
 		DoorStarImage->CutCount(6, 2);
 		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);

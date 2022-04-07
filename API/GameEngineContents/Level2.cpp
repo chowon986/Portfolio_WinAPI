@@ -79,7 +79,7 @@ void Level2::LevelChangeStart()
 
 	{
 		Background* Stage2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage2->CreateRenderer("Stage2.bmp",RenderPivot::CENTER,float4(384.0f,0.0f));
+		Stage2->CreateRenderer("Stage2.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER,float4(384.0f,0.0f));
 	}
 
 	{
@@ -89,7 +89,7 @@ void Level2::LevelChangeStart()
 	}
 
 	Monster* SwrodItem = CreateActor<Monster>((int)ORDER::MONSTER);
-	GameEngineRenderer* SwrodItemRenderer = SwrodItem->CreateRenderer("SwordItem3.bmp", RenderPivot::CENTER, float4(958.0f, 330.0f));
+	GameEngineRenderer* SwrodItemRenderer = SwrodItem->CreateRenderer("SwordItem3.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(958.0f, 330.0f));
 	GameEngineImage* SwrodItemImage = SwrodItemRenderer->GetImage();
 	SwrodItemImage->CutCount(2, 1);
 	SwrodItemRenderer->CreateAnimation("SwordItem3.bmp", "SwordItem", 0, 1, 0.5f, true);

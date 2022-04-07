@@ -86,7 +86,7 @@ void Level2_3::LevelChangeStart()
 
 	{
 	Tomato* Tomato_ = CreateActor<Tomato>((int)ORDER::ITEM);
-	Tomato_->CreateRenderer("Tomato.bmp", RenderPivot::CENTER, float4(384, 100));
+	Tomato_->CreateRenderer("Tomato.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(384, 100));
 	}
 }
 

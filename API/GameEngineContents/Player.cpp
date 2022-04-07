@@ -47,7 +47,7 @@ void Player::Start()
 	Renderer_->CreateAnimation("NormalKirby.bmp", "HoverKirbyStart", 69, 72, 0.1f, false);
 	Renderer_->CreateAnimation("NormalKirby.bmp", "HoveringKirby", 73, 74, 0.1f, true);
 
-	AttackEffectRenderer_ = CreateRenderer("Bomb.bmp",RenderPivot::CENTER,float4(100.0f,-20.0f));
+	AttackEffectRenderer_ = CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER,float4(100.0f,-20.0f));
 	AttackEffectCol_ = CreateCollision("KirbyEffect", float4(40.0f, 40.0f), float4(0.0f, -20.0f));
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))

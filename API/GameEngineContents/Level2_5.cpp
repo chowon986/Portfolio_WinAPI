@@ -79,7 +79,7 @@ void Level2_5::LevelChangeStart()
 
 	{
 		Background* Stage2_5 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage2_5->CreateRenderer("Stage2_5.bmp", RenderPivot::CENTER, float4(-2352.0f, 0.0f));
+		Stage2_5->CreateRenderer("Stage2_5.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-2352.0f, 0.0f));
 	}
 
 	{
@@ -90,7 +90,7 @@ void Level2_5::LevelChangeStart()
 
 	{
 		Monster* TreasureChest = CreateActor<Monster>((int)ORDER::MONSTER);
-		GameEngineRenderer* TreasureChestRenderer = TreasureChest->CreateRenderer("TresureChest.bmp", RenderPivot::CENTER, float4(958.0f, 330.0f));
+		GameEngineRenderer* TreasureChestRenderer = TreasureChest->CreateRenderer("TresureChest.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(958.0f, 330.0f));
 	}
 
 	// 커터 or 대체?

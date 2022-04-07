@@ -4,6 +4,10 @@
 #include <map>
 #include <vector>
 
+
+
+
+// 설명 : 그리는걸 도와주는 클래스
 class GameEngineImage;
 class GameEngineCollision : public GameEngineActorSubObject
 {
@@ -41,9 +45,14 @@ public:
 	}
 
 
+	// Player   Bullet
+	// 방패     적의 총알을 막는다.
+	// 방패     적의 총알
+
+	// 충돌한 대상이 있는지 없는지만 체크하는 함수
 	bool CollisionCheck(
-		const std::string& _TargetGroup,
-		CollisionType _This = CollisionType::Circle,
+		const std::string& _TargetGroup, 
+		CollisionType _This = CollisionType::Circle, 
 		CollisionType _Target = CollisionType::Circle
 	);
 
