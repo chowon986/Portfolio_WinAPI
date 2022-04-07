@@ -6,6 +6,7 @@ enum class ORDER
 	PLAYER,
 	MONSTER,
 	BOTUI,
-	EFFECT,
+	OBSTRUCTION,
+	ITEM,
 };
 

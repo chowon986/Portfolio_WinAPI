@@ -9,10 +9,10 @@
 #include "Waddledi.h"
 //#include "Waddledu.h"
 //#include "Sparky.h"
-//#include "Box.h"
+#include "Box.h"
 #include "Fire.h"
 #include "Brontobert.h"
-//#include "BigBox.h"
+#include "BigBox.h"
 #include "Monster1.h"
 //#include "Tomato.h"
 //#include "Bomb.h"
@@ -101,46 +101,38 @@ void Level1_2::LevelChangeStart()
 	{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(MapSizeX_, MapSizeY_), RenderPivot::CENTER, float4(1776.0f, 0.0f));
+
 	}
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(180.0f, 436.0f));
-
 		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 
 	{
-		/////////////////////////////////////////////////////////////////////////////
-		Monster* Box = CreateActor<Monster>((int)ORDER::MONSTER);
-		Box->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(982.0f, 305.0f));
+		Box* Box_1 = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box_1->SetPosition(float4(982.0f, 305.0f));
 	}
 
 	{
 		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
 		Fire_->SetPosition(float4(1410.0f, 430.0f));
-		GameEngineCollision* FireCol = Fire_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
-		/////////////////////////////////////////////////////////////////////////////
-		Monster* Box1 = CreateActor<Monster>((int)ORDER::MONSTER);
-		Monster* Box2 = CreateActor<Monster>((int)ORDER::MONSTER);
-		Monster* Box3 = CreateActor<Monster>((int)ORDER::MONSTER);
-		Monster* Box4 = CreateActor<Monster>((int)ORDER::MONSTER);
-		Monster* Box5 = CreateActor<Monster>((int)ORDER::MONSTER);
-		Box1->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(2375.0f, 270.0f));
-		Box2->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(2425.0f, 270.0f));
-		Box3->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(2475.0f, 270.0f));
-		Box4->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(2525.0f, 270.0f));
-		Box5->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(2575.0f, 270.0f));
+		Box* Box_2 = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box* Box_3 = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box* Box_4 = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box* Box_5 = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box* Box_6 = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box_2->SetPosition(float4(2375.0f, 270.0f));
+		Box_3->SetPosition(float4(2425.0f, 270.0f));
+		Box_4->SetPosition(float4(2475.0f, 270.0f));
+		Box_5->SetPosition(float4(2525.0f, 270.0f));
+		Box_6->SetPosition(float4(2575.0f, 270.0f));
 	}
 
-	{
-		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
-		Fire_->SetPosition(float4(1410.0f, 430.0f));
-		GameEngineCollision* FireCol = Fire_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
-	}
 	{
 		Brontobert* Brontobert_ = CreateActor<Brontobert>((int)ORDER::MONSTER);
 		Brontobert_->SetPosition(float4(2980.0f, 240.0f));
@@ -148,15 +140,13 @@ void Level1_2::LevelChangeStart()
 	}
 
 	{
-		/////////////////////////////////////////////////////////////////////////////
-		Monster* BigBox = CreateActor<Monster>((int)ORDER::MONSTER);
-		BigBox->CreateRenderer("BigBox.bmp", RenderPivot::CENTER, float4(3555.0f, 380.0f));
+		BigBox* BigBox_ = CreateActor<BigBox>((int)ORDER::OBSTRUCTION);
+		BigBox_->SetPosition(float4(3555.0f, 380.0f));
 	}
 
 	{
 		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
 		Monster1_->SetPosition(float4(3630.0f, 380.0f));
-		GameEngineCollision* Monster1Col = Monster1_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
@@ -192,7 +182,15 @@ void Level1_2::LevelChangeStart()
 	{
 		// Door
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", RenderPivot::CENTER, float4(3870.0f, 10.0f));
 		DoorCol1_3 = Door->CreateCollision("DoorCol1_3", float4(44.0f, 64.0f), float4(3870.0f, 20.0f));
+
+		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", RenderPivot::CENTER, float4(3870.0f, -20.0f));
+		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+		DoorStarImage->CutCount(6, 2);
+		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
+		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 }
 

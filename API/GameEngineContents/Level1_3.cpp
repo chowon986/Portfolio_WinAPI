@@ -1,13 +1,17 @@
 #include "Level1_3.h"
-#include "GameEngineBase/GameEngineInput.h"
-#include "GameEngine/GameEngine.h"
+#include <GameEngine/GameEngine.h>
+#include<GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineWindow.h>
+#include "ContentsEnum.h"
 #include "Background.h"
+#include "BotUI.h"
 #include "Player.h"
 #include "Monster.h"
-#include "BotUI.h"
-#include "ContentsEnum.h"
-#include <GameEngineBase/GameEngineWindow.h>
+#include "HPUp.h"
+
+
 
 Level1_3::Level1_3()
 	: Player_(nullptr)
@@ -67,7 +71,6 @@ void Level1_3::Update()
 
 void Level1_3::LevelChangeStart()
 {
-	// 이미지 문제
 	SetColMapImage("Stage1_3ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -89,14 +92,21 @@ void Level1_3::LevelChangeStart()
 
 	{
 		// 아이템 생성
-		Monster* HPUP = CreateActor<Monster>((int)ORDER::MONSTER);
-		HPUP->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 400));
+		HPUp* HPUp_ = CreateActor<HPUp>((int)ORDER::ITEM);
+		HPUp_->SetPosition(float4(145.0f, 400.0f));
 	}
 
 	{
-		// Door 위치 조정 필요
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", RenderPivot::CENTER, float4(312.0f, -36.0f));
 		DoorCol1_4 = Door->CreateCollision("DoorCol1_4", float4(48.0f, 64.0f), float4(312.0f, -36.0f));
+
+		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", RenderPivot::CENTER, float4(312.0f, -80.0f));
+		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+		DoorStarImage->CutCount(6, 2);
+		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
+		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 }
 float Level1_3::GetMapSizeY()

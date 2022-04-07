@@ -8,6 +8,7 @@
 #include "Waddledi.h"
 #include "BigWaddledee.h"
 #include "ContentsEnum.h"
+#include "HPUp.h"
 
 Level3_2::Level3_2()
 	: Player_(nullptr)
@@ -76,8 +77,8 @@ void Level3_2::LevelChangeStart()
 		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
 	}
 
-	Monster* HPUP = CreateActor<Monster>((int)ORDER::MONSTER);
-	HPUP->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 400));
+	HPUp* HPUp_ = CreateActor<HPUp>((int)ORDER::MONSTER);
+	HPUp_->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(145, 400));
 
 
 	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);

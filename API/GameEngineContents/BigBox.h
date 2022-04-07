@@ -1,7 +1,7 @@
 #pragma once
-#include "Monster.h"
+#include "Obstruction.h"
 
-class BigBox : public Monster
+class BigBox : public Obstruction
 {
 public:
 	BigBox();
@@ -14,7 +14,9 @@ public:
 
 protected:
 	void Start();
+	void Update();
 
 private:
-
+	GameEngineRenderer* BigBoxRenderer_;
+	GameEngineCollision* BigBoxCol_;
 };

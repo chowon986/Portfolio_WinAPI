@@ -5,6 +5,7 @@ class GameEngineImage;
 class GameEngineCollision;
 class GameEngineRenderer;
 class GameEngineLevel;
+class Player;
 class Waddledi : public Monster
 {
 public:
@@ -23,7 +24,7 @@ public:
 protected:
 
 private:
-	int HP_;
+	Player* Player_;
 	float4 PrevPos_;
 	bool CheckMapCollision();
 	GameEngineImage* ColMapImage_;

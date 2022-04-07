@@ -18,11 +18,17 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	inline void SetHPCount(int _HPCount) { HPCount_ = _HPCount; }
+	inline int GetHPCount() { return HPCount_; }
+
 protected:
 	GameEngineCollision* KirbyCol_;
 
 private:
 	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* AttackEffectRenderer_;
+	GameEngineCollision* AttackEffectCol_;
+	int HPCount_;
 
 	float Gravity_;
 	float AccGravity_;
@@ -30,15 +36,18 @@ private:
 	float Speed_;
 	GameEngineImage* ColMapImage_;
 	GameEngineLevel* Level_;
+	Player* Player_;
 
 	void Start() override;
 	void Update() override;
+	void Render() override;
 
 	virtual float GetSpeed() override;
 
 	virtual bool CanWalk() override;
 	virtual bool CanRun() override;
 	virtual bool CanJump() override;
+	bool CanHover();
 	bool CanMoveUp();
 	bool CanMoveDown();
 
@@ -50,5 +59,7 @@ private:
 	void MoveUp();
 	void MoveDown();
 	bool CheckMapCollision();
+	void Hover();
+	
 };
 

@@ -8,6 +8,7 @@
 #include "BotUI.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include "Tomato.h"
 
 Level2_3::Level2_3()
 	: Player_(nullptr)
@@ -84,8 +85,8 @@ void Level2_3::LevelChangeStart()
 	}
 
 	{
-	Monster* Tomato = CreateActor<Monster>((int)ORDER::MONSTER);
-	Tomato->CreateRenderer("Tomato.bmp", RenderPivot::CENTER, float4(384, 100));
+	Tomato* Tomato_ = CreateActor<Tomato>((int)ORDER::ITEM);
+	Tomato_->CreateRenderer("Tomato.bmp", RenderPivot::CENTER, float4(384, 100));
 	}
 }
 

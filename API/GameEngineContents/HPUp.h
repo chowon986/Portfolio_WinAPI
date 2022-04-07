@@ -1,7 +1,10 @@
 #pragma once
-#include "Monster.h"
+#include "Item.h"
 
-class HPUp : public Monster
+class GameEngineCollision;
+class Player;
+class GameEngineRenderer;
+class HPUp : public Item
 {
 public:
 	HPUp();
@@ -14,9 +17,11 @@ public:
 
 public:
 	void Start();
+	void Update();
 
 protected:
 
 private:
-
+	GameEngineCollision* HPUpCol_;
+	GameEngineRenderer* HPUpRenderer_;
 };

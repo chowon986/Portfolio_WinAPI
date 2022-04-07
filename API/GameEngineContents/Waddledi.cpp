@@ -4,10 +4,10 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "Player.h"
 
 
 Waddledi::Waddledi()
-	: HP_(1)
 {
 }
 
@@ -19,7 +19,7 @@ void Waddledi::Start()
 {
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
-
+	SetHP(1);
 	SetState(CharacterState::WALK);
 	WaddlediRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* WaddlediImage = WaddlediRenderer_->GetImage();
@@ -37,20 +37,32 @@ void Waddledi::Render()
 
 void Waddledi::Update()
 {
-	PrevPos_ = GetPosition();
+	//SetMove(Direction_ * GameEngineTime::GetDeltaTime() * GetSpeed());
 
-	float4 NewPos;
-	NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
-	NewPos.y = GetPosition().y;
-	SetPosition(NewPos);
+	//if (RGB(0, 0, 0) != ColMapImage_->GetImagePixel(RightWalk))
+	//{
+	//	SetPosition(RightWalk);
+	//}
 
+	//if (0 > Player_->GetPosition().x - GetPosition().x)
+	//{
+	//	SetMove(RightWalk);
+	//}
+
+	//if (0 < Player_->GetPosition().x - GetPosition().x)
+	//{
+	//	SetMove(LeftWalk);
+	//}
+	// 
 	// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
 	if (true == WaddlediCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
 	{
 		SetHP(GetHP() - 1);
-		WaddlediRenderer_->ChangeAnimation("WaddlediDie");
-		//WaddlediCol_->Death();
-		WaddlediRenderer_->Death();
+		if (0 == GetHP())
+		{
+			WaddlediRenderer_->ChangeAnimation("WaddlediDie");
+			Death(1.0f);
+		}
 	}
 
 	if (true == CheckMapCollision())
@@ -64,12 +76,12 @@ bool Waddledi::CheckMapCollision()
 {
 	if (nullptr != ColMapImage_)
 	{
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(20.0f, 0.0f)))
 		{
 			return true;
 		}
 
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
+		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() - float4(20.0f, 0.0f)))
 		{
 			return true;
 		}

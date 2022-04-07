@@ -11,6 +11,7 @@ enum class CharacterState
 	JUMP,
 	Up,
 	Down,
+	HOVER,
 };
 
 class CharacterBase : public GameEngineActor

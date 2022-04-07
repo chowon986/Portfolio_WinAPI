@@ -96,7 +96,15 @@ void Level1::LevelChangeStart()
 
 	{
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		Door->CreateRenderer("Door.bmp", RenderPivot::CENTER, float4(4153.0f, 60.0f));
 		DoorCol1_2 = Door->CreateCollision("DoorCol1_2", float4(44.0f, 64.0f), float4(4153.0f,60.0f));
+
+		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", RenderPivot::CENTER, float4(4153.0f, 10.0f));
+		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+		DoorStarImage->CutCount(6, 2);
+		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
+		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 	{
 		Background* Grass1 = CreateActor<Background>((int)ORDER::BACKGROUND);
@@ -127,7 +135,7 @@ void Level1::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(205.0f, 436.0f));
+		Player_->SetPosition(float4(/*205.0*/4100.0f, /*436.0*/200.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 

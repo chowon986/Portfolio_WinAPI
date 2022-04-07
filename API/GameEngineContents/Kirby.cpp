@@ -81,7 +81,7 @@ void Kirby::GameInit()
 	CreateLevel<EndingStory>("EndingStory");
 	CreateLevel<EndingLevel>("Ending");
 
-	ChangeLevel("Level1");
+	ChangeLevel("Level1_4");
 
 }
 

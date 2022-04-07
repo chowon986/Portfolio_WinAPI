@@ -10,6 +10,10 @@
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImage.h>
+#include "Tomato.h"
+#include "Box.h"
+#include "BombBox.h"
+#include "Bomb.h"
 
 Level1_4::Level1_4()
 	: Player_(nullptr)
@@ -94,8 +98,8 @@ void Level1_4::LevelChangeStart()
 	}
 
 	{
-		Monster* Box = CreateActor<Monster>((int)ORDER::MONSTER);
-		Box->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(890.0f, 350.0f));
+		Box* Box_ = CreateActor<Box>((int)ORDER::OBSTRUCTION);
+		Box_->CreateRenderer("Box.bmp", RenderPivot::CENTER, float4(890.0f, 350.0f));
 	}
 
 	{
@@ -111,8 +115,8 @@ void Level1_4::LevelChangeStart()
 	}
 
 	{
-		Monster* Tomato = CreateActor<Monster>((int)ORDER::MONSTER);
-		Tomato->CreateRenderer("Tomato.bmp", RenderPivot::CENTER, float4(2140.0f, 100));
+		Tomato* Tomato_ = CreateActor<Tomato>((int)ORDER::ITEM);
+		Tomato_->SetPosition(float4(2140.0f, 100.0f));
 	}
 
 	{
@@ -138,65 +142,73 @@ void Level1_4::LevelChangeStart()
 	}
 
 	{
-		Monster* Bomb = CreateActor<Monster>((int)ORDER::MONSTER);
-		Bomb->CreateRenderer("Bomb.bmp", RenderPivot::CENTER, float4(3920.0f, 210.0f));
+		Bomb* Bomb_ = CreateActor<Bomb>((int)ORDER::OBSTRUCTION);
+		Bomb_->SetPosition(float4(3920.0f, 210.0f));
 	}
 
 	{
-		Monster* BombBox1 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox1->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(3965.0f, 210.0f));
-		Monster* BombBox2 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox2->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4010.0f, 210.0f));
-		Monster* BombBox3 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox3->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4055.0f, 210.0f));
-		Monster* BombBox4 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox4->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4100.0f, 210.0f));
-		Monster* BombBox5 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox5->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4145.0f, 210.0f));
-		Monster* BombBox6 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox6->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(3965.0f, 165.0f));
-		Monster* BombBox7 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox7->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4010.0f, 165.0f));
-		Monster* BombBox8 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox8->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4055.0f, 165.0f));
-		Monster* BombBox9 = CreateActor<Monster>((int)ORDER::MONSTER);				 
-		BombBox9->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4100.0f, 165.0f));
-		Monster* BombBox10 = CreateActor<Monster>((int)ORDER::MONSTER);				 
-		BombBox10->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4145.0f, 165.0f));
-		Monster* BombBox11 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox11->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(3965.0f, 120.0f));
-		Monster* BombBox12 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox12->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4010.0f, 120.0f));
-		Monster* BombBox13 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox13->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4055.0f, 120.0f));
-		Monster* BombBox14 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox14->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4100.0f, 120.0f));
-		Monster* BombBox15 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox15->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4145.0f, 120.0f));
-		Monster* BombBox16 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox16->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(3965.0f, 75.0f));
-		Monster* BombBox17 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox17->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4010.0f, 75.0f));
-		Monster* BombBox18 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox18->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4055.0f, 75.0f));
-		Monster* BombBox19 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox19->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4100.0f, 75.0f));
-		Monster* BombBox20 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox20->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4145.0f, 75.0f));
-		Monster* BombBox21 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox21->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(3965.0f, 30.0f));
-		Monster* BombBox22 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox22->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4010.0f, 30.0f));
-		Monster* BombBox23 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox23->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4055.0f, 30.0f));
-		Monster* BombBox24 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox24->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4100.0f, 30.0f));
-		Monster* BombBox25 = CreateActor<Monster>((int)ORDER::MONSTER);
-		BombBox25->CreateRenderer("BombBox.bmp", RenderPivot::CENTER, float4(4145.0f, 30.0f));
+		BombBox* BombBox1 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox1->SetPosition(float4(3965.0f, 210.0f));
+		BombBox* BombBox2 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox2->SetPosition(float4(4010.0f, 210.0f));
+		BombBox* BombBox3 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox3->SetPosition(float4(4055.0f, 210.0f));
+		BombBox* BombBox4 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox4->SetPosition(float4(4100.0f, 210.0f));
+		BombBox* BombBox5 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox5->SetPosition(float4(4145.0f, 210.0f));
+		BombBox* BombBox6 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox6->SetPosition(float4(3965.0f, 165.0f));
+		BombBox* BombBox7 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox7->SetPosition(float4(4010.0f, 165.0f));
+		BombBox* BombBox8 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox8->SetPosition(float4(4055.0f, 165.0f));
+		BombBox* BombBox9 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox9->SetPosition(float4(4100.0f, 165.0f));
+		BombBox* BombBox10 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox10->SetPosition(float4(4145.0f, 165.0f));
+		BombBox* BombBox11 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox11->SetPosition(float4(3965.0f, 120.0f));
+		BombBox* BombBox12 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox12->SetPosition(float4(4010.0f, 120.0f));
+		BombBox* BombBox13 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox13->SetPosition(float4(4055.0f, 120.0f));
+		BombBox* BombBox14 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox14->SetPosition(float4(4100.0f, 120.0f));
+		BombBox* BombBox15 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox15->SetPosition(float4(4145.0f, 120.0f));
+		BombBox* BombBox16 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox16->SetPosition(float4(3965.0f, 75.0f));
+		BombBox* BombBox17 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox17->SetPosition(float4(4010.0f, 75.0f));
+		BombBox* BombBox18 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox18->SetPosition(float4(4055.0f, 75.0f));
+		BombBox* BombBox19 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox19->SetPosition(float4(4100.0f, 75.0f));
+		BombBox* BombBox20 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox20->SetPosition(float4(4145.0f, 75.0f));
+		BombBox* BombBox21 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox21->SetPosition(float4(3965.0f, 30.0f));
+		BombBox* BombBox22 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox22->SetPosition(float4(4010.0f, 30.0f));
+		BombBox* BombBox23 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox23->SetPosition(float4(4055.0f, 30.0f));
+		BombBox* BombBox24 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox24->SetPosition(float4(4100.0f, 30.0f));
+		BombBox* BombBox25 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+		BombBox25->SetPosition(float4(4145.0f, 30.0f));
 	}
 
 	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+	GameEngineRenderer* DoorRenderer = Door->CreateRenderer("BigDoor.bmp", RenderPivot::CENTER, float4(4120.0f, -117.0f));
 	Cannon_ = Door->CreateCollision("Cannon", float4(90.0f, 70.0f), float4(4120.0f, -87.0f));
+
+	Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+	GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("BigDoorStar.bmp", RenderPivot::CENTER, float4(4120.0f, -140.0f));
+	GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+	DoorStarImage->CutCount(6, 2);
+	DoorStarRenderer->CreateAnimation("BigDoorStar.bmp", "BigDoorStar", 0, 11, 0.05f, true);
+	DoorStarRenderer->ChangeAnimation("BigDoorStar");
 }
 
 float Level1_4::GetMapSizeX()

@@ -3,6 +3,7 @@
 
 class GameEngineImage;
 class GameEngineLevel;
+class GameEngineCollision;
 class Fire : public Monster
 {
 public:
@@ -25,4 +26,7 @@ private:
 	bool CheckMapCollision();
 	float4 PrevPos_;
 	GameEngineLevel* Level_;
+	GameEngineRenderer* FireRenderer_;
+	GameEngineCollision* FireCol_;
+	GameEngineImage* FireImage_;
 };

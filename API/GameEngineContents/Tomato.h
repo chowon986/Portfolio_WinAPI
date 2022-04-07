@@ -1,7 +1,10 @@
 #pragma once
-#include "Monster.h"
+#include "Item.h"
 
-class Tomato : public Monster
+class GameEngineCollision;
+class Player;
+class GameEngineRenderer;
+class Tomato : public Item
 {
 public:
 	Tomato();
@@ -14,9 +17,11 @@ public:
 
 public:
 	void Start();
+	void Update();
 
 protected:
 
 private:
-
+	GameEngineCollision* TomatoCol_;
+	GameEngineRenderer* TomatoRenderer_;
 };

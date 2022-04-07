@@ -11,6 +11,7 @@
 #include "Waddledi.h"
 #include "BigWaddledee.h"
 #include "ContentsEnum.h"
+#include "HPUp.h"
 
 Level3_5::Level3_5()
 	: Player_(nullptr)
@@ -100,8 +101,8 @@ void Level3_5::LevelChangeStart()
 	Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
 	Waddledi_->SetPosition(float4(300.0f, 300.0f));
 
-	Monster* HPUP = CreateActor<Monster>((int)ORDER::MONSTER);
-	HPUP->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(600.0f, 600.0f));
+	HPUp* HPUp_ = CreateActor<HPUp>((int)ORDER::MONSTER);
+	HPUp_->CreateRenderer("HPUP.bmp", RenderPivot::CENTER, float4(600.0f, 600.0f));
 
 	Animal* Animal_2 = CreateActor<Animal>((int)ORDER::MONSTER);
 	Animal_2->SetPosition(float4(300.0f, 300.0f));

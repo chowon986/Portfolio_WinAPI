@@ -18,6 +18,7 @@ void BotUI::Start()
 
 void BotUI::Render()
 {
+
 	GameEngineRenderer* PlayerUI_ = CreateRenderer("NormalStatus.bmp",RenderPivot::CENTER,float4(49.0f,557.0f));
 	GameEngineRenderer* PlayerHP_ = CreateRenderer("HPUI.bmp", RenderPivot::CENTER, float4(235.0f, 550.0f));
 	PlayerHPMinus_ = CreateRenderer("HPMinus.bmp", RenderPivot::CENTER, float4(235.0f, 550.0f));

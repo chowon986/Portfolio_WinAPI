@@ -70,7 +70,7 @@ void Level3::Update()
 void Level3::LevelChangeStart()
 {
 
-	SetColMapImage("Stage1_4ColMap.bmp");
+	SetColMapImage("Stage3ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
 	if (ColMapImage_ == nullptr)

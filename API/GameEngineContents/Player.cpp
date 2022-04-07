@@ -22,6 +22,7 @@ Player::Player()
 	, AccGravity_(1.0f)
 	, Time_(3.0f)
 	, Level_(nullptr)
+	, HPCount_(0)
 {
 }
 
@@ -33,6 +34,7 @@ Player::~Player()
 void Player::Start()
 {
 	Level_ = GetLevel();
+	SetHPCount(2);
 	ColMapImage_ = Level_->GetColMapImage();
 	KirbyCol_ = CreateCollision("KirbyCol", float4(50, 50), float4(0, -25));
 	Renderer_ = CreateRenderer("NormalKirby.bmp");
@@ -40,8 +42,13 @@ void Player::Start()
 	GameEngineImage* Image = Renderer_->GetImage();
 	Image->CutCount(10, 16);
 	Renderer_->CreateAnimation("NormalKirby.bmp", "WalkKirby", 10, 19, 0.1f, true);
-	Renderer_->ChangeAnimation("WalkKirby");
 	Renderer_->CreateAnimation("NormalKirby.bmp", "RunKirby", 21, 28, 0.1f, true);
+	Renderer_->CreateAnimation("NormalKirby.bmp", "IdleKirby", 0, 0 , 0.1f, true);
+	Renderer_->CreateAnimation("NormalKirby.bmp", "HoverKirbyStart", 69, 72, 0.1f, false);
+	Renderer_->CreateAnimation("NormalKirby.bmp", "HoveringKirby", 73, 74, 0.1f, true);
+
+	AttackEffectRenderer_ = CreateRenderer("Bomb.bmp",RenderPivot::CENTER,float4(100.0f,-20.0f));
+	AttackEffectCol_ = CreateCollision("KirbyEffect", float4(40.0f, 40.0f), float4(0.0f, -20.0f));
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
@@ -50,7 +57,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
 		GameEngineInput::GetInst()->CreateKey("Jump", VK_LSHIFT);
-		GameEngineInput::GetInst()->CreateKey("Fire", VK_SPACE);
+		GameEngineInput::GetInst()->CreateKey("Hover", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("RunLeft", 'Q');
 		GameEngineInput::GetInst()->CreateKey("RunRight", 'E');
 		// VK_LBUTTON;
@@ -59,6 +66,7 @@ void Player::Start()
 
 void Player::Update()
 {
+	SetState(CharacterState::IDLE);
 	PrevPos_ = GetPosition();
 
 	if (true == CanRun())
@@ -84,6 +92,11 @@ void Player::Update()
 	if (true == CanMoveDown())
 	{
 		MoveDown();
+	}
+
+	if(true == CanHover()) // 다른거랑 동시에 불가
+	{
+		Hover();
 	}
 
 	if (true == CheckMapCollision())
@@ -117,12 +130,53 @@ void Player::Update()
 		GameEngine::GetInst().ChangeLevel("Level2_2"); 
 	}
 
-
 	if (true == KirbyCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect) && Time_ >= 3)
 	{
 		Time_ = 0;
 		SetHP(GetHP() - 1);
 	}
+
+	if (GetState() == CharacterState::HOVER)
+	{
+		AttackEffectRenderer_->SetImageScale();
+		if (true == AttackEffectCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect))
+		{
+			
+		}
+	}
+	else
+	{
+		AttackEffectRenderer_->SetScale(float4(0.0f, 0.0f));
+	}
+
+	CharacterState State = GetState();
+	switch (State)
+	{
+	case CharacterState::WALK:
+		Renderer_->ChangeAnimation("WalkKirby");
+		break;
+	case CharacterState::RUN:
+		Renderer_->ChangeAnimation("RunKirby");
+		break;
+	case CharacterState::HOVER:
+		Renderer_->ChangeAnimation("HoverKirbyStart");
+		//GameEngineImage* LastImage = Renderer_->GetImage();
+		//float4 LastPivot = LastImage->GetCutPivot(72);
+		//Renderer_->
+		////if(== LastPivot)
+		break;
+	default:
+		Renderer_->ChangeAnimation("IdleKirby");
+		break;
+	}
+}
+
+void Player::Render()
+{
+	float Time_ = GameEngineTime::GetDeltaTime();
+	std::string Text = std::to_string(Time_);
+
+	TextOutA(GameEngine::BackBufferImage()->ImageDC(), 0, 0, Text.c_str(), Text.size());
 }
 
 bool Player::CanMoveUp()
@@ -163,10 +217,17 @@ bool Player::CanJump() //"Jump", VK_LSHIFT
 	return GameEngineInput::GetInst()->IsUp("Jump") || GetState() == CharacterState::JUMP;
 }
 
+bool Player:: CanHover()
+{
+	return GameEngineInput::GetInst()->IsPress("Hover") 
+		&& GetState() != CharacterState::WALK
+		&& GetState() != CharacterState::RUN
+		&& GetState() != CharacterState::JUMP;
+}
+
 void Player::Walk()
 {
 	SetState(CharacterState::WALK);
-	Renderer_->ChangeAnimation("WalkKirby");
 	float4 direction = GameEngineInput::GetInst()->IsPress("MoveLeft") ? float4::LEFT : float4::RIGHT;
 	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
@@ -174,7 +235,6 @@ void Player::Walk()
 void Player::Run()
 {
 	SetState(CharacterState::RUN);
-	Renderer_->ChangeAnimation("RunKirby");
 	float4 direction = GameEngineInput::GetInst()->IsPress("RunLeft") ? float4::LEFT : float4::RIGHT;
 	SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
@@ -239,4 +299,10 @@ bool Player::CheckMapCollision()
 			return true;
 		}
 	}
+}
+
+void Player::Hover()
+{
+	SetState(CharacterState::HOVER);
+	
 }

@@ -24,6 +24,8 @@ void Monster1::Start()
 	Monster1Image->CutCount(10, 26);
 	Monster1Renderer->CreateAnimation("monster0.bmp", "Monster1Idel", 216, 219, 0.3f, true);
 	Monster1Renderer->ChangeAnimation("Monster1Idel");
+
+	GameEngineCollision* Monster1Col = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 }
 
 

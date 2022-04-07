@@ -157,8 +157,11 @@
     <ClInclude Include="BeforeTitleLevel.h" />
     <ClInclude Include="BigBomb.h" />
     <ClInclude Include="BigBox.h" />
+    <ClInclude Include="BigTreasureChest.h" />
     <ClInclude Include="BigWaddledee.h" />
     <ClInclude Include="BlueMouse.h" />
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombBox.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BotUI.h">
       <SubType>
@@ -184,6 +187,7 @@
     <ClInclude Include="GreenMouse.h" />
     <ClInclude Include="HPUp.h" />
     <ClInclude Include="IntroStory.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Kirby.h">
       <SubType>
       </SubType>
@@ -213,6 +217,7 @@
     <ClInclude Include="Monster2.h" />
     <ClInclude Include="Monster3.h" />
     <ClInclude Include="Moon.h" />
+    <ClInclude Include="Obstruction.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -239,8 +244,11 @@
     <ClCompile Include="BeforeTitleLevel.cpp" />
     <ClCompile Include="BigBomb.cpp" />
     <ClCompile Include="BigBox.cpp" />
+    <ClCompile Include="BigTreasureChest.cpp" />
     <ClCompile Include="BigWaddledee.cpp" />
     <ClCompile Include="BlueMouse.cpp" />
+    <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BombBox.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BotUI.cpp">
       <SubType>
@@ -265,6 +273,7 @@
     <ClCompile Include="GreenMouse.cpp" />
     <ClCompile Include="HPUp.cpp" />
     <ClCompile Include="IntroStory.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Kirby.cpp">
       <SubType>
       </SubType>
@@ -294,6 +303,7 @@
     <ClCompile Include="Monster2.cpp" />
     <ClCompile Include="Monster3.cpp" />
     <ClCompile Include="Moon.cpp" />
+    <ClCompile Include="Obstruction.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>

@@ -1,6 +1,7 @@
 #pragma once
 #include "Monster.h"
 
+class GameEngineRenderer;
 class TreasureChest : public Monster
 {
 public:
@@ -14,9 +15,11 @@ public:
 
 public:
 	void Start();
+	void Update();
 
 protected:
 
 private:
-
+	GameEngineCollision* TreasureChestCol_;
+	GameEngineRenderer* TreasureChestRenderer_;
 };

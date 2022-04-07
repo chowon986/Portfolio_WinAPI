@@ -25,17 +25,8 @@
     <Filter Include="Level\01 Title">
       <UniqueIdentifier>{7f55e9d3-900c-4959-88f4-c8dc696d1653}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Play\Monster">
-      <UniqueIdentifier>{4cfa8086-2877-4ebe-aff3-c60ae6d32923}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Play\Base">
       <UniqueIdentifier>{3e593a2d-8d92-4a82-be36-8d3f8f5d9f89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play\Monster\Parent">
-      <UniqueIdentifier>{6b83067f-a760-4dfb-b8c0-ee4a2b32e8e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Item">
-      <UniqueIdentifier>{8eb29cef-cd29-4f6f-8c3a-fc44923b82c2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\02 Play\Level1">
       <UniqueIdentifier>{d7daae6a-fda0-4cf5-8a1c-1bf97e50f4e1}</UniqueIdentifier>
@@ -51,6 +42,24 @@
     </Filter>
     <Filter Include="Level\02 Play\Level4">
       <UniqueIdentifier>{7ffbdc77-f362-4841-9745-e358a34e2661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Character">
+      <UniqueIdentifier>{5eff4d24-a255-4095-ad56-a1090936f932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Character\Monster">
+      <UniqueIdentifier>{4cfa8086-2877-4ebe-aff3-c60ae6d32923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Character\Monster\Parent">
+      <UniqueIdentifier>{6b83067f-a760-4dfb-b8c0-ee4a2b32e8e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\VideoPlay">
+      <UniqueIdentifier>{5cca9bf5-986a-4af4-9861-4ac62577dd79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Item">
+      <UniqueIdentifier>{0f7b8538-a473-4329-852d-36e469f41881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Obstruction">
+      <UniqueIdentifier>{0a5ca2ab-db23-4eb9-bd34-71888b520e9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,38 +87,17 @@
     <ClInclude Include="EndingStory.h">
       <Filter>Level\03 Ending</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Play</Filter>
-    </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>Level\02 Play</Filter>
     </ClInclude>
     <ClInclude Include="Kirby.h" />
     <ClInclude Include="Monster.h">
-      <Filter>Play\Monster\Parent</Filter>
+      <Filter>Play\Character\Monster\Parent</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Play\Background</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="BigBox.h" />
-    <ClInclude Include="Tomato.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="SwordItem.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="TreasureChest.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="HPUp.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="FireItem.h">
-      <Filter>Item</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
-    <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="Level1.h">
       <Filter>Level\02 Play\Level1</Filter>
     </ClInclude>
@@ -133,22 +121,22 @@
     </ClInclude>
     <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="Waddledi.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Waddledoo.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Sparky.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Fire.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Brontobert.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Monster1.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Level2.h">
       <Filter>Level\02 Play\Level2</Filter>
@@ -166,16 +154,16 @@
       <Filter>Level\02 Play\Level2</Filter>
     </ClInclude>
     <ClInclude Include="BigWaddledee.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Sword.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Monster2.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Tiktik.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Level3.h">
       <Filter>Level\02 Play\Level3</Filter>
@@ -187,16 +175,16 @@
       <Filter>Level\02 Play\Level3</Filter>
     </ClInclude>
     <ClInclude Include="Moon.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Frosty.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Level3_4.h">
       <Filter>Level\02 Play\Level3</Filter>
     </ClInclude>
     <ClInclude Include="Monster3.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Level3_5.h">
       <Filter>Level\02 Play\Level3</Filter>
@@ -208,28 +196,28 @@
       <Filter>Level\02 Play\Level3</Filter>
     </ClInclude>
     <ClInclude Include="BigBomb.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Animal.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Doroach.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Storo.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Spinni.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="YellowMouse.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="BlueMouse.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="GreenMouse.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Level4.h">
       <Filter>Level\02 Play\Level4</Filter>
@@ -238,7 +226,49 @@
       <Filter>Level\02 Play\Level4</Filter>
     </ClInclude>
     <ClInclude Include="Doc.h">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstruction.h">
+      <Filter>Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Play\Obstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="BigBox.h">
+      <Filter>Play\Obstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Play\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoPlayer.h">
+      <Filter>Play\VideoPlay</Filter>
+    </ClInclude>
+    <ClInclude Include="FireItem.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HPUp.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordItem.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Tomato.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TreasureChest.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BigTreasureChest.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Play\Obstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="BombBox.h">
+      <Filter>Play\Obstruction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -270,33 +300,12 @@
       <Filter>Level\02 Play</Filter>
     </ClCompile>
     <ClCompile Include="Kirby.cpp" />
-    <ClCompile Include="Player.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Play\Monster\Parent</Filter>
+      <Filter>Play\Character\Monster\Parent</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Play\Background</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp" />
-    <ClCompile Include="BigBox.cpp" />
-    <ClCompile Include="SwordItem.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Tomato.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="TreasureChest.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="HPUp.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="FireItem.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoPlayer.cpp" />
     <ClCompile Include="Level1.cpp">
       <Filter>Level\02 Play\Level1</Filter>
     </ClCompile>
@@ -320,22 +329,22 @@
     </ClCompile>
     <ClCompile Include="VideoPlayer.cpp" />
     <ClCompile Include="Waddledi.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Waddledoo.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Sparky.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Fire.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Brontobert.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Monster1.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Level2.cpp">
       <Filter>Level\02 Play\Level2</Filter>
@@ -353,16 +362,16 @@
       <Filter>Level\02 Play\Level2</Filter>
     </ClCompile>
     <ClCompile Include="BigWaddledee.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Sword.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Monster2.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Tiktik.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Level3.cpp">
       <Filter>Level\02 Play\Level3</Filter>
@@ -374,16 +383,16 @@
       <Filter>Level\02 Play\Level3</Filter>
     </ClCompile>
     <ClCompile Include="Moon.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Frosty.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Level3_4.cpp">
       <Filter>Level\02 Play\Level3</Filter>
     </ClCompile>
     <ClCompile Include="Monster3.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Level3_5.cpp">
       <Filter>Level\02 Play\Level3</Filter>
@@ -395,28 +404,28 @@
       <Filter>Level\02 Play\Level3</Filter>
     </ClCompile>
     <ClCompile Include="BigBomb.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Animal.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Doroach.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Spinni.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Storo.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="YellowMouse.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="BlueMouse.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="GreenMouse.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Level4.cpp">
       <Filter>Level\02 Play\Level4</Filter>
@@ -425,7 +434,49 @@
       <Filter>Level\02 Play\Level4</Filter>
     </ClCompile>
     <ClCompile Include="Doc.cpp">
-      <Filter>Play\Monster</Filter>
+      <Filter>Play\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstruction.cpp">
+      <Filter>Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="BigBox.cpp">
+      <Filter>Play\Obstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Play\Obstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Play\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp">
+      <Filter>Play\VideoPlay</Filter>
+    </ClCompile>
+    <ClCompile Include="FireItem.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HPUp.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordItem.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Tomato.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="TreasureChest.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BigTreasureChest.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Play\Obstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="BombBox.cpp">
+      <Filter>Play\Obstruction</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
