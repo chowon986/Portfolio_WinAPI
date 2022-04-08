@@ -27,6 +27,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 Kirby::Kirby()
@@ -53,6 +54,21 @@ void Kirby::GameInit()
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
 	}
+
+	{
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Sound");
+
+		std::vector<GameEngineFile> AllSoundFileList = ResourcesDir.GetAllFile();
+
+		for (size_t i = 0; i < AllSoundFileList.size(); i++)
+		{
+			GameEngineSound::LoadRes(AllSoundFileList[i].GetFullPath());
+		}
+	}
+
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
 	{
@@ -81,7 +97,7 @@ void Kirby::GameInit()
 	CreateLevel<EndingStory>("EndingStory");
 	CreateLevel<EndingLevel>("Ending");
 
-	ChangeLevel("Level1");
+	ChangeLevel("BeforeTitle");
 
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 class VideoPlayer;
 class BeforeTitleLevel : public GameEngineLevel
@@ -12,6 +13,10 @@ public:
 	BeforeTitleLevel(BeforeTitleLevel&& _Other) noexcept = delete;
 	BeforeTitleLevel& operator=(const BeforeTitleLevel& _Other) = delete;
 	BeforeTitleLevel& operator=(BeforeTitleLevel&& _Other) noexcept = delete;
+
+	float Time;
+
+	GameEngineSoundPlayer BgmPlayer;
 
 protected:
 	void Loading() override;

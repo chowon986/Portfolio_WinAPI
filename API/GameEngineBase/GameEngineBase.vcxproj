@@ -84,11 +84,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+    <LibraryPath>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+    <LibraryPath>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -196,6 +198,8 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <None Include="ThirdParty\inc\fmod.h" />
+    <None Include="ThirdParty\inc\fmod.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">
@@ -245,18 +249,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmod.dll">
+    <CopyFileToFolders Include="ThirdParty\bin\fmod.dll">
       <FileType>Document</FileType>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmodL.dll">
+    <CopyFileToFolders Include="ThirdParty\bin\fmodL.dll">
       <FileType>Document</FileType>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmodL_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\bin\fmodL_vc.lib">
       <FileType>Document</FileType>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmod_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\bin\fmod_vc.lib">
       <FileType>Document</FileType>
     </CopyFileToFolders>
   </ItemGroup>

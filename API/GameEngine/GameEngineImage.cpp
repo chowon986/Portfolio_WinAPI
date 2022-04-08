@@ -23,13 +23,13 @@ GameEngineImage::~GameEngineImage()
 	if (nullptr != OldBitMap_)
 	{
 		DeleteObject(OldBitMap_);
-		OldBitMap_ = nullptr;
+		OldBitMap_ = nullptr;                                              
 	}
 
 	if (nullptr != ImageDC_)
 	{
 		DeleteDC(ImageDC_);
-		ImageDC_ = nullptr;
+		ImageDC_ = nullptr;        
 	}
 }
 
