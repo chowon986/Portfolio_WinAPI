@@ -17,6 +17,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 
 
+
 Level1::Level1()
 	: MapSizeX_(4608)
 	, MapSizeY_(576)

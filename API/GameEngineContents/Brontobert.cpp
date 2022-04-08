@@ -22,8 +22,8 @@ void Brontobert::Start()
 	GameEngineRenderer* BrontobertRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* BrontobertImage = BrontobertRenderer->GetImage();
 	BrontobertImage->CutCount(10, 26);
-	BrontobertRenderer->CreateAnimation("monster0.bmp", "BrontobertIdel", 33, 34, 0.3f, true);
-	BrontobertRenderer->ChangeAnimation("BrontobertIdel");
+	BrontobertRenderer->CreateAnimation("monster0.bmp", "BrontobertIdle", 33, 34, 0.3f, true);
+	BrontobertRenderer->ChangeAnimation("BrontobertIdle");
 }
 
 

@@ -24,8 +24,8 @@ void BigBomb::Start()
 	BigBombRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* BigBombImage = BigBombRenderer_->GetImage();
 	BigBombImage->CutCount(10, 26);
-	BigBombRenderer_->CreateAnimation("monster0.bmp", "BigBombIdel", 0, 5, 0.3f, true);
-	BigBombRenderer_->ChangeAnimation("BigBombIdel");
+	BigBombRenderer_->CreateAnimation("monster0.bmp", "BigBombIdle", 0, 5, 0.3f, true);
+	BigBombRenderer_->ChangeAnimation("BigBombIdle");
 
 	BigBombCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 }

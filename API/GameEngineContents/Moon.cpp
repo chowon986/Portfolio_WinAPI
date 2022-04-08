@@ -22,8 +22,8 @@ void Moon::Start()
 	GameEngineRenderer* MoonRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* MoonImage = MoonRenderer->GetImage();
 	MoonImage->CutCount(10, 26);
-	MoonRenderer->CreateAnimation("monster0.bmp", "MoonIdel",0,1,  0.3f, true);
-	MoonRenderer->ChangeAnimation("MoonIdel");
+	MoonRenderer->CreateAnimation("monster0.bmp", "MoonIdle",0,1,  0.3f, true);
+	MoonRenderer->ChangeAnimation("MoonIdle");
 }
 
 

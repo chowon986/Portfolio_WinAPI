@@ -22,8 +22,8 @@ void Sword::Start()
 	GameEngineRenderer* SwordRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* SwordImage = SwordRenderer->GetImage();
 	SwordImage->CutCount(10, 26);
-	SwordRenderer->CreateAnimation("monster0.bmp", "SwordIdel", 181, 186, 0.3f, true);
-	SwordRenderer->ChangeAnimation("SwordIdel");
+	SwordRenderer->CreateAnimation("monster0.bmp", "SwordIdle", 181, 186, 0.3f, true);
+	SwordRenderer->ChangeAnimation("SwordIdle");
 }
 
 

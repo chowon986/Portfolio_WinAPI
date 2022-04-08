@@ -22,8 +22,8 @@ void Spinni::Start()
 	GameEngineRenderer* SpinniRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* SpinniImage = SpinniRenderer->GetImage();
 	SpinniImage->CutCount(10, 26);
-	SpinniRenderer->CreateAnimation("monster0.bmp", "SpinniIdel", 108, 111, 0.3f, true);
-	SpinniRenderer->ChangeAnimation("SpinniIdel");
+	SpinniRenderer->CreateAnimation("monster0.bmp", "SpinniIdle", 108, 111, 0.3f, true);
+	SpinniRenderer->ChangeAnimation("SpinniIdle");
 }
 
 

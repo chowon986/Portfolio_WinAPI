@@ -12,6 +12,7 @@ enum class CharacterState
 	Up,
 	Down,
 	HOVER,
+	EAT,
 };
 
 class CharacterBase : public GameEngineActor

@@ -22,8 +22,8 @@ void GreenMouse::Start()
 	GameEngineRenderer* GreenMouseRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* GreenMouseImage = GreenMouseRenderer->GetImage();
 	GreenMouseImage->CutCount(10, 26);
-	GreenMouseRenderer->CreateAnimation("monster0.bmp", "GreenMouseIdel", 160, 164, 0.3f, true);
-	GreenMouseRenderer->ChangeAnimation("GreenMouseIdel");
+	GreenMouseRenderer->CreateAnimation("monster0.bmp", "GreenMouseIdle", 160, 164, 0.3f, true);
+	GreenMouseRenderer->ChangeAnimation("GreenMouseIdle");
 
 }
 

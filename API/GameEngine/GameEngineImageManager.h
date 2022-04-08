@@ -54,13 +54,14 @@ public:
 private:
 	std::map < std::string, GameEngineImage* > AllRes;
 
-	/// <summary>
+/// <summary>
 /// 일반이미지
 /// </summary>
-public:
-	GameEngineFolderImage* FolderImageFind(const std::string& _Name);
-	GameEngineFolderImage* FolderImageLoad(const std::string& _Path);
-	GameEngineFolderImage* FolderImageLoad(const std::string& _Path, const std::string& _Name);
+//현재 사용 x
+//public:
+//	GameEngineFolderImage* FolderImageFind(const std::string& _Name);
+//	GameEngineFolderImage* FolderImageLoad(const std::string& _Path);
+//	GameEngineFolderImage* FolderImageLoad(const std::string& _Path, const std::string& _Name);
 
 
 private:

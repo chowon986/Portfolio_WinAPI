@@ -22,8 +22,8 @@ void Sparky::Start()
 	GameEngineRenderer* SparkyRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* SparkyImage = SparkyRenderer->GetImage();
 	SparkyImage->CutCount(10, 26);
-	SparkyRenderer->CreateAnimation("monster0.bmp", "SparkyIdel", 108, 111, 0.3f, true);
-	SparkyRenderer->ChangeAnimation("SparkyIdel");
+	SparkyRenderer->CreateAnimation("monster0.bmp", "SparkyIdle", 108, 111, 0.3f, true);
+	SparkyRenderer->ChangeAnimation("SparkyIdle");
 }
 
 

@@ -22,8 +22,8 @@ void Doroach::Start()
 	GameEngineRenderer* DoroachRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* DoroachImage = DoroachRenderer->GetImage();
 	DoroachImage->CutCount(10, 26);
-	DoroachRenderer->CreateAnimation("monster0.bmp", "DoroachIdel", 160, 164, 0.3f, true);
-	DoroachRenderer->ChangeAnimation("DoroachIdel");
+	DoroachRenderer->CreateAnimation("monster0.bmp", "DoroachIdle", 160, 164, 0.3f, true);
+	DoroachRenderer->ChangeAnimation("DoroachIdle");
 
 }
 

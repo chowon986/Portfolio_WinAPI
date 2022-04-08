@@ -22,8 +22,8 @@ void Frosty::Start()
 	GameEngineRenderer* FrostyRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* FrostyImage = FrostyRenderer->GetImage();
 	FrostyImage->CutCount(10, 26);
-	FrostyRenderer->CreateAnimation("monster0.bmp", "FrostyIdel", 160, 164, 0.3f, true);
-	FrostyRenderer->ChangeAnimation("FrostyIdel");
+	FrostyRenderer->CreateAnimation("monster0.bmp", "FrostyIdle", 160, 164, 0.3f, true);
+	FrostyRenderer->ChangeAnimation("FrostyIdle");
 
 }
 

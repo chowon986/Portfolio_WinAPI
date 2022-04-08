@@ -2,6 +2,17 @@
 #include <GameEngine/GameEngineActor.h>
 #include "CharacterBase.h"
 
+enum class KirbyClass
+{
+	SPARK,
+	SWORD,
+	FIRE,
+	ICE,
+	ANIMAL,
+	BEAM,
+};
+
+
 class GameEngineImage;
 class GameEngineRenderer;
 class GameEngineCollision;
@@ -47,7 +58,9 @@ private:
 	virtual bool CanWalk() override;
 	virtual bool CanRun() override;
 	virtual bool CanJump() override;
+
 	bool CanHover();
+	bool CanEat();
 	bool CanMoveUp();
 	bool CanMoveDown();
 
@@ -60,6 +73,7 @@ private:
 	void MoveDown();
 	bool CheckMapCollision();
 	void Hover();
+	void Eat();
 	
 };
 

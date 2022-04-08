@@ -22,8 +22,8 @@ void Tiktik::Start()
 	GameEngineRenderer* TiktikRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* TiktikImage = TiktikRenderer->GetImage();
 	TiktikImage->CutCount(10, 26);
-	TiktikRenderer->CreateAnimation("monster0.bmp", "TiktikIdel", 137, 145, 0.3f, true);
-	TiktikRenderer->ChangeAnimation("TiktikIdel");
+	TiktikRenderer->CreateAnimation("monster0.bmp", "TiktikIdle", 137, 145, 0.3f, true);
+	TiktikRenderer->ChangeAnimation("TiktikIdle");
 }
 
 

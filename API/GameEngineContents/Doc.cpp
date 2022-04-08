@@ -22,8 +22,8 @@ void Doc::Start()
 	GameEngineRenderer* DocRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* DocImage = DocRenderer->GetImage();
 	DocImage->CutCount(10, 26);
-	DocRenderer->CreateAnimation("monster0.bmp", "DocIdel", 160, 164, 0.3f, true);
-	DocRenderer->ChangeAnimation("DocIdel");
+	DocRenderer->CreateAnimation("monster0.bmp", "DocIdle", 160, 164, 0.3f, true);
+	DocRenderer->ChangeAnimation("DocIdle");
 
 }
 

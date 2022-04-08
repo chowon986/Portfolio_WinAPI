@@ -22,8 +22,8 @@ void Waddledoo::Start()
 	GameEngineRenderer* WaddledooRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* WaddledooImage = WaddledooRenderer->GetImage();
 	WaddledooImage->CutCount(10, 26);
-	WaddledooRenderer->CreateAnimation("monster0.bmp", "WaddledooIdel", 17, 21, 0.3f, true);
-	WaddledooRenderer->ChangeAnimation("WaddledooIdel");
+	WaddledooRenderer->CreateAnimation("monster0.bmp", "WaddledooIdle", 17, 21, 0.3f, true);
+	WaddledooRenderer->ChangeAnimation("WaddledooIdle");
 
 }
 

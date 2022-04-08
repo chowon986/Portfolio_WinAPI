@@ -23,8 +23,8 @@ void Monster3::Start()
 	GameEngineRenderer* Monster3Renderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* Monster3Image = Monster3Renderer->GetImage();
 	Monster3Image->CutCount(10, 26);
-	Monster3Renderer->CreateAnimation("monster0.bmp", "Monster3Idel", 241, 250, 0.3f, true);
-	Monster3Renderer->ChangeAnimation("Monster3Idel");
+	Monster3Renderer->CreateAnimation("monster0.bmp", "Monster3Idle", 241, 250, 0.3f, true);
+	Monster3Renderer->ChangeAnimation("Monster3Idle");
 }
 
 

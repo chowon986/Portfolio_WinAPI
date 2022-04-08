@@ -22,8 +22,8 @@ void Fire::Start()
 	FireRenderer_ = CreateRenderer("monster0.bmp");
 	FireImage_ = FireRenderer_->GetImage();
 	FireImage_->CutCount(10, 26);
-	FireRenderer_->CreateAnimation("monster0.bmp", "FireIdel", 160, 164, 0.3f, true);
-	FireRenderer_->ChangeAnimation("FireIdel");
+	FireRenderer_->CreateAnimation("monster0.bmp", "FireIdle", 160, 164, 0.3f, true);
+	FireRenderer_->ChangeAnimation("FireIdle");
 
 	FireCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 

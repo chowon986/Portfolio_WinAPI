@@ -22,8 +22,8 @@ void BlueMouse::Start()
 	GameEngineRenderer* BlueMouseRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* BlueMouseImage = BlueMouseRenderer->GetImage();
 	BlueMouseImage->CutCount(10, 26);
-	BlueMouseRenderer->CreateAnimation("monster0.bmp", "BlueMouseIdel", 216, 219, 0.3f, true);
-	BlueMouseRenderer->ChangeAnimation("BlueMouseIdel");
+	BlueMouseRenderer->CreateAnimation("monster0.bmp", "BlueMouseIdle", 216, 219, 0.3f, true);
+	BlueMouseRenderer->ChangeAnimation("BlueMouseIdle");
 }
 
 

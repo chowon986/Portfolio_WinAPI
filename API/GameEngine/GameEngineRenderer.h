@@ -145,7 +145,8 @@ public:
 	// 애니메이션을 만든다.
 	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
-	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+	// 현재 사용 x
+	//void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
 	// 애니메이션을 재생한다.
 	void ChangeAnimation(const std::string& _Name);

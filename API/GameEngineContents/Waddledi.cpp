@@ -24,9 +24,9 @@ void Waddledi::Start()
 	WaddlediRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* WaddlediImage = WaddlediRenderer_->GetImage();
 	WaddlediImage->CutCount(10, 26);
-	WaddlediRenderer_->CreateAnimation("monster0.bmp", "WaddlediIdel", 7, 14, 0.3f, true);
-	WaddlediRenderer_->CreateAnimation("monster0.bmp", "WaddlediDie", 15, 16, 0.3f, true);
-	WaddlediRenderer_->ChangeAnimation("WaddlediIdel");
+	WaddlediRenderer_->CreateAnimation("monster0.bmp", "WaddlediIdle", 7, 14, 0.3f, true);
+	WaddlediRenderer_->CreateAnimation("monster0.bmp", "WaddlediIdie", 15, 16, 0.3f, true);
+	WaddlediRenderer_->ChangeAnimation("WaddlediIdle");
 
 	WaddlediCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 }

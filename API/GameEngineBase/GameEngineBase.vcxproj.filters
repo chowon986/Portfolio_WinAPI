@@ -22,6 +22,15 @@
     <Filter Include="IO">
       <UniqueIdentifier>{45afdc2f-2427-49fc-a567-4e25e9fed586}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{9634d06f-d1fe-4c21-a719-d3d0e4e81ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\bin">
+      <UniqueIdentifier>{0174dabb-dbbf-4a5d-8d5f-b88423a21fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{a0a110c8-346f-4837-8cfc-04747f23216f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -56,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineUpdateObject.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSound.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,5 +104,22 @@
     <ClCompile Include="GameEngineUpdateObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineSound.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmod.dll">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmod_vc.lib">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmodL.dll">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\..\..\..\초\SDK\FMOD Studio API Windows\api\core\lib\x64\fmodL_vc.lib">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

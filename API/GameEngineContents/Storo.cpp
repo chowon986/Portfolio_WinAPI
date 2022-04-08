@@ -22,8 +22,8 @@ void Storo::Start()
 	GameEngineRenderer* StoroRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* StoroImage = StoroRenderer->GetImage();
 	StoroImage->CutCount(10, 26);
-	StoroRenderer->CreateAnimation("monster0.bmp", "StoroIdel", 108, 111, 0.3f, true);
-	StoroRenderer->ChangeAnimation("StoroIdel");
+	StoroRenderer->CreateAnimation("monster0.bmp", "StoroIdle", 108, 111, 0.3f, true);
+	StoroRenderer->ChangeAnimation("StoroIdle");
 }
 
 

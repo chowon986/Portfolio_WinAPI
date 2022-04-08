@@ -22,8 +22,8 @@ void YellowMouse::Start()
 	GameEngineRenderer* YellowMouseRenderer = CreateRenderer("monster0.bmp");
 	GameEngineImage* YellowMouseImage = YellowMouseRenderer->GetImage();
 	YellowMouseImage->CutCount(10, 26);
-	YellowMouseRenderer->CreateAnimation("monster0.bmp", "YellowMouseIdel", 17, 21, 0.3f, true);
-	YellowMouseRenderer->ChangeAnimation("YellowMouseIdel");
+	YellowMouseRenderer->CreateAnimation("monster0.bmp", "YellowMouseIdle", 17, 21, 0.3f, true);
+	YellowMouseRenderer->ChangeAnimation("YellowMouseIdle");
 
 }
 

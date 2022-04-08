@@ -1,6 +1,5 @@
 #pragma once
-#include <GameEngineBase/GameEngineNameObject.h>
-
+#include "GameEngineNameObject.h"
 // Ό³Έν :
 class GameEngineSound : public GameEngineNameObject
 {

@@ -24,8 +24,8 @@ void BigWaddledee::Start()
 	BigWaddledeeRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* BigWaddledeeImage = BigWaddledeeRenderer_->GetImage();
 	BigWaddledeeImage->CutCount(10, 26);
-	BigWaddledeeRenderer_->CreateAnimation("monster0.bmp", "BigWaddledeeIdel", 0, 5, 0.3f, true);
-	BigWaddledeeRenderer_->ChangeAnimation("BigWaddledeeIdel");
+	BigWaddledeeRenderer_->CreateAnimation("monster0.bmp", "BigWaddledeeIdle", 0, 5, 0.3f, true);
+	BigWaddledeeRenderer_->ChangeAnimation("BigWaddledeeIdle");
 
 	BigWaddledeeCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 }

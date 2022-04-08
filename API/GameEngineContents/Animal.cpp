@@ -23,8 +23,8 @@ void Animal::Start()
 	AnimalRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* AnimalImage = AnimalRenderer_->GetImage();
 	AnimalImage->CutCount(10, 26);
-	AnimalRenderer_->CreateAnimation("monster0.bmp", "AnimalIdel", 0, 5, 0.3f, true);
-	AnimalRenderer_->ChangeAnimation("AnimalIdel");
+	AnimalRenderer_->CreateAnimation("monster0.bmp", "AnimalIdle", 0, 5, 0.3f, true);
+	AnimalRenderer_->ChangeAnimation("AnimalIdle");
 
 	AnimalCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 }

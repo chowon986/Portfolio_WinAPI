@@ -135,23 +135,24 @@ GameEngineImage* GameEngineImageManager::Load(const std::string& _Path, const st
 	return NewImage;
 }
 
+// 현재 사용 x
 //////////////////////////////////////////////////////// 폴더 이미지
-
-GameEngineFolderImage* GameEngineImageManager::FolderImageFind(const std::string& _Name)
-{
-	std::string EngineName = GameEngineString::ToUpperReturn(_Name);
-
-	std::map<std::string, GameEngineFolderImage*>::iterator FindIter = AllFolderRes.find(EngineName);
-
-	if (AllFolderRes.end() == FindIter)
-	{
-		// MsgBoxAssert("이미 존재하는 이름의 이미지를 또 만들려고 했습니다.");
-		return nullptr;
-	}
-
-	return FindIter->second;
-}
 //
+//GameEngineFolderImage* GameEngineImageManager::FolderImageFind(const std::string& _Name)
+//{
+//	std::string EngineName = GameEngineString::ToUpperReturn(_Name);
+//
+//	std::map<std::string, GameEngineFolderImage*>::iterator FindIter = AllFolderRes.find(EngineName);
+//
+//	if (AllFolderRes.end() == FindIter)
+//	{
+//		// MsgBoxAssert("이미 존재하는 이름의 이미지를 또 만들려고 했습니다.");
+//		return nullptr;
+//	}
+//
+//	return FindIter->second;
+//}
+////
 //GameEngineFolderImage* GameEngineImageManager::FolderImageLoad(const std::string& _Path)
 //{
 //	GameEnginePath NewPath = GameEnginePath(_Path);
