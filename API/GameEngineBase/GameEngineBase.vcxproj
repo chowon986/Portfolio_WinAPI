@@ -249,18 +249,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\bin\fmod.dll">
+    <CopyFileToFolders Include="ThirdParty\lib\fmod.dll">
       <FileType>Document</FileType>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\bin\fmodL.dll">
+    <CopyFileToFolders Include="ThirdParty\lib\fmodL.dll">
       <FileType>Document</FileType>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\bin\fmodL_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\lib\fmodL_vc.lib">
       <FileType>Document</FileType>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\bin\fmod_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\lib\fmod_vc.lib">
       <FileType>Document</FileType>
     </CopyFileToFolders>
   </ItemGroup>

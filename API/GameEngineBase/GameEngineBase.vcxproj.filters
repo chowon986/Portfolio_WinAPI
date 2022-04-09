@@ -112,25 +112,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\bin\fmod.dll">
-      <Filter>ThirdParty\bin</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\bin\fmod_vc.lib">
-      <Filter>ThirdParty\bin</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\bin\fmodL.dll">
-      <Filter>ThirdParty\bin</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\bin\fmodL_vc.lib">
-      <Filter>ThirdParty\bin</Filter>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ThirdParty\inc\fmod.h">
       <Filter>ThirdParty\Inc</Filter>
     </None>
     <None Include="ThirdParty\inc\fmod.hpp">
       <Filter>ThirdParty\Inc</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\lib\fmod.dll">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\lib\fmod_vc.lib">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\lib\fmodL.dll">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\lib\fmodL_vc.lib">
+      <Filter>ThirdParty\bin</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

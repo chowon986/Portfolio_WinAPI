@@ -6,12 +6,13 @@ enum class CharacterState
 	IDLE,
 	WALK,
 	RUN,
+	FLY,
 	ATTACK,
 	DIE,
-	JUMP,
 	Up,
 	Down,
 	HOVER,
+	INHALE,
 	EAT,
 };
 

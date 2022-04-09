@@ -4,6 +4,7 @@
 
 enum class KirbyClass
 {
+	PIG,
 	SPARK,
 	SWORD,
 	FIRE,
@@ -43,22 +44,41 @@ private:
 
 	float Gravity_;
 	float AccGravity_;
+	float JumpHeight_;
 	float Time_;
 	float Speed_;
 	GameEngineImage* ColMapImage_;
 	GameEngineLevel* Level_;
 	Player* Player_;
+	KirbyClass KirbyClass_;
+	CharacterState PrevState_;
 
-	void Start() override;
-	void Update() override;
-	void Render() override;
+	void SetPrevState(CharacterState _PrevState);
+	CharacterState GetPrevState();
+
+	void SetKirbyClass(KirbyClass _KirbyClass);
+	KirbyClass GetKirbyClass();
+
+	virtual void Start() override;
+	virtual void Update() override;
+	virtual void Render() override;
+
+	void UpdateMove();
+	void UpdateJump();
+	void UpdateFly();
+	void CorrectPos();
+
+	void CheckCollision();
+
+	void UpdateAnimation();
 
 	virtual float GetSpeed() override;
-
 	virtual bool CanWalk() override;
 	virtual bool CanRun() override;
 	virtual bool CanJump() override;
-
+	
+	bool CanFly();
+	bool CanInhale();
 	bool CanHover();
 	bool CanEat();
 	bool CanMoveUp();
@@ -74,6 +94,8 @@ private:
 	bool CheckMapCollision();
 	void Hover();
 	void Eat();
+	void Fly();
+	void Inhale();
 	
 };
 

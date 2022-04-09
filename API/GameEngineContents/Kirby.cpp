@@ -55,7 +55,7 @@ void Kirby::GameInit()
 		}
 	}
 
-	{
+	/*{
 		GameEngineDirectory ResourcesDir;
 		ResourcesDir.MoveParent("API");
 		ResourcesDir.Move("Resources");
@@ -67,7 +67,7 @@ void Kirby::GameInit()
 		{
 			GameEngineSound::LoadRes(AllSoundFileList[i].GetFullPath());
 		}
-	}
+	}*/
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
@@ -97,7 +97,7 @@ void Kirby::GameInit()
 	CreateLevel<EndingStory>("EndingStory");
 	CreateLevel<EndingLevel>("Ending");
 
-	ChangeLevel("BeforeTitle");
+	ChangeLevel("Level1_2");
 
 }
 
