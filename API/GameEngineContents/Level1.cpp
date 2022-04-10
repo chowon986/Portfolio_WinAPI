@@ -136,7 +136,7 @@ void Level1::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(/*205.0*/4100.0f, /*436.0*/200.0f));
+		Player_->SetPosition(float4(205.0, 436.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 	}
 

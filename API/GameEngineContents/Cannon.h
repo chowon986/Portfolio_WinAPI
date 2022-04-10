@@ -18,5 +18,6 @@ protected:
 	void LevelChangeStart() override;
 
 private:
+	GameEngineRenderer* CanRenderer_;
 };
 

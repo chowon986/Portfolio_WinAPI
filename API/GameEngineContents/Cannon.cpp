@@ -9,6 +9,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 Cannon::Cannon()
 {
@@ -30,6 +31,7 @@ void Cannon::Update()
 	{
 		GameEngine::GetInst().ChangeLevel("DanceStage");
 	}
+
 }
 
 void Cannon::LevelChangeStart()
@@ -41,11 +43,10 @@ void Cannon::LevelChangeStart()
 
 	{
 		Background* Can = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* CanRenderer = Can->CreateRenderer("can.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
-		GameEngineImage* CanImage = CanRenderer->GetImage();
+		CanRenderer_ = Can->CreateRenderer("can.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
+		GameEngineImage* CanImage = CanRenderer_->GetImage();
 		CanImage->CutCount(4, 2);
-		CanRenderer->CreateAnimation("can.bmp", "Can", 0, 7, 0.05f, true);
-		CanRenderer->ChangeAnimation("Can");
+		CanRenderer_->CreateAnimation("can.bmp", "Can", 0, 7, 0.1f, false);
+		CanRenderer_->ChangeAnimation("Can");
 	}
-
 }

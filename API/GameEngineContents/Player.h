@@ -13,6 +13,23 @@ enum class KirbyClass
 	BEAM,
 };
 
+enum class KirbyState
+{
+	IDLE,
+	WALK,
+	RUN,
+	FLY,
+	FLYSTAY,
+	FLYATTACK,
+	ATTACK,
+	DIE,
+	Up,
+	Down,
+	HOVER,
+	INHALE,
+	EAT,
+	JUMP,
+};
 
 class GameEngineImage;
 class GameEngineRenderer;
@@ -51,10 +68,12 @@ private:
 	GameEngineLevel* Level_;
 	Player* Player_;
 	KirbyClass KirbyClass_;
-	CharacterState PrevState_;
+	KirbyState KirbyState_;
+	std::string Dir_;
 
-	void SetPrevState(CharacterState _PrevState);
-	CharacterState GetPrevState();
+	void SetState(KirbyState _PrevState);
+	void SetSpeed(float _Speed) { Speed_ = _Speed; }
+	KirbyState GetState();
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
 	KirbyClass GetKirbyClass();
@@ -63,20 +82,18 @@ private:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void UpdateMove();
-	void UpdateJump();
-	void UpdateFly();
 	void CorrectPos();
 
 	void CheckCollision();
 
 	void UpdateAnimation();
+	void StateUpdate();
 
-	virtual float GetSpeed() override;
+	//virtual float GetSpeed() override;
 	virtual bool CanWalk() override;
 	virtual bool CanRun() override;
 	virtual bool CanJump() override;
-	
+
 	bool CanFly();
 	bool CanInhale();
 	bool CanHover();
@@ -96,6 +113,21 @@ private:
 	void Eat();
 	void Fly();
 	void Inhale();
-	
-};
 
+
+
+	void UpdateIdle();
+	void UpdateWalk();
+	void UpdateRun();
+	void UpdateFly();
+	void UpdateFlyStay();
+	void UpdateFlyAttack();
+	void UpdateAttack();
+	void UpdateDie();
+	void UpdateUp();
+	void UpdateDown();
+	void UpdateHover();
+	void UpdateInhale();
+	void UpdateEat();
+	void UpdateJump();
+};
