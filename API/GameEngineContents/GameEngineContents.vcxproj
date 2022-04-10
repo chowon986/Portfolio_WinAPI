@@ -311,6 +311,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Level1_3.cpp" />
+    <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="Sparky.cpp" />
     <ClCompile Include="Spinni.cpp" />
     <ClCompile Include="Storo.cpp" />

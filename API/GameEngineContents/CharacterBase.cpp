@@ -4,7 +4,7 @@
 CharacterBase::CharacterBase()
 	: HP_(0)
 	, Speed_(100)
-	, State_(CharacterState::IDLE) // enum class 荤侩 规过
+	//, State_(CharacterState::IDLE) // enum class 荤侩 规过
 	, JumpMaxHeight_(10)
 	, JumpHeight_(50)
 	, JumpDirection_({0, 0})

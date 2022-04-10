@@ -13,6 +13,21 @@ enum class KirbyClass
 	BEAM,
 };
 
+enum class KirbyState
+{
+	IDLE,
+	WALK,
+	RUN,
+	FLY,
+	ATTACK,
+	DIE,
+	Up,
+	Down,
+	HOVER,
+	INHALE,
+	EAT,
+};
+
 
 class GameEngineImage;
 class GameEngineRenderer;
@@ -51,10 +66,11 @@ private:
 	GameEngineLevel* Level_;
 	Player* Player_;
 	KirbyClass KirbyClass_;
-	CharacterState PrevState_;
+	KirbyState KirbyState_;
+	std::string Dir_;
 
-	void SetPrevState(CharacterState _PrevState);
-	CharacterState GetPrevState();
+	void SetState(KirbyState _PrevState);
+	KirbyState GetState();
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
 	KirbyClass GetKirbyClass();
@@ -71,8 +87,10 @@ private:
 	void CheckCollision();
 
 	void UpdateAnimation();
+	void StateUpdate();
+	void UpdateIdle();
 
-	virtual float GetSpeed() override;
+	//virtual float GetSpeed() override;
 	virtual bool CanWalk() override;
 	virtual bool CanRun() override;
 	virtual bool CanJump() override;

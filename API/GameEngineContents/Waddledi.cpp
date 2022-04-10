@@ -20,7 +20,7 @@ void Waddledi::Start()
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
 	SetHP(1);
-	SetState(CharacterState::WALK);
+	//SetState(CharacterState::WALK);
 	WaddlediRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* WaddlediImage = WaddlediRenderer_->GetImage();
 	WaddlediImage->CutCount(10, 26);
