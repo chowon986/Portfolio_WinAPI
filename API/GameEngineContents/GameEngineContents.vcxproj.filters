@@ -479,7 +479,11 @@
       <Filter>Play\Obstruction</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
+<<<<<<< HEAD
       <Filter>Play</Filter>
+=======
+      <Filter>Play\Character</Filter>
+>>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
     </ClCompile>
   </ItemGroup>
 </Project>

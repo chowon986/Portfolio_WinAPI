@@ -19,7 +19,7 @@ void Animal::Start()
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
 
-	SetState(CharacterState::WALK);
+	//SetState(CharacterState::WALK);
 	AnimalRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* AnimalImage = AnimalRenderer_->GetImage();
 	AnimalImage->CutCount(10, 26);

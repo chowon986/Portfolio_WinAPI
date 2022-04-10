@@ -19,8 +19,11 @@ enum class KirbyState
 	WALK,
 	RUN,
 	FLY,
+<<<<<<< HEAD
 	FLYSTAY,
 	FLYATTACK,
+=======
+>>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 	ATTACK,
 	DIE,
 	Up,
@@ -28,8 +31,13 @@ enum class KirbyState
 	HOVER,
 	INHALE,
 	EAT,
+<<<<<<< HEAD
 	JUMP,
 };
+=======
+};
+
+>>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
 class GameEngineImage;
 class GameEngineRenderer;
@@ -72,7 +80,10 @@ private:
 	std::string Dir_;
 
 	void SetState(KirbyState _PrevState);
+<<<<<<< HEAD
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
+=======
+>>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 	KirbyState GetState();
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
@@ -88,6 +99,10 @@ private:
 
 	void UpdateAnimation();
 	void StateUpdate();
+<<<<<<< HEAD
+=======
+	void UpdateIdle();
+>>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
 	//virtual float GetSpeed() override;
 	virtual bool CanWalk() override;

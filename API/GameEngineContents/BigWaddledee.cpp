@@ -20,7 +20,7 @@ void BigWaddledee::Start()
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
 
-	SetState(CharacterState::WALK);
+	//SetState(::WALK);
 	BigWaddledeeRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* BigWaddledeeImage = BigWaddledeeRenderer_->GetImage();
 	BigWaddledeeImage->CutCount(10, 26);

@@ -16,6 +16,7 @@ void Player::UpdateIdle()
 
 }
 
+<<<<<<< HEAD
 void Player::UpdateWalk()
 {
     float4 direction = float4::ZERO;
@@ -119,3 +120,5 @@ void Player::UpdateJump()
     float JumpHeight = JumpHeight_ - AccGravity_;
     SetMove(float4(0, -JumpHeight));
 }
+=======
+>>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf

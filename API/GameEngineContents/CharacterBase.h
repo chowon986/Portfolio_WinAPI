@@ -1,20 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
-enum class CharacterState
-{
-	IDLE,
-	WALK,
-	RUN,
-	FLY,
-	ATTACK,
-	DIE,
-	Up,
-	Down,
-	HOVER,
-	INHALE,
-	EAT,
-};
 
 class CharacterBase : public GameEngineActor
 {
@@ -24,7 +10,6 @@ private:
 	float JumpMaxHeight_;
 	float JumpHeight_;
 	float4 JumpDirection_;
-	CharacterState State_;
 
 protected:
 	CharacterBase();
@@ -39,7 +24,6 @@ protected:
 
 public:
 	virtual void SetHP(int _HP) { HP_ = _HP; }
-	void SetState(CharacterState _State) { State_ = _State; }
 	void SetJumpHeight(float _JumpHeight) { JumpHeight_ = _JumpHeight; }
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
 	void SetJumpDirection(float4 _JumpDirection)
@@ -52,7 +36,6 @@ public:
 
 	int GetHP() { return HP_; }
 	virtual float GetSpeed() { return Speed_; }
-	CharacterState GetState() { return State_; }
 	float GetJumpHeight() { return JumpHeight_; }
 	float GetJumpMaxHeight() { return JumpMaxHeight_; }
 	float4 GetJumpDirection() { return JumpDirection_; }

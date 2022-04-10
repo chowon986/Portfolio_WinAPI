@@ -20,7 +20,7 @@ void BigBomb::Start()
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
 
-	SetState(CharacterState::WALK);
+	//SetState(CharacterState::WALK);
 	BigBombRenderer_ = CreateRenderer("monster0.bmp");
 	GameEngineImage* BigBombImage = BigBombRenderer_->GetImage();
 	BigBombImage->CutCount(10, 26);
