@@ -40,64 +40,64 @@ Kirby::~Kirby()
 
 void Kirby::GameInit()
 {
-	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 0, 0 }, { 768, 576 });
-	
-	{
-		GameEngineDirectory ResourcesDir;
-		ResourcesDir.MoveParent("API");
-		ResourcesDir.Move("Resources");
+    GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 0, 0 }, { 768, 576 });
 
-		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+    {
+        GameEngineDirectory ResourcesDir;
+        ResourcesDir.MoveParent("API");
+        ResourcesDir.Move("Resources");
 
-		for (size_t i = 0; i < AllImageFileList.size(); i++)
-		{
-			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
-		}
-	}
+        std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
-	/*{
-		GameEngineDirectory ResourcesDir;
-		ResourcesDir.MoveParent("API");
-		ResourcesDir.Move("Resources");
-		ResourcesDir.Move("Sound");
+        for (size_t i = 0; i < AllImageFileList.size(); i++)
+        {
+            GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+        }
+    }
 
-		std::vector<GameEngineFile> AllSoundFileList = ResourcesDir.GetAllFile();
+    //{
+    //   GameEngineDirectory ResourcesDir;
+    //   ResourcesDir.MoveParent("API");
+    //   ResourcesDir.Move("Resources");
+    //   ResourcesDir.Move("Sound");
 
-		for (size_t i = 0; i < AllSoundFileList.size(); i++)
-		{
-			GameEngineSound::LoadRes(AllSoundFileList[i].GetFullPath());
-		}
-	}*/
+    //   std::vector<GameEngineFile> AllSoundFileList = ResourcesDir.GetAllFile();
+
+    //   for (size_t i = 0; i < AllSoundFileList.size(); i++)
+    //   {
+    //      GameEngineSound::LoadRes(AllSoundFileList[i].GetFullPath());
+    //   }
+    //}
 
 
-	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
-	{
-		GameEngineInput::GetInst()->CreateKey("LevelChange", VK_RETURN);
-	}
+    if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
+    {
+        GameEngineInput::GetInst()->CreateKey("LevelChange", VK_RETURN);
+    }
 
-	CreateLevel<BeforeTitleLevel>("BeforeTitle");
-	CreateLevel<TitleLevel>("Title");
-	CreateLevel<IntroStory>("IntroStory");
-	CreateLevel<Level1>("Level1");
-	CreateLevel<Level1_2>("Level1_2");
-	CreateLevel<Level1_3>("Level1_3");
-	CreateLevel<Level1_4>("Level1_4");
-	CreateLevel<Cannon>("Cannon");
-	CreateLevel<DanceStage>("DanceStage");
-	CreateLevel<WorldMap>("WorldMap");
-	CreateLevel<Level2>("Level2");
-	CreateLevel<Level2_2>("Level2_2");
-	CreateLevel<Level2_3>("Level2_3");
-	CreateLevel<Level2_4>("Level2_4");
-	CreateLevel<Level3>("Level3");
-	CreateLevel<Level3_2>("Level3_2");
-	CreateLevel<Level3_3>("Level3_3");
-	CreateLevel<Level4>("Level4");
-	CreateLevel<Boss>("Boss");
-	CreateLevel<EndingStory>("EndingStory");
-	CreateLevel<EndingLevel>("Ending");
+    CreateLevel<BeforeTitleLevel>("BeforeTitle");
+    CreateLevel<TitleLevel>("Title");
+    CreateLevel<IntroStory>("IntroStory");
+    CreateLevel<Level1>("Level1");
+    CreateLevel<Level1_2>("Level1_2");
+    CreateLevel<Level1_3>("Level1_3");
+    CreateLevel<Level1_4>("Level1_4");
+    CreateLevel<Cannon>("Cannon");
+    CreateLevel<DanceStage>("DanceStage");
+    CreateLevel<WorldMap>("WorldMap");
+    CreateLevel<Level2>("Level2");
+    CreateLevel<Level2_2>("Level2_2");
+    CreateLevel<Level2_3>("Level2_3");
+    CreateLevel<Level2_4>("Level2_4");
+    CreateLevel<Level3>("Level3");
+    CreateLevel<Level3_2>("Level3_2");
+    CreateLevel<Level3_3>("Level3_3");
+    CreateLevel<Level4>("Level4");
+    CreateLevel<Boss>("Boss");
+    CreateLevel<EndingStory>("EndingStory");
+    CreateLevel<EndingLevel>("Ending");
 
-	ChangeLevel("Level1");
+    ChangeLevel("Level1");
 
 }
 

@@ -16,7 +16,6 @@ void Player::UpdateIdle()
 
 }
 
-<<<<<<< HEAD
 void Player::UpdateWalk()
 {
     float4 direction = float4::ZERO;
@@ -74,7 +73,6 @@ void Player::UpdateFlyAttack()
 {
     SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_ * AccGravity_);
 }
-
 void Player::UpdateAttack()
 {
 }
@@ -120,5 +118,3 @@ void Player::UpdateJump()
     float JumpHeight = JumpHeight_ - AccGravity_;
     SetMove(float4(0, -JumpHeight));
 }
-=======
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf

@@ -61,6 +61,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::FLY: // press 'x'
         Renderer_->ChangeAnimation("Fly" + Dir_);
         StateUpdate();
+
         break;
     case KirbyState::FLYSTAY:
         Renderer_->ChangeAnimation("FlyStay" + Dir_);
@@ -69,7 +70,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::FLYATTACK:
         Renderer_->ChangeAnimation("FlyAttack" + Dir_);
         StateUpdate();
-
+        break;
     case KirbyState::ATTACK:
         Renderer_->ChangeAnimation("ATTACK" + Dir_);
         break;
@@ -102,57 +103,8 @@ void Player::SetState(KirbyState _KirbyState)
 
 }
 
-void Player::SetState(KirbyState _KirbyState)
-{
-	KirbyState_ = _KirbyState;
-	switch (KirbyState_)
-	{
-	case KirbyState::IDLE:
-		Renderer_->ChangeAnimation("Idle"+ Dir_);
-		break;
-	case KirbyState::WALK:
-		Renderer_->ChangeAnimation("Walk" + Dir_);
-		break;
-	case KirbyState::RUN:
-		Renderer_->ChangeAnimation("Run" + Dir_);
-		break;
-	case KirbyState::FLY:
-		Renderer_->ChangeAnimation("Fly" + Dir_);
-		break;
-	case KirbyState::ATTACK:
-		Renderer_->ChangeAnimation("ATTACK" + Dir_);
-		break;
-	case KirbyState::DIE:
-		Renderer_->ChangeAnimation("DIE" + Dir_);
-		break;
-	case KirbyState::Up:
-		Renderer_->ChangeAnimation("Up" + Dir_);
-
-		break;
-	case KirbyState::Down:
-		Renderer_->ChangeAnimation("Down" + Dir_);
-
-		break;
-	case KirbyState::HOVER:
-		Renderer_->ChangeAnimation("HOVER" + Dir_);
-
-		break;
-	case KirbyState::INHALE:
-		Renderer_->ChangeAnimation("INHALE" + Dir_);
-
-		break;
-	case KirbyState::EAT:
-		Renderer_->ChangeAnimation("EAT" + Dir_);
-		break;
-	default:
-		break;
-	}
-
-}
-
 void Player::Start()
 {
-<<<<<<< HEAD
     Dir_ = "Right";
     Level_ = GetLevel();
     ColMapImage_ = Level_->GetColMapImage();
@@ -160,15 +112,6 @@ void Player::Start()
     Renderer_ = CreateRenderer("Normal.bmp");
     SetHPCount(2);
     SetHP(9);
-=======
-	Dir_ = "Right";
-	Level_ = GetLevel();
-	ColMapImage_ = Level_->GetColMapImage();
-	KirbyCol_ = CreateCollision("KirbyCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
-	Renderer_ = CreateRenderer("Normal.bmp");
-	SetHPCount(2);
-	SetHP(9);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
     GameEngineImage* Image = Renderer_->GetImage();
     Image->CutCount(10, 19);
@@ -181,30 +124,14 @@ void Player::Start()
     Renderer_->CreateAnimation("Normal.bmp", "IdleRight", 0, 0, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "IdleLeft", 92, 92, 0.1f, true);
 
-<<<<<<< HEAD
     Renderer_->CreateAnimation("Normal.bmp", "FlyRight", 64, 69, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "FlyLeft", 156, 161, 0.1f, true);
-=======
-	Renderer_->CreateAnimation("Normal.bmp", "INHALERight", 64, 69, 0.1f, true);
-	Renderer_->CreateAnimation("Normal.bmp", "HoverStartLeft", 156, 161, 0.1f, true);
-	
-	Renderer_->CreateAnimation("Normal.bmp", "HoveringRight", 70, 75, 0.1f, true);
-	Renderer_->CreateAnimation("Normal.bmp", "HoveringLeft", 162, 167, 0.1f, true);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
     Renderer_->CreateAnimation("Normal.bmp", "FlyStayRight", 70, 75, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "AttackRight", 18, 18, 0.3f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "AttackLeft", 110, 110, 0.1f, true);
-
-<<<<<<< HEAD
     Renderer_->CreateAnimation("Normal.bmp", "HoverEndRight", 85, 88, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "HoverEndLeft", 177, 180, 0.1f, true);
-=======
-	Renderer_->CreateAnimation("Normal.bmp", "EATRight", 76, 78, 0.1f, true); 
-	Renderer_->CreateAnimation("Normal.bmp", "EATLeft", 168, 178, 0.1f, true); 
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
     Renderer_->CreateAnimation("Normal.bmp", "HoverEnd2Right", 89, 90, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "HoverEnd2Left", 181, 182, 0.1f, true);
@@ -218,31 +145,18 @@ void Player::Start()
     Renderer_->CreateAnimation("Normal.bmp", "WalkWzMonsterRight", 2, 17, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "WalkWzMonsterLeft", 94, 109, 0.1f, true);
 
-<<<<<<< HEAD
+    Renderer_->CreateAnimation("Normal.bmp", "AttackRight", 18, 18, 0.3f, true);
+    Renderer_->CreateAnimation("Normal.bmp", "AttackLeft", 110, 110, 0.1f, true);
+
     Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 93, 93, 0.1f, true);
-=======
-	Renderer_->CreateAnimation("Normal.bmp", "JUMPRight", 38, 38, 0.1f, true);
-	Renderer_->CreateAnimation("Normal.bmp", "JUMPLeft", 38, 38, 0.1f, true);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
     Renderer_->CreateAnimation("Normal.bmp", "JumpRight", 38, 38, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "JumpLeft", 38, 38, 0.1f, true);
 
-<<<<<<< HEAD
     Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.1f, true);
     Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 39, 44, 0.1f, true);
-=======
 
-	AttackEffectRenderer_ = CreateRenderer("Attack.bmp"	,static_cast<int>(EngineMax::RENDERORDERMAX),RenderPivot::CENTER,float4(100.0f,0.0f));
-	GameEngineImage* Attack_ = AttackEffectRenderer_->GetImage();
-	Attack_->CutCount(7, 2);
-	AttackEffectRenderer_->CreateAnimation("Attack.bmp", "Attack", 0, 12, 0.1f, false);
-	AttackEffectCol_ = CreateCollision("KirbyEffect", float4(40.0f, 40.0f), float4(100.0f, -20.0f)); // HoverKirbyEnd2가 바닥에 닿아 끝나면
-	//AttackEffectRenderer_->CreateAnimation("AttackEffect.bmp", "AttackEffect", 0, 12, 0.1f, false);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
-
-	SetState(KirbyState::IDLE);
 
     //AttackEffectRenderer_ = CreateRenderer("Attack.bmp"   ,static_cast<int>(EngineMax::RENDERORDERMAX),RenderPivot::CENTER,float4(100.0f,0.0f));
     //GameEngineImage* Attack_ = AttackEffectRenderer_->GetImage();
@@ -271,9 +185,7 @@ void Player::Start()
 
 void Player::Update()
 {
-<<<<<<< HEAD
     SetSpeed(20);
-    AccGravity_ = Gravity_ * GameEngineTime::GetDeltaTime() * Speed_;
     float4 direction = float4::ZERO;
     if (true == GameEngineInput::GetInst()->IsPress("WalkLeft"))
     {
@@ -338,72 +250,16 @@ void Player::Update()
 
     //// 애니메이션 처리
     //UpdateAnimation();
-=======
-	//Time_ += GameEngineTime::GetDeltaTime();
-
-	//SetPrevState(GetState());
-	//PrevPos_ = GetPosition();
-	//SetState(CharacterState::IDLE);
-
-	//if (true == CanRun())
-	//{
-	//	Run();
-	//}
-	//else if (true == CanWalk())
-	//{
-	//	Walk();
-	//}
-	//if (true == CanJump()) // Shift
-	//{
-	//	Jump();
-	//}
-	//if (true == CanMoveUp())
-	//{
-	//	MoveUp();
-	//}
-	//if (true == CanMoveDown())
-	//{
-	//	MoveDown();
-	//}
-	//if (true == CanHover()) 
-	//{
-	//	Hover();
-	//}
-	//if (true == CanEat())
-	//{
-	//	Eat();
-	//}
-	//
-	//// 위치 처리
-	//UpdateMove();
-	//UpdateJump();
-	//UpdateFly();
-	//CorrectPos();
-
-	//// 충돌 처리
-	//CheckCollision();
-
-	//// 애니메이션 처리
-	//UpdateAnimation();
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 // 시간 확인
 void Player::Render()
 {
-<<<<<<< HEAD
     //   float Time_ = GameEngineTime::GetDeltaTime();
     //   Time_ += Time_;
     //   std::string Text = std::to_string(Time_);
     //
     //   TextOutA(GameEngine::BackBufferImage()->ImageDC(), 0, 0, Text.c_str(), Text.size());
-=======
-//	float Time_ = GameEngineTime::GetDeltaTime();
-//	Time_ += Time_;
-//	std::string Text = std::to_string(Time_);
-//
-//	TextOutA(GameEngine::BackBufferImage()->ImageDC(), 0, 0, Text.c_str(), Text.size());
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 //
 //void Player::UpdateMove()
@@ -423,7 +279,6 @@ void Player::Render()
 //   //SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 //}
 
-<<<<<<< HEAD
 //void Player::UpdateJump()
 //{
 //   //AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
@@ -504,84 +359,10 @@ void Player::CorrectPos()
     //{
     //   SetPosition(float4(CurrentPos.x, 50));
     //}
-=======
-void Player::UpdateMove()
-{
-	//CharacterState State = GetState();
-	//float4 direction = float4::ZERO;
-	//if (true == GameEngineInput::GetInst()->IsPress("MoveLeft") ||
-	//	true == GameEngineInput::GetInst()->IsPress("RunLeft"))
-	//{
-	//	direction = float4::LEFT;
-	//}
-	//else if (true == GameEngineInput::GetInst()->IsPress("MoveRight") ||
-	//	     true == GameEngineInput::GetInst()->IsPress("RunRight"))
-	//{
-	//	direction = float4::RIGHT;
-	//}
-	//SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
-}
-
-void Player::UpdateJump()
-{
-	//AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
-	//float JumpHeight = JumpHeight_ - AccGravity_;
-	//SetMove(float4(0, -JumpHeight));
-}
-
-void Player::UpdateFly()
-{
-	//CharacterState State = GetState();
-	//if (State == CharacterState::HOVER)
-	//{
-	//	if (true == Renderer_->IsAnimationName("HoveringRight"))
-	//	{
-	//		SetMove(float4::UP * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
-	//		AccGravity_ = 0;
-	//		JumpHeight_ = 0;
-	//	}
-	//}
-}
-
-void Player::CorrectPos()
-{
-	//float4 CurrentPos = GetPosition();
-	//float4 JumpDirection = PrevPos_ - GetPosition();
-	//float JumpDirectionX = JumpDirection.x > 0 ? float4::RIGHT.x : float4::LEFT.x;
-	//float JumpDirectionY = JumpDirection.y > 0 ? float4::DOWN.y : float4::UP.y;
- //	while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y))
-	//{
-	//	SetMove(float4(0, JumpDirectionY));
-	//	AccGravity_ = 0;
-	//	JumpHeight_ = 0;
-	//}
-
-	//while ((RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y) && RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y - 40))
-	//	|| (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y) && RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y - 40)))
-	//{
-	//	SetMove(float4(JumpDirectionX, 0));
-	//}
-
-	//if (CurrentPos.x < 0)
-	//{
-	//	SetPosition(float4(0, CurrentPos.y));
-	//}
-
-	//if (CurrentPos.x > GetLevel()->GetMapSizeX())
-	//{
-	//	SetPosition(float4(GetLevel()->GetMapSizeX(), CurrentPos.y));
-	//}
-
-	//if (CurrentPos.y < 50)
-	//{
-	//	SetPosition(float4(CurrentPos.x, 50));
-	//}
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::CheckCollision()
 {
-<<<<<<< HEAD
     //if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
     //{
     //   GameEngine::GetInst().ChangeLevel("Level1_2");
@@ -639,70 +420,10 @@ void Player::CheckCollision()
     //{
     //   AttackEffectRenderer_->SetScale(float4(0.0f, 0.0f));
     //}
-=======
-	//if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Level1_2");
-	//}
-
-	//if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Level1_3");
-	//}
-
-	//if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Level1_4");
-	//}
-
-	//if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Cannon");
-	//}
-
-	//if (true == KirbyCol_->CollisionCheck("DorrCol2_2", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Level2_2");
-	//}
-
-	//if (true == KirbyCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect) && Time_ >= 3)
-	//{
-	//	Time_ = 0;
-	//	SetHP(GetHP() - 1);
-	//}
-
-	//if (GetState() == CharacterState::HOVER)
-	//{
-	//	// Attack colliison chk
-	//	// AttackEffectRenderer_->SetImageScale();
-	//	std::vector <GameEngineCollision*> ColResult;
-	//	if (true == AttackEffectCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
-	//	{
-	//		for (GameEngineCollision* Collision : ColResult)
-	//		{
-	//			GameEngineActor* Actor = Collision->GetActor(); // 충돌한 actor 가져오기
-	//			Monster* Monster_ = dynamic_cast<Monster*>(Actor); // monster 맞는지 dynamic_cast로 chk
-	//			if (nullptr != Monster_) // monster면
-	//			{
-	//				AttackEffectRenderer_->ChangeAnimation("Attack");
-	//				float4 Position;
-	//				Position.x = Monster_->GetPosition().x - 5;
-	//				Position.y = Monster_->GetPosition().y;
-	//				Monster_->SetPosition(Position);
-	//			}
-	//		}
-	//	}
-	//}
-	//else
-	//{
-	//	AttackEffectRenderer_->SetScale(float4(0.0f, 0.0f));
-	//}
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::UpdateAnimation()
 {
-<<<<<<< HEAD
     //CharacterState State = GetState();
     //CharacterState PrevState = GetPrevState();
     //float4 Direction = PrevPos_ - GetPosition();
@@ -849,168 +570,16 @@ void Player::StateUpdate()
     default:
         break;
     }
-=======
-	//CharacterState State = GetState();
-	//CharacterState PrevState = GetPrevState();
-	//float4 Direction = PrevPos_ - GetPosition();
-
-	//if (State == CharacterState::HOVER)
-	//{
-	//	if (PrevState != CharacterState::HOVER) // hover가 아니였다가 hover가 됐을 때
-	//	{
-	//		Renderer_->ChangeAnimation("Inhale"); // 빨아들이기
-	//	}
-	//	else if (Renderer_->IsAnimationName("Inhale") && 
-	//		Renderer_->IsEndAnimation())
-	//	{
-	//		Renderer_->ChangeAnimation("HoveringRight");
-	//	}
-	//}
-	//else if (0 != AccGravity_)
-	//{
-	//	if (Direction.y < 0)
-	//	{
-	//		if (PrevState == CharacterState::HOVER && State != CharacterState::HOVER)
-	//		{
-	//			Renderer_->ChangeAnimation("AttackRight");
-	//			//AttackEffectRenderer_->ChangeAnimation("Attack");// 떨어지는 동작 1
-	//		}
-	//		else if (true == Renderer_->IsAnimationName("AttackRight"))
-	//		{
-	//			if (true == Renderer_->IsEndAnimation())
-	//			{
-	//				//Renderer_->ChangeAnimation("HoverEndRight");
-	//				Renderer_->ChangeAnimation("HoverEnd2Right");
-	//			}
-	//		}
-	//		else
-	//		{
-	//			if (false == Renderer_->IsAnimationName("HoverEnd2Right"))
-	//			{
-	//				Renderer_->ChangeAnimation("JumpingRight");
-	//			}
-	//			else if (true == Renderer_->IsAnimationName("JumpingRight") &&
-	//				true == Renderer_->IsEndAnimation())
-	//			{
-	//				//Renderer_->ChangeAnimation("HoverEndRight");
-	//				Renderer_->ChangeAnimation("HoverEnd2Right");
-	//			}
-	//		}
-
-	//	}
-	//	else
-	//	{
-	//		if (GetState() != CharacterState::HOVER)
-	//		{
-	//			Renderer_->ChangeAnimation("JumpRight");
-	//		}
-	//	}
-	//}
-	//else if (State == CharacterState::WALK)
-	//{
-	//	if (PrevState != CharacterState::WALK)
-	//	{
-	//		Renderer_->ChangeAnimation("WalkRight");
-	//	}
-	//}
-	//else if (State == CharacterState::RUN)
-	//{
-	//	if (PrevState != CharacterState::RUN)
-	//	{
-	//		Renderer_->ChangeAnimation("RunRight");
-	//	}
-	//}
-	//else if (State == CharacterState::IDLE)
-	//{
-	//	Renderer_->ChangeAnimation("IdleRight");
-	//}
-	//
-	//switch (State)B
-	//{
-	//case CharacterState::INHALE:
-	//	Renderer_->ChangeAnimation("Inhale");
-	//	if (true == Renderer_->IsEndAnimation())
-	//	{
-	//		// 돼지 되기
-	//	}
-	//	break;
-	//case CharacterState::EAT:
-	//	Renderer_->ChangeAnimation("HoverStartRight");
-	//	if (true == Renderer_->IsEndAnimation())
-	//	{
-	//		Renderer_->ChangeAnimation("EatingRight");
-	//		if (true == Renderer_->IsEndAnimation())
-	//		{
-	//			Renderer_->ChangeAnimation("IdleWzMonsterRight"); // 이제부터 걸을때도 볼 부풀린채로
-	//			Renderer_->ChangeAnimation("AttackRight"); // 별쏘기
-	//			//AttackEffectRenderer_->ChangeAnimation("AttackEffect");
-	//		}
-	//	}
-	//	break;
-	//}
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
-}
-
-void Player::StateUpdate()
-{
-	switch (KirbyState_)
-	{
-	case KirbyState::IDLE:
-		UpdateIdle();
-		break;
-	case KirbyState::WALK:
-
-		break;
-	case KirbyState::RUN:
-
-		break;
-	case KirbyState::FLY:
-
-		break;
-	case KirbyState::ATTACK:
-
-		break;
-	case KirbyState::DIE:
-
-		break;
-	case KirbyState::Up:
-
-
-		break;
-	case KirbyState::Down:
-
-
-		break;
-	case KirbyState::HOVER:
-
-
-		break;
-	case KirbyState::INHALE:
-
-
-		break;
-	case KirbyState::EAT:
-
-		break;
-	default:
-		break;
-	}
 }
 
 bool Player::CanMoveUp()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("MoveUp");
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("MoveUp");
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanMoveDown()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("MoveDown");
     return true;
 }
@@ -1021,161 +590,78 @@ bool Player::CanWalk()
     //   || GameEngineInput::GetInst()->IsPress("MoveRight");
 
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("MoveDown");
-	return true;
-}
-
-//float Player::GetSpeed()
-//{
-//	//switch (GetState())
-//	//{
-//	//case CharacterState::RUN:
-//	//	return CharacterBase::GetSpeed() * 2;
-//	//default:
-//	//	return CharacterBase::GetSpeed();
-//	//}
-//
-//}
-
-bool Player::CanWalk()
-{
-	//return GameEngineInput::GetInst()->IsPress("MoveLeft")
-	//	|| GameEngineInput::GetInst()->IsPress("MoveRight");
-
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanRun()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("RunLeft")
     //   || GameEngineInput::GetInst()->IsPress("RunRight");
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("RunLeft")
-	//	|| GameEngineInput::GetInst()->IsPress("RunRight");
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanJump() //"Jump", VK_LSHIFT
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsUp("Jump");
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsUp("Jump");
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanFly()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("Fly");
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("Fly");
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanInhale()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("Inhale");
 
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("Inhale");
-
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanHover()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("Hover")
     //   && GetState() != CharacterState::RUN;
 
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("Hover")
-	//	&& GetState() != CharacterState::RUN;
-
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CanEat()
 {
-<<<<<<< HEAD
     //return GameEngineInput::GetInst()->IsPress("Eat")
     //   && GetState() != CharacterState::WALK
     //   && GetState() != CharacterState::RUN;
 
     return true;
-=======
-	//return GameEngineInput::GetInst()->IsPress("Eat")
-	//	&& GetState() != CharacterState::WALK
-	//	&& GetState() != CharacterState::RUN;
-
-	return true;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::Walk()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::WALK);
-=======
-	//SetState(CharacterState::WALK);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::Run()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::RUN);
-=======
-	//SetState(CharacterState::RUN);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::Jump()
 {
-<<<<<<< HEAD
     //JumpHeight_ = 20;
-=======
-	//JumpHeight_ = 20;
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 
 }
 
 void Player::MoveUp()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::Up);
     //SetMove(float4::UP * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
-=======
-	//SetState(CharacterState::Up);
-	//SetMove(float4::UP * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 
 void Player::MoveDown()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::Down);
     //SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
-=======
-	//SetState(CharacterState::Down);
-	//SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 bool Player::CheckMapCollision()
@@ -1204,38 +690,21 @@ bool Player::CheckMapCollision()
 
 void Player::Hover()
 {
-<<<<<<< HEAD
     SetState(KirbyState::HOVER);
     StateUpdate();
-=======
-	//SetState(CharacterState::HOVER);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::Eat()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::EAT);
-=======
-	//SetState(CharacterState::EAT);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::Fly()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::FLY);
-=======
-	//SetState(CharacterState::FLY);
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
 }
 
 void Player::Inhale()
 {
-<<<<<<< HEAD
     //SetState(CharacterState::INHALE);
 }
-=======
-	//SetState(CharacterState::INHALE);
-}
->>>>>>> 511e3aca4c74297466569a3d33a10aee0607f3cf
