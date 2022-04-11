@@ -111,10 +111,6 @@ void Player::UpdateEat()
 
 void Player::UpdateJump()
 {
-    float4 JumpDirection = PrevPos_ - GetPosition();
-    float JumpDirectionX = JumpDirection.x > 0 ? float4::RIGHT.x : float4::LEFT.x;
-    float JumpDirectionY = JumpDirection.y > 0 ? float4::DOWN.y : float4::UP.y;
-    AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
-    float JumpHeight = JumpHeight_ - AccGravity_;
-    SetMove(float4(0, -JumpHeight));
-}
+    JumpHeight_ = 5;
+    AccGravity_ = 0;
+} 

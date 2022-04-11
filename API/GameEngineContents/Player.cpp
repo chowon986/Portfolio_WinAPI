@@ -19,9 +19,9 @@
 
 Player::Player()
     : Renderer_(nullptr)
-    , Gravity_(20.8f)
+    , Gravity_(9.8f)
     , AccGravity_(0.0f)
-    , JumpHeight_(20.0f)
+    , JumpHeight_(0.0f)
     , Time_(3.0f)
     , Level_(nullptr)
     , HPCount_(0)
@@ -60,12 +60,9 @@ void Player::SetState(KirbyState _KirbyState)
         break;
     case KirbyState::FLY: // press 'x'
         Renderer_->ChangeAnimation("Fly" + Dir_);
-        StateUpdate();
-
         break;
     case KirbyState::FLYSTAY:
         Renderer_->ChangeAnimation("FlyStay" + Dir_);
-        StateUpdate();
         break;
     case KirbyState::FLYATTACK:
         Renderer_->ChangeAnimation("FlyAttack" + Dir_);
@@ -180,6 +177,7 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("RunRight", 'E');
         GameEngineInput::GetInst()->CreateKey("Inhale", 'Z'); // 흡입
         GameEngineInput::GetInst()->CreateKey("Fly", 'X'); // 날기
+        GameEngineInput::GetInst()->CreateKey("ResetPos", 'P'); // 날기
     }
 }
 
@@ -198,6 +196,8 @@ void Player::Update()
         StateUpdate();
     }
 
+    
+
     if (true == GameEngineInput::GetInst()->IsPress("RunLeft"))
     {
         SetState(KirbyState::RUN);
@@ -212,6 +212,7 @@ void Player::Update()
     if (true == GameEngineInput::GetInst()->IsPress("Fly"))
     {
         SetState(KirbyState::FLY);
+        StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
@@ -226,11 +227,32 @@ void Player::Update()
         StateUpdate();
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("Jump"))
+    if (true == GameEngineInput::GetInst()->IsUp("Jump") &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1))
     {
         SetState(KirbyState::JUMP);
         StateUpdate();
     }
+
+    if (true == GameEngineInput::GetInst()->IsPress("ResetPos"))
+    {
+        SetPosition(float4(205.0, 436.0f));
+        AccGravity_ = 0;
+    }
+
+    AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
+    float JumpHeight = JumpHeight_ - AccGravity_;
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y - JumpHeight))
+    {
+        AccGravity_ = 0;
+        JumpHeight_ = 0;
+    }
+    else
+    {
+        SetMove(float4(0, -JumpHeight));
+    }
+
+
 
     //Time_ += GameEngineTime::GetDeltaTime();
 
@@ -657,7 +679,6 @@ void Player::MoveUp()
     //SetMove(float4::UP * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
 }
 
-
 void Player::MoveDown()
 {
     //SetState(CharacterState::Down);
@@ -696,7 +717,7 @@ void Player::Hover()
 
 void Player::Eat()
 {
-    //SetState(CharacterState::EAT);
+    //SetState(CharacterState::EAT);ㅉ
 }
 
 void Player::Fly()
