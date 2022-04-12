@@ -112,11 +112,32 @@ void Player::UpdateEat()
 {
 }
 
-void Player::UpdateJump()
+void Player::UpdateJumpUp()
 {
-    JumpHeight_ = 10;
+    JumpHeight_ = 25;
     AccGravity_ = 0;
+    UpdateWalk();
 } 
+
+void Player::UpdateJumping()
+{
+    if (Renderer_->IsAnimationName("JumpingRight") && Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::JUMPDOWN);
+    }
+
+    if (Renderer_->IsAnimationName("JumpingLeft") && Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::JUMPDOWN);
+    }
+
+    UpdateWalk();
+}
+
+void Player::UpdateJumpDown()
+{
+    UpdateWalk();
+}
 
 void Player::UpdateSlide()
 {

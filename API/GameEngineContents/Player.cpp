@@ -37,11 +37,27 @@ Player::~Player()
 void Player::SetKirbyClass(KirbyClass _KirbyClass)
 {
     KirbyClass_ = _KirbyClass;
+    ClassUpdate();
 }
 
 KirbyClass Player::GetKirbyClass()
 {
-    return KirbyClass_;
+	return KirbyClass_;
+}
+
+void Player::ClassUpdate()
+{
+    switch (KirbyClass_)
+    {
+    case KirbyClass::SPARK:
+        Renderer_->SetScale(float4 (0.0f, 0.0f)); // Renderer_->Death(); 사용??
+        SparkKirbyRenderer_->SetImageScale();
+        break;
+    default:
+        Renderer_->SetImageScale();
+        SparkKirbyRenderer_->SetScale(float4(0.0f, 0.0f));
+        break;
+    }
 }
 
 void Player::SetState(KirbyState _KirbyState)
@@ -50,91 +66,241 @@ void Player::SetState(KirbyState _KirbyState)
     switch (KirbyState_)
     {
     case KirbyState::IDLE:
-        Renderer_->ChangeAnimation("Idle" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Idle" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Idle" + Dir_);
+        }
         break;
     case KirbyState::UP:
         // 사다리 타기 구현
         break;
     case KirbyState::DOWN:
-        Renderer_->ChangeAnimation("Down" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Down" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Down" + Dir_);
+        }
         break;
+
     case KirbyState::WALK:
-        Renderer_->ChangeAnimation("Walk" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Walk" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Walk" + Dir_);
+        }
         break;
+
     case KirbyState::RUN:
-        Renderer_->ChangeAnimation("Run" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+		SparkKirbyRenderer_->ChangeAnimation("Run" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Run" + Dir_);
+        }
         break;
 
 
     case KirbyState::FLY:
-        Renderer_->ChangeAnimation("Fly" + Dir_);
-        StateUpdate();
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Fly" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Fly" + Dir_);
+        }
         break;
     case KirbyState::FLYSTAY:
-        Renderer_->ChangeAnimation("FlyStay" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("FlyStay" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("FlyStay" + Dir_);
+        }
         break;
     case KirbyState::FLYATTACK:
-        Renderer_->ChangeAnimation("FlyAttack" + Dir_);
-        StateUpdate();
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("FlyAttack" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("FlyAttack" + Dir_);
+        }
         break;
+
     case KirbyState::FLYEND:
-        Renderer_->ChangeAnimation("FlyEnd" + Dir_);
-        StateUpdate();
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("FlyEnd" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("FlyEnd" + Dir_);
+        }
         break;
 
 
     case KirbyState::EATSTART:
-        Renderer_->ChangeAnimation("EatStart" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("EatStart" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("EatStart" + Dir_);
+        }
         break;
     case KirbyState::EAT:
-        Renderer_->ChangeAnimation("Eat" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Eat" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Eat" + Dir_);
+        }
         break;
     case KirbyState::EATEND:
-        Renderer_->ChangeAnimation("EatEnd" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("EatEnd" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("EatEnd" + Dir_);
+        }
         break;
 
 
     case KirbyState::STARATTACK:
-        Renderer_->ChangeAnimation("StarAttack" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("StarAttack" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("StarAttack" + Dir_);
+        }
         break;
     case KirbyState::TRANSFORM:
-		Renderer_->ChangeAnimation("Transform" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Transform" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Transform" + Dir_);
+        }
 		break;
 	case KirbyState::TRANSFORMEND:
-		Renderer_->ChangeAnimation("Transform" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("TransformEnd" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("TransformEnd" + Dir_);
+        }
 		break;
 
 
     case KirbyState::GETDAMAGE:
-        Renderer_->ChangeAnimation("GetDamage" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("GetDamage" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("GetDamage" + Dir_);
+        }
         break;
 
 
 
-    case KirbyState::JUMP:
+    case KirbyState::JUMPUP:
         PrevPos_ = GetPosition();
-        Renderer_->ChangeAnimation("Jump" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("JumpUp" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("JumpUp" + Dir_);
+        }
         break;
     case KirbyState::JUMPING:
-        PrevPos_ = GetPosition();
-        Renderer_->ChangeAnimation("Jumping" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Jumping" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Jumping" + Dir_);
+        }
         break;
+    case KirbyState::JUMPDOWN:
+        PrevPos_ = GetPosition();
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("JumpDown" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("JumpDown" + Dir_);
+        }
+        break;
+
+
 
     case KirbyState::SLIDE:
-        Renderer_->ChangeAnimation("Slide" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Slide" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Slide" + Dir_);
+        }
         break;
     case KirbyState::SLIDESTAY:
-        Renderer_->ChangeAnimation("SlideStay" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("SlideStay" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("SlideStay" + Dir_);
+        }
         break;
     case KirbyState::DIE:
-        Renderer_->ChangeAnimation("SlideStay" + Dir_);
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkKirbyRenderer_->ChangeAnimation("Die" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("Die" + Dir_);
+        }
         break;
-
-
     default:
         break;
     }
-
+    StateUpdate();
 }
 
 void Player::Start()
@@ -195,10 +361,12 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "TransformEndRight", 85, 85, 0.3f, true); // 변신 완료 동작
         Renderer_->CreateAnimation("Normal.bmp", "TransformEndAttackLeft", 177, 177, 0.1f, true);
 
-		Renderer_->CreateAnimation("Normal.bmp", "JumpRight", 38, 38, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpLeft", 130, 130, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 131, 137, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpUpRight", 38, 38, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 130, 130, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.05f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 131, 137, 0.05f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpDownRight", 45, 46, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpDownLeft", 138, 139, 0.1f, true);
 
         Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 93, 93, 0.1f, true);
@@ -218,57 +386,60 @@ void Player::Start()
 
     {
         // SparkKirby
-        //Renderer_ = CreateRenderer("SparkKirby.bmp");
-        //GameEngineImage* Image = Renderer_->GetImage();
-        //Image->CutCount(10, 23);
+        SparkKirbyRenderer_ = CreateRenderer("SparkKirby.bmp");
+        GameEngineImage* SparkImage = SparkKirbyRenderer_->GetImage();
+        SparkImage->CutCount(10, 23);
 
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkRight", 10, 16, 0.1f, true); // need chk img
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkLeft", 123, 129, 0.1f, true); // need chk img
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "RunRight", 28, 34, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "RunLeft", 141, 147, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleRight", 3, 3, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleLeft", 116, 116, 0.1f, true); // ok
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyRight", 64, 69, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyLeft", 156, 161, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyStayRight", 70, 75, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEndRight", 85, 88, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEndLeft", 177, 180, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Right", 89, 90, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Left", 181, 182, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "EATRight", 76, 78, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "EATLeft", 168, 178, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterRight", 79, 79, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterLeft", 171, 171, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterRight", 2, 17, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterLeft", 94, 109, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackRight", 18, 18, 0.3f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackLeft", 110, 110, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "AttackRight", 18, 18, 0.3f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "AttackLeft", 110, 110, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "DownRight", 4, 4, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "DownLeft", 117, 117, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpRight", 38, 38, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpLeft", 38, 38, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpingRight", 39, 44, 0.1f, true);
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpingLeft", 39, 44, 0.1f, true);
-        //                            
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "SlideRight", 5, 9, 0.5f, true); // need to chk img :: 오른쪽 바라보는 이미지를 앞에 추가
-        //Renderer_->CreateAnimation("SparkKirby.bmp", "SlideLeft", 118, 122, 0.5f, true); // "
+
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkRight", 10, 22, 0.1f, true); 
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkLeft", 123, 135, 0.1f, true);
+                                    
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "RunRight", 28, 33, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "RunLeft", 141, 147, 0.1f, true);
+                                   
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleRight", 3, 3, 0.1f, true); // 머리 바뀌는 이미지로 변경 필요
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleLeft", 116, 116, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyRight", 64, 69, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyLeft", 156, 161, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyStayRight", 70, 75, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEndRight", 85, 88, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEndLeft", 177, 180, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Right", 89, 90, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Left", 181, 182, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "EatRight", 76, 78, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "EatLeft", 168, 178, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterRight", 79, 79, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterLeft", 171, 171, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterRight", 2, 17, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterLeft", 94, 109, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackRight", 18, 18, 0.3f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackLeft", 110, 110, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "AttackRight", 18, 18, 0.3f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "AttackLeft", 110, 110, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "DownRight", 4, 4, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "DownLeft", 117, 117, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpUpRight", 38, 38, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpUpLeft", 38, 38, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpingRight", 39, 44, 0.1f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpingLeft", 39, 44, 0.1f, true);
+                           
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideRight", 5, 9, 0.5f, true); 
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideLeft", 118, 122, 0.5f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideStayRight", 9, 9, 0.5f, true);
+        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideStayLeft", 122, 122, 0.5f, true);
     }
 
     {
@@ -284,7 +455,7 @@ void Player::Start()
     //AttackEffectRenderer_->CreateAnimation("AttackEffect.bmp", "AttackEffect", 0, 12, 0.1f, false);
 
     SetState(KirbyState::IDLE);
-
+    SetKirbyClass(KirbyClass::DEFAULT);
     if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
     {
         GameEngineInput::GetInst()->CreateKey("WalkLeft", 'S');
@@ -301,6 +472,8 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P'); // 날기
         GameEngineInput::GetInst()->CreateKey("SlideLeft", 'A');
         GameEngineInput::GetInst()->CreateKey("SlideRight", 'G');
+        GameEngineInput::GetInst()->CreateKey("Spark", 'T');
+
 
     }
 }
@@ -309,26 +482,41 @@ void Player::Update()
 {
     SetSpeed(100);
     float4 direction = float4::ZERO;
-    if (true == GameEngineInput::GetInst()->IsPress("WalkLeft"))
+
+    if (true == GameEngineInput::GetInst()->IsUp("Spark"))
     {
-        SetState(KirbyState::WALK);
-        StateUpdate();
-    }
-    else if (true == GameEngineInput::GetInst()->IsPress("WalkRight"))
-    {
-        SetState(KirbyState::WALK);
-        StateUpdate();
+        SetKirbyClass(KirbyClass::SPARK);
+        //Renderer_->Death();
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("RunLeft"))
+    if (true == GameEngineInput::GetInst()->IsPress("WalkLeft") 
+        && GetState() != KirbyState::JUMPUP
+        && GetState() != KirbyState::JUMPING
+        && GetState() != KirbyState::JUMPDOWN)
     {
-        SetState(KirbyState::RUN);
-        StateUpdate();
+        SetState(KirbyState::WALK);
     }
-    else if (true == GameEngineInput::GetInst()->IsPress("RunRight"))
+    else if (true == GameEngineInput::GetInst()->IsPress("WalkRight")
+        && GetState() != KirbyState::JUMPUP
+        && GetState() != KirbyState::JUMPING
+        && GetState() != KirbyState::JUMPDOWN)
+    {
+        SetState(KirbyState::WALK);
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("RunLeft")
+        && GetState() != KirbyState::JUMPUP
+        && GetState() != KirbyState::JUMPING
+        && GetState() != KirbyState::JUMPDOWN)
     {
         SetState(KirbyState::RUN);
-        StateUpdate();
+    }
+    else if (true == GameEngineInput::GetInst()->IsPress("RunRight")
+        && GetState() != KirbyState::JUMPUP
+        && GetState() != KirbyState::JUMPING
+        && GetState() != KirbyState::JUMPDOWN)
+    {
+        SetState(KirbyState::RUN);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Fly"))
@@ -339,20 +527,17 @@ void Player::Update()
     if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
     {
         SetState(KirbyState::UP);
-        StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
     {
         SetState(KirbyState::DOWN);
-        StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsUp("Jump") &&
         RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1)) // 공중에서 점프 불가
     {
-        SetState(KirbyState::JUMP);
-        StateUpdate();
+        SetState(KirbyState::JUMPUP);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("ResetPos"))
@@ -364,39 +549,48 @@ void Player::Update()
     if (true == GameEngineInput::GetInst()->IsPress("SlideLeft"))
     {
         SetState(KirbyState::SLIDE);
-        StateUpdate();
     }
 
     else if (true == GameEngineInput::GetInst()->IsPress("SlideRight"))
     {
         SetState(KirbyState::SLIDE);
-        StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Eat"))
     {
         SetState(KirbyState::EATSTART);
-        StateUpdate();
     }
 
 
 	AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
 	JumpHeight_ = JumpHeight_ - AccGravity_;
-	SetMove(float4(0, -JumpHeight_));
 
-    if (true == GameEngineInput::GetInst()->IsUp("WalkLeft") ||
-        true == GameEngineInput::GetInst()->IsUp("WalkRight") ||
-        true == GameEngineInput::GetInst()->IsUp("RunLeft") ||
-        true == GameEngineInput::GetInst()->IsUp("RunRight") ||
-        true == GameEngineInput::GetInst()->IsUp("MoveDown") ||
-        true == GameEngineInput::GetInst()->IsUp("SlideRight") ||
-        true == GameEngineInput::GetInst()->IsUp("SlideLeft"))
+    // 땅에 닿았을 때
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y-JumpHeight_))
     {
-        SetState(KirbyState::IDLE);
+        JumpHeight_ = 0;
+        AccGravity_ = 0;
+        if (true == GameEngineInput::GetInst()->IsFree("WalkLeft") &&
+            true == GameEngineInput::GetInst()->IsFree("WalkRight") &&
+            true == GameEngineInput::GetInst()->IsFree("RunLeft") &&
+            true == GameEngineInput::GetInst()->IsFree("RunRight") &&
+            true == GameEngineInput::GetInst()->IsFree("MoveDown") &&
+            true == GameEngineInput::GetInst()->IsFree("SlideRight") &&
+            true == GameEngineInput::GetInst()->IsFree("SlideLeft") &&
+            true == GameEngineInput::GetInst()->IsFree("Jump"))
+        {
+			SetState(KirbyState::IDLE);
+        }
     }
-
-
-
+    // 떠 있을 때
+    else
+    {
+        SetMove(float4(0, -JumpHeight_));
+        if (JumpHeight_ < 15 && GetState() != KirbyState::JUMPDOWN)
+        {
+            SetState(KirbyState::JUMPING);
+        }
+    }
 
 
 
@@ -666,23 +860,24 @@ void Player::StateUpdate()
     case KirbyState::DIE:
         UpdateDie();
         break;
-    case KirbyState::Up:
+    case KirbyState::UP:
         UpdateUp();
         break;
-    case KirbyState::Down:
+    case KirbyState::DOWN:
         UpdateDown();
-        break;
-    case KirbyState::HOVER:
-        UpdateHover();
-        break;
-    case KirbyState::INHALE:
-        UpdateInhale();
         break;
     case KirbyState::EAT:
         UpdateEat();
         break;
-    case KirbyState::JUMP:
-        UpdateJump();
+    case KirbyState::JUMPUP:
+        UpdateJumpUp();
+        break;
+    case KirbyState::JUMPING:
+        UpdateJumping();
+        break;
+    case KirbyState::JUMPDOWN:
+        UpdateJumpDown();
+        break;
     case KirbyState::SLIDE:
         UpdateSlide();
         break;
@@ -792,23 +987,3 @@ bool Player::CheckMapCollision()
     return true;
 }
 
-void Player::Hover()
-{
-    SetState(KirbyState::HOVER);
-    StateUpdate();
-}
-
-void Player::Eat()
-{
-    //SetState(CharacterState::EAT);ㅉ
-}
-
-void Player::Fly()
-{
-    //SetState(CharacterState::FLY);
-}
-
-void Player::Inhale()
-{
-    //SetState(CharacterState::INHALE);
-}

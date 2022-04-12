@@ -4,6 +4,7 @@
 
 enum class KirbyClass
 {
+	DEFAULT,
 	PIG,
 	SPARK,
 	SWORD,
@@ -28,8 +29,9 @@ enum class KirbyState
 	STARATTACK,
 	TRANSFORM,
 	TRANSFORMEND,
-	JUMP,
+	JUMPUP,
 	JUMPING,
+	JUMPDOWN,
 	UP,
 	DOWN,
 	SLIDE,
@@ -82,11 +84,12 @@ private:
 
 	void SetState(KirbyState _PrevState);
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
-	KirbyState GetState();
+	KirbyState GetState() { return KirbyState_; }
 
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
 	KirbyClass GetKirbyClass();
+	void ClassUpdate();
 
 	virtual void Start() override;
 	virtual void Update() override;
@@ -136,7 +139,9 @@ private:
 	void UpdateInhale();
 	void UpdateEatStart();
 	void UpdateEat();
-	void UpdateJump();
+	void UpdateJumpUp();
+	void UpdateJumping();
+	void UpdateJumpDown();
 	void UpdateSlide();
 	void UpdateSlideStay();
 };
