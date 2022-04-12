@@ -25,14 +25,14 @@
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{9634d06f-d1fe-4c21-a719-d3d0e4e81ffe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty\bin">
-      <UniqueIdentifier>{0174dabb-dbbf-4a5d-8d5f-b88423a21fb2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{a0a110c8-346f-4837-8cfc-04747f23216f}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThirdParty\Inc">
       <UniqueIdentifier>{42a90afe-4ea9-48a7-bcb1-667a036807de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\bin">
+      <UniqueIdentifier>{e1441529-939b-4c12-bd20-c1d5e1cb5f92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,10 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineSound.h">
-      <Filter>Sound</Filter>
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRandom.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,7 +111,10 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineSound.cpp">
-      <Filter>Sound</Filter>
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRandom.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,16 +126,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\lib\fmod.dll">
+    <CopyFileToFolders Include="ThirdParty\bin\fmod.dll">
       <Filter>ThirdParty\bin</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\lib\fmod_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\bin\fmod_vc.lib">
       <Filter>ThirdParty\bin</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\lib\fmodL.dll">
+    <CopyFileToFolders Include="ThirdParty\bin\fmodL.dll">
       <Filter>ThirdParty\bin</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\lib\fmodL_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\bin\fmodL_vc.lib">
       <Filter>ThirdParty\bin</Filter>
     </CopyFileToFolders>
   </ItemGroup>

@@ -21,14 +21,21 @@ enum class KirbyState
 	FLY,
 	FLYSTAY,
 	FLYATTACK,
-	ATTACK,
-	DIE,
-	Up,
-	Down,
-	HOVER,
-	INHALE,
+	FLYEND,
+	EATSTART,
 	EAT,
+	EATEND,
+	STARATTACK,
+	TRANSFORM,
+	TRANSFORMEND,
 	JUMP,
+	JUMPING,
+	UP,
+	DOWN,
+	SLIDE,
+	SLIDESTAY,
+	GETDAMAGE,
+	DIE,
 };
 
 class GameEngineImage;
@@ -55,6 +62,8 @@ protected:
 
 private:
 	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* SparkKirbyRenderer_;
+
 	GameEngineRenderer* AttackEffectRenderer_;
 	GameEngineCollision* AttackEffectCol_;
 	int HPCount_;
@@ -74,6 +83,7 @@ private:
 	void SetState(KirbyState _PrevState);
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
 	KirbyState GetState();
+
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
 	KirbyClass GetKirbyClass();
@@ -101,13 +111,9 @@ private:
 	bool CanMoveUp();
 	bool CanMoveDown();
 
-	virtual void Walk() override;
-	virtual void Run() override;
 	/*virtual void Attack() override;
 	virtual void Die() override;*/
 	virtual void Jump() override;
-	void MoveUp();
-	void MoveDown();
 	bool CheckMapCollision();
 	void Hover();
 	void Eat();
@@ -128,6 +134,9 @@ private:
 	void UpdateDown();
 	void UpdateHover();
 	void UpdateInhale();
+	void UpdateEatStart();
 	void UpdateEat();
 	void UpdateJump();
+	void UpdateSlide();
+	void UpdateSlideStay();
 };

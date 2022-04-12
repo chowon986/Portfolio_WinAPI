@@ -18,8 +18,5 @@ void EndingLevel::Loading()
 
 void EndingLevel::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		//GameEngine::GlobalEngine().ChangeLevel("DanceStage");
-	}
+
 }

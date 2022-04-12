@@ -22,13 +22,14 @@ void Player::UpdateWalk()
     if (true == GameEngineInput::GetInst()->IsPress("WalkLeft"))
     {
         direction = float4::LEFT;
-
+        Dir_ = "Left";
     }
     else if (true == GameEngineInput::GetInst()->IsPress("WalkRight"))
     {
         direction = float4::RIGHT;
+        Dir_ = "Right";
     }
-
+    
     SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_);
 }
 
@@ -38,11 +39,12 @@ void Player::UpdateRun()
     if (true == GameEngineInput::GetInst()->IsPress("RunLeft"))
     {
         direction = float4::LEFT;
-
+        Dir_ = "Left";
     }
     else if (true == GameEngineInput::GetInst()->IsPress("RunRight"))
     {
         direction = float4::RIGHT;
+        Dir_ = "Right";
     }
 
     SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_ * 2);
@@ -50,29 +52,26 @@ void Player::UpdateRun()
 
 void Player::UpdateFly()
 {
-    if (true == Renderer_->IsEndAnimation())
+    if (true == GameEngineInput::GetInst()->IsPress("Fly") && true == Renderer_->IsEndAnimation())
     {
         SetState(KirbyState::FLYSTAY);
     }
 }
 
-
 void Player::UpdateFlyStay()
 {
-    // 나는거 -> 날다가 키를 놓으면 kirbystate가 flyattack으로 바껴야함
-    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-    AccGravity_ = 0;
-    JumpHeight_ = 0;
-    if (true == GameEngineInput::GetInst()->IsUp("Fly"))
+    if (true == GameEngineInput::GetInst()->IsPress("Fly"))
     {
-        SetState(KirbyState::FLYATTACK);
+    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
     }
 }
 
 void Player::UpdateFlyAttack()
 {
-    SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_ * AccGravity_);
+    //SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_ * AccGravity_);
+   // SetState(KirbyState::FLYDOWN);
 }
+
 void Player::UpdateAttack()
 {
 }
@@ -84,7 +83,7 @@ void Player::UpdateDie()
 void Player::UpdateUp()
 {
     SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-
+    // 애니몰 상태
 }
 
 void Player::UpdateDown()
@@ -105,12 +104,41 @@ void Player::UpdateInhale()
 {
 }
 
+void Player::UpdateEatStart()
+{
+}
+
 void Player::UpdateEat()
 {
 }
 
 void Player::UpdateJump()
 {
-    JumpHeight_ = 5;
+    JumpHeight_ = 10;
     AccGravity_ = 0;
 } 
+
+void Player::UpdateSlide()
+{
+    float4 direction = float4::ZERO;
+    if (true == GameEngineInput::GetInst()->IsPress("SlideLeft"))
+    {
+        direction = float4::LEFT;
+        Dir_ = "Left";
+    }
+    else if (true == GameEngineInput::GetInst()->IsPress("SlideRight"))
+    {
+        direction = float4::RIGHT;
+        Dir_ = "Right";
+    }
+
+    if (Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::SLIDESTAY);
+    }
+}
+
+void Player::UpdateSlideStay()
+{
+    // 멈추기
+}

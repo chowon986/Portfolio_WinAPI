@@ -1,13 +1,21 @@
 #pragma once
 #include <list>
 #include <map>
+#include <vector>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
+
+class GameEngineActor;
+struct ChangeOrderItem
+{
+	GameEngineActor* TargetObject; // 이녀석을
+	int ChangeOrder; // 이렇게 바꿔라.
+};
 
 class GameEngine;
 class GameEngineActor;
 class GameEngineCollision;
-class GameEngineRenderer;
+class GameEngineRenderer; 
 class GameEngineImage;
 class GameEngineLevel : public GameEngineNameObject
 {
@@ -35,7 +43,7 @@ public:
 	{
 		ActorType* NewActor = new ActorType();
 		GameEngineActor* StartActor = NewActor;
-		NewActor->SetOrder(_Order);
+		NewActor->GameEngineUpdateObject::SetOrder(_Order);
 		NewActor->SetName(_Name);
 		NewActor->SetLevel(this);
 		StartActor->Start();
@@ -76,7 +84,6 @@ public:
 		CameraPos_  = _Value;
 	}
 
-
 	virtual float GetMapSizeX() { return MapSizeX_; }
 	virtual float GetMapSizeY() { return MapSizeY_; }
 
@@ -86,7 +93,6 @@ public:
 
 protected:
 	GameEngineImage* ColMapImage_;
-
 protected:
 	// 시점함수
 	// 만들어지면서 리소스나 액터를 만들때 써라
@@ -102,6 +108,8 @@ private:
 	// std::vector로 관리하는게 더 좋다고 생각..
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
 
+	std::vector<ChangeOrderItem> ChangeOrderList;
+
 	float4 CameraPos_;
 	float MapSizeX_;
 	float MapSizeY_;
@@ -111,11 +119,12 @@ private:
 	void CollisionDebugRender();
 	void ActorRelease();
 
-
 private:
 	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
 
 	void AddRenderer(GameEngineRenderer* _Renderer);
+
+	void ChangeUpdateOrder(GameEngineActor* _Actor, int _Oreder);
 
 	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);
 

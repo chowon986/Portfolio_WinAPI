@@ -84,13 +84,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
-    <LibraryPath>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
-    <LibraryPath>$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)Bin\$(Configuration)\$(PlatformTarget)\;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -177,10 +177,6 @@
     <ClInclude Include="DanceStage.h" />
     <ClInclude Include="Doc.h" />
     <ClInclude Include="Doroach.h" />
-    <ClInclude Include="EndingCredit.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="EndingStory.h" />
     <ClInclude Include="Fire.h" />
@@ -263,10 +259,6 @@
     <ClCompile Include="DanceStage.cpp" />
     <ClCompile Include="Doc.cpp" />
     <ClCompile Include="Doroach.cpp" />
-    <ClCompile Include="EndingCredit.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="EndingStory.cpp" />
     <ClCompile Include="Fire.cpp" />

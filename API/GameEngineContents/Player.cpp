@@ -52,14 +52,23 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::IDLE:
         Renderer_->ChangeAnimation("Idle" + Dir_);
         break;
+    case KirbyState::UP:
+        // 사다리 타기 구현
+        break;
+    case KirbyState::DOWN:
+        Renderer_->ChangeAnimation("Down" + Dir_);
+        break;
     case KirbyState::WALK:
         Renderer_->ChangeAnimation("Walk" + Dir_);
         break;
     case KirbyState::RUN:
         Renderer_->ChangeAnimation("Run" + Dir_);
         break;
-    case KirbyState::FLY: // press 'x'
+
+
+    case KirbyState::FLY:
         Renderer_->ChangeAnimation("Fly" + Dir_);
+        StateUpdate();
         break;
     case KirbyState::FLYSTAY:
         Renderer_->ChangeAnimation("FlyStay" + Dir_);
@@ -68,32 +77,60 @@ void Player::SetState(KirbyState _KirbyState)
         Renderer_->ChangeAnimation("FlyAttack" + Dir_);
         StateUpdate();
         break;
-    case KirbyState::ATTACK:
-        Renderer_->ChangeAnimation("ATTACK" + Dir_);
+    case KirbyState::FLYEND:
+        Renderer_->ChangeAnimation("FlyEnd" + Dir_);
+        StateUpdate();
         break;
-    case KirbyState::DIE:
-        Renderer_->ChangeAnimation("DIE" + Dir_);
-        break;
-    case KirbyState::Up:
-        // 사다리 타기 구현
-        break;
-    case KirbyState::Down:
-        Renderer_->ChangeAnimation("Down" + Dir_);
-        break;
-    case KirbyState::HOVER:
-        Renderer_->ChangeAnimation("HOVER" + Dir_);
-        break;
-    case KirbyState::INHALE:
-        Renderer_->ChangeAnimation("INHALE" + Dir_);
 
+
+    case KirbyState::EATSTART:
+        Renderer_->ChangeAnimation("EatStart" + Dir_);
         break;
     case KirbyState::EAT:
-        Renderer_->ChangeAnimation("EAT" + Dir_);
+        Renderer_->ChangeAnimation("Eat" + Dir_);
         break;
+    case KirbyState::EATEND:
+        Renderer_->ChangeAnimation("EatEnd" + Dir_);
+        break;
+
+
+    case KirbyState::STARATTACK:
+        Renderer_->ChangeAnimation("StarAttack" + Dir_);
+        break;
+    case KirbyState::TRANSFORM:
+		Renderer_->ChangeAnimation("Transform" + Dir_);
+		break;
+	case KirbyState::TRANSFORMEND:
+		Renderer_->ChangeAnimation("Transform" + Dir_);
+		break;
+
+
+    case KirbyState::GETDAMAGE:
+        Renderer_->ChangeAnimation("GetDamage" + Dir_);
+        break;
+
+
+
     case KirbyState::JUMP:
         PrevPos_ = GetPosition();
         Renderer_->ChangeAnimation("Jump" + Dir_);
         break;
+    case KirbyState::JUMPING:
+        PrevPos_ = GetPosition();
+        Renderer_->ChangeAnimation("Jumping" + Dir_);
+        break;
+
+    case KirbyState::SLIDE:
+        Renderer_->ChangeAnimation("Slide" + Dir_);
+        break;
+    case KirbyState::SLIDESTAY:
+        Renderer_->ChangeAnimation("SlideStay" + Dir_);
+        break;
+    case KirbyState::DIE:
+        Renderer_->ChangeAnimation("SlideStay" + Dir_);
+        break;
+
+
     default:
         break;
     }
@@ -102,57 +139,141 @@ void Player::SetState(KirbyState _KirbyState)
 
 void Player::Start()
 {
-    Dir_ = "Right";
-    Level_ = GetLevel();
-    ColMapImage_ = Level_->GetColMapImage();
-    KirbyCol_ = CreateCollision("KirbyCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
-    Renderer_ = CreateRenderer("Normal.bmp");
-    SetHPCount(2);
-    SetHP(9);
+    {
+        // NormalKirby
+		Dir_ = "Right";
+		Level_ = GetLevel();
+		SetHPCount(2);
+		SetHP(9);
+		ColMapImage_ = Level_->GetColMapImage();
+		KirbyCol_ = CreateCollision("KirbyCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
 
-    GameEngineImage* Image = Renderer_->GetImage();
-    Image->CutCount(10, 19);
-    Renderer_->CreateAnimation("Normal.bmp", "WalkRight", 19, 28, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "WalkLeft", 111, 120, 0.1f, true);
+		Renderer_ = CreateRenderer("Normal.bmp");
+		GameEngineImage* Image = Renderer_->GetImage();
+		Image->CutCount(10, 19);
 
-    Renderer_->CreateAnimation("Normal.bmp", "RunRight", 29, 36, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "RunLeft", 121, 128, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "WalkRight", 19, 28, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "WalkLeft", 111, 120, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "IdleRight", 0, 0, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "IdleLeft", 92, 92, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "RunRight", 29, 36, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "RunLeft", 121, 128, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "FlyRight", 64, 69, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "FlyLeft", 156, 161, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "IdleRight", 0, 0, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "IdleLeft", 92, 92, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "FlyStayRight", 70, 75, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyRight", 64, 69, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyLeft", 156, 161, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyStayRight", 70, 75, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackRight", 85, 88, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackLeft", 177, 180, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyEndRight", 89, 90, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyEndLeft", 181, 182, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "HoverEndRight", 85, 88, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "HoverEndLeft", 177, 180, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "EatStartRight", 64, 69, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "EatStartLeft", 156, 161, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "EatRight", 85, 86, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "EatLeft", 177, 178, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "EatEndRight", 76, 78, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "EatEndLeft", 168, 170, 0.1f, true);
+        
+        // pig
+        Renderer_->CreateAnimation("Normal.bmp", "PigIdleRight", 79, 79, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "PigIdleLeft", 171, 171, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "HoverEnd2Right", 89, 90, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "HoverEnd2Left", 181, 182, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "PigWalkRight", 2, 17, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "PigWalkLeft", 94, 109, 0.1f, true);
+        //
 
-    Renderer_->CreateAnimation("Normal.bmp", "EATRight", 76, 78, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "EATLeft", 168, 178, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "IdleWzMonsterRight", 79, 79, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "IdleWzMonsterLeft", 171, 171, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "StarAttackRight", 18, 18, 0.3f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "StarAttackLeft", 110, 110, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "WalkWzMonsterRight", 2, 17, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "WalkWzMonsterLeft", 94, 109, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "TransformRight", 79, 84, 0.3f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "TransformAttackLeft", 171, 176, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "AttackRight", 18, 18, 0.3f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "AttackLeft", 110, 110, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "TransformEndRight", 85, 85, 0.3f, true); // 변신 완료 동작
+        Renderer_->CreateAnimation("Normal.bmp", "TransformEndAttackLeft", 177, 177, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 93, 93, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpRight", 38, 38, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpLeft", 130, 130, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 131, 137, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "JumpRight", 38, 38, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "JumpLeft", 38, 38, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 93, 93, 0.1f, true);
 
-    Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.1f, true);
-    Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 39, 44, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "SlideRight", 184, 185, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "SlideLeft", 186, 187, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "SlideStayRight", 185, 185, 0.5f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "SlideStayLeft", 187, 187, 0.5f, true);
+
+        Renderer_->CreateAnimation("Normal.bmp", "GetDamageRight", 184, 185, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "GetDamageLeft", 184, 185, 0.1f, true);
+
+        Renderer_->CreateAnimation("Normal.bmp", "DieRight", 184, 185, 0.1f, true); // 동작 확인 필요
+        Renderer_->CreateAnimation("Normal.bmp", "DieLeft", 184, 185, 0.1f, true);
+	}
+
+
+    {
+        // SparkKirby
+        //Renderer_ = CreateRenderer("SparkKirby.bmp");
+        //GameEngineImage* Image = Renderer_->GetImage();
+        //Image->CutCount(10, 23);
+
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkRight", 10, 16, 0.1f, true); // need chk img
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkLeft", 123, 129, 0.1f, true); // need chk img
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "RunRight", 28, 34, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "RunLeft", 141, 147, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleRight", 3, 3, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleLeft", 116, 116, 0.1f, true); // ok
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyRight", 64, 69, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyLeft", 156, 161, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyStayRight", 70, 75, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEndRight", 85, 88, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEndLeft", 177, 180, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Right", 89, 90, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Left", 181, 182, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "EATRight", 76, 78, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "EATLeft", 168, 178, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterRight", 79, 79, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterLeft", 171, 171, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterRight", 2, 17, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterLeft", 94, 109, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackRight", 18, 18, 0.3f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackLeft", 110, 110, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "AttackRight", 18, 18, 0.3f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "AttackLeft", 110, 110, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "DownRight", 4, 4, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "DownLeft", 117, 117, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpRight", 38, 38, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpLeft", 38, 38, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpingRight", 39, 44, 0.1f, true);
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "JumpingLeft", 39, 44, 0.1f, true);
+        //                            
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "SlideRight", 5, 9, 0.5f, true); // need to chk img :: 오른쪽 바라보는 이미지를 앞에 추가
+        //Renderer_->CreateAnimation("SparkKirby.bmp", "SlideLeft", 118, 122, 0.5f, true); // "
+    }
+
+    {
+
+    }
 
 
     //AttackEffectRenderer_ = CreateRenderer("Attack.bmp"   ,static_cast<int>(EngineMax::RENDERORDERMAX),RenderPivot::CENTER,float4(100.0f,0.0f));
@@ -166,24 +287,27 @@ void Player::Start()
 
     if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
     {
-        GameEngineInput::GetInst()->CreateKey("WalkLeft", 'A');
-        GameEngineInput::GetInst()->CreateKey("WalkRight", 'D');
-        GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
-        GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
+        GameEngineInput::GetInst()->CreateKey("WalkLeft", 'S');
+        GameEngineInput::GetInst()->CreateKey("WalkRight", 'F');
+        GameEngineInput::GetInst()->CreateKey("MoveUp", 'E');
+        GameEngineInput::GetInst()->CreateKey("MoveDown", 'D');
         GameEngineInput::GetInst()->CreateKey("Jump", VK_LSHIFT);
         GameEngineInput::GetInst()->CreateKey("Hover", VK_SPACE);
         GameEngineInput::GetInst()->CreateKey("Eat", 'X');
-        GameEngineInput::GetInst()->CreateKey("RunLeft", 'Q');
-        GameEngineInput::GetInst()->CreateKey("RunRight", 'E');
+        GameEngineInput::GetInst()->CreateKey("RunLeft", 'W');
+        GameEngineInput::GetInst()->CreateKey("RunRight", 'R');
         GameEngineInput::GetInst()->CreateKey("Inhale", 'Z'); // 흡입
         GameEngineInput::GetInst()->CreateKey("Fly", 'X'); // 날기
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P'); // 날기
+        GameEngineInput::GetInst()->CreateKey("SlideLeft", 'A');
+        GameEngineInput::GetInst()->CreateKey("SlideRight", 'G');
+
     }
 }
 
 void Player::Update()
 {
-    SetSpeed(20);
+    SetSpeed(100);
     float4 direction = float4::ZERO;
     if (true == GameEngineInput::GetInst()->IsPress("WalkLeft"))
     {
@@ -195,8 +319,6 @@ void Player::Update()
         SetState(KirbyState::WALK);
         StateUpdate();
     }
-
-    
 
     if (true == GameEngineInput::GetInst()->IsPress("RunLeft"))
     {
@@ -212,23 +334,22 @@ void Player::Update()
     if (true == GameEngineInput::GetInst()->IsPress("Fly"))
     {
         SetState(KirbyState::FLY);
-        StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
     {
-        SetState(KirbyState::Up);
+        SetState(KirbyState::UP);
         StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
     {
-        SetState(KirbyState::Down);
+        SetState(KirbyState::DOWN);
         StateUpdate();
     }
 
     if (true == GameEngineInput::GetInst()->IsUp("Jump") &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1))
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1)) // 공중에서 점프 불가
     {
         SetState(KirbyState::JUMP);
         StateUpdate();
@@ -240,38 +361,52 @@ void Player::Update()
         AccGravity_ = 0;
     }
 
-    AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
-    float JumpHeight = JumpHeight_ - AccGravity_;
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y - JumpHeight))
+    if (true == GameEngineInput::GetInst()->IsPress("SlideLeft"))
     {
-        AccGravity_ = 0;
-        JumpHeight_ = 0;
-    }
-    else
-    {
-        SetMove(float4(0, -JumpHeight));
+        SetState(KirbyState::SLIDE);
+        StateUpdate();
     }
 
+    else if (true == GameEngineInput::GetInst()->IsPress("SlideRight"))
+    {
+        SetState(KirbyState::SLIDE);
+        StateUpdate();
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("Eat"))
+    {
+        SetState(KirbyState::EATSTART);
+        StateUpdate();
+    }
 
 
-    //Time_ += GameEngineTime::GetDeltaTime();
+	AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
+	JumpHeight_ = JumpHeight_ - AccGravity_;
+	SetMove(float4(0, -JumpHeight_));
 
-    //SetPrevState(GetState());
-    //PrevPos_ = GetPosition();
-    //SetState(CharacterState::IDLE);
+    if (true == GameEngineInput::GetInst()->IsUp("WalkLeft") ||
+        true == GameEngineInput::GetInst()->IsUp("WalkRight") ||
+        true == GameEngineInput::GetInst()->IsUp("RunLeft") ||
+        true == GameEngineInput::GetInst()->IsUp("RunRight") ||
+        true == GameEngineInput::GetInst()->IsUp("MoveDown") ||
+        true == GameEngineInput::GetInst()->IsUp("SlideRight") ||
+        true == GameEngineInput::GetInst()->IsUp("SlideLeft"))
+    {
+        SetState(KirbyState::IDLE);
+    }
 
 
-    //// 위치 처리
-    //UpdateMove();
-    //UpdateJump();
-    //UpdateFly();
-    //CorrectPos();
 
-    //// 충돌 처리
-    //CheckCollision();
 
-    //// 애니메이션 처리
-    //UpdateAnimation();
+
+
+    //if (CurrentPos.x > GetLevel()->GetMapSizeX())
+//{
+//   SetPosition(float4(GetLevel()->GetMapSizeX(), CurrentPos.y));
+//}
+
+    CheckCollision();
+
 }
 
 // 시간 확인
@@ -283,23 +418,6 @@ void Player::Render()
     //
     //   TextOutA(GameEngine::BackBufferImage()->ImageDC(), 0, 0, Text.c_str(), Text.size());
 }
-//
-//void Player::UpdateMove()
-//{
-//   //CharacterState State = GetState();
-//   //float4 direction = float4::ZERO;
-//   //if (true == GameEngineInput::GetInst()->IsPress("MoveLeft") ||
-//   //   true == GameEngineInput::GetInst()->IsPress("RunLeft"))
-//   //{
-//   //   direction = float4::LEFT;
-//   //}
-//   //else if (true == GameEngineInput::GetInst()->IsPress("MoveRight") ||
-//   //        true == GameEngineInput::GetInst()->IsPress("RunRight"))
-//   //{
-//   //   direction = float4::RIGHT;
-//   //}
-//   //SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
-//}
 
 //void Player::UpdateJump()
 //{
@@ -321,29 +439,6 @@ void Player::Render()
 //   //   }
 //   //}
 //}
-//
-//void Player::UpdateAttack()
-//{
-//}
-//
-//void Player::UpdateDie()
-//{
-//}
-//
-//void Player::UpdateUp()
-//{
-//}
-//
-//void Player::UpdateDown()
-//{
-//}
-//
-//void Player::UpdateHover()
-//{
-//}
-//
-//void Player::UpdateInhale()
-//{
 //}
 
 
@@ -588,6 +683,8 @@ void Player::StateUpdate()
         break;
     case KirbyState::JUMP:
         UpdateJump();
+    case KirbyState::SLIDE:
+        UpdateSlide();
         break;
     default:
         break;
@@ -657,54 +754,40 @@ bool Player::CanEat()
     return true;
 }
 
-void Player::Walk()
-{
-    //SetState(CharacterState::WALK);
-}
-
-void Player::Run()
-{
-    //SetState(CharacterState::RUN);
-}
 
 void Player::Jump()
 {
-    //JumpHeight_ = 20;
+    //if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y - JumpHeight_))
+    //{
+    //    AccGravity_ = 0;
+    //    JumpHeight_ = 0;
+    //}
+    //else
+    //{
+    //    SetMove(float4(0, -JumpHeight_));
+    //}
 
 }
 
-void Player::MoveUp()
-{
-    //SetState(CharacterState::Up);
-    //SetMove(float4::UP * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
-}
-
-void Player::MoveDown()
-{
-    //SetState(CharacterState::Down);
-    //SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * static_cast<float>(GetSpeed()));
-}
 
 bool Player::CheckMapCollision()
 {
     if (nullptr != ColMapImage_)
     {
-        //if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
-        //{
-        //   return true;
-        //}
+        if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
+        {
+           return true;
+        }
 
-        //if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
-        //{
-        //   return true;
-        //}
+        if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
+        {
+           return true;
+        }
 
-
-        ////왼쪽, 오른쪽, 위쪽으로 이동 금지 -> 맵마다 다름
-        //if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50)
-        //{
-        //   return true;
-        //}
+        if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50)
+        {
+           return true;
+        }
     }
     return true;
 }
