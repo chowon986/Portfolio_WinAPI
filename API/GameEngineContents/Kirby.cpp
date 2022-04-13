@@ -20,6 +20,7 @@
 #include "WorldMap.h"
 #include "EndingLevel.h"
 #include "EndingStory.h"
+#include "GameOver.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -46,6 +47,7 @@ void Kirby::GameInit()
         GameEngineDirectory ResourcesDir;
         ResourcesDir.MoveParent("API");
         ResourcesDir.Move("Resources");
+        ResourcesDir.Move("Image");
 
         std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
@@ -56,17 +58,17 @@ void Kirby::GameInit()
     }
 
     //{
-    //   GameEngineDirectory ResourcesDir;
-    //   ResourcesDir.MoveParent("API");
-    //   ResourcesDir.Move("Resources");
-    //   ResourcesDir.Move("Sound");
+    //    GameEngineDirectory ResourcesDir;
+    //    ResourcesDir.MoveParent("API");
+    //    ResourcesDir.Move("Resources");
+    //    ResourcesDir.Move("Sound");
 
-    //   std::vector<GameEngineFile> AllSoundFileList = ResourcesDir.GetAllFile(".mp3");
+    //    std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
 
-    //   for (size_t i = 0; i < AllSoundFileList.size(); i++)
-    //   {
-    //      GameEngineSound::LoadRes(AllSoundFileList[i].GetFullPath());
-    //   }
+    //    for (size_t i = 0; i < AllImageFileList.size(); i++)
+    //    {
+    //        GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
+    //    }
     //}
 
 
@@ -96,6 +98,7 @@ void Kirby::GameInit()
     CreateLevel<Boss>("Boss");
     CreateLevel<EndingStory>("EndingStory");
     CreateLevel<EndingLevel>("Ending");
+    CreateLevel<GameOver>("GameOver");
 
     ChangeLevel("Level1");
 

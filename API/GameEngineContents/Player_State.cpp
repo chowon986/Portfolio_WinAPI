@@ -16,6 +16,20 @@ void Player::UpdateIdle()
 
 }
 
+void Player::UpdateTransform()
+{
+    //Death();
+    SetKirbyClass(KirbyClass::SPARK);
+}
+
+void Player::UpdateTransformEnd()
+{
+    if (Renderer_->IsEndAnimation())
+    {
+        SetKirbyClass(KirbyClass::SPARK);
+    }
+}
+
 void Player::UpdateWalk()
 {
     float4 direction = float4::ZERO;
@@ -64,6 +78,7 @@ void Player::UpdateFlyStay()
     {
     SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
     }
+
 }
 
 void Player::UpdateFlyAttack()
@@ -78,12 +93,30 @@ void Player::UpdateAttack()
 
 void Player::UpdateDie()
 {
+    if (HPCount_ != 0)
+    {
+        // 각 레벨의 시작 위치로 가고 idle되기
+        SetState(KirbyState::IDLE);
+    }
+
+    else
+    {
+        
+    }
+
 }
 
 void Player::UpdateUp()
 {
-    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-    // 애니몰 상태
+    if (GetKirbyClass() == KirbyClass::ANIMAL)
+    {
+        SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+    }
+    else
+    {
+        SetKirbyClass(KirbyClass::DEFAULT);
+        SetState(KirbyState::IDLE);
+    }
 }
 
 void Player::UpdateDown()
@@ -106,10 +139,65 @@ void Player::UpdateInhale()
 
 void Player::UpdateEatStart()
 {
+    if (Renderer_->IsAnimationName("EatStartRight") && Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::EAT);
+    }
 }
 
 void Player::UpdateEat()
 {
+    // need : EatCol 생성 여부 확인 후 위치 커비로 옮기기
+    GameEngineCollision* EatCol = CreateCollision("EatCol", float4(10.0f, 10.0f), float4(100.0f, 0.0f));
+
+	std::vector <GameEngineCollision*> ColResult;
+    if (true == EatCol->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
+    {
+        for (GameEngineCollision* Collision : ColResult)
+        {
+            GameEngineActor* Actor = Collision->GetActor();
+            Monster* Monster_ = dynamic_cast<Monster*>(Actor);
+            if (nullptr != Monster_)
+            {
+                float4 MonPos = GetPosition() - Monster_->GetPosition();
+                if (MonPos.x > 0) // 내가 오른쪽
+                {
+                    Monster_->SetPosition(Monster_->GetPosition() + MonPos);
+                }
+                if (MonPos.x < 0) // 내가 왼쪽
+                {
+                    Monster_->SetPosition(Monster_->GetPosition() - MonPos);
+                }
+                else
+                {
+                    MonName_ = Monster_->GetNameCopy();
+                   // Monster_->Death();
+                    SetState(KirbyState::EATEND);
+                }
+            }
+        }
+    }
+}
+
+void Player::UpdateEatEnd()
+{
+    if (true == GameEngineInput::GetInst()->IsUp("Eat"))
+    {
+        SetState(KirbyState::STARATTACK);
+    }
+
+    if (KirbyClass::DEFAULT == GetKirbyClass())
+    {
+        if (true == GameEngineInput::GetInst()->IsUp("Transform"))
+        {
+            //if(MonName_ == "Sparky")
+            //{
+            //	SetKirbyClass(KirbyClass::SPARK);
+            //}
+
+            SetState(KirbyState::TRANSFORM);
+        }
+    }
 }
 
 void Player::UpdateJumpUp()

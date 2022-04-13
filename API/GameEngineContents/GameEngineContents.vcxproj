@@ -182,6 +182,7 @@
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FireItem.h" />
     <ClInclude Include="Frosty.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="GreenMouse.h" />
     <ClInclude Include="HPUp.h" />
     <ClInclude Include="IntroStory.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FireItem.cpp" />
     <ClCompile Include="Frosty.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GreenMouse.cpp" />
     <ClCompile Include="HPUp.cpp" />
     <ClCompile Include="IntroStory.cpp" />

@@ -28,6 +28,6 @@ void IntroStory::Update()
 
 void IntroStory::LevelChangeStart()
 {
-	//IntroVideo_ = CreateActor<VideoPlayer>();
-	//IntroVideo_->SetInfo("intro_frame_", 438, 1200, 30);
+	IntroVideo_ = CreateActor<VideoPlayer>();
+	IntroVideo_->SetInfo("intro_frame_", 438, 1200, 30);
 }

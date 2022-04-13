@@ -60,8 +60,8 @@ void Waddledi::Update()
 		SetHP(GetHP() - 1);
 		if (0 == GetHP())
 		{
-			WaddlediRenderer_->ChangeAnimation("WaddlediDie");
-			Death(1.0f);
+			//WaddlediRenderer_->ChangeAnimation("WaddlediDie");
+			//Death(1.0f);
 		}
 	}
 

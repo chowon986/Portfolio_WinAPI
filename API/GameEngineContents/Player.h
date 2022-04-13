@@ -59,15 +59,21 @@ public:
 	inline void SetHPCount(int _HPCount) { HPCount_ = _HPCount; }
 	inline int GetHPCount() { return HPCount_; }
 
+	void SetKirbyClass(KirbyClass _KirbyClass);
+	KirbyClass GetKirbyClass();
 protected:
-	GameEngineCollision* KirbyCol_;
 
 private:
 	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* SparkKirbyRenderer_;
-
 	GameEngineRenderer* AttackEffectRenderer_;
+
+	GameEngineRenderer* KirbyEffect_;
+	GameEngineCollision* KirbyCol_;
 	GameEngineCollision* AttackEffectCol_;
+	GameEngineCollision* KirbyEffectCol_;
+	std::string MonName_;
+
 	int HPCount_;
 
 	float Gravity_;
@@ -87,8 +93,6 @@ private:
 	KirbyState GetState() { return KirbyState_; }
 
 
-	void SetKirbyClass(KirbyClass _KirbyClass);
-	KirbyClass GetKirbyClass();
 	void ClassUpdate();
 
 	virtual void Start() override;
@@ -98,31 +102,8 @@ private:
 	void CorrectPos();
 
 	void CheckCollision();
-
-	void UpdateAnimation();
 	void StateUpdate();
-
-	//virtual float GetSpeed() override;
-	virtual bool CanWalk() override;
-	virtual bool CanRun() override;
-	virtual bool CanJump() override;
-
-	bool CanFly();
-	bool CanInhale();
-	bool CanHover();
-	bool CanEat();
-	bool CanMoveUp();
-	bool CanMoveDown();
-
-	/*virtual void Attack() override;
-	virtual void Die() override;*/
-	virtual void Jump() override;
 	bool CheckMapCollision();
-	void Hover();
-	void Eat();
-	void Fly();
-	void Inhale();
-
 
 
 	void UpdateIdle();
@@ -139,9 +120,13 @@ private:
 	void UpdateInhale();
 	void UpdateEatStart();
 	void UpdateEat();
+	void UpdateEatEnd();
 	void UpdateJumpUp();
 	void UpdateJumping();
 	void UpdateJumpDown();
 	void UpdateSlide();
 	void UpdateSlideStay();
+	void UpdateTransform();
+	void UpdateTransformEnd();
+	void UpdateEffect();
 };
