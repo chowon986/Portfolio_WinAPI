@@ -142,7 +142,7 @@ void Level1::LevelChangeStart()
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
+		Waddledi_->SetPosition(float4(/*1200.0f, 430.0f*/300.0f,436.0f));
 	}
 
 	{

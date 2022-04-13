@@ -68,10 +68,8 @@ private:
 	GameEngineRenderer* SparkKirbyRenderer_;
 	GameEngineRenderer* AttackEffectRenderer_;
 
-	GameEngineRenderer* KirbyEffect_;
 	GameEngineCollision* KirbyCol_;
-	GameEngineCollision* AttackEffectCol_;
-	GameEngineCollision* KirbyEffectCol_;
+	GameEngineCollision* EatCol_;
 	std::string MonName_;
 
 	int HPCount_;

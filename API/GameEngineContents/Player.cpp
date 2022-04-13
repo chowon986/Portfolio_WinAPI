@@ -20,6 +20,7 @@ Player::Player()
     , Level_(nullptr)
     , HPCount_(0)
     , Speed_(20)
+    , EatCol_(nullptr)
 {
 }
 
@@ -43,15 +44,18 @@ void Player::ClassUpdate()
 {
     switch (KirbyClass_)
     {
+        // 금요일까지 alpha 작업 하기 (디버그 방법은 ctrl alt p(rocess))
     case KirbyClass::SPARK:
-        Renderer_->SetScale(float4 (0.0f, 0.0f)); // Renderer_->Death(); 사용??
-        SparkKirbyRenderer_->SetImageScale();
+        Renderer_->SetAlpha(0);
+        SparkKirbyRenderer_->SetAlpha(255);
         break;
     case KirbyClass::ANIMAL:
         break;
     case KirbyClass::BEAM:
         break;
     case KirbyClass::DEFAULT:
+        Renderer_->SetAlpha(255);
+        SparkKirbyRenderer_->SetAlpha(0);
         break;
     case KirbyClass::FIRE:
         break;
@@ -62,8 +66,6 @@ void Player::ClassUpdate()
     case KirbyClass::PIG:
         break;
     default:
-        Renderer_->SetImageScale();
-        SparkKirbyRenderer_->SetScale(float4(0.0f, 0.0f));
         break;
     }
 }
@@ -214,12 +216,12 @@ void Player::SetState(KirbyState _KirbyState)
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
             SparkKirbyRenderer_->ChangeAnimation("Transform" + Dir_);
-            KirbyEffect_->ChangeAnimation("Transform");
+            //KirbyEffect_->ChangeAnimation("Transform");
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
             Renderer_->ChangeAnimation("Transform" + Dir_);
-            KirbyEffect_->ChangeAnimation("Transform");
+            //KirbyEffect_->ChangeAnimation("Transform");
         }
 		break;
 
@@ -308,14 +310,11 @@ void Player::SetState(KirbyState _KirbyState)
     default:
         break;
     }
-
-    StateUpdate();
 }
 
 
 void Player::Update()
 {
-    SetSpeed(100);
     float4 direction = float4::ZERO;
     PrevPos_ = GetPosition();
 
@@ -323,8 +322,14 @@ void Player::Update()
 
     if (true == GameEngineInput::GetInst()->IsUp("Spark")) // transform
     {
-        SetState(KirbyState::TRANSFORM);
+        //SetState(KirbyState::TRANSFORM);
+        SetKirbyClass(KirbyClass::SPARK);
         //Renderer_->Death();
+    }
+    
+    if (true == GameEngineInput::GetInst()->IsUp("Default")) // transform
+    {
+        SetKirbyClass(KirbyClass::DEFAULT);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("WalkLeft") 
@@ -399,6 +404,10 @@ void Player::Update()
         SetState(KirbyState::EATSTART);
     }
 
+    if (GetState() == KirbyState::EATSTART && true == Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::EAT);
+    }
 
 	AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
 	JumpHeight_ = JumpHeight_ - AccGravity_;
@@ -425,29 +434,26 @@ void Player::Update()
     else
     {
         SetMove(float4(0, -JumpHeight_));
-        // 이거랑 updatejumping이 겹쳐서 여러번 구름
-        //if (JumpHeight_ < 15 && GetState() != KirbyState::JUMPDOWN)
-        //{
-        //    //SetState(KirbyState::JUMPING);
-        //}
+        if (JumpHeight_ < 15 && GetState() != KirbyState::JUMPDOWN)
+        {
+            SetState(KirbyState::JUMPING);
+        }
     }
 
     // 능력 버리기
     if (GetKirbyClass() != KirbyClass::DEFAULT)
     {
         if (true == GameEngineInput::GetInst()->IsUp("AbandonClass"))
-        {
-            
+        {            
             SetKirbyClass(KirbyClass::DEFAULT);
         }
     }
-
-
 //if (CurrentPos.x > GetLevel()->GetMapSizeX())
 //{
 //   SetPosition(float4(GetLevel()->GetMapSizeX(), CurrentPos.y));
 //}
 
+    StateUpdate();
     CheckCollision();
 
 }
@@ -647,6 +653,7 @@ void Player::Start()
 		Level_ = GetLevel();
 		SetHPCount(2);
 		SetHP(9);
+        SetSpeed(200);
 		ColMapImage_ = Level_->GetColMapImage();
 		KirbyCol_ = CreateCollision("KirbyCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
 
@@ -777,22 +784,7 @@ void Player::Start()
         SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideStayLeft", 122, 122, 0.5f, true);
     }
 
-    {
-        KirbyEffect_ = CreateRenderer("Transform.bmp");
-        GameEngineImage* TransformEffectImage = KirbyEffect_->GetImage();
-        TransformEffectImage->CutCount(10, 2);
-        KirbyEffect_->CreateAnimation("Transform.bmp", "Transform", 0, 13, 0.1f, false);
-
-        KirbyEffectCol_ = CreateCollision("TransformEffect", float4(0.1f, 0.1f), float4(0.1f, 0.1f));
-    }
-
-
-    //AttackEffectRenderer_ = CreateRenderer("Attack.bmp"   ,static_cast<int>(EngineMax::RENDERORDERMAX),RenderPivot::CENTER,float4(100.0f,0.0f));
-    //GameEngineImage* Attack_ = AttackEffectRenderer_->GetImage();
-    //Attack_->CutCount(7, 2);
-    //A ttackEffectRenderer_->CreateAnimation("Attack.bmp", "Attack", 0, 12, 0.1f, false);
-    AttackEffectCol_ = CreateCollision("KirbyEffect", float4(40.0f, 40.0f), float4(100.0f, -20.0f)); // HoverKirbyEnd2가 바닥에 닿아 끝나면
-    //AttackEffectRenderer_->CreateAnimation("AttackEffect.bmp", "AttackEffect", 0, 12, 0.1f, false);
+    EatCol_ = CreateCollision("EatCol", float4(100.0f, 100.0f), float4(100.0f, -20.0f));
 
     SetState(KirbyState::IDLE);
     SetKirbyClass(KirbyClass::DEFAULT);
@@ -808,11 +800,12 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("RunLeft", 'W');
         GameEngineInput::GetInst()->CreateKey("RunRight", 'R');
         GameEngineInput::GetInst()->CreateKey("Inhale", 'Z'); // 흡입
-        GameEngineInput::GetInst()->CreateKey("Fly", 'X'); // 날기
+        GameEngineInput::GetInst()->CreateKey("Fly", 'C'); // 날기
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P');
         GameEngineInput::GetInst()->CreateKey("SlideLeft", 'A');
         GameEngineInput::GetInst()->CreateKey("SlideRight", 'G');
         GameEngineInput::GetInst()->CreateKey("Spark", 'T');
+        GameEngineInput::GetInst()->CreateKey("Default", 'Y');
         GameEngineInput::GetInst()->CreateKey("AbandonClass", 'O');
 
 
