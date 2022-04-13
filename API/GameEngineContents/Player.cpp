@@ -13,7 +13,7 @@
 
 Player::Player()
     : Renderer_(nullptr)
-    , Gravity_(9.8f)
+    , Gravity_(5.0f)
     , AccGravity_(0.0f)
     , JumpHeight_(0.0f)
     , Time_(3.0f)
@@ -373,7 +373,7 @@ void Player::Update()
     }
 
     if (true == GameEngineInput::GetInst()->IsUp("Jump") &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1)) // 공중에서 점프 불가
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y + 1)) // 공중에서 점프 불가
     {
         SetState(KirbyState::JUMPUP);
     }
@@ -425,10 +425,11 @@ void Player::Update()
     else
     {
         SetMove(float4(0, -JumpHeight_));
-        if (JumpHeight_ < 15 && GetState() != KirbyState::JUMPDOWN)
-        {
-            SetState(KirbyState::JUMPING);
-        }
+        // 이거랑 updatejumping이 겹쳐서 여러번 구름
+        //if (JumpHeight_ < 15 && GetState() != KirbyState::JUMPDOWN)
+        //{
+        //    //SetState(KirbyState::JUMPING);
+        //}
     }
 
     // 능력 버리기
@@ -693,20 +694,20 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "TransformRight", 79, 84, 0.3f, false);
         Renderer_->CreateAnimation("Normal.bmp", "TransformLeft", 171, 176, 0.1f, false);
 
-		Renderer_->CreateAnimation("Normal.bmp", "JumpUpRight", 38, 38, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 130, 130, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.05f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 131, 137, 0.05f, true);
-        Renderer_->CreateAnimation("Normal.bmp", "JumpDownRight", 45, 46, 0.1f, true);
-        Renderer_->CreateAnimation("Normal.bmp", "JumpDownLeft", 138, 139, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpUpRight", 38, 38, 0.5f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 130, 130, 0.5f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.1f, false);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 131, 137, 0.f, false);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpDownRight", 45, 46, 0.5f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpDownLeft", 138, 139, 0.5f, true);
 
         Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 93, 93, 0.1f, true);
 
-        Renderer_->CreateAnimation("Normal.bmp", "SlideRight", 184, 185, 0.1f, true);
-        Renderer_->CreateAnimation("Normal.bmp", "SlideLeft", 186, 187, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "SlideStayRight", 185, 185, 0.5f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "SlideStayLeft", 187, 187, 0.5f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "SlideRight", 184, 185, 0.1f, false);
+        Renderer_->CreateAnimation("Normal.bmp", "SlideLeft", 186, 187, 0.1f, false);
+		Renderer_->CreateAnimation("Normal.bmp", "SlideStayRight", 185, 185, 0.5f, false);
+		Renderer_->CreateAnimation("Normal.bmp", "SlideStayLeft", 187, 187, 0.5f, false);
 
         Renderer_->CreateAnimation("Normal.bmp", "GetDamageRight", 184, 185, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "GetDamageLeft", 184, 185, 0.1f, true);
@@ -717,7 +718,6 @@ void Player::Start()
 
 
     {
-        // SparkKirby
         SparkKirbyRenderer_ = CreateRenderer("SparkKirby.bmp");
         GameEngineImage* SparkImage = SparkKirbyRenderer_->GetImage();
         SparkImage->CutCount(10, 23);

@@ -24,10 +24,7 @@ void Player::UpdateTransform()
 
 void Player::UpdateTransformEnd()
 {
-    if (Renderer_->IsEndAnimation())
-    {
-        SetKirbyClass(KirbyClass::SPARK);
-    }
+
 }
 
 void Player::UpdateWalk()
@@ -66,7 +63,7 @@ void Player::UpdateRun()
 
 void Player::UpdateFly()
 {
-    if (true == GameEngineInput::GetInst()->IsPress("Fly") && true == Renderer_->IsEndAnimation())
+    if (true == GameEngineInput::GetInst()->IsPress("Fly") && Renderer_->IsEndAnimation())
     {
         SetState(KirbyState::FLYSTAY);
     }
@@ -139,7 +136,7 @@ void Player::UpdateInhale()
 
 void Player::UpdateEatStart()
 {
-    if (Renderer_->IsAnimationName("EatStartRight") && Renderer_->IsEndAnimation())
+    if (true == Renderer_->IsAnimationName("EatStartRight") && true == Renderer_->IsEndAnimation())
     {
         SetState(KirbyState::EAT);
     }
@@ -200,30 +197,38 @@ void Player::UpdateEatEnd()
     }
 }
 
+
+
 void Player::UpdateJumpUp()
 {
     JumpHeight_ = 25;
     AccGravity_ = 0;
+    
+    //SetState(KirbyState::JUMPDOWN);
     UpdateWalk();
+
 } 
 
 void Player::UpdateJumping()
 {
-    if (Renderer_->IsAnimationName("JumpingRight") && Renderer_->IsEndAnimation())
+    if (true == Renderer_->IsAnimationName("JumpingRight") && true == Renderer_->IsEndAnimation())
     {
         SetState(KirbyState::JUMPDOWN);
     }
 
-    if (Renderer_->IsAnimationName("JumpingLeft") && Renderer_->IsEndAnimation())
+    if (true == Renderer_->IsAnimationName("JumpingLeft") && true == Renderer_->IsEndAnimation())
     {
         SetState(KirbyState::JUMPDOWN);
     }
-
     UpdateWalk();
 }
 
 void Player::UpdateJumpDown()
 {
+    if (true == Renderer_->IsAnimationName("JumpDownRight") && true == Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::IDLE);
+    }
     UpdateWalk();
 }
 
