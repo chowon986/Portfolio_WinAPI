@@ -136,19 +136,16 @@ void Player::UpdateInhale()
 
 void Player::UpdateEatStart()
 {
-    if (true == Renderer_->IsAnimationName("EatStartRight") && true == Renderer_->IsEndAnimation())
-    {
-        SetState(KirbyState::EAT);
-    }
+    
 }
 
 void Player::UpdateEat()
 {
     // need : EatCol 생성 여부 확인 후 위치 커비로 옮기기
-    GameEngineCollision* EatCol = CreateCollision("EatCol", float4(10.0f, 10.0f), float4(100.0f, 0.0f));
+    // start로
 
 	std::vector <GameEngineCollision*> ColResult;
-    if (true == EatCol->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
+    if (true == EatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
     {
         for (GameEngineCollision* Collision : ColResult)
         {
@@ -159,13 +156,13 @@ void Player::UpdateEat()
                 float4 MonPos = GetPosition() - Monster_->GetPosition();
                 if (MonPos.x > 0) // 내가 오른쪽
                 {
-                    Monster_->SetPosition(Monster_->GetPosition() + MonPos);
+                    Monster_->SetMove(-MonPos * GameEngineTime::GetDeltaTime());
                 }
-                if (MonPos.x < 0) // 내가 왼쪽
+                if (MonPos.x < 0) // 내가 왼쪽 
                 {
-                    Monster_->SetPosition(Monster_->GetPosition() - MonPos);
+                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime());
                 }
-                else
+                else // 다 먹으면
                 {
                     MonName_ = Monster_->GetNameCopy();
                    // Monster_->Death();
@@ -206,7 +203,6 @@ void Player::UpdateJumpUp()
     
     //SetState(KirbyState::JUMPDOWN);
     UpdateWalk();
-
 } 
 
 void Player::UpdateJumping()

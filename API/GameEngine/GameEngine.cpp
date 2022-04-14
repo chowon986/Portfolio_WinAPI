@@ -98,7 +98,7 @@ void GameEngine::EngineLoop()
         MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
     }
 
-    GameEngineSound::Update();
+    //GameEngineSound::Update();
     GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
 
     // 레벨수준 시간제한이 있는 게임이라면
@@ -130,7 +130,7 @@ void GameEngine::EngineEnd()
     }
 
 
-    GameEngineSound::AllResourcesDestroy();
+    //GameEngineSound::AllResourcesDestroy();
     GameEngineImageManager::Destroy();
     GameEngineInput::Destroy();
     GameEngineTime::Destroy();
