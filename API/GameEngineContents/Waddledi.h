@@ -21,7 +21,6 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-	void SetState(MonsterState _PrevState);
 
 	void UpdateWalk();
 	void UpdateMove();
@@ -29,8 +28,6 @@ protected:
 
 private:
 	Player* Player_;
-	float4 PrevPos_;
-	bool CheckMapCollision();
 	GameEngineImage* ColMapImage_;
 	GameEngineCollision* WaddlediCol_;
 	GameEngineRenderer* WaddlediRenderer_;

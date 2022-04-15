@@ -73,11 +73,16 @@ private:
 	GameEngineRenderer* AnimalRenderer_;
 
 
-
 	GameEngineRenderer* AttackEffectRenderer_;
 
 	GameEngineCollision* KirbyCol_;
 	GameEngineCollision* EatCol_;
+
+
+	GameEngineImage* Image_;
+	GameEngineImage* SwordKirbyImage_;
+	GameEngineImage* IceKirbyImage_;
+
 
 	std::string MonName_;
 

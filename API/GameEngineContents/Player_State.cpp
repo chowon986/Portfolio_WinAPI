@@ -63,7 +63,12 @@ void Player::UpdateRun()
 
 void Player::UpdateFly()
 {
+//need to chk
+    //if (true == Renderer_->IsEndAnimation())
+    //{
     SetState(KirbyState::FLYSTAY);
+
+    //}
 }
 
 void Player::UpdateFlyStay()
@@ -71,13 +76,21 @@ void Player::UpdateFlyStay()
     AccGravity_ = 0;
     JumpHeight_ = 0;
 
+    if (true == GameEngineInput::GetInst()->IsUp("Fly"))
+    {
+        SetState(KirbyState::FLYATTACK);
+    }
     SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+    UpdateWalk();
 }
 
 void Player::UpdateFlyAttack()
 {
-    //SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_ * AccGravity_);
-   // SetState(KirbyState::FLYDOWN);
+    SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_ * AccGravity_);
+    if (true == Renderer_->IsEndAnimation())
+    {
+        SetState(KirbyState::FLYEND);
+    }
 }
 
 void Player::UpdateAttack()
@@ -141,6 +154,17 @@ void Player::UpdateEatStart()
 
 void Player::UpdateEat()
 {
+    if (Dir_ == "Right")
+    {
+        EatCol_->SetScale(float4(100.0f, 50.0f));
+        EatCol_->SetPivot(float4(50.0f, -20.0f));
+    }
+
+    if (Dir_ == "Left")
+    {
+        EatCol_->SetScale(float4(100.0f, 50.0f));
+        EatCol_->SetPivot(float4(-50.0f, -20.0f));
+    }
 	std::vector <GameEngineCollision*> ColResult;
     if (true == EatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
     {
@@ -153,11 +177,11 @@ void Player::UpdateEat()
                 float4 MonPos = GetPosition() - Monster_->GetPosition();
                 if (MonPos.x > 0) // 내가 오른쪽
                 {
-                    Monster_->SetMove(-MonPos * GameEngineTime::GetDeltaTime()* 10); // need to chk : (1) 속도 (2) 애니메이션 반복
+                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5); // need to chk : (1) 속도 (2) 애니메이션 반복
                 }
                 if (MonPos.x < 0) // 내가 왼쪽 
                 {
-                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 10);
+                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5);
                 }
                 if (true == KirbyCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
                 {
@@ -204,17 +228,17 @@ void Player::UpdateJumpUp()
 
 void Player::UpdateJumping()
 {
-    if (true == Renderer_->IsAnimationName("JumpingRight") && true == Renderer_->IsEndAnimation())
-    {
-        SetState(KirbyState::JUMPDOWN);
-    }
+        if (true == Renderer_->IsAnimationName("JumpingRight") && true == Renderer_->IsEndAnimation())
+        {
+            SetState(KirbyState::JUMPDOWN);
+        }
 
-    if (true == Renderer_->IsAnimationName("JumpingLeft") && true == Renderer_->IsEndAnimation())
-    {
-        SetState(KirbyState::JUMPDOWN);
-    }
-    UpdateWalk();
-    UpdateRun();
+        if (true == Renderer_->IsAnimationName("JumpingLeft") && true == Renderer_->IsEndAnimation())
+        {
+            SetState(KirbyState::JUMPDOWN);
+        }
+        UpdateWalk();
+        UpdateRun();
 }
 
 void Player::UpdateJumpDown()
@@ -249,5 +273,5 @@ void Player::UpdateSlide()
 
 void Player::UpdateSlideStay()
 {
-    // 멈추기
+    // need to chk : move slidestay
 }

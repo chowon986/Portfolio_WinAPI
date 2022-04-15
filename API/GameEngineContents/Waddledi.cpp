@@ -5,9 +5,17 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngine/GameEngineCollision.h>
 #include "Monster.h"
+#include "Player.h"
 
 
 Waddledi::Waddledi()
+	: ColMapImage_(nullptr)
+	, Level_(nullptr)
+	, Player_(nullptr)
+	, WaddlediCol_(nullptr)
+	, WaddlediRenderer_(nullptr)
+	, Dir_(float4::ZERO)
+
 {
 }
 
@@ -42,35 +50,11 @@ void Waddledi::UpdateWalk()
 void Waddledi::Update()
 {
 	UpdateMove();
-	//std::string Dir_;
-	//Dir_ = "Right";
-	//SetMove(Dir_ * GameEngineTime::GetDeltaTime() * GetSpeed());
-
-	//if (RGB(0, 0, 0) != ColMapImage_->GetImagePixel(RightWalk))
-	//{
-	//	SetPosition(RightWalk);
-	//}
-
-	//if (0 > Player_->GetPosition().x - GetPosition().x)
-	//{
-	//	SetMove(RightWalk);
-	//}
-
-	//if (0 < Player_->GetPosition().x - GetPosition().x)
-	//{
-	//	SetMove(LeftWalk);
-	//}
-	// 
+ 
+	//if (/*true == 커비공격col->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect)))*/)
+	{
+	}
 	// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
-	//if (true == WaddlediCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	SetHP(GetHP() - 1);
-	//	if (0 == GetHP())
-	//	{
-	//		WaddlediRenderer_->ChangeAnimation("WaddlediDie");
-	//		//Death(1.0f);
-	//	}
-	//}
 
 	//if (true == CheckMapCollision())
 	//{
@@ -91,29 +75,15 @@ void Waddledi::UpdateMove()
 		Dir_ = float4::LEFT;
 	}
 
+	if (true == WaddlediCol_->CollisionCheck("EatCol", CollisionType::Rect, CollisionType::Rect))
+	{
+		Dir_ = float4::ZERO;
+	}
+
+	if (// Dir_ == ZERO고,
+		 true != WaddlediCol_->CollisionCheck("EatCol", CollisionType::Rect, CollisionType::Rect))
+	{
+		Dir_ = float4::RIGHT;
+	}
 	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * 15);
-}
-
-
-bool Waddledi::CheckMapCollision()
-{
-	//if (nullptr != ColMapImage_)
-	//{
-	//	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(20.0f, 0.0f)))
-	//	{
-	//		return true;
-	//	}
-
-	//	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() - float4(20.0f, 0.0f)))
-	//	{
-	//		return true;
-	//	}
-
-	//	// 왼쪽, 오른쪽, 위쪽으로 이동 금지
-	//	if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50)
-	//	{
-	//		return true;
-	//	}
-	//}
-	return true;
 }
