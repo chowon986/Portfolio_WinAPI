@@ -101,15 +101,19 @@ void Player::UpdateDie()
 
 void Player::UpdateUp()
 {
-    if (GetKirbyClass() == KirbyClass::ANIMAL)
-    {
+    //if (GetKirbyClass() == KirbyClass::ANIMAL)
+    //{
+    AccGravity_ = 0;
+    JumpHeight_ = 0;
         SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-    }
-    else
-    {
-        SetKirbyClass(KirbyClass::DEFAULT);
-        SetState(KirbyState::IDLE);
-    }
+        UpdateWalk();
+        UpdateRun();
+    //}
+    //else
+    //{
+    //    SetKirbyClass(KirbyClass::DEFAULT);
+    //    SetState(KirbyState::IDLE);
+    //}
 }
 
 void Player::UpdateDown()
@@ -195,6 +199,7 @@ void Player::UpdateJumpUp()
     
     //SetState(KirbyState::JUMPDOWN);
     UpdateWalk();
+    UpdateRun();
 } 
 
 void Player::UpdateJumping()
@@ -209,6 +214,7 @@ void Player::UpdateJumping()
         SetState(KirbyState::JUMPDOWN);
     }
     UpdateWalk();
+    UpdateRun();
 }
 
 void Player::UpdateJumpDown()

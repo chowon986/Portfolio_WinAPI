@@ -497,7 +497,8 @@ void Player::Update()
             true == GameEngineInput::GetInst()->IsFree("SlideLeft") &&
             true == GameEngineInput::GetInst()->IsFree("Jump") &&
             true == GameEngineInput::GetInst()->IsFree("Eat") &&
-            true == GameEngineInput::GetInst()->IsFree("Fly"))
+            true == GameEngineInput::GetInst()->IsFree("Fly") &&
+            true == GameEngineInput::GetInst()->IsFree("MoveUp"))
         {
 			SetState(KirbyState::IDLE);
         }
@@ -506,7 +507,7 @@ void Player::Update()
     else
     {
         SetMove(float4(0, -JumpHeight_));
-        if (JumpHeight_ < 15 && GetState() != KirbyState::JUMPDOWN && GetState() != KirbyState::IDLE)
+        if (GetState() != KirbyState::JUMPDOWN && GetState() != KirbyState::IDLE && GetState()!=KirbyState::UP)
         {
             SetState(KirbyState::JUMPING);
         }
