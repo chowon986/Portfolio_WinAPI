@@ -153,11 +153,11 @@ void Player::UpdateEat()
                 float4 MonPos = GetPosition() - Monster_->GetPosition();
                 if (MonPos.x > 0) // 내가 오른쪽
                 {
-                    Monster_->SetMove(-MonPos * GameEngineTime::GetDeltaTime()* 5); // need to chk : (1) 속도 (2) 애니메이션 반복
+                    Monster_->SetMove(-MonPos * GameEngineTime::GetDeltaTime()* 10); // need to chk : (1) 속도 (2) 애니메이션 반복
                 }
                 if (MonPos.x < 0) // 내가 왼쪽 
                 {
-                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5);
+                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 10);
                 }
                 if (true == KirbyCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
                 {

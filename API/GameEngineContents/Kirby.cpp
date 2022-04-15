@@ -75,6 +75,7 @@ void Kirby::GameInit()
     if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
     {
         GameEngineInput::GetInst()->CreateKey("LevelChange", VK_RETURN);
+        GameEngineInput::GetInst()->CreateKey("Level1", '9');
     }
 
     CreateLevel<BeforeTitleLevel>("BeforeTitle");
