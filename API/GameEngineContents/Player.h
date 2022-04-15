@@ -11,7 +11,6 @@ enum class KirbyClass
 	FIRE,
 	ICE,
 	ANIMAL,
-	BEAM,
 };
 
 enum class KirbyState
@@ -44,6 +43,7 @@ class GameEngineImage;
 class GameEngineRenderer;
 class GameEngineCollision;
 class GameEngineLevel;
+class BotUI;
 class Player : public CharacterBase
 {
 public:
@@ -64,12 +64,21 @@ public:
 protected:
 
 private:
-	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* Renderer_; // Default
 	GameEngineRenderer* SparkKirbyRenderer_;
+	GameEngineRenderer* PigRenderer_;
+	GameEngineRenderer* SwordRenderer_;
+	GameEngineRenderer* FireRenderer_;
+	GameEngineRenderer* IceRenderer_;
+	GameEngineRenderer* AnimalRenderer_;
+
+
+
 	GameEngineRenderer* AttackEffectRenderer_;
 
 	GameEngineCollision* KirbyCol_;
 	GameEngineCollision* EatCol_;
+
 	std::string MonName_;
 
 	int HPCount_;

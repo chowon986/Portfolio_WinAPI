@@ -36,6 +36,8 @@ void Monster::GetPos(float4 _Pos)
 
 void Monster::Start()
 {
+	GameEngineLevel* Level = GetLevel();
+	ColMapImage_ = Level->GetColMapImage();
 }
 
 void Monster::Update()

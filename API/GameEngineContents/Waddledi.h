@@ -21,6 +21,10 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
+	void SetState(MonsterState _PrevState);
+
+	void UpdateWalk();
+	void UpdateMove();
 protected:
 
 private:
@@ -31,6 +35,7 @@ private:
 	GameEngineCollision* WaddlediCol_;
 	GameEngineRenderer* WaddlediRenderer_;
 	GameEngineLevel* Level_;
+	float4 Dir_;
 
 private:
 };

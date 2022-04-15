@@ -63,19 +63,15 @@ void Player::UpdateRun()
 
 void Player::UpdateFly()
 {
-    if (true == GameEngineInput::GetInst()->IsPress("Fly") && Renderer_->IsEndAnimation())
-    {
-        SetState(KirbyState::FLYSTAY);
-    }
+    SetState(KirbyState::FLYSTAY);
 }
 
 void Player::UpdateFlyStay()
 {
-    if (true == GameEngineInput::GetInst()->IsPress("Fly"))
-    {
-    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-    }
+    AccGravity_ = 0;
+    JumpHeight_ = 0;
 
+    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
 }
 
 void Player::UpdateFlyAttack()
@@ -141,9 +137,6 @@ void Player::UpdateEatStart()
 
 void Player::UpdateEat()
 {
-    // need : EatCol 생성 여부 확인 후 위치 커비로 옮기기
-    // start로
-
 	std::vector <GameEngineCollision*> ColResult;
     if (true == EatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
     {
@@ -156,17 +149,17 @@ void Player::UpdateEat()
                 float4 MonPos = GetPosition() - Monster_->GetPosition();
                 if (MonPos.x > 0) // 내가 오른쪽
                 {
-                    Monster_->SetMove(-MonPos * GameEngineTime::GetDeltaTime());
+                    Monster_->SetMove(-MonPos * GameEngineTime::GetDeltaTime()* 5); // need to chk : (1) 속도 (2) 애니메이션 반복
                 }
                 if (MonPos.x < 0) // 내가 왼쪽 
                 {
-                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime());
+                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5);
                 }
-                else // 다 먹으면
+                if (true == KirbyCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
                 {
                     MonName_ = Monster_->GetNameCopy();
-                   // Monster_->Death();
-                    SetState(KirbyState::EATEND);
+                    Monster_->Death();
+                    ////need to chk : next animation
                 }
             }
         }
@@ -195,10 +188,9 @@ void Player::UpdateEatEnd()
 }
 
 
-
 void Player::UpdateJumpUp()
 {
-    JumpHeight_ = 25;
+    JumpHeight_ = 15;
     AccGravity_ = 0;
     
     //SetState(KirbyState::JUMPDOWN);
@@ -221,11 +213,12 @@ void Player::UpdateJumping()
 
 void Player::UpdateJumpDown()
 {
+    UpdateWalk();
+
     if (true == Renderer_->IsAnimationName("JumpDownRight") && true == Renderer_->IsEndAnimation())
     {
         SetState(KirbyState::IDLE);
     }
-    UpdateWalk();
 }
 
 void Player::UpdateSlide()

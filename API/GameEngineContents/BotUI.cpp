@@ -20,8 +20,8 @@ void BotUI::Render()
 {
 
 	GameEngineRenderer* PlayerUI_ = CreateRenderer("NormalStatus.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER,float4(49.0f,557.0f));
-	GameEngineRenderer* PlayerHP_ = CreateRenderer("HPUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(235.0f, 550.0f));
-	PlayerHPMinus_ = CreateRenderer("HPMinus.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(235.0f, 550.0f));
+	GameEngineRenderer* PlayerHP_ = CreateRenderer("HPUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(235.0f, 555.0f));
+	PlayerHPMinus_ = CreateRenderer("HPMinus.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(235.0f, 562.0f));
 	GameEngineRenderer* PlayerHPCount1_ = CreateRenderer("PlayerHPCount1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(155.0f, 525.0f));
 	GameEngineRenderer* PlayerHPCount2_ = CreateRenderer("PlayerHPCount2.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(190.0f, 527.0f));
 	//GameEngineRenderer* PlayerHPCount3 = CreateRenderer("            .bmp", RenderPivot::CENTER, float4(         .0f,            .0f));
@@ -37,8 +37,4 @@ void BotUI::Render()
 
 void BotUI::Update()
 {
-	//if (true == Player::KirbyCol_->CollisionCheck("BasicMonster", CollisionType::Rect))
-	//{
-	//	PlayerHPMinus->
-	//}
 }

@@ -25,4 +25,6 @@ private:
 	bool CheckMapCollision();
 	float4 PrevPos_;
 	GameEngineLevel* Level_;
+	float4 Dir_;
+	void UpdateMove();
 };

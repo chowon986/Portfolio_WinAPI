@@ -2,6 +2,16 @@
 #include <GameEngine/GameEngineActor.h>
 #include "CharacterBase.h"
 
+enum class MonsterState
+{
+	WALK,
+	FLY,
+	ATTACK,
+	DIE,
+};
+
+class GameEngineImage;
+class GameEngineLevel;
 class Monster : public CharacterBase
 {
 public:
@@ -20,6 +30,9 @@ protected:
 private:
 	int Speed_;
 	GameEngineRenderer* WaddlediRenderer_;
+	MonsterState MonsterState_;
+	GameEngineImage* ColMapImage_;
+	GameEngineLevel* Level_;
 
 private:
 	void Walk();
@@ -29,7 +42,7 @@ private:
 	void GetPos(float4 _Pos);
 	void Start();
 	void Update();
-	// 지속적으로 게임이 실행될때 호출된다.
+	void SetState(MonsterState _PrevState);
 	void Render();
 
 public:

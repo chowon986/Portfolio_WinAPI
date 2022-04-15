@@ -33,17 +33,27 @@ void Sparky::Render()
 
 void Sparky::Update()
 {
-	PrevPos_ = GetPosition();
-
-	float4 NewPos;
-	NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
-	NewPos.y = GetPosition().y;
-	SetPosition(NewPos);
+	void UpdeteMove();
 
 	if (true == CheckMapCollision())
 	{
 		SetPosition(PrevPos_);
 	}
+}
+
+void Sparky::UpdateMove()
+{
+	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(20.0f, 0.0f)))
+	{
+		Dir_ = float4::RIGHT;
+	}
+
+	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(-20.0f, 0.0f)))
+	{
+		Dir_ = float4::LEFT;
+	}
+
+	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * 15);
 }
 
 bool Sparky::CheckMapCollision()
