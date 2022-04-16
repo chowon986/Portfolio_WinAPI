@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include "CharacterBase.h"
 
+
 enum class KirbyClass
 {
 	DEFAULT,
@@ -16,26 +17,25 @@ enum class KirbyClass
 enum class KirbyState
 {
 	IDLE,
-	WALK,
-	RUN,
-	FLY,
+	WALK, // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE, TAKEDMG,  
+	RUN,  // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE, TKDMG,
+	UP,	  // Animal 상태에서 땅 파고 올라가는 상태
+	DOWN, // possible : SLIDE 
+	SLIDE,  
+	FLY, 
 	FLYSTAY,
 	FLYATTACK,
 	FLYEND,
-	EATSTART,
-	EAT,
-	EATEND,
-	STARATTACK,
-	TRANSFORM,
-	TRANSFORMEND,
-	JUMPUP,
-	JUMPING,
-	JUMPDOWN,
-	UP,
-	DOWN,
-	SLIDE,
-	SLIDESTAY,
-	GETDAMAGE,
+	EATSTART, // possible : ATTACK
+	EAT,      // possible : ATTACK
+	EATEND,   // possible : ATTACK
+	ATTACK,	  
+	ABANDON,  
+	TRANSFORM, 
+	JUMPUP, // Possible : FLY
+	JUMPING, // Possible : FLY
+	JUMPDOWN, // Possible : FLY
+	TAKEDAMAGE, // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE,
 	DIE,
 };
 
@@ -44,6 +44,8 @@ class GameEngineRenderer;
 class GameEngineCollision;
 class GameEngineLevel;
 class BotUI;
+class Monster;
+class StarAttackEffect;
 class Player : public CharacterBase
 {
 public:
@@ -73,17 +75,20 @@ private:
 	GameEngineRenderer* AnimalRenderer_;
 
 
+
 	GameEngineRenderer* AttackEffectRenderer_;
 
 	GameEngineCollision* KirbyCol_;
 	GameEngineCollision* EatCol_;
 
-
 	GameEngineImage* Image_;
 	GameEngineImage* SwordKirbyImage_;
 	GameEngineImage* IceKirbyImage_;
+	GameEngineImage* PigImage_;
 
+	StarAttackEffect* StarAttackEffect_;
 
+	Monster* Monster_;
 	std::string MonName_;
 
 	int HPCount_;
@@ -95,7 +100,6 @@ private:
 	float Speed_;
 	GameEngineImage* ColMapImage_;
 	GameEngineLevel* Level_;
-	Player* Player_;
 	KirbyClass KirbyClass_;
 	KirbyState KirbyState_;
 	std::string Dir_;
@@ -137,8 +141,13 @@ private:
 	void UpdateJumping();
 	void UpdateJumpDown();
 	void UpdateSlide();
-	void UpdateSlideStay();
 	void UpdateTransform();
 	void UpdateTransformEnd();
-	void UpdateEffect();
+
+	//void UpdateEffect();
+public:
+	void SetStarAttackEffect(StarAttackEffect* _StarAttackEffect)
+	{
+		StarAttackEffect_ = _StarAttackEffect;
+	}
 };

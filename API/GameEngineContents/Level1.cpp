@@ -15,6 +15,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include "StarAttackEffect.h"
 
 
 
@@ -135,25 +136,35 @@ void Level1::LevelChangeStart()
 	}
 
 	{
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::ATTACKEFFECT);
+
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(205.0, 436.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		Player_->SetStarAttackEffect(StarAttackEffect_);
 	}
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
 		Waddledi_->SetPosition(float4(/*1200.0f, 430.0f*/300.0f,436.0f));
+		Waddledi_->SetName("ImpossibleTransform");
+
+		Waddledi* Waddledicho_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
+		Waddledicho_->SetPosition(float4(/*1200.0f, 430.0f*/100.0f, 436.0f));
+		Waddledicho_->SetName("ImpossibleTransform");
 	}
 
 	{
 		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
 		Waddledoo_->SetPosition(float4(2837.0f, 377.0f));
+		Waddledoo_->SetName("Beam");
 		GameEngineCollision* WaddledooCol = Waddledoo_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
 		Monster* Sparky_ = CreateActor<Sparky>((int)ORDER::MONSTER);
 		Sparky_->SetPosition(float4(3780.0f, 380.0f));
+		Sparky_->SetName("Spark");
 		GameEngineCollision* SparkyCol = Sparky_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 }

@@ -6,6 +6,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Monster.h"
 #include "Player.h"
+#include <vector>
 
 
 Waddledi::Waddledi()
@@ -37,6 +38,7 @@ void Waddledi::Start()
 	WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
 	Dir_ = float4::RIGHT;
 	WaddlediCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
+	DirectionCol_ = CreateCollision("DirectionCol", float4(200.0f, 50.0f), float4(0.0f, -30.0f));
 }
 
 void Waddledi::Render()
@@ -50,16 +52,6 @@ void Waddledi::UpdateWalk()
 void Waddledi::Update()
 {
 	UpdateMove();
- 
-	//if (/*true == 커비공격col->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect)))*/)
-	{
-	}
-	// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
-
-	//if (true == CheckMapCollision())
-	//{
-	//	SetPosition(PrevPos_);
-	//}
 
 }
 
@@ -67,12 +59,52 @@ void Waddledi::UpdateMove()
 {
 	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(20.0f, 0.0f)))
 	{
-		Dir_ = float4::RIGHT;
+		Dir_ = float4::LEFT;
+		WaddlediRenderer_->ChangeAnimation("WaddlediWalkLeft");
 	}
 
 	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(-20.0f, 0.0f)))
 	{
+		Dir_ = float4::RIGHT;
+		WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
+	}
+
+	// 벽에 부딪혔을때
+	if (GetPosition().x < 0)
+	{
+		Dir_ = float4::RIGHT;
+		WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
+	}
+
+	if (GetPosition().x > GetLevel()->GetMapSizeX())
+	{
 		Dir_ = float4::LEFT;
+		WaddlediRenderer_->ChangeAnimation("WaddlediWalkLeft");
+	}
+
+	//vector 생성 std::vector<자료형>변수이름;
+	std::vector<GameEngineCollision*> Result;
+	if (DirectionCol_->CollisionResult("KirbyCol", Result, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* Collision : Result)
+		{
+			Player* ColPlayer = dynamic_cast<Player*>(Collision->GetActor()); // 부딪힌 액터 꺼내기
+			if (ColPlayer != nullptr)
+			{
+				float Distance = ColPlayer->GetPosition().x - GetPosition().x;
+				if (Distance < 0)
+				{
+					Dir_ = float4::LEFT;
+					WaddlediRenderer_->ChangeAnimation("WaddlediWalkLeft");
+				}
+
+				else if (Distance > 0)
+				{
+					Dir_ = float4::RIGHT;
+					WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
+				}
+			}
+		}
 	}
 
 	if (true == WaddlediCol_->CollisionCheck("EatCol", CollisionType::Rect, CollisionType::Rect))
@@ -80,10 +112,12 @@ void Waddledi::UpdateMove()
 		Dir_ = float4::ZERO;
 	}
 
-	if (// Dir_ == ZERO고,
+	if (Dir_.x == float4::ZERO.x &&
 		 true != WaddlediCol_->CollisionCheck("EatCol", CollisionType::Rect, CollisionType::Rect))
 	{
 		Dir_ = float4::RIGHT;
+		WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
 	}
 	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * 15);
+
 }

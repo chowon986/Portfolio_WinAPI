@@ -227,6 +227,7 @@
     <ClInclude Include="Level1_3.h" />
     <ClInclude Include="Sparky.h" />
     <ClInclude Include="Spinni.h" />
+    <ClInclude Include="StarAttackEffect.h" />
     <ClInclude Include="Storo.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="SwordItem.h" />
@@ -311,6 +312,7 @@
     <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="Sparky.cpp" />
     <ClCompile Include="Spinni.cpp" />
+    <ClCompile Include="StarAttackEffect.cpp" />
     <ClCompile Include="Storo.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SwordItem.cpp" />

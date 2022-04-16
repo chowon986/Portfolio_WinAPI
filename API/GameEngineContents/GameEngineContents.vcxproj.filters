@@ -207,6 +207,7 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="StarAttackEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -413,6 +414,7 @@
     <ClInclude Include="GameOver.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="StarAttackEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

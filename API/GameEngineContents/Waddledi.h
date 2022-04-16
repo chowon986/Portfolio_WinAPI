@@ -30,6 +30,7 @@ private:
 	Player* Player_;
 	GameEngineImage* ColMapImage_;
 	GameEngineCollision* WaddlediCol_;
+	GameEngineCollision* DirectionCol_;
 	GameEngineRenderer* WaddlediRenderer_;
 	GameEngineLevel* Level_;
 	float4 Dir_;

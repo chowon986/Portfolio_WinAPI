@@ -24,7 +24,6 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
 protected:
-	int HP_;
 	float4 Pos_;
 
 private:

@@ -3,10 +3,10 @@
 #include <GameEngine/GameEngineImage.h>
 
 Monster::Monster()
-	: HP_(1)
-	, Pos_(0, 0)
+	: Pos_(0, 0)
 	, Speed_(10)
 {
+	SetHP(1);
 }
 
 Monster::~Monster()
