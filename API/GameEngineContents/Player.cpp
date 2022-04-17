@@ -573,10 +573,6 @@ void Player::SetState(KirbyState _KirbyState)
 
 void Player::Update()
 {
-
-    float4 direction = float4::ZERO;
-    PrevPos_ = GetPosition();
-
     if (true == GameEngineInput::GetInst()->IsPress("Left") &&
         false == GameEngineInput::GetInst()->IsPress("Run") &&
         false == GameEngineInput::GetInst()->IsPress("Attack") &&
@@ -707,7 +703,7 @@ void Player::Update()
         KirbyState::TRANSFORM != GetState() &&
         RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN)) // 공중에서 점프 불가
     {
-        JumpHeight_ = 180;
+        JumpHeight_ = 200;
         SetState(KirbyState::JUMPUP);
     }
 
@@ -759,6 +755,7 @@ void Player::Update()
         JumpDirection = float4::ZERO;
     }
 
+    SetMove(JumpDirection * Jump);
     // 땅에 닿았을 때
     if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) && JumpDirection.y > 0)
     {
@@ -766,6 +763,8 @@ void Player::Update()
         {
             SetMove(float4::UP);
         }
+        SetPosition(float4(GetPosition().ix(), GetPosition().iy()));
+
         JumpHeight_ = 0;
         if (true == GameEngineInput::GetInst()->IsFree("Left") &&
             true == GameEngineInput::GetInst()->IsFree("Right") &&
@@ -829,7 +828,6 @@ void Player::Update()
     // 떠 있을 때
     else
     {
-        SetMove(JumpDirection * Jump);
         if (GetState() != KirbyState::FLYSTAY &&
             GetState() != KirbyState::FLY &&
             GetState() != KirbyState::FLYATTACK &&
@@ -858,7 +856,7 @@ void Player::Update()
     }
 
     StateUpdate();
-    //CheckCollision();
+    CheckCollision();
 
 }
 
@@ -921,19 +919,39 @@ void Player::CheckCollision()
        }
     }
 
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y) &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y - 25))
     {
-        SetPosition(PrevPos_);
+        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y) &&
+               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y - 25))
+        {
+            SetMove(float4::LEFT);
+        }
     }
 
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y) &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y - 25))
     {
-        SetPosition(PrevPos_);
+        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y) &&
+               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y - 25))
+        {
+            SetMove(float4::RIGHT);
+        }
     }
 
-    if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50)
+    if (GetPosition().x < 0)
     {
-        SetPosition(PrevPos_);
+        SetPosition(float4(0, GetPosition().y));
+    }
+
+    if (GetPosition().x > GetLevel()->GetMapSizeX())
+    {
+        SetPosition(float4(GetLevel()->GetMapSizeX(), GetPosition().y));
+    }
+
+    if (GetPosition().y < 70)
+    {
+        SetPosition(float4(GetPosition().x, 70));
     }
 }
 
@@ -1061,7 +1079,7 @@ void Player::Start()
 		Renderer_->CreateAnimation("Normal.bmp", "FlyStayRight", 59, 64, 0.1f, true);
 		Renderer_->CreateAnimation("Normal.bmp", "FlyStayLeft", 149, 154, 0.1f, true);
 		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackRight", 74, 74, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackLeft", 164, 167, 0.1f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackLeft", 164, 164, 0.1f, true);
 		Renderer_->CreateAnimation("Normal.bmp", "FlyEndRight", 78, 79, 0.1f, true);
 		Renderer_->CreateAnimation("Normal.bmp", "FlyEndLeft", 168, 169, 0.1f, true);
 
@@ -1073,11 +1091,11 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "EatEndLeft", 155, 157, 0.1f, true);
 
 		Renderer_->CreateAnimation("Normal.bmp", "JumpUpRight", 38, 38, 0.5f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 120, 120, 0.5f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.1f, false);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 129, 134, 0.f, false);
-        Renderer_->CreateAnimation("Normal.bmp", "JumpDownRight", 45, 46, 0.5f, true);
-        Renderer_->CreateAnimation("Normal.bmp", "JumpDownLeft", 135, 136, 0.5f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 128, 128, 0.5f, true);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.03f, false);
+		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 129, 134, 0.03f, false);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpDownRight", 45, 46, 0.3f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpDownLeft", 135, 136, 0.3f, true);
 
         Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 91, 91, 0.1f, true);
