@@ -7,6 +7,7 @@
 
 
 Monster1::Monster1()
+	: Monster()
 {
 }
 

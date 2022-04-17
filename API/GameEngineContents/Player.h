@@ -46,6 +46,7 @@ class GameEngineLevel;
 class BotUI;
 class Monster;
 class StarAttackEffect;
+enum class MonsterClass;
 class Player : public CharacterBase
 {
 public:
@@ -89,12 +90,11 @@ private:
 	StarAttackEffect* StarAttackEffect_;
 
 	Monster* Monster_;
-	std::string MonName_;
+	MonsterClass MonClass_;
 
 	int HPCount_;
 
 	float Gravity_;
-	float AccGravity_;
 	float JumpHeight_;
 	float Time_;
 	float Speed_;
@@ -128,6 +128,7 @@ private:
 	void UpdateFly();
 	void UpdateFlyStay();
 	void UpdateFlyAttack();
+	void UpdateFlyEnd();
 	void UpdateAttack();
 	void UpdateDie();
 	void UpdateUp();

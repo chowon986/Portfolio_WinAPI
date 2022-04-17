@@ -10,6 +10,18 @@ enum class MonsterState
 	DIE,
 };
 
+enum class MonsterClass
+{
+	NONE,
+	DEFAULT,
+	SPARK,
+	SWORD,
+	FIRE,
+	ICE,
+	ANIMAL,
+	BOSS
+};
+
 class GameEngineImage;
 class GameEngineLevel;
 class Monster : public CharacterBase
@@ -32,6 +44,18 @@ private:
 	MonsterState MonsterState_;
 	GameEngineImage* ColMapImage_;
 	GameEngineLevel* Level_;
+	MonsterClass MonsterClass_;
+
+public:
+	void SetMonsterClass(MonsterClass _MonsterClass)
+	{
+		MonsterClass_ = _MonsterClass;
+	}
+
+	MonsterClass GetMonsterClass()
+	{
+		return MonsterClass_;
+	}
 
 private:
 	void Walk();

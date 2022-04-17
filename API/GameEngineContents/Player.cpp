@@ -14,13 +14,13 @@
 Player::Player()
     : Renderer_(nullptr)
     , Gravity_(5.0f)
-    , AccGravity_(0.0f)
     , JumpHeight_(0.0f)
     , Time_(3.0f)
     , Level_(nullptr)
     , HPCount_(0)
     , Speed_(20)
     , EatCol_(nullptr)
+    , MonClass_(MonsterClass::NONE)
 {
 }
 
@@ -397,11 +397,7 @@ void Player::SetState(KirbyState _KirbyState)
         }
         break;
     case KirbyState::TRANSFORM:
-        if (GetKirbyClass() == KirbyClass::PIG)
-        {
-            PigRenderer_->ChangeAnimation("Transform" + Dir_);
-            //KirbyEffect_->ChangeAnimation("Transform");
-        }
+        PigRenderer_->ChangeAnimation("Transform" + Dir_);
 		break;
 
 
@@ -435,7 +431,6 @@ void Player::SetState(KirbyState _KirbyState)
 
 
     case KirbyState::JUMPUP:
-        PrevPos_ = GetPosition();
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
             SparkKirbyRenderer_->ChangeAnimation("JumpUp" + Dir_);
@@ -488,7 +483,6 @@ void Player::SetState(KirbyState _KirbyState)
         }
         break;
     case KirbyState::JUMPDOWN:
-        PrevPos_ = GetPosition();
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
             SparkKirbyRenderer_->ChangeAnimation("JumpDown" + Dir_);
@@ -583,40 +577,6 @@ void Player::Update()
     float4 direction = float4::ZERO;
     PrevPos_ = GetPosition();
 
-    //if (true == GameEngineInput::GetInst()->IsUp("Spark")) 
-    //{
-    //    //SetState(KirbyState::TRANSFORM);
-    //    SetKirbyClass(KirbyClass::SPARK);
-    //}
-    //
-    //if (true == GameEngineInput::GetInst()->IsUp("Fire")) // transform
-    //{
-    //    //SetState(KirbyState::TRANSFORM);
-    //    SetKirbyClass(KirbyClass::FIRE);
-    //}
-
-    //if (true == GameEngineInput::GetInst()->IsUp("Animal")) // transform
-    //{
-    //    //SetState(KirbyState::TRANSFORM);
-    //    SetKirbyClass(KirbyClass::ANIMAL);
-    //}
-
-    //if (true == GameEngineInput::GetInst()->IsUp("Ice")) // transform
-    //{
-    //    SetKirbyClass(KirbyClass::ICE);
-    //}
-
-    //if (true == GameEngineInput::GetInst()->IsUp("Sword")) // transform
-    //{
-    //    //SetState(KirbyState::TRANSFORM);
-    //    SetKirbyClass(KirbyClass::SWORD);
-    //}
-
-    //if (true == GameEngineInput::GetInst()->IsUp("Default")) // transform
-    //{
-    //    SetKirbyClass(KirbyClass::DEFAULT);
-    //}
-
     if (true == GameEngineInput::GetInst()->IsPress("Left") &&
         false == GameEngineInput::GetInst()->IsPress("Run") &&
         false == GameEngineInput::GetInst()->IsPress("Attack") &&
@@ -625,13 +585,9 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
         KirbyState::FLY != GetState() &&
-        KirbyState::FLYEND != GetState() &&
-        KirbyState::FLYSTAY != GetState() &&
-        KirbyState::FLYATTACK != GetState() &&
-        KirbyState::JUMPUP != GetState() &&
-        KirbyState::JUMPING != GetState() &&
-        KirbyState::JUMPDOWN != GetState() &&
-        KirbyState::SLIDE != GetState())
+        KirbyState::SLIDE != GetState() &&
+        KirbyState::TRANSFORM != GetState() &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
 
     {
         SetState(KirbyState::WALK);
@@ -644,13 +600,9 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
         KirbyState::FLY != GetState() &&
-        KirbyState::FLYEND != GetState() &&
-        KirbyState::FLYSTAY != GetState() &&
-        KirbyState::FLYATTACK != GetState() &&
-        KirbyState::JUMPUP != GetState() &&
-        KirbyState::JUMPING != GetState() &&
-        KirbyState::JUMPDOWN != GetState() &&
-        KirbyState::SLIDE != GetState())
+        KirbyState::SLIDE != GetState() &&
+        KirbyState::TRANSFORM != GetState() &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
     {
         SetState(KirbyState::WALK);
     }
@@ -663,13 +615,9 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
         KirbyState::FLY != GetState() &&
-        KirbyState::FLYEND != GetState() &&
-        KirbyState::FLYSTAY != GetState() &&
-        KirbyState::FLYATTACK != GetState() &&
-        KirbyState::JUMPUP != GetState() &&
-        KirbyState::JUMPING != GetState() &&
-        KirbyState::JUMPDOWN != GetState() &&
-        KirbyState::SLIDE != GetState())
+        KirbyState::SLIDE != GetState() && 
+        KirbyState::TRANSFORM != GetState() &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
     {
         SetState(KirbyState::RUN);
     }
@@ -681,64 +629,99 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
         KirbyState::FLY != GetState() &&
-        KirbyState::FLYEND != GetState() &&
-        KirbyState::FLYSTAY != GetState() &&
-        KirbyState::FLYATTACK != GetState() &&
-        KirbyState::JUMPUP != GetState() &&
-        KirbyState::JUMPING != GetState() &&
-        KirbyState::JUMPDOWN != GetState() &&
-        KirbyState::SLIDE != GetState())
+        KirbyState::SLIDE != GetState() &&
+        KirbyState::TRANSFORM != GetState() &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
     {
         SetState(KirbyState::RUN);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Up") &&
-        KirbyClass::ANIMAL == GetKirbyClass() //&&
+        KirbyClass::ANIMAL == GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState()//&&
         /*need to chk RGB(,,)  */)
     {
         SetState(KirbyState::UP);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Down") &&
-        KirbyClass::PIG != GetKirbyClass())
+        KirbyClass::PIG != GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState())
     {
         SetState(KirbyState::DOWN);
     }
 
     if (true == GameEngineInput::GetInst()->IsDown("Slide") &&
         KirbyState::DOWN == GetState() &&
-        KirbyClass::PIG != GetKirbyClass())
+        KirbyClass::PIG != GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState())
     {
         SetState(KirbyState::SLIDE);
     }
 
     if (true == GameEngineInput::GetInst()->IsDown("Attack") &&
-        KirbyClass::DEFAULT != GetKirbyClass())
+        KirbyClass::DEFAULT != GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState())
     {
         SetState(KirbyState::ATTACK);
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("Fly")
-        && GetState() != KirbyState::JUMPUP
-        && GetState() != KirbyState::JUMPING
-        && GetState() != KirbyState::JUMPDOWN
-        && KirbyClass::PIG != GetKirbyClass()
-        && RGB(0, 0, 0) != ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y - 1))
+    if (true == GameEngineInput::GetInst()->IsPress("Fly") &&
+        GetState() != KirbyState::JUMPUP &&
+        GetState() != KirbyState::JUMPING &&
+        GetState() != KirbyState::JUMPDOWN &&
+        KirbyClass::PIG != GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState())
     {
-       SetState(KirbyState::FLYSTAY);
+        if (KirbyState::FLYSTAY != GetState())
+        {
+            SetState(KirbyState::FLY);
+        }
+
+        if (KirbyState::FLY == GetState() &&
+            true == Renderer_->IsEndAnimation())
+        {
+            SetState(KirbyState::FLYSTAY);
+        }
+    }
+    else if (true == GameEngineInput::GetInst()->IsFree("Fly") &&
+        (KirbyState::FLYSTAY == GetState() || KirbyState::FLYATTACK == GetState() || KirbyState::FLYEND == GetState()) &&
+        KirbyClass::PIG != GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState())
+    {
+        
+        if (KirbyState::FLYEND != GetState())
+        {
+            SetState(KirbyState::FLYATTACK);
+        }
+
+        if (KirbyState::FLYATTACK == GetState() &&
+            true == Renderer_->IsEndAnimation())
+        {
+            SetState(KirbyState::FLYEND);
+        }
     }
 
     if (true == GameEngineInput::GetInst()->IsUp("Jump") &&
         KirbyClass::PIG != GetKirbyClass() &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y + 1)) // 공중에서 점프 불가
+        KirbyState::TRANSFORM != GetState() &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN)) // 공중에서 점프 불가
     {
+        JumpHeight_ = 180;
         SetState(KirbyState::JUMPUP);
+    }
+
+    if (true == GameEngineInput::GetInst()->IsUp("Transform") &&
+        MonClass_ != MonsterClass::NONE &&
+        MonClass_ != MonsterClass::DEFAULT &&
+        MonClass_ != MonsterClass::BOSS)
+    {
+        SetState(KirbyState::TRANSFORM);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("ResetPos"))
     {
         SetPosition(float4(205.0, 436.0f));
-        AccGravity_ = 0;
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Eat") &&
@@ -748,6 +731,7 @@ void Player::Update()
         KirbyState::FLYSTAY != GetState() &&
         KirbyState::FLYATTACK != GetState() &&
         KirbyState::EATEND != GetState() &&
+        KirbyState::TRANSFORM != GetState() &&
         KirbyClass::PIG != GetKirbyClass())
     {
         if (KirbyState::EAT != GetState())
@@ -767,49 +751,100 @@ void Player::Update()
         }
     }
 
-	AccGravity_ += Gravity_ * GameEngineTime::GetDeltaTime();
-	JumpHeight_ = JumpHeight_ - AccGravity_;
+    float Jump = (Gravity_ * GameEngineTime::GetDeltaTime() * 100);
+    JumpHeight_ = JumpHeight_ - Jump;
+    float4 JumpDirection = JumpHeight_ > 0 ? float4::UP : float4::DOWN;
+    if (KirbyState::FLYSTAY == GetState())
+    {
+        JumpDirection = float4::ZERO;
+    }
 
     // 땅에 닿았을 때
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y-JumpHeight_))
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) && JumpDirection.y > 0)
     {
+        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()))
+        {
+            SetMove(float4::UP);
+        }
         JumpHeight_ = 0;
-        AccGravity_ = 0;
         if (true == GameEngineInput::GetInst()->IsFree("Left") &&
             true == GameEngineInput::GetInst()->IsFree("Right") &&
             true == GameEngineInput::GetInst()->IsFree("Down") &&
             true == GameEngineInput::GetInst()->IsFree("Slide") &&
             true == GameEngineInput::GetInst()->IsFree("Slide") &&
             true == GameEngineInput::GetInst()->IsFree("Jump") &&
-            (true == GameEngineInput::GetInst()->IsFree("Eat") || (KirbyState::EATEND == GetState() && true == Renderer_->IsEndAnimation()) ) &&
             true == GameEngineInput::GetInst()->IsFree("Fly") &&
-            true == GameEngineInput::GetInst()->IsFree("Attack"))
+            true == GameEngineInput::GetInst()->IsFree("Attack") &&
+            (true == GameEngineInput::GetInst()->IsFree("Eat") || (KirbyState::EATEND == GetState() && true == Renderer_->IsEndAnimation())))
         {
-            if (MonName_ != "")
+            if (GetKirbyClass() != KirbyClass::ANIMAL &&
+                GetKirbyClass() != KirbyClass::FIRE &&
+                GetKirbyClass() != KirbyClass::ICE &&
+                GetKirbyClass() != KirbyClass::SPARK &&
+                GetKirbyClass() != KirbyClass::SWORD)
             {
-                SetKirbyClass(KirbyClass::PIG);
+                if (MonClass_ == MonsterClass::NONE)
+                {
+                    SetKirbyClass(KirbyClass::DEFAULT);
+                }
+                else
+                {
+                    SetKirbyClass(KirbyClass::PIG);
+                }
             }
 
+            if (KirbyState::TRANSFORM == GetState())
+            {
+                if (true == PigRenderer_->IsEndAnimation())
+                {
+                    switch (MonClass_)
+                    {
+                    case MonsterClass::ANIMAL:
+                        SetKirbyClass(KirbyClass::ANIMAL);
+                        break;
+                    case MonsterClass::SPARK:
+                        SetKirbyClass(KirbyClass::SPARK);
+                        break;
+                    case MonsterClass::SWORD:
+                        SetKirbyClass(KirbyClass::SWORD);
+                        break;
+                    case MonsterClass::FIRE:
+                        SetKirbyClass(KirbyClass::FIRE);
+                        break;
+                    case MonsterClass::ICE:
+                        SetKirbyClass(KirbyClass::ICE);
+                        break;
+                    }
+                    MonClass_ = MonsterClass::NONE;
+                    SetState(KirbyState::IDLE);
+                }
+            }
             else
             {
-                SetKirbyClass(KirbyClass::DEFAULT);
+                SetState(KirbyState::IDLE);
             }
-
-			SetState(KirbyState::IDLE);
+            
         }
     }
     // 떠 있을 때
     else
     {
-        SetMove(float4(0, -JumpHeight_));
-        if (GetState() != KirbyState::JUMPDOWN && 
-            GetState() != KirbyState::IDLE && 
-            GetState()!=KirbyState::FLYSTAY &&
+        SetMove(JumpDirection * Jump);
+        if (GetState() != KirbyState::FLYSTAY &&
             GetState() != KirbyState::FLY &&
             GetState() != KirbyState::FLYATTACK &&
             GetState() != KirbyState::FLYEND)
         {
-            SetState(KirbyState::JUMPING);
+            if (KirbyState::JUMPUP == GetState() &&
+                JumpHeight_ < 0)
+            {
+                SetState(KirbyState::JUMPING);
+            }
+            if (KirbyState::JUMPING == GetState() &&
+                true == Renderer_->IsEndAnimation())
+            {
+                SetState(KirbyState::JUMPDOWN);
+            }
         }
     }
 
@@ -821,13 +856,9 @@ void Player::Update()
             SetKirbyClass(KirbyClass::DEFAULT);
         }
     }
-//if (CurrentPos.x > GetLevel()->GetMapSizeX())
-//{
-//   SetPosition(float4(GetLevel()->GetMapSizeX(), CurrentPos.y));
-//}
 
     StateUpdate();
-    CheckCollision();
+    //CheckCollision();
 
 }
 
@@ -844,37 +875,6 @@ void Player::Render()
 
 void Player::CorrectPos()
 {
-    //float4 CurrentPos = GetPosition();
-    //float4 JumpDirection = PrevPos_ - GetPosition();
-    //float JumpDirectionX = JumpDirection.x > 0 ? float4::RIGHT.x : float4::LEFT.x;
-    //float JumpDirectionY = JumpDirection.y > 0 ? float4::DOWN.y : float4::UP.y;
-  //   while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y))
-    //{
-    //   SetMove(float4(0, JumpDirectionY));
-    //   AccGravity_ = 0;
-    //   JumpHeight_ = 0;
-    //}
-
-    //while ((RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y) && RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y - 40))
-    //   || (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y) && RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y - 40)))
-    //{
-    //   SetMove(float4(JumpDirectionX, 0));
-    //}
-
-    //if (CurrentPos.x < 0)
-    //{
-    //   SetPosition(float4(0, CurrentPos.y));
-    //}
-
-    //if (CurrentPos.x > GetLevel()->GetMapSizeX())
-    //{
-    //   SetPosition(float4(GetLevel()->GetMapSizeX(), CurrentPos.y));
-    //}
-
-    //if (CurrentPos.y < 50)
-    //{
-    //   SetPosition(float4(CurrentPos.x, 50));
-    //}
 }
 
 void Player::CheckCollision()
@@ -962,6 +962,9 @@ void Player::StateUpdate()
         break;
     case KirbyState::FLYATTACK:
         UpdateFlyAttack();
+        break;
+    case KirbyState::FLYEND:
+        UpdateFlyEnd();
         break;
     case KirbyState::DIE:
         UpdateDie();
@@ -1391,9 +1394,10 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("Copy", 'A');
         GameEngineInput::GetInst()->CreateKey("Abandon", 'S');
         GameEngineInput::GetInst()->CreateKey("Slide", 'D');
-        GameEngineInput::GetInst()->CreateKey("Attack", 'Z');
+        GameEngineInput::GetInst()->CreateKey("Run", 'Z');
         GameEngineInput::GetInst()->CreateKey("Eat", 'X');
-        GameEngineInput::GetInst()->CreateKey("Run", 'C');
+        GameEngineInput::GetInst()->CreateKey("Attack", 'C');
+        GameEngineInput::GetInst()->CreateKey("Transform", 'V');
 
         
         

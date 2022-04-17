@@ -7,8 +7,10 @@
 
 
 BigBomb::BigBomb()
-	: HP_(1)
+	: Monster() // 부모 생성자 호출
+	, HP_(1)
 {
+	SetMonsterClass(MonsterClass::BOSS);
 }
 
 BigBomb::~BigBomb()

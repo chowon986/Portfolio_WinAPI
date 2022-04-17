@@ -7,6 +7,7 @@
 
 
 GreenMouse::GreenMouse()
+	: Monster()
 {
 }
 

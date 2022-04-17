@@ -7,6 +7,7 @@
 
 
 Brontobert::Brontobert()
+	: Monster()
 {
 }
 

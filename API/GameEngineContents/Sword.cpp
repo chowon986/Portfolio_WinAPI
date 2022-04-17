@@ -7,7 +7,9 @@
 
 
 Sword::Sword()
+	: Monster()
 {
+	SetMonsterClass(MonsterClass::SWORD);
 }
 
 Sword::~Sword()

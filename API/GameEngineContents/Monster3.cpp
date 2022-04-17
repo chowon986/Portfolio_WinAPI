@@ -8,6 +8,7 @@
 // 파란색 나는 몬스터
 
 Monster3::Monster3()
+	: Monster()
 {
 }
 

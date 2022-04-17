@@ -7,6 +7,7 @@
 
 
 BlueMouse::BlueMouse()
+	: Monster()
 {
 }
 

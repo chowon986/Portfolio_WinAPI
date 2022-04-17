@@ -7,7 +7,9 @@
 
 
 Frosty::Frosty()
+	: Monster()
 {
+	SetMonsterClass(MonsterClass::ICE);
 }
 
 Frosty::~Frosty()

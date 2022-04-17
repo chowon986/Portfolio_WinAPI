@@ -93,7 +93,9 @@ void Level1::LevelChangeStart()
 
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1->CreateRenderer("Stage1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		
+		Stage1->CreateRenderer("Stage1ColMap.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		//Stage1->CreateRenderer("Stage1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{
@@ -146,25 +148,22 @@ void Level1::LevelChangeStart()
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(/*1200.0f, 430.0f*/300.0f,436.0f));
-		Waddledi_->SetName("ImpossibleTransform");
+		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
 
-		Waddledi* Waddledicho_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledicho_->SetPosition(float4(/*1200.0f, 430.0f*/100.0f, 436.0f));
-		Waddledicho_->SetName("ImpossibleTransform");
+		Monster* SparkyCho_ = CreateActor<Sparky>((int)ORDER::MONSTER);
+		SparkyCho_->SetPosition(float4(/*1200.0f, 430.0f*/100.0f, 436.0f));
+		GameEngineCollision* SparkyChoCol = SparkyCho_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
 		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
 		Waddledoo_->SetPosition(float4(2837.0f, 377.0f));
-		Waddledoo_->SetName("Beam");
 		GameEngineCollision* WaddledooCol = Waddledoo_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
 		Monster* Sparky_ = CreateActor<Sparky>((int)ORDER::MONSTER);
 		Sparky_->SetPosition(float4(3780.0f, 380.0f));
-		Sparky_->SetName("Spark");
 		GameEngineCollision* SparkyCol = Sparky_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 }

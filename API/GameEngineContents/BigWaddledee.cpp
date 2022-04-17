@@ -7,7 +7,8 @@
 
 
 BigWaddledee::BigWaddledee()
-	: HP_(1)
+	: Monster()
+	, HP_(1)
 {
 }
 

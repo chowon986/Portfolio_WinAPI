@@ -10,7 +10,8 @@
 
 
 Waddledi::Waddledi()
-	: ColMapImage_(nullptr)
+	: Monster()
+	, ColMapImage_(nullptr)
 	, Level_(nullptr)
 	, Player_(nullptr)
 	, WaddlediCol_(nullptr)

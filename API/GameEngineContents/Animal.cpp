@@ -6,8 +6,10 @@
 #include <GameEngine/GameEngineCollision.h>
 
 Animal::Animal()
-	: HP_(1)
+	: Monster()
+	, HP_(1)
 {
+	SetMonsterClass(MonsterClass::ANIMAL);
 }
 
 Animal::~Animal()

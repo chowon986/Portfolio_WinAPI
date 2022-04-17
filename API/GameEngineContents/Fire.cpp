@@ -7,7 +7,9 @@
 
 
 Fire::Fire()
+	: Monster()
 {
+	SetMonsterClass(MonsterClass::FIRE);
 }
 
 Fire::~Fire()

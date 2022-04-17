@@ -7,6 +7,7 @@
 
 
 Doc::Doc()
+	: Monster()
 {
 }
 

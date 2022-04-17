@@ -7,6 +7,7 @@
 
 
 Moon::Moon()
+	: Monster()
 {
 }
 

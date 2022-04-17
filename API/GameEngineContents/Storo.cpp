@@ -7,6 +7,7 @@
 
 
 Storo::Storo()
+	: Monster() // need to chk
 {
 }
 

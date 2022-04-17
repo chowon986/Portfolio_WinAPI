@@ -19,8 +19,6 @@ void Player::UpdateIdle()
 
 void Player::UpdateTransform()
 {
-    //Death();
-    SetKirbyClass(KirbyClass::SPARK);
 }
 
 void Player::UpdateTransformEnd()
@@ -64,34 +62,24 @@ void Player::UpdateRun()
 
 void Player::UpdateFly()
 {
-//need to chk
-    //if (true == Renderer_->IsEndAnimation())
-    //{
-    SetState(KirbyState::FLYSTAY);
-
-    //}
 }
 
 void Player::UpdateFlyStay()
 {
-    AccGravity_ = 0;
     JumpHeight_ = 0;
 
-    if (true == GameEngineInput::GetInst()->IsUp("Fly"))
-    {
-        SetState(KirbyState::FLYATTACK);
-    }
     SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
     UpdateWalk();
 }
 
 void Player::UpdateFlyAttack()
 {
-    SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_ * AccGravity_);
-    if (true == Renderer_->IsEndAnimation())
-    {
-        SetState(KirbyState::FLYEND);
-    }
+    UpdateWalk();
+}
+
+void Player::UpdateFlyEnd()
+{
+    UpdateWalk();
 }
 
 void Player::UpdateAttack()
@@ -114,7 +102,7 @@ void Player::UpdateAttack()
 
         //PigAttackRenderer_->SetAlpha(255);
         //PigAttackCol_->SetScale(float4(50.0f, 50.0f));
-        MonName_ = "";
+        MonClass_ = MonsterClass::NONE;
         //SetKirbyAttackEffet(KirbyAttackEffect::AttackStart);
         //PigAttackRenderer_->SetPivot(float4(100.0f, 0.0f));
     }
@@ -122,24 +110,12 @@ void Player::UpdateAttack()
 
 void Player::UpdateDie()
 {
-    if (HPCount_ != 0)
-    {
-        // 각 레벨의 시작 위치로 가고 idle되기
-        SetState(KirbyState::IDLE);
-    }
-
-    else
-    {
-        
-    }
-
 }
 
 void Player::UpdateUp()
 {
     //if (GetKirbyClass() == KirbyClass::ANIMAL)
     //{
-    AccGravity_ = 0;
     JumpHeight_ = 0;
         SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
         UpdateWalk();
@@ -216,7 +192,7 @@ void Player::UpdateEatEnd()
 {
     if (nullptr != Monster_)
     {
-        MonName_ = Monster_->GetNameCopy();
+        MonClass_ = Monster_->GetMonsterClass();
         Monster_->Death();
         Monster_ = nullptr;
         EatCol_->SetScale(float4(0.0f, 0.0f));
@@ -226,37 +202,17 @@ void Player::UpdateEatEnd()
 
 void Player::UpdateJumpUp()
 {
-    JumpHeight_ = 15;
-    AccGravity_ = 0;
-    
-    //SetState(KirbyState::JUMPDOWN);
     UpdateWalk();
-    UpdateRun();
 } 
 
 void Player::UpdateJumping()
 {
-        if (true == Renderer_->IsAnimationName("JumpingRight") && true == Renderer_->IsEndAnimation())
-        {
-            SetState(KirbyState::JUMPDOWN);
-        }
-
-        if (true == Renderer_->IsAnimationName("JumpingLeft") && true == Renderer_->IsEndAnimation())
-        {
-            SetState(KirbyState::JUMPDOWN);
-        }
-        UpdateWalk();
-        UpdateRun();
+    UpdateWalk();
 }
 
 void Player::UpdateJumpDown()
 {
     UpdateWalk();
-
-    if (true == Renderer_->IsAnimationName("JumpDownRight") && true == Renderer_->IsEndAnimation())
-    {
-        SetState(KirbyState::IDLE);
-    }
 }
 
 void Player::UpdateSlide()

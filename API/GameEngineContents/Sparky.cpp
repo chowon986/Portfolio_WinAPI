@@ -7,7 +7,9 @@
 
 
 Sparky::Sparky()
+	: Monster()
 {
+	SetMonsterClass(MonsterClass::SPARK);
 }
 
 Sparky::~Sparky()

@@ -5,6 +5,7 @@
 Monster::Monster()
 	: Pos_(0, 0)
 	, Speed_(10)
+	, MonsterClass_(MonsterClass::DEFAULT)
 {
 	SetHP(1);
 }

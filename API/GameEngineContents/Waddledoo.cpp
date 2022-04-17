@@ -7,7 +7,9 @@
 
 
 Waddledoo::Waddledoo()
+	: Monster()
 {
+	//SetMonsterClass(MonsterClass::BEAM);
 }
 
 Waddledoo::~Waddledoo()

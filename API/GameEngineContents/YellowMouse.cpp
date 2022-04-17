@@ -7,6 +7,7 @@
 
 
 YellowMouse::YellowMouse()
+	: Monster()
 {
 }
 
