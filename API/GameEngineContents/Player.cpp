@@ -619,6 +619,7 @@ void Player::Update()
     {
         SetState(KirbyState::WALK);
     }
+
     else if (true == GameEngineInput::GetInst()->IsPress("Right") &&
         false == GameEngineInput::GetInst()->IsPress("Run") &&
         false == GameEngineInput::GetInst()->IsPress("Attack") &&
@@ -630,6 +631,7 @@ void Player::Update()
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
         RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
+
     {
         SetState(KirbyState::WALK);
     }

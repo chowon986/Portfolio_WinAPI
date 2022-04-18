@@ -39,17 +39,19 @@ void Player::UpdateOpenDoor()
 void Player::UpdateWalk()
 {
     float4 direction = float4::ZERO;
+
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
         Dir_ = "Left";
     }
+    
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
         Dir_ = "Right";
     }
-    
+
     SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_);
 }
 
