@@ -208,6 +208,9 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="StarAttackEffect.cpp" />
+    <ClCompile Include="Dedede.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -415,6 +418,9 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="StarAttackEffect.h" />
+    <ClInclude Include="Dedede.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

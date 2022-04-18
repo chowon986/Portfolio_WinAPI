@@ -178,6 +178,7 @@
     <ClInclude Include="CharacterBase.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="DanceStage.h" />
+    <ClInclude Include="Dedede.h" />
     <ClInclude Include="Doc.h" />
     <ClInclude Include="Doroach.h" />
     <ClInclude Include="EndingLevel.h" />
@@ -262,6 +263,7 @@
     <ClCompile Include="Cannon.cpp" />
     <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="DanceStage.cpp" />
+    <ClCompile Include="Dedede.cpp" />
     <ClCompile Include="Doc.cpp" />
     <ClCompile Include="Doroach.cpp" />
     <ClCompile Include="EndingLevel.cpp" />

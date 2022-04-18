@@ -92,10 +92,12 @@ void Player::UpdateAttack()
             if (Dir_ == "Right")
             {
                 StarAttackEffect_->SetState(StarAttackEffectState::AttackStartRight);
+                KirbyAttackCol_->SetScale(float4(50.0f, 50.0f));
             }
             else if (Dir_ == "Left")
             {
                 StarAttackEffect_->SetState(StarAttackEffectState::AttackStartLeft);
+                KirbyAttackCol_->SetScale(float4(50.0f, 50.0f));
             }
         }
 
@@ -103,6 +105,7 @@ void Player::UpdateAttack()
         //PigAttackRenderer_->SetAlpha(255);
         //PigAttackCol_->SetScale(float4(50.0f, 50.0f));
         MonClass_ = MonsterClass::NONE;
+        KirbyAttackCol_->SetScale(float4(0.0f, 0.0f));
         //SetKirbyAttackEffet(KirbyAttackEffect::AttackStart);
         //PigAttackRenderer_->SetPivot(float4(100.0f, 0.0f));
     }
@@ -155,18 +158,18 @@ void Player::UpdateEat()
 {
     if (Dir_ == "Right")
     {
-        EatCol_->SetScale(float4(100.0f, 50.0f));
-        EatCol_->SetPivot(float4(50.0f, -20.0f));
+        KirbyEatCol_->SetScale(float4(100.0f, 50.0f));
+        KirbyEatCol_->SetPivot(float4(50.0f, -20.0f));
     }
 
     if (Dir_ == "Left")
     {
-        EatCol_->SetScale(float4(100.0f, 50.0f));
-        EatCol_->SetPivot(float4(-50.0f, -20.0f));
+        KirbyEatCol_->SetScale(float4(100.0f, 50.0f));
+        KirbyEatCol_->SetPivot(float4(-50.0f, -20.0f));
     }
 
 	std::vector <GameEngineCollision*> ColResult;
-    if (true == EatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyEatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
     {
         for (GameEngineCollision* Collision : ColResult)
         {
@@ -195,7 +198,7 @@ void Player::UpdateEatEnd()
         MonClass_ = Monster_->GetMonsterClass();
         Monster_->Death();
         Monster_ = nullptr;
-        EatCol_->SetScale(float4(0.0f, 0.0f));
+        KirbyEatCol_->SetScale(float4(0.0f, 0.0f));
     }
 }
 

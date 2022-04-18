@@ -24,7 +24,11 @@ void Monster::Jump()
 
 bool Monster::IsDie()
 {
-	return false;
+	if (GetHP() <= 0)
+	{
+		return true;
+	}
+	else return false;
 }
 
 void Monster::attack()
@@ -43,8 +47,17 @@ void Monster::Start()
 
 void Monster::Update()
 {
+
 }
 
 void Monster::Render()
 {
+}
+
+void Monster::Die()
+{
+	if (true == IsDie())
+	{
+		Death();
+	}
 }

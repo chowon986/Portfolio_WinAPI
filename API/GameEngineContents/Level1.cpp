@@ -94,8 +94,9 @@ void Level1::LevelChangeStart()
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		
-		Stage1->CreateRenderer("Stage1ColMap.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
-		//Stage1->CreateRenderer("Stage1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		//Colmap È®ÀÎ¿ë
+		//Stage1->CreateRenderer("Stage1ColMap.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Stage1->CreateRenderer("Stage1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{
@@ -148,7 +149,7 @@ void Level1::LevelChangeStart()
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
+		Waddledi_->SetPosition(float4(300.0f,430.0f)/*1200.0f, 430.0f)*/);
 
 		Monster* SparkyCho_ = CreateActor<Sparky>((int)ORDER::MONSTER);
 		SparkyCho_->SetPosition(float4(/*1200.0f, 430.0f*/100.0f, 436.0f));

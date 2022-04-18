@@ -17,7 +17,7 @@ Waddledi::Waddledi()
 	, WaddlediCol_(nullptr)
 	, WaddlediRenderer_(nullptr)
 	, Dir_(float4::ZERO)
-
+	, DirectionCol_(nullptr)
 {
 }
 
@@ -46,14 +46,33 @@ void Waddledi::Render()
 {
 }
 
-void Waddledi::UpdateWalk()
-{
-}
 
 void Waddledi::Update()
 {
 	UpdateMove();
+	UpdateAttack();
+	IsDie();
+	Die();
+}
 
+void Waddledi::UpdateAttack()
+{
+}
+
+void Waddledi::TakeDamage()
+{
+	std::vector<GameEngineCollision*> Result;
+	if (WaddlediCol_->CollisionResult("KirbyAttackCol", Result, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* TakeDamageCol : Result)
+		{
+			Player* ColPlayer = dynamic_cast<Player*>(TakeDamageCol->GetActor());
+			if (ColPlayer != nullptr)
+			{
+				SetHP(GetHP() - 1);
+			}
+		}
+	}
 }
 
 void Waddledi::UpdateMove()
@@ -104,21 +123,43 @@ void Waddledi::UpdateMove()
 					Dir_ = float4::RIGHT;
 					WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
 				}
+
+				else if (Distance == 0)
+				{
+					Player_->SetHP(GetHP() - 1);
+				}
 			}
 		}
 	}
 
-	if (true == WaddlediCol_->CollisionCheck("EatCol", CollisionType::Rect, CollisionType::Rect))
+	if (true == WaddlediCol_->CollisionCheck("KirbyEatCol", CollisionType::Rect, CollisionType::Rect))
 	{
 		Dir_ = float4::ZERO;
 	}
 
 	if (Dir_.x == float4::ZERO.x &&
-		 true != WaddlediCol_->CollisionCheck("EatCol", CollisionType::Rect, CollisionType::Rect))
+		 true != WaddlediCol_->CollisionCheck("KirbyEatCol", CollisionType::Rect, CollisionType::Rect))
 	{
 		Dir_ = float4::RIGHT;
 		WaddlediRenderer_->ChangeAnimation("WaddlediWalkRight");
 	}
 	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * 15);
 
+}
+
+bool Waddledi::IsDie()
+{
+	if (GetHP() <= 0)
+	{
+		return true;
+	}
+	else return false;
+}
+
+void Waddledi::Die()
+{
+	if (true == IsDie())
+	{
+		Death();
+	}
 }

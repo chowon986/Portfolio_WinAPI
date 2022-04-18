@@ -19,7 +19,7 @@ Player::Player()
     , Level_(nullptr)
     , HPCount_(0)
     , Speed_(20)
-    , EatCol_(nullptr)
+    , KirbyEatCol_(nullptr)
     , MonClass_(MonsterClass::NONE)
 {
 }
@@ -1057,8 +1057,8 @@ void Player::Start()
         SetSpeed(200);
 		ColMapImage_ = Level_->GetColMapImage();
         KirbyCol_ = CreateCollision("KirbyCol", float4(50.0f, 50.0f), float4(0.0f,-25.0f));
-        EatCol_ = CreateCollision("EatCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
-
+        KirbyEatCol_ = CreateCollision("KirbyEatCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
+        KirbyAttackCol_ = CreateCollision("KirbyAttackCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
 
 
 		Renderer_ = CreateRenderer("Normal.bmp");

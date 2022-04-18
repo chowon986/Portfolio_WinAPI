@@ -21,9 +21,11 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-
-	void UpdateWalk();
+	bool IsDie();
+	void Die();
 	void UpdateMove();
+	void UpdateAttack();
+	void TakeDamage();
 protected:
 
 private:

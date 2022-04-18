@@ -67,6 +67,7 @@ private:
 	void Update();
 	void SetState(MonsterState _PrevState);
 	void Render();
+	void Die();
 
 public:
 

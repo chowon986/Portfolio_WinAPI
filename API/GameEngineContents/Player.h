@@ -80,7 +80,8 @@ private:
 	GameEngineRenderer* AttackEffectRenderer_;
 
 	GameEngineCollision* KirbyCol_;
-	GameEngineCollision* EatCol_;
+	GameEngineCollision* KirbyEatCol_;
+	GameEngineCollision* KirbyAttackCol_;
 
 	GameEngineImage* Image_;
 	GameEngineImage* SwordKirbyImage_;
