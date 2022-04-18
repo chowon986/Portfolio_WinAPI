@@ -25,7 +25,6 @@ public:
 	void Die();
 	void UpdateMove();
 	void UpdateAttack();
-	void TakeDamage();
 protected:
 
 private:

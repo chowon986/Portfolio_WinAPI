@@ -5,6 +5,8 @@
 #include <GameEngine/GameEngineActor.h>
 
 HPUp::HPUp()
+	: HPUpCol_(nullptr)
+	, HPUpRenderer_(nullptr)
 {
 }
 

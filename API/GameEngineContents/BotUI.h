@@ -22,6 +22,13 @@ private:
 	void Render() override;
 	void Update() override;
 
+	int MinusHP_;
 	GameEngineRenderer* PlayerHPMinus_;
+	GameEngineRenderer* PlayerUI_;
+	GameEngineRenderer* PlayerHP_;
+	GameEngineRenderer* PlayerHPCount1_;
+	GameEngineRenderer* PlayerHPCount2_;
+	GameEngineRenderer* PlayerHPCount3_;
+	GameEngineImage* PlayerHPCountNum_;
 };
 

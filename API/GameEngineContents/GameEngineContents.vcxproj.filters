@@ -207,9 +207,14 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="StarAttackEffect.cpp" />
     <ClCompile Include="Dedede.cpp">
       <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="StarAttackEffect.cpp">
+      <Filter>Kirby</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackEffect.cpp">
+      <Filter>Kirby</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -417,9 +422,14 @@
     <ClInclude Include="GameOver.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="StarAttackEffect.h" />
     <ClInclude Include="Dedede.h">
       <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="StarAttackEffect.h">
+      <Filter>Kirby</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackEffect.h">
+      <Filter>Kirby</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,10 @@
 #include <vector>
 
 StarAttackEffect::StarAttackEffect()
+	:ColMapImage_(nullptr)
+	,Collision_(nullptr)
+	,Renderer_(nullptr)
+	,StarAttackEffectState_(StarAttackEffectState::None)
 {
 	
 }
@@ -17,7 +21,7 @@ StarAttackEffect::~StarAttackEffect()
 
 void StarAttackEffect::Start()
 {
-	Collision_ = CreateCollision("StarCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
+	Collision_ = CreateCollision("AttackCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
 	Renderer_ = CreateRenderer("AttackEffect.bmp");
 	Renderer_->SetAlpha(0);
 	GameEngineImage* Image = Renderer_->GetImage();
@@ -95,7 +99,7 @@ void StarAttackEffect::UpdateAttackStartRight()
 
 	float4 Distance = GetPosition() - StartPos_;
 
-	if (Distance.x > 200)
+	if (Distance.x > 230)
 	{
 		SetState(StarAttackEffectState::AttackEndRight);
 	}

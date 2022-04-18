@@ -59,21 +59,6 @@ void Waddledi::UpdateAttack()
 {
 }
 
-void Waddledi::TakeDamage()
-{
-	std::vector<GameEngineCollision*> Result;
-	if (WaddlediCol_->CollisionResult("KirbyAttackCol", Result, CollisionType::Rect, CollisionType::Rect))
-	{
-		for (GameEngineCollision* TakeDamageCol : Result)
-		{
-			Player* ColPlayer = dynamic_cast<Player*>(TakeDamageCol->GetActor());
-			if (ColPlayer != nullptr)
-			{
-				SetHP(GetHP() - 1);
-			}
-		}
-	}
-}
 
 void Waddledi::UpdateMove()
 {
@@ -126,7 +111,7 @@ void Waddledi::UpdateMove()
 
 				else if (Distance == 0)
 				{
-					Player_->SetHP(GetHP() - 1);
+					ColPlayer->SetHP(GetHP() - 1);
 				}
 			}
 		}

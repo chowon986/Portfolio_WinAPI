@@ -16,6 +16,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include "StarAttackEffect.h"
+#include "AttackEffect.h"
 
 
 
@@ -41,10 +42,7 @@ void Level1::Loading()
 
 void Level1::Update()
 {
-	/*if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		GameEngine::GlobalEngine().ChangeLevel("Level1_2");
-	}*/
+
 
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -139,21 +137,19 @@ void Level1::LevelChangeStart()
 	}
 
 	{
-		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::ATTACKEFFECT);
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
 
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(205.0, 436.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
 	}
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(300.0f,430.0f)/*1200.0f, 430.0f)*/);
-
-		Monster* SparkyCho_ = CreateActor<Sparky>((int)ORDER::MONSTER);
-		SparkyCho_->SetPosition(float4(/*1200.0f, 430.0f*/100.0f, 436.0f));
-		GameEngineCollision* SparkyChoCol = SparkyCho_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
+		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
 	}
 
 	{

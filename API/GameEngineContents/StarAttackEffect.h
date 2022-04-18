@@ -40,7 +40,6 @@ protected:
 	void Render() override;
 private:
 	StarAttackEffectState StarAttackEffectState_;
-
 	float4 StartPos_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;

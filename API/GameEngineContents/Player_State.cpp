@@ -11,6 +11,8 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Monster.h"
 #include "StarAttackEffect.h"
+#include "AttackEffect.h"
+#include "Box.h"
 
 void Player::UpdateIdle()
 {
@@ -24,6 +26,14 @@ void Player::UpdateTransform()
 void Player::UpdateTransformEnd()
 {
 
+}
+
+void Player::UpdateOpenDoor()
+{
+	//if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
+	//{
+	//	GameEngine::GetInst().ChangeLevel("Level1_2");
+	//}
 }
 
 void Player::UpdateWalk()
@@ -74,6 +84,19 @@ void Player::UpdateFlyStay()
 
 void Player::UpdateFlyAttack()
 {
+	if (AttackEffect_ != nullptr)
+	{
+        AttackEffect_->SetPosition(GetPosition()); // need to chk : the pos;
+		if (Dir_ == "Right")
+		{
+            AttackEffect_->SetState(AttackEffectState::AttackEffectRight);
+		}
+		else if (Dir_ == "Left")
+		{
+            AttackEffect_->SetState(AttackEffectState::AttackEffectLeft);
+		}
+	}
+
     UpdateWalk();
 }
 
@@ -92,20 +115,16 @@ void Player::UpdateAttack()
             if (Dir_ == "Right")
             {
                 StarAttackEffect_->SetState(StarAttackEffectState::AttackStartRight);
-                KirbyAttackCol_->SetScale(float4(50.0f, 50.0f));
             }
             else if (Dir_ == "Left")
             {
                 StarAttackEffect_->SetState(StarAttackEffectState::AttackStartLeft);
-                KirbyAttackCol_->SetScale(float4(50.0f, 50.0f));
             }
         }
-
 
         //PigAttackRenderer_->SetAlpha(255);
         //PigAttackCol_->SetScale(float4(50.0f, 50.0f));
         MonClass_ = MonsterClass::NONE;
-        KirbyAttackCol_->SetScale(float4(0.0f, 0.0f));
         //SetKirbyAttackEffet(KirbyAttackEffect::AttackStart);
         //PigAttackRenderer_->SetPivot(float4(100.0f, 0.0f));
     }
@@ -113,6 +132,8 @@ void Player::UpdateAttack()
 
 void Player::UpdateDie()
 {
+    //need to chk colmap 무시하고 애니메이션 하면서 바닥으로 떨어짐
+    SetMove(float4::DOWN);
 }
 
 void Player::UpdateUp()
@@ -133,12 +154,11 @@ void Player::UpdateUp()
 
 void Player::UpdateDown()
 {
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y))
-    {
-        Speed_ = 0;
-        SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
-    }
-    SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
+    //if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1))
+    //{
+    //    SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
+    //}
+    //SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
 }
 
 void Player::UpdateHover()
@@ -224,16 +244,23 @@ void Player::UpdateSlide()
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
+        SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 500);
         Dir_ = "Left";
-    }
-    else if (true == GameEngineInput::GetInst()->IsPress("Right"))
-    {
-        direction = float4::RIGHT;
-        Dir_ = "Right";
+        KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
+        KirbySlideCol_->SetPivot(float4(-20.0f, -15.0f));
+
+        //float4 Distance = GetPosition() - StartPos_;
+
     }
 
-    if (Renderer_->IsEndAnimation())
+   else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
-        //SetState(KirbyState::SLIDESTAY);
+        direction = float4::RIGHT;
+        SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 500);
+        Dir_ = "Right";
+        KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
+        KirbySlideCol_->SetPivot(float4(20.0f, -15.0f));
+
+       // float4 Distance = GetPosition() - StartPos_;
     }
 }

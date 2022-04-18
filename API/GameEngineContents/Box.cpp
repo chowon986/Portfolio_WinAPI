@@ -1,6 +1,7 @@
 #include "Box.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "Player.h"
 
 Box::Box()
 {
@@ -19,8 +20,18 @@ void Box::Start()
 
 void Box::Update()
 {
-	if (true == BoxCol_->CollisionCheck("KirbyCol",CollisionType::Rect,CollisionType::Rect)) // chk : 공격을 받으면
+
+	std::vector<GameEngineCollision*> Result;
+	if (true == BoxCol_->CollisionResult("KirbySlideCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{
-		Death();
+		for (GameEngineCollision* Collision : Result)
+		{
+			GameEngineActor* ColActor = Collision->GetActor();
+			Player* Player_ = dynamic_cast<Player*>(ColActor);
+			if (Player_ != nullptr)
+			{
+				Death();
+			}
+		}
 	}
 }

@@ -37,6 +37,7 @@ enum class KirbyState
 	JUMPDOWN, // Possible : FLY
 	TAKEDAMAGE, // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE,
 	DIE,
+	OPENDOOR,
 };
 
 class GameEngineImage;
@@ -46,6 +47,7 @@ class GameEngineLevel;
 class BotUI;
 class Monster;
 class StarAttackEffect;
+class AttackEffect;
 enum class MonsterClass;
 class Player : public CharacterBase
 {
@@ -81,20 +83,24 @@ private:
 
 	GameEngineCollision* KirbyCol_;
 	GameEngineCollision* KirbyEatCol_;
-	GameEngineCollision* KirbyAttackCol_;
+	GameEngineCollision* KirbySlideCol_;
 
 	GameEngineImage* Image_;
 	GameEngineImage* SwordKirbyImage_;
 	GameEngineImage* IceKirbyImage_;
 	GameEngineImage* PigImage_;
+	float4 StartPos_;
 
 	StarAttackEffect* StarAttackEffect_;
+	AttackEffect* AttackEffect_;
+
 
 	Monster* Monster_;
 	MonsterClass MonClass_;
 
-	int HPCount_;
 
+	int HPCount_;
+	bool Die_;
 	float Gravity_;
 	float JumpHeight_;
 	float Time_;
@@ -121,7 +127,8 @@ private:
 	void CheckCollision();
 	void StateUpdate();
 	bool CheckMapCollision();
-
+	bool IsDie();
+	void Die();
 
 	void UpdateIdle();
 	void UpdateWalk();
@@ -145,11 +152,17 @@ private:
 	void UpdateSlide();
 	void UpdateTransform();
 	void UpdateTransformEnd();
+	void UpdateOpenDoor();
 
 	//void UpdateEffect();
 public:
 	void SetStarAttackEffect(StarAttackEffect* _StarAttackEffect)
 	{
 		StarAttackEffect_ = _StarAttackEffect;
+	}
+
+	void SetAttackEffect(AttackEffect* _AttackEffect)
+	{
+		AttackEffect_ = _AttackEffect;
 	}
 };
