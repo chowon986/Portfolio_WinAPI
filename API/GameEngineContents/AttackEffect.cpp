@@ -23,7 +23,12 @@ void AttackEffect::Start()
 	Image_ = Renderer_->GetImage();
 	Image_->CutCount(7, 2);
 	Renderer_->CreateAnimation("Attack.bmp", "AttackRight", 0, 12, 0.03f, true);
-	Renderer_->CreateAnimation("Attack.bmp", "AttackLeft", 0, 12, 0.03f, true);
+
+	Renderer2_ = CreateRenderer("Attack2.bmp");
+	Renderer2_->SetAlpha(0);
+	Image2_ = Renderer2_->GetImage();
+	Image2_->CutCount(7, 2);
+	Renderer2_->CreateAnimation("Attack2.bmp", "AttackLeft", 0, 12, 0.03f, true);
 
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
@@ -51,7 +56,7 @@ void AttackEffect::SetState(AttackEffectState _AttackEffectState)
 		StartPos_ = GetPosition();
 		break;
 	case AttackEffectState::AttackEffectLeft:
-		Renderer_->ChangeAnimation("AttackLeft");
+		Renderer2_->ChangeAnimation("AttackLeft");
 		StartPos_ = GetPosition();
 		break;
 	}
@@ -120,11 +125,11 @@ void AttackEffect::UpdateAttackEffectRight()
 
 void AttackEffect::UpdateAttackEffectLeft()
 {
-	Renderer_->SetAlpha(255);
-	Renderer_->SetPivot(float4(40.0f, 0.0f));
+	Renderer2_->SetAlpha(255);
+	Renderer2_->SetPivot(float4(-40.0f, 0.0f));
 	SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 100);
 	Collision_->SetScale(float4(70.0f, 50.0f));
-	Collision_->SetPivot(float4(20.0f, -25.0f));
+	Collision_->SetPivot(float4(-20.0f, -25.0f));
 
 	float4 Distance = GetPosition() - StartPos_;
 
@@ -144,9 +149,9 @@ void AttackEffect::UpdateAttackEffectLeft()
 
 	if (Distance.x < 10 || RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()))
 	{
-		if (true == Renderer_->IsEndAnimation())
+		if (true == Renderer2_->IsEndAnimation())
 		{
-			Renderer_->SetAlpha(0);
+			Renderer2_->SetAlpha(0);
 			Collision_->SetScale(float4(0.0f, 0.0f));
 			SetState(AttackEffectState::None);
 		}

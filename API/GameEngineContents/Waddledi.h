@@ -1,13 +1,24 @@
 #pragma once
 #include "Monster.h"
 
-class GameEngineImage;
-class GameEngineCollision;
-class GameEngineRenderer;
-class GameEngineLevel;
 class Player;
+class GameEngineImage;
+class GameEngineLevel;
+class GameEngineRenderer;
+class GameEngineCollision;
 class Waddledi : public Monster
 {
+private:
+	Player* Player_;
+	GameEngineImage* ColMapImage_;
+	GameEngineCollision* WaddlediCol_;
+	GameEngineCollision* RightDirCol_;
+	GameEngineCollision* LeftDirCol_;
+	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* EffectRenderer_;
+	GameEngineLevel* Level_;
+	float4 Dir_;
+
 public:
 	Waddledi();
 	~Waddledi();
@@ -24,17 +35,5 @@ public:
 	bool IsDie();
 	void Die();
 	void UpdateMove();
-	void UpdateAttack();
-protected:
 
-private:
-	Player* Player_;
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* WaddlediCol_;
-	GameEngineCollision* DirectionCol_;
-	GameEngineRenderer* WaddlediRenderer_;
-	GameEngineLevel* Level_;
-	float4 Dir_;
-
-private:
 };

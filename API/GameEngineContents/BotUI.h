@@ -1,7 +1,12 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include "Player.h"
 
 // Ό³Έν :
+class GameEngineRenderer;
+class GameEngineImage;
+class Player;
+enum class KirbyClass;
 class BotUI : public GameEngineActor
 {
 public:
@@ -28,7 +33,9 @@ private:
 	GameEngineRenderer* PlayerHP_;
 	GameEngineRenderer* PlayerHPCount1_;
 	GameEngineRenderer* PlayerHPCount2_;
-	GameEngineRenderer* PlayerHPCount3_;
+	GameEngineRenderer* HPNumberLeft_;
+	GameEngineRenderer* HPNumberRight_;
 	GameEngineImage* PlayerHPCountNum_;
+	Player* Player_;
 };
 

@@ -3,7 +3,7 @@
 
 CharacterBase::CharacterBase()
 	: HP_(0)
-	, Speed_(100)
+	, Speed_(200)
 	//, State_(CharacterState::IDLE) // enum class 사용 방법
 	, JumpMaxHeight_(10)
 	, JumpHeight_(50)

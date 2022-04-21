@@ -12,6 +12,8 @@ enum class KirbyClass
 	FIRE,
 	ICE,
 	ANIMAL,
+
+	// default , pig, spark, fire, ice
 };
 
 enum class KirbyState
@@ -29,7 +31,8 @@ enum class KirbyState
 	EATSTART, // possible : ATTACK
 	EAT,      // possible : ATTACK
 	EATEND,   // possible : ATTACK
-	ATTACK,	  
+	ATTACK,	
+	ATTACKSTAY,
 	ABANDON,  
 	TRANSFORM, 
 	JUMPUP, // Possible : FLY
@@ -37,7 +40,7 @@ enum class KirbyState
 	JUMPDOWN, // Possible : FLY
 	TAKEDAMAGE, // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE,
 	DIE,
-	OPENDOOR,
+	//OPENDOOR,
 };
 
 class GameEngineImage;
@@ -49,6 +52,7 @@ class Monster;
 class StarAttackEffect;
 class AttackEffect;
 enum class MonsterClass;
+class IceAttackEffect;
 class Player : public CharacterBase
 {
 public:
@@ -66,6 +70,7 @@ public:
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
 	KirbyClass GetKirbyClass();
+	KirbyState GetState() { return KirbyState_; }
 protected:
 
 private:
@@ -76,6 +81,7 @@ private:
 	GameEngineRenderer* FireRenderer_;
 	GameEngineRenderer* IceRenderer_;
 	GameEngineRenderer* AnimalRenderer_;
+	GameEngineRenderer* RunEffect_;
 
 
 
@@ -93,6 +99,7 @@ private:
 
 	StarAttackEffect* StarAttackEffect_;
 	AttackEffect* AttackEffect_;
+	IceAttackEffect* IceAttackEffect_;
 
 
 	Monster* Monster_;
@@ -113,7 +120,7 @@ private:
 
 	void SetState(KirbyState _PrevState);
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
-	KirbyState GetState() { return KirbyState_; }
+
 
 
 	void ClassUpdate();
@@ -138,6 +145,7 @@ private:
 	void UpdateFlyAttack();
 	void UpdateFlyEnd();
 	void UpdateAttack();
+	void UpdateAttackStay();
 	void UpdateDie();
 	void UpdateUp();
 	void UpdateDown();
@@ -152,7 +160,8 @@ private:
 	void UpdateSlide();
 	void UpdateTransform();
 	void UpdateTransformEnd();
-	void UpdateOpenDoor();
+	void UpdateTakeDamage();
+	//void UpdateOpenDoor();
 
 	//void UpdateEffect();
 public:
@@ -164,5 +173,10 @@ public:
 	void SetAttackEffect(AttackEffect* _AttackEffect)
 	{
 		AttackEffect_ = _AttackEffect;
+	}
+
+	void SetIceAttackEffect(IceAttackEffect* _IceAttackEffect)
+	{
+		IceAttackEffect_ = _IceAttackEffect;
 	}
 };

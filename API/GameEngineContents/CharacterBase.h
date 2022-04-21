@@ -40,14 +40,8 @@ public:
 	float GetJumpMaxHeight() { return JumpMaxHeight_; }
 	float4 GetJumpDirection() { return JumpDirection_; }
 
-	virtual bool CanRun() { return false; }
-	virtual bool CanWalk() { return false; }
-	virtual bool CanJump() { return false; }
-
 	virtual void Walk() {}
 	virtual void Run() {}
-	/*virtual void Attack();
-	virtual void Die();*/
 	virtual void Jump() {}
 
 };

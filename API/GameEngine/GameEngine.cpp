@@ -106,7 +106,7 @@ void GameEngine::EngineLoop()
     CurrentLevel_->Update();
     CurrentLevel_->ActorUpdate();
     CurrentLevel_->ActorRender();
-    //CurrentLevel_->CollisionDebugRender(); //need to chk : delete coldebug
+   // CurrentLevel_->CollisionDebugRender(); //need to chk : delete coldebug
     WindowMainImage_->BitCopy(BackBufferImage_);
 
     CurrentLevel_->ActorRelease();

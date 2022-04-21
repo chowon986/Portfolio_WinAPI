@@ -27,15 +27,15 @@ public:
 protected:
 
 private:
-	Player* Player_;
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* WaddledooCol_;
-	GameEngineCollision* DirectionCol_;
-	GameEngineCollision* AttackRangeCol_;
-	GameEngineCollision* AttackCol_;
-
-	GameEngineRenderer* WaddledooRenderer_;
-	GameEngineRenderer* AttackRenderer_;
-	GameEngineLevel* Level_;
 	float4 Dir_;
+	Player* Player_;
+	GameEngineLevel* Level_;
+	GameEngineImage* ColMapImage_;
+	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* AttackRenderer_;
+	GameEngineCollision* AttackCol_;
+	GameEngineCollision* Collision_;
+	GameEngineCollision* RightDirCol_;
+	GameEngineCollision* LeftDirCol_;
+	GameEngineCollision* AttackRangeCol_;
 };

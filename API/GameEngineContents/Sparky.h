@@ -2,7 +2,10 @@
 #include "Monster.h"
 
 class GameEngineImage;
+class GameEngineCollision;
+class GameEngineRenderer;
 class GameEngineLevel;
+class Player;
 class Sparky : public Monster
 {
 public:
@@ -21,10 +24,21 @@ public:
 protected:
 
 private:
+	void UpdateMove();
+	void UpdateAttack();
+	bool IsDie();
+	void Die();
+
+private:
 	GameEngineImage* ColMapImage_;
-	bool CheckMapCollision();
-	float4 PrevPos_;
+	GameEngineCollision* SparkyCol_;
+	GameEngineCollision* DirectionCol_;
+	GameEngineCollision* AttackRangeCol_;
+	GameEngineCollision* AttackCol_;
+	Player* Player_;
+
+	GameEngineRenderer* SparkyRenderer_;
+	GameEngineRenderer* AttackRenderer_;
 	GameEngineLevel* Level_;
 	float4 Dir_;
-	void UpdateMove();
 };

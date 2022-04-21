@@ -12,6 +12,7 @@
 #include "Monster.h"
 #include "StarAttackEffect.h"
 #include "AttackEffect.h"
+#include "IceAttackEffect.h"
 #include "Box.h"
 
 void Player::UpdateIdle()
@@ -28,18 +29,60 @@ void Player::UpdateTransformEnd()
 
 }
 
-void Player::UpdateOpenDoor()
+//void Player::UpdateOpenDoor()
+//{
+//	//if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
+//	//{
+//	//	GameEngine::GetInst().ChangeLevel("Level1_2");
+//	//}
+//}
+
+// need to chk : 왜 여기로 안들어오는지
+void Player::UpdateTakeDamage()
 {
-	//if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Level1_2");
-	//}
+    SetHP(GetHP() - 1);
+    std::vector<GameEngineCollision*> ColResult;
+    if (KirbyCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
+    {
+        float4 StartPos = GetPosition();
+        for (GameEngineCollision* CenterCol : ColResult)
+        {
+            Monster* CenterColMonster = dynamic_cast<Monster*>(CenterCol->GetActor());
+            if (CenterColMonster != nullptr)
+            {
+                float MoveDir = CenterColMonster->GetPosition().x - GetPosition().x;
+                if (MoveDir <= 0)
+                {
+                    if (StartPos.x - GetPosition().x > -20)
+                    {
+                        float4 Dir = float4::RIGHT;
+                        float4 Move = Dir * GameEngineTime::GetDeltaTime() * 20;
+                        SetMove(Move);
+                    }
+                }
+                if (MoveDir > 0)
+                {
+                    if (StartPos.x - GetPosition().x < 20)
+                    {
+                        float4 Dir = float4::LEFT;
+                        float4 Move = Dir * GameEngineTime::GetDeltaTime() * 20;
+                        SetMove(Move);
+                    }
+                }
+            }
+        }
+    }
+
+	if (GetHP() <= 0)
+	{
+		SetState(KirbyState::DIE);
+		--HPCount_;
+	}
 }
 
 void Player::UpdateWalk()
 {
     float4 direction = float4::ZERO;
-
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
@@ -50,6 +93,7 @@ void Player::UpdateWalk()
     {
         direction = float4::RIGHT;
         Dir_ = "Right";
+
     }
 
     SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_);
@@ -63,13 +107,16 @@ void Player::UpdateRun()
         direction = float4::LEFT;
         Dir_ = "Left";
     }
+
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
         Dir_ = "Right";
+
     }
 
-    SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_ * 2);
+
+    SetMove(direction * GameEngineTime::GetDeltaTime() * (Speed_ * 2));
 }
 
 void Player::UpdateFly()
@@ -135,17 +182,17 @@ void Player::UpdateAttack()
 void Player::UpdateDie()
 {
     //need to chk colmap 무시하고 애니메이션 하면서 바닥으로 떨어짐
-    SetMove(float4::DOWN);
+   // SetMove(float4::DOWN);
 }
 
 void Player::UpdateUp()
 {
     //if (GetKirbyClass() == KirbyClass::ANIMAL)
     //{
-    JumpHeight_ = 0;
-        SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-        UpdateWalk();
-        UpdateRun();
+	/*JumpHeight_ = 0;
+	SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+	UpdateWalk();
+	UpdateRun();*/
     //}
     //else
     //{
@@ -156,11 +203,10 @@ void Player::UpdateUp()
 
 void Player::UpdateDown()
 {
-    //if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1))
-    //{
-    //    SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
-    //}
-    //SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1))
+    {
+        SetMove(float4::DOWN);
+    }
 }
 
 void Player::UpdateHover()
@@ -224,6 +270,21 @@ void Player::UpdateEatEnd()
     }
 }
 
+void Player::UpdateAttackStay()
+{
+    if (IceAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::ICE)
+    {
+        IceAttackEffect_->SetPosition(GetPosition()); // need to chk : the pos;
+        if (Dir_ == "Right")
+        {
+            IceAttackEffect_->SetState(IceAttackEffectState::IceAttackEffectRight);
+        }
+        else if (Dir_ == "Left")
+        {
+            IceAttackEffect_->SetState(IceAttackEffectState::IceAttackEffectLeft);
+        }
+    }
+}
 
 void Player::UpdateJumpUp()
 {
@@ -252,7 +313,6 @@ void Player::UpdateSlide()
         KirbySlideCol_->SetPivot(float4(-20.0f, -15.0f));
 
         //float4 Distance = GetPosition() - StartPos_;
-
     }
 
    else if (true == GameEngineInput::GetInst()->IsPress("Right"))

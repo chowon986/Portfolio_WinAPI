@@ -1,6 +1,10 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+class Player;
+class Background;
+class GameEngineImage;
+class GameEngineRenderer;
 class Boss : public GameEngineLevel
 {
 public:
@@ -18,6 +22,15 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-
+	Background* BossLevelStart_;
+	Background* BossLevelEnd_;
+	GameEngineRenderer* BossLevelStartRenderer_;
+	GameEngineRenderer* BossLevelEndRenderer_;
+	GameEngineImage* BossLevelStartImage_;
+	GameEngineImage* BossLevelEndImage_;
+	GameEngineImage* ColMapImage_;
+	Player* Player_;
+	float MapSizeX_;
+	float MapSizeY_;
 };
 

@@ -190,6 +190,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GreenMouse.h" />
     <ClInclude Include="HPUp.h" />
+    <ClInclude Include="IceAttackEffect.h" />
     <ClInclude Include="IntroStory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Kirby.h">
@@ -276,6 +277,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GreenMouse.cpp" />
     <ClCompile Include="HPUp.cpp" />
+    <ClCompile Include="IceAttackEffect.cpp" />
     <ClCompile Include="IntroStory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Kirby.cpp">

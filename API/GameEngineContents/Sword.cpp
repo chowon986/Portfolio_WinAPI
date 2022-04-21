@@ -8,6 +8,7 @@
 
 Sword::Sword()
 	: Monster()
+	, ColMapImage_(nullptr)
 {
 	SetMonsterClass(MonsterClass::SWORD);
 }

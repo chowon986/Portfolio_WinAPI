@@ -210,11 +210,14 @@
     <ClCompile Include="Dedede.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="StarAttackEffect.cpp">
-      <Filter>Kirby</Filter>
-    </ClCompile>
     <ClCompile Include="AttackEffect.cpp">
-      <Filter>Kirby</Filter>
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="IceAttackEffect.cpp">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="StarAttackEffect.cpp">
+      <Filter>Kirby\AttackEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -425,11 +428,14 @@
     <ClInclude Include="Dedede.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="StarAttackEffect.h">
-      <Filter>Kirby</Filter>
-    </ClInclude>
     <ClInclude Include="AttackEffect.h">
-      <Filter>Kirby</Filter>
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="IceAttackEffect.h">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="StarAttackEffect.h">
+      <Filter>Kirby\AttackEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -447,6 +453,9 @@
     </Filter>
     <Filter Include="Kirby">
       <UniqueIdentifier>{c764010c-f638-4795-bd28-695a8b59084c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kirby\AttackEffect">
+      <UniqueIdentifier>{f123c167-2f35-4021-abe9-4ea4de8bcd35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
