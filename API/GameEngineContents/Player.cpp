@@ -993,6 +993,7 @@ void Player::Update()
             else
             {
                 SetState(KirbyState::IDLE);
+                KirbySlideCol_->SetScale(float4(0.0f, 0.0f));
             }
             
         }
