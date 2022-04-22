@@ -20,6 +20,9 @@
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImage.h>
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
 
 Level1_2::Level1_2()
 	: MapSizeX_(4320)
@@ -103,12 +106,23 @@ void Level1_2::LevelChangeStart()
 		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(MapSizeX_, MapSizeY_), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1776.0f, 0.0f));
 
 	}
-
 	{
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(180.0f, 436.0f));
-		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
 	}
+	//{
+	//	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+	//	Player_->SetPosition(float4(180.0f, 436.0f));
+	//	PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+	//}
 
 	{
 		Box* Box_1 = CreateActor<Box>((int)ORDER::OBSTRUCTION);

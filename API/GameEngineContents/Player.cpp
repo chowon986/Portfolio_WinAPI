@@ -1091,7 +1091,10 @@ void Player::CorrectPos()
 
 void Player::CheckCollision()
 {
-
+    if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
+    {
+        GameEngine::GetInst().ChangeLevel("Level1_2");
+    }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect))
     {
@@ -1327,7 +1330,7 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "DownRight", 1, 1, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "DownLeft", 91, 91, 0.1f, true);
 
-        Renderer_->CreateAnimation("Normal.bmp", "SlideRight", 47, 47, 0.5f, false); // 루프안돌리고 이미지 이으면?
+        Renderer_->CreateAnimation("Normal.bmp", "SlideRight", 47, 47, 0.5f, false);
         Renderer_->CreateAnimation("Normal.bmp", "SlideLeft", 137, 137, 0.5f, false);
 
         Renderer_->CreateAnimation("Normal.bmp", "TakeDamageRight", 172, 172, 0.1f, true); 

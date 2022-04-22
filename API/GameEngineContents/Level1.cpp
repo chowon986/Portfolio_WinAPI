@@ -157,7 +157,7 @@ void Level1::LevelChangeStart()
 
 	{
 		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
-		Waddledoo_->SetPosition(float4(2837.0f, 377.0f));
+		Waddledoo_->SetPosition(float4(2840.0f, 377.0f));
 		GameEngineCollision* WaddledooCol = Waddledoo_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 

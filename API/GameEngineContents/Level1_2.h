@@ -31,6 +31,7 @@ private:
 	float MapSizeY_;
 	GameEngineRenderer* MonsterRenderer_;
 	GameEngineCollision* DoorCol1_3;
+	BotUI* PlayerStatus_;
 
 };
 

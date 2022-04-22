@@ -18,6 +18,7 @@ protected:
 
 private:
 	GameEngineCollision* BoxCol_;
+	GameEngineCollision* BoxBlockCol_;
 	GameEngineRenderer* BoxRenderer_;
 
 };
