@@ -16,7 +16,7 @@ public:
 
 	float Time;
 
-	//GameEngineSoundPlayer BgmPlayer;
+	GameEngineSoundPlayer BgmPlayer;
 
 protected:
 	void Loading() override;

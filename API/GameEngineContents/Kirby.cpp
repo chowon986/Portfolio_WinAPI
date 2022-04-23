@@ -57,19 +57,19 @@ void Kirby::GameInit()
         }
     }
 
-    //{
-    //    GameEngineDirectory ResourcesDir;
-    //    ResourcesDir.MoveParent("API");
-    //    ResourcesDir.Move("Resources");
-    //    ResourcesDir.Move("Sound");
+    {
+        GameEngineDirectory ResourcesDir;
+        ResourcesDir.MoveParent("API");
+        ResourcesDir.Move("Resources");
+        ResourcesDir.Move("Sound");
 
-    //    std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
+        std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
 
-    //    for (size_t i = 0; i < AllImageFileList.size(); i++)
-    //    {
-    //        GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
-    //    }
-    //}
+        for (size_t i = 0; i < AllImageFileList.size(); i++)
+        {
+            GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
+        }
+    }
 
 
     if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
@@ -101,7 +101,7 @@ void Kirby::GameInit()
     CreateLevel<EndingLevel>("Ending");
     CreateLevel<GameOver>("GameOver");
 
-    ChangeLevel("Level1_2");
+    ChangeLevel("BeforeTitle");
 
 }
 

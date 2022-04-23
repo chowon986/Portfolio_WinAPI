@@ -26,8 +26,8 @@ void BeforeTitleLevel::LevelChangeStart()
 	BeforeTitleVideo_ = CreateActor<VideoPlayer>();
 	BeforeTitleVideo_->SetInfo("intro_frame_", 0, 400, 30.0f);
 	//
-	//BgmPlayer = GameEngineSound::SoundPlayControl("00");
-	//Time = 5.0f;
+	BgmPlayer = GameEngineSound::SoundPlayControl("00.mp3");
+	Time = 5.0f;
 }
 
 void BeforeTitleLevel::Update()
@@ -39,8 +39,8 @@ void BeforeTitleLevel::Update()
 
 	Time -= GameEngineTime::GetDeltaTime();
 
-	//if (0 >= Time)
-	//{
-	//	BgmPlayer.Stop();
-	//}
+	if (0 >= Time)
+	{
+		BgmPlayer.Stop();
+	}
 }
