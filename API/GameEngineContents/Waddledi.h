@@ -35,5 +35,6 @@ public:
 	bool IsDie();
 	void Die();
 	void UpdateMove();
+	void SetDir(float4 _Dir) { Dir_ = _Dir; }
 
 };

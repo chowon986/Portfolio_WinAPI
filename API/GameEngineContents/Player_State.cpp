@@ -13,6 +13,8 @@
 #include "StarAttackEffect.h"
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "BeamAttackEffect.h"
 #include "Box.h"
 
 void Player::UpdateIdle()
@@ -86,13 +88,13 @@ void Player::UpdateWalk()
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
-        Dir_ = "Left";
+        //Dir_ = "Left";
     }
     
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
-        Dir_ = "Right";
+        //Dir_ = "Right";
 
     }
 
@@ -105,13 +107,13 @@ void Player::UpdateRun()
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
-        Dir_ = "Left";
+        //Dir_ = "Left";
     }
 
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
-        Dir_ = "Right";
+        //Dir_ = "Right";
 
     }
 
@@ -125,6 +127,31 @@ void Player::UpdateFly()
 
 void Player::UpdateFlyStay()
 {
+    if (GetKirbyClass() == KirbyClass::SPARK)
+    {
+        SparkKirbyRenderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
+    if (GetKirbyClass() == KirbyClass::DEFAULT)
+    {
+        Renderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
+    if (GetKirbyClass() == KirbyClass::ICE)
+    {
+        IceRenderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
+    if (GetKirbyClass() == KirbyClass::SWORD)
+    {
+        SwordRenderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
+    if (GetKirbyClass() == KirbyClass::ANIMAL)
+    {
+        AnimalRenderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
+    if (GetKirbyClass() == KirbyClass::FIRE)
+    {
+        FireRenderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
+
     JumpHeight_ = 0;
 
     SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
@@ -284,6 +311,26 @@ void Player::UpdateAttackStay()
             IceAttackEffect_->SetState(IceAttackEffectState::IceAttackEffectLeft);
         }
     }
+
+    if (SparkAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::SPARK)
+    {
+        SparkAttackEffect_->SetPosition(GetPosition());
+        SparkAttackEffect_->SetState(SparkAttackEffectState::SparkAttackEffect);
+    }
+
+    if (BeamAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::BEAM)
+    {
+        BeamAttackEffect_->SetPosition(GetPosition());
+        if (Dir_ == "Right")
+        {
+            BeamAttackEffect_->SetState(BeamAttackEffectState::BeamRightAttackEffect);
+
+        }
+        else if (Dir_ == "Left")
+        {
+            BeamAttackEffect_->SetState(BeamAttackEffectState::BeamLeftAttackEffect);
+        }
+    }
 }
 
 void Player::UpdateJumpUp()
@@ -304,25 +351,28 @@ void Player::UpdateJumpDown()
 void Player::UpdateSlide()
 {
     float4 direction = float4::ZERO;
-    if (true == GameEngineInput::GetInst()->IsPress("Left"))
-    {
-        direction = float4::LEFT;
-        SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 500);
-        Dir_ = "Left";
-        KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
-        KirbySlideCol_->SetPivot(float4(-20.0f, -15.0f));
-
-        //float4 Distance = GetPosition() - StartPos_;
-    }
-
-   else if (true == GameEngineInput::GetInst()->IsPress("Right"))
+    float Range = 0;
+    float4 Distance = GetPosition() - StartPos_;
+    if (Dir_ == "Right")
     {
         direction = float4::RIGHT;
-        SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 500);
-        Dir_ = "Right";
+        Range = 50;
+        if (Distance.x < Range)
+        {
+            SetMove(direction * GameEngineTime::GetDeltaTime() * 100);
+        }
         KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
         KirbySlideCol_->SetPivot(float4(20.0f, -15.0f));
-
-       // float4 Distance = GetPosition() - StartPos_;
+    }
+    else if (Dir_ == "Left")
+    {
+        direction = float4::LEFT;
+        Range = -50;
+        if (Distance.x > Range)
+        {
+            SetMove(direction * GameEngineTime::GetDeltaTime() * 100);
+        }
+        KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
+        KirbySlideCol_->SetPivot(float4(-20.0f, -15.0f));
     }
 }

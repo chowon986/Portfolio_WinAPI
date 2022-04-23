@@ -134,7 +134,7 @@ void StarAttackEffect::UpdateAttackStartLeft()
 	Collision_->SetPivot(float4(-20.0f, -30.0f));
 	
 	float4 Distance = GetPosition() - StartPos_;
-	if (Distance.x < -200)
+	if (Distance.x < -230)
 	{
 		SetState(StarAttackEffectState::AttackEndLeft);
 	}

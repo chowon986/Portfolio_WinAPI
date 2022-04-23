@@ -18,6 +18,7 @@
 #include "StarAttackEffect.h"
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
+#include "BeamAttackEffect.h"
 
 
 
@@ -141,10 +142,13 @@ void Level1::LevelChangeStart()
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
 		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		//BeamAttackEffect_ = CreateActor<BeamAttackEffect>((int)ORDER::EFFECT);
+		//BeamAttackEffect_->SetPlayer(Player_);
 
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(205.0, 436.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);

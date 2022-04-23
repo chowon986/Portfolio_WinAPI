@@ -155,7 +155,6 @@ void AttackEffect::UpdateAttackEffectLeft()
 			Collision_->SetScale(float4(0.0f, 0.0f));
 			SetState(AttackEffectState::None);
 		}
-
 	}
 }
 

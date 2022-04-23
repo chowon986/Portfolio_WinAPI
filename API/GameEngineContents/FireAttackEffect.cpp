@@ -1,4 +1,4 @@
-#include "IceAttackEffect.h"
+#include "FireAttackEffect.h"
 #include "Monster.h"
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
@@ -6,83 +6,83 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
 
-IceAttackEffect::IceAttackEffect()
+FireAttackEffect::FireAttackEffect()
 {
 
 }
 
-IceAttackEffect::~IceAttackEffect()
+FireAttackEffect::~FireAttackEffect()
 {
 }
 
-void IceAttackEffect::Start()
+void FireAttackEffect::Start()
 {
-	Collision_ = CreateCollision("IceAttackCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
-	Renderer_ = CreateRenderer("IceAtt.bmp");
+	Collision_ = CreateCollision("FireAttackCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
+	Renderer_ = CreateRenderer("FireAtt.bmp");
 	Renderer_->SetAlpha(0);
 	Image_ = Renderer_->GetImage();
 	Image_->CutCount(5, 3);
-	Renderer_->CreateAnimation("IceAtt.bmp", "AttackRight", 0, 12, 0.03f, true);
-	Renderer_->CreateAnimation("IceAtt.bmp", "AttackLeft", 0, 12, 0.03f, true);
+	Renderer_->CreateAnimation("FireAtt.bmp", "AttackRight", 0, 12, 0.03f, true);
+	Renderer_->CreateAnimation("FireAtt.bmp", "AttackLeft", 0, 12, 0.03f, true);
 
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
 
-	SetState(IceAttackEffectState::None);
+	SetState(FireAttackEffectState::None);
 }
 
-void IceAttackEffect::Update()
+void FireAttackEffect::Update()
 {
 	StateUpdate();
 }
 
-void IceAttackEffect::Render()
+void FireAttackEffect::Render()
 {
 }
 
-void IceAttackEffect::SetState(IceAttackEffectState _IceAttackEffectState)
+void FireAttackEffect::SetState(FireAttackEffectState _FireAttackEffectState)
 {
-	IceAttackEffectState_ = _IceAttackEffectState;
+	FireAttackEffectState_ = _FireAttackEffectState;
 
-	switch (IceAttackEffectState_)
+	switch (FireAttackEffectState_)
 	{
-	case IceAttackEffectState::IceAttackEffectRight:
+	case FireAttackEffectState::FireAttackEffectRight:
 		Renderer_->ChangeAnimation("AttackRight");
 		StartPos_ = GetPosition();
 		break;
-	case IceAttackEffectState::IceAttackEffectLeft:
+	case FireAttackEffectState::FireAttackEffectLeft:
 		Renderer_->ChangeAnimation("AttackLeft");
 		StartPos_ = GetPosition();
 		break;
 	}
 }
 
-IceAttackEffectState IceAttackEffect::GetState()
+FireAttackEffectState FireAttackEffect::GetState()
 {
-	return IceAttackEffectState_;
+	return FireAttackEffectState_;
 }
 
-void IceAttackEffect::StateUpdate()
+void FireAttackEffect::StateUpdate()
 {
-	switch (IceAttackEffectState_)
+	switch (FireAttackEffectState_)
 	{
-	case IceAttackEffectState::IceAttackEffectRight:
-		UpdateIceAttackEffectRight();
+	case FireAttackEffectState::FireAttackEffectRight:
+		UpdateFireAttackEffectRight();
 		break;
-	case IceAttackEffectState::IceAttackEffectLeft:
-		UpdateIceAttackEffectLeft();
+	case FireAttackEffectState::FireAttackEffectLeft:
+		UpdateFireAttackEffectLeft();
 		break;
-	case IceAttackEffectState::None:
+	case FireAttackEffectState::None:
 		UpdateNone();
 		break;
 	}
 }
 
-void IceAttackEffect::UpdateNone()
+void FireAttackEffect::UpdateNone()
 {
 }
 
-void IceAttackEffect::UpdateIceAttackEffectRight()
+void FireAttackEffect::UpdateFireAttackEffectRight()
 {
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(40.0f, 0.0f));
@@ -98,13 +98,13 @@ void IceAttackEffect::UpdateIceAttackEffectRight()
 		{
 			Renderer_->SetAlpha(0);
 			Collision_->SetScale(float4(0.0f, 0.0f));
-			SetState(IceAttackEffectState::None);
+			SetState(FireAttackEffectState::None);
 		}
 
 	}
 }
 
-void IceAttackEffect::UpdateIceAttackEffectLeft()
+void FireAttackEffect::UpdateFireAttackEffectLeft()
 {
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(-40.0f, 0.0f));
@@ -134,21 +134,21 @@ void IceAttackEffect::UpdateIceAttackEffectLeft()
 		{
 			Renderer_->SetAlpha(0);
 			Collision_->SetScale(float4(0.0f, 0.0f));
-			SetState(IceAttackEffectState::None);
+			SetState(FireAttackEffectState::None);
 		}
 
 	}
 
-	std::vector<GameEngineCollision*> IceResult;
-	if (true == Collision_->CollisionResult("BasicMonster", IceResult, CollisionType::Rect, CollisionType::Rect))
+	std::vector<GameEngineCollision*> FireResult;
+	if (true == Collision_->CollisionResult("BasicMonster", FireResult, CollisionType::Rect, CollisionType::Rect))
 	{
-		for (GameEngineCollision* IceCollision : IceResult)
+		for (GameEngineCollision* FireCollision : FireResult)
 		{
-			GameEngineActor* IceColActor = IceCollision->GetActor();
-			Monster* Monster_ = dynamic_cast<Monster*>(IceColActor);
+			GameEngineActor* FireColActor = FireCollision->GetActor();
+			Monster* Monster_ = dynamic_cast<Monster*>(FireColActor);
 			if (Monster_ != nullptr)
 			{
-				Renderer_->ChangeAnimation("Ice");
+				Renderer_->ChangeAnimation("Fire");
 				Monster_->SetDir(float4::ZERO);
 				Monster_->RightDirCol_->SetScale(float4(0.0f, 0.0f));
 				Monster_->RightDirCol_->SetPivot(float4(0.0f, 200.0f));

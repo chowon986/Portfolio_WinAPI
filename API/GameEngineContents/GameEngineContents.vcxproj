@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -160,6 +160,7 @@
     <ClInclude Include="Animal.h" />
     <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="BeamAttackEffect.h" />
     <ClInclude Include="BeforeTitleLevel.h" />
     <ClInclude Include="BigBomb.h" />
     <ClInclude Include="BigBox.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="EndingStory.h" />
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="FireAttackEffect.h" />
     <ClInclude Include="FireItem.h" />
     <ClInclude Include="Frosty.h" />
     <ClInclude Include="GameOver.h" />
@@ -228,11 +230,13 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Level1_3.h" />
+    <ClInclude Include="SparkAttackEffect.h" />
     <ClInclude Include="Sparky.h" />
     <ClInclude Include="Spinni.h" />
     <ClInclude Include="StarAttackEffect.h" />
     <ClInclude Include="Storo.h" />
     <ClInclude Include="Sword.h" />
+    <ClInclude Include="SwordAttackEffect.h" />
     <ClInclude Include="SwordItem.h" />
     <ClInclude Include="Tiktik.h" />
     <ClInclude Include="TitleLevel.h" />
@@ -248,6 +252,7 @@
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="BeamAttackEffect.cpp" />
     <ClCompile Include="BeforeTitleLevel.cpp" />
     <ClCompile Include="BigBomb.cpp" />
     <ClCompile Include="BigBox.cpp" />
@@ -272,6 +277,7 @@
     <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="EndingStory.cpp" />
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="FireAttackEffect.cpp" />
     <ClCompile Include="FireItem.cpp" />
     <ClCompile Include="Frosty.cpp" />
     <ClCompile Include="GameOver.cpp" />
@@ -316,11 +322,13 @@
     </ClCompile>
     <ClCompile Include="Level1_3.cpp" />
     <ClCompile Include="Player_State.cpp" />
+    <ClCompile Include="SparkAttackEffect.cpp" />
     <ClCompile Include="Sparky.cpp" />
     <ClCompile Include="Spinni.cpp" />
     <ClCompile Include="StarAttackEffect.cpp" />
     <ClCompile Include="Storo.cpp" />
     <ClCompile Include="Sword.cpp" />
+    <ClCompile Include="SwordAttackEffect.cpp" />
     <ClCompile Include="SwordItem.cpp" />
     <ClCompile Include="Tiktik.cpp" />
     <ClCompile Include="TitleLevel.cpp" />

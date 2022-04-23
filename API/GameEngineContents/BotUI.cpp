@@ -78,43 +78,66 @@ void BotUI::Start()
 	HPNumberRight_->CameraEffectOff();
 	
 	// 체력바는 총 9칸
-	MinusHP_ = PlayerHPMinus_->GetScale().x/9;
+	MinusHP_ = PlayerHPMinus_->GetImageScale().x/9;
 }
 
 void BotUI::Update()
 {
-	//switch ()
-	//{
-	//case KirbyClass::DEFAULT:
-	//case KirbyClass::PIG:
-	//	PlayerUI_->ChangeAnimation("Default");
-	//	 PlayerUI_->SetPivot(float4(.0f,.0f));
-	//	break;
-	//case KirbyClass::ANIMAL:
-	//	PlayerUI_->ChangeAnimation("Animal");
-	//	PlayerUI_->SetPivot(float4(.0f,.0f));
-	//	break;
-	//case KirbyClass::FIRE:
-	//	PlayerUI_->ChangeAnimation("Fire");
-	//	PlayerUI_->SetPivot(float4(.0f,.0f));
-	//	break;
-	//case KirbyClass::ICE:
-	//	PlayerUI_->ChangeAnimation("Ice");
-	//	PlayerUI_->SetPivot(float4(.0f,.0f));
-	//	break;
-	//case KirbyClass::SPARK:
-	//	PlayerUI_->ChangeAnimation("Spark");
-	//	PlayerUI_->SetPivot(float4(.0f,.0f));
-	//	break;
-	//case KirbyClass::SWORD:
-	//	PlayerUI_->ChangeAnimation("Sword");
-	//	PlayerUI_->SetPivot(float4(.0f,.0f));
-	//	break;
-	//}
+	// kirby의 class를 가져오고싶은데 nullptr이 될 경우
+	// botui와 kirby가 같이 있는 곳에서 설정이 필요하고,
+	// botui에서 kirby 정보가 필요하니까 set함수를 만든다.
+	// 지금은 level에서 같이 있으므로 level에서 set 함수를 설정하고
+	// 설정된 player를 멤버변수로 받아서 nullptr이 아니게 만든다.
+	// 그 후 사용
+	if (Player_ == nullptr)
+	{
+		return;
+	}
+
+	KirbyClass Class =  Player_->GetKirbyClass();
+
+	switch (Class)
+	{
+	case KirbyClass::DEFAULT:
+	case KirbyClass::PIG:
+		PlayerUI_->ChangeAnimation("Default");
+		 PlayerUI_->SetPivot(float4(16.0f, 570.0f));
+		break;
+	case KirbyClass::ANIMAL:
+		PlayerUI_->ChangeAnimation("Animal");
+		PlayerUI_->SetPivot(float4(48.0f, 570.0f));
+		break;
+	case KirbyClass::FIRE:
+		PlayerUI_->ChangeAnimation("Fire");
+		PlayerUI_->SetPivot(float4(82.0f, 570.0f));
+		break;
+	case KirbyClass::ICE:
+		PlayerUI_->ChangeAnimation("Ice");
+		PlayerUI_->SetPivot(float4(82.0f, 570.0f));
+		break;
+	case KirbyClass::SPARK:
+		PlayerUI_->ChangeAnimation("Spark");
+		PlayerUI_->SetPivot(float4(49.0f, 570.0f));
+		break;
+	case KirbyClass::SWORD:
+		PlayerUI_->ChangeAnimation("Sword");
+		PlayerUI_->SetPivot(float4(49.0f, 570.0f));
+		break; 
+		// beam 16.0f, 570.0f
+	}
 	
 	// 플레이어가 공격을 받으면
-	// PlayerHPMinus_->GetScale() - MinusHP_;
+	// SetScale(GetScale().x - MinusHP_);
+	int PlayerHP = Player_->GetHP();
+
+	float4 ImageScale = PlayerHPMinus_->GetImageScale();
+	PlayerHPMinus_->SetScale(float4(MinusHP_ * PlayerHP, ImageScale.y));
+
+	float Distance = MinusHP_ / 2;
+	PlayerHPMinus_->SetPivot(float4(PlayerHPMinus_->GetPivot().x, PlayerHPMinus_->GetPivot().y));
+	
 }
+
 
 void BotUI::Render()
 {

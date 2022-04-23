@@ -37,6 +37,7 @@ public:
 
 protected:
 	float4 Pos_;
+	float4 Dir_;
 
 private:
 	int Speed_;
@@ -46,7 +47,10 @@ private:
 	GameEngineLevel* Level_;
 	MonsterClass MonsterClass_;
 
+
 public:
+	GameEngineCollision* RightDirCol_;
+	GameEngineCollision* LeftDirCol_;
 	void SetMonsterClass(MonsterClass _MonsterClass)
 	{
 		MonsterClass_ = _MonsterClass;
@@ -56,6 +60,7 @@ public:
 	{
 		return MonsterClass_;
 	}
+	void SetDir(float4 _Dir) { Dir_ = _Dir; }
 
 private:
 	void Walk();

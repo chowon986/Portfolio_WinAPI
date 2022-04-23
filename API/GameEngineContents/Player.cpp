@@ -276,31 +276,7 @@ void Player::SetState(KirbyState _KirbyState)
         break;
 
     case KirbyState::FLYSTAY:
-        if (GetKirbyClass() == KirbyClass::SPARK)
-        {
-            SparkKirbyRenderer_->ChangeAnimation("FlyStay" + Dir_);
-        }
-        if (GetKirbyClass() == KirbyClass::DEFAULT)
-        {
-            Renderer_->ChangeAnimation("FlyStay" + Dir_);
-        }
-        if (GetKirbyClass() == KirbyClass::ICE)
-        {
-            IceRenderer_->ChangeAnimation("FlyStay" + Dir_);
-        }
-        if (GetKirbyClass() == KirbyClass::SWORD)
-        {
-            SwordRenderer_->ChangeAnimation("FlyStay" + Dir_);
-        }
-        if (GetKirbyClass() == KirbyClass::ANIMAL)
-        {
-            AnimalRenderer_->ChangeAnimation("FlyStay" + Dir_);
-        }
-        if (GetKirbyClass() == KirbyClass::FIRE)
-        {
-            FireRenderer_->ChangeAnimation("FlyStay" + Dir_);
-        }
-        break;
+        
 
     case KirbyState::FLYATTACK:
         if (GetKirbyClass() == KirbyClass::SPARK)
@@ -551,26 +527,34 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::SLIDE:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
+            StartPos_ = GetPosition();
             SparkKirbyRenderer_->ChangeAnimation("Slide" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
+            StartPos_ = GetPosition();
             Renderer_->ChangeAnimation("Slide" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::ICE)
         {
+            StartPos_ = GetPosition();
+
             IceRenderer_->ChangeAnimation("Slide" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::SWORD)
         {
+            StartPos_ = GetPosition();
+
             SwordRenderer_->ChangeAnimation("Slide" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::ANIMAL)
         {
+            StartPos_ = GetPosition();
             AnimalRenderer_->ChangeAnimation("Slide" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
+            StartPos_ = GetPosition();
             FireRenderer_->ChangeAnimation("Slide" + Dir_);
         }
         break;
@@ -636,11 +620,29 @@ void Player::SetState(KirbyState _KirbyState)
 
 void Player::Update()
 {
+    if (true == GameEngineInput::GetInst()->IsPress("Right"))
+    {
+        Dir_ = "Right";
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("Left"))
+    {
+        Dir_ ="Left";
+    }
     if (true == GameEngineInput::GetInst()->IsPress("Ice"))
     {
         SetKirbyClass(KirbyClass::ICE);
     }
 
+    if (true == GameEngineInput::GetInst()->IsPress("Spark"))
+    {
+        SetKirbyClass(KirbyClass::SPARK);
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("Fire"))
+    {
+        SetKirbyClass(KirbyClass::FIRE);
+    }
 
     if (true == GameEngineInput::GetInst()->IsPress("Left") &&
         false == GameEngineInput::GetInst()->IsPress("Run") &&
@@ -705,7 +707,8 @@ void Player::Update()
 
     if (true == GameEngineInput::GetInst()->IsPress("Up") &&
         KirbyClass::ANIMAL == GetKirbyClass() &&
-        KirbyState::TRANSFORM != GetState()//&&
+        KirbyState::TRANSFORM != GetState() &&
+        KirbyState::SLIDE != GetState()
         /*need to chk RGB(,,)  */)
     {
         SetState(KirbyState::UP);
@@ -713,7 +716,8 @@ void Player::Update()
 
     if (true == GameEngineInput::GetInst()->IsPress("Down") &&
         KirbyClass::PIG != GetKirbyClass() &&
-        KirbyState::TRANSFORM != GetState())
+        KirbyState::TRANSFORM != GetState() &&
+        KirbyState::SLIDE != GetState())
     {
         SetState(KirbyState::DOWN);
     }
@@ -938,10 +942,12 @@ void Player::Update()
 		/*SetPosition(float4(GetPosition().ix(), GetPosition().iy()));*/
 
         JumpHeight_ = 0;
+        float4 Distance = GetPosition() - StartPos_;
+        float DistanceX = Distance.x < 0 ? Distance.x * -1 : Distance.x;
         if (true == GameEngineInput::GetInst()->IsFree("Left") &&
             true == GameEngineInput::GetInst()->IsFree("Right") &&
             true == GameEngineInput::GetInst()->IsFree("Down") &&
-            true == GameEngineInput::GetInst()->IsFree("Slide") &&
+            true == GameEngineInput::GetInst()->IsFree("Slide")&&
             true == GameEngineInput::GetInst()->IsFree("Jump") &&
             true == GameEngineInput::GetInst()->IsFree("Fly") &&
             true == GameEngineInput::GetInst()->IsFree("Attack") &&
@@ -1662,8 +1668,8 @@ void Player::Start()
         
         
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P');
-        /*GameEngineInput::GetInst()->CreateKey("Spark", '1');
-        GameEngineInput::GetInst()->CreateKey("Fire", '2');
+        GameEngineInput::GetInst()->CreateKey("Spark", '1');
+        GameEngineInput::GetInst()->CreateKey("Fire", '2');/*
         GameEngineInput::GetInst()->CreateKey("Sword", '3');
         GameEngineInput::GetInst()->CreateKey("Animal", '4');*/
         GameEngineInput::GetInst()->CreateKey("Ice", '5');

@@ -27,7 +27,7 @@ private:
 	void Render() override;
 	void Update() override;
 
-	int MinusHP_;
+	float MinusHP_;
 	GameEngineRenderer* PlayerHPMinus_;
 	GameEngineRenderer* PlayerUI_;
 	GameEngineRenderer* PlayerHP_;
@@ -37,5 +37,7 @@ private:
 	GameEngineRenderer* HPNumberRight_;
 	GameEngineImage* PlayerHPCountNum_;
 	Player* Player_;
+public:
+	void SetPlayer(Player* _Player) { Player_ = _Player; }
 };
 

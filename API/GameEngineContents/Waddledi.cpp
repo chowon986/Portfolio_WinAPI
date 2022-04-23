@@ -212,26 +212,6 @@ void Waddledi::UpdateMove()
 	}
 
 
-	std::vector<GameEngineCollision*> IceResult;
-	if (true == WaddlediCol_->CollisionResult("IceAttackCol", IceResult, CollisionType::Rect, CollisionType::Rect))
-	{
-		for (GameEngineCollision* IceCollision : IceResult)
-		{
-			GameEngineActor* IceColActor = IceCollision->GetActor();
-			IceAttackEffect* Ice = dynamic_cast<IceAttackEffect*>(IceColActor);
-			if (Ice != nullptr)
-			{
-				Renderer_->ChangeAnimation("Ice");
-				Dir_ = float4::ZERO;
-				RightDirCol_->SetScale(float4(0.0f, 0.0f));
-				RightDirCol_->SetPivot(float4(0.0f, 200.0f));
-				LeftDirCol_->SetScale(float4(0.0f, 0.0f));
-				LeftDirCol_->SetPivot(float4(0.0f, 200.0f));
-			}
-		}
-	}
-
-
 	if (true == WaddlediCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect) && true == Renderer_->IsAnimationName("Ice"))
 	{
 		float4 StartPos = GetPosition();

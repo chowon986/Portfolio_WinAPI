@@ -219,6 +219,18 @@
     <ClCompile Include="StarAttackEffect.cpp">
       <Filter>Kirby\AttackEffect</Filter>
     </ClCompile>
+    <ClCompile Include="SparkAttackEffect.cpp">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireAttackEffect.cpp">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordAttackEffect.cpp">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="BeamAttackEffect.cpp">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -435,6 +447,18 @@
       <Filter>Kirby\AttackEffect</Filter>
     </ClInclude>
     <ClInclude Include="StarAttackEffect.h">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SparkAttackEffect.h">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireAttackEffect.h">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordAttackEffect.h">
+      <Filter>Kirby\AttackEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="BeamAttackEffect.h">
       <Filter>Kirby\AttackEffect</Filter>
     </ClInclude>
   </ItemGroup>

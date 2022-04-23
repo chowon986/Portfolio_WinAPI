@@ -12,7 +12,7 @@ enum class KirbyClass
 	FIRE,
 	ICE,
 	ANIMAL,
-
+	BEAM,
 	// default , pig, spark, fire, ice
 };
 
@@ -53,6 +53,10 @@ class StarAttackEffect;
 class AttackEffect;
 enum class MonsterClass;
 class IceAttackEffect;
+class SparkAttackEffect;
+class FireAttackEffect;
+class SwordAttackEffect;
+class BeamAttackEffect;
 class Player : public CharacterBase
 {
 public:
@@ -100,6 +104,10 @@ private:
 	StarAttackEffect* StarAttackEffect_;
 	AttackEffect* AttackEffect_;
 	IceAttackEffect* IceAttackEffect_;
+	SparkAttackEffect* SparkAttackEffect_;
+	FireAttackEffect* FireAttackEffect_;
+	SwordAttackEffect* SwordAttackEffect_;
+	BeamAttackEffect* BeamAttackEffect_;
 
 
 	Monster* Monster_;
@@ -178,5 +186,25 @@ public:
 	void SetIceAttackEffect(IceAttackEffect* _IceAttackEffect)
 	{
 		IceAttackEffect_ = _IceAttackEffect;
+	}	
+	
+	void SetSparkAttackEffect(SparkAttackEffect* _SparkAttackEffect)
+	{
+		SparkAttackEffect_ = _SparkAttackEffect;
+	}
+
+	void SetSwordAttackEffect(SwordAttackEffect* _SwordAttackEffect)
+	{
+		SwordAttackEffect_ = _SwordAttackEffect;
+	}
+
+	void SetFireAttackEffect(FireAttackEffect* _FireAttackEffect)
+	{
+		FireAttackEffect_ = _FireAttackEffect;
+	}
+
+	void SetBeamAttackEffect(BeamAttackEffect* _BeamAttackEffect)
+	{
+		BeamAttackEffect_ = _BeamAttackEffect;
 	}
 };
