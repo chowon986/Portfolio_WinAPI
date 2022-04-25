@@ -38,8 +38,6 @@ private:
 	float4 StartPos_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
-	GameEngineRenderer* Renderer2_;
 	GameEngineCollision* Collision_;
 	GameEngineImage* Image_;
-	GameEngineImage* Image2_;
 };

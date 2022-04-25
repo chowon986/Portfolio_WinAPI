@@ -48,6 +48,52 @@ void Kirby::GameInit()
         ResourcesDir.MoveParent("API");
         ResourcesDir.Move("Resources");
         ResourcesDir.Move("Image");
+        ResourcesDir.Move("Character");
+
+        std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+        for (size_t i = 0; i < AllImageFileList.size(); i++)
+        {
+            GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+        }
+    }
+
+    {
+        GameEngineDirectory ResourcesDir;
+        ResourcesDir.MoveParent("API");
+        ResourcesDir.Move("Resources");
+        ResourcesDir.Move("Image");
+        ResourcesDir.Move("Etc");
+
+        std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+        for (size_t i = 0; i < AllImageFileList.size(); i++)
+        {
+            GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+        }
+    }
+
+    {
+        GameEngineDirectory ResourcesDir;
+        ResourcesDir.MoveParent("API");
+        ResourcesDir.Move("Resources");
+        ResourcesDir.Move("Image");
+        ResourcesDir.Move("Level");
+
+        std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+        for (size_t i = 0; i < AllImageFileList.size(); i++)
+        {
+            GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+        }
+    }
+
+    {
+        GameEngineDirectory ResourcesDir;
+        ResourcesDir.MoveParent("API");
+        ResourcesDir.Move("Resources");
+        ResourcesDir.Move("Image");
+        ResourcesDir.Move("Video");
 
         std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
 
@@ -101,7 +147,7 @@ void Kirby::GameInit()
     CreateLevel<EndingLevel>("Ending");
     CreateLevel<GameOver>("GameOver");
 
-    ChangeLevel("BeforeTitle");
+    ChangeLevel("Level1");
 
 }
 

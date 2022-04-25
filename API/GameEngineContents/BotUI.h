@@ -28,7 +28,18 @@ private:
 	void Update() override;
 
 	float MinusHP_;
-	GameEngineRenderer* PlayerHPMinus_;
+	GameEngineRenderer* HP10_;
+	GameEngineRenderer* HP9_;
+	GameEngineRenderer* HP8_;
+	GameEngineRenderer* HP7_;
+	GameEngineRenderer* HP6_;
+	GameEngineRenderer* HP5_;
+	GameEngineRenderer* HP4_;
+	GameEngineRenderer* HP3_;
+	GameEngineRenderer* HP2_;
+	GameEngineRenderer* HP1_;
+	GameEngineRenderer* HP0_;
+
 	GameEngineRenderer* PlayerUI_;
 	GameEngineRenderer* PlayerHP_;
 	GameEngineRenderer* PlayerHPCount1_;

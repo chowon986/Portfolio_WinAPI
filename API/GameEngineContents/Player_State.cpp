@@ -129,7 +129,7 @@ void Player::UpdateFlyStay()
 {
     if (GetKirbyClass() == KirbyClass::SPARK)
     {
-        SparkKirbyRenderer_->ChangeAnimation("FlyStay" + Dir_);
+        SparkRenderer_->ChangeAnimation("FlyStay" + Dir_);
     }
     if (GetKirbyClass() == KirbyClass::DEFAULT)
     {

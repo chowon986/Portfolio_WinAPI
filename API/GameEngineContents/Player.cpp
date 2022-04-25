@@ -54,17 +54,18 @@ void Player::ClassUpdate()
     {
     case KirbyClass::SPARK:
         Renderer_->SetAlpha(0);
-        SparkKirbyRenderer_->SetAlpha(255);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(255);
         PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(0);
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        
         break;
     case KirbyClass::ANIMAL:
         Renderer_->SetAlpha(0);
-        SparkKirbyRenderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(0);
         PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(0);
         FireRenderer_->SetAlpha(0);
@@ -73,7 +74,8 @@ void Player::ClassUpdate()
         break;
     case KirbyClass::DEFAULT:
         Renderer_->SetAlpha(255);
-        SparkKirbyRenderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(0);
         PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(0);
         FireRenderer_->SetAlpha(0);
@@ -83,7 +85,8 @@ void Player::ClassUpdate()
         break;
     case KirbyClass::ICE:
         Renderer_->SetAlpha(0);
-        SparkKirbyRenderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(0);
         PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(0);
         FireRenderer_->SetAlpha(0);
@@ -92,7 +95,8 @@ void Player::ClassUpdate()
         break;
     case KirbyClass::SWORD:
         Renderer_->SetAlpha(0);
-        SparkKirbyRenderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(0);
         PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(255);
         FireRenderer_->SetAlpha(0);
@@ -101,7 +105,8 @@ void Player::ClassUpdate()
         break;
     case KirbyClass::FIRE:
         Renderer_->SetAlpha(0);
-        SparkKirbyRenderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(0);
         PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(0);
         FireRenderer_->SetAlpha(255);
@@ -110,8 +115,19 @@ void Player::ClassUpdate()
         break;
     case KirbyClass::PIG:
         Renderer_->SetAlpha(0);
-        SparkKirbyRenderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(0);
+        SparkRenderer_->SetAlpha(0);
         PigRenderer_->SetAlpha(255);
+        SwordRenderer_->SetAlpha(0);
+        FireRenderer_->SetAlpha(0);
+        IceRenderer_->SetAlpha(0);
+        AnimalRenderer_->SetAlpha(0);
+        break;
+    case KirbyClass::DIE:
+        Renderer_->SetAlpha(0);
+        Renderer2_->SetAlpha(255);
+        SparkRenderer_->SetAlpha(0);
+        PigRenderer_->SetAlpha(0);
         SwordRenderer_->SetAlpha(0);
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
@@ -139,7 +155,7 @@ void Player::SetState(KirbyState _KirbyState)
         }
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Idle" + Dir_);
+            SparkRenderer_->ChangeAnimation("Idle" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::SWORD)
         {
@@ -165,7 +181,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::DOWN:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Down" + Dir_);
+            SparkRenderer_->ChangeAnimation("Down" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -192,7 +208,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::WALK:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Walk" + Dir_);
+            SparkRenderer_->ChangeAnimation("Walk" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -223,7 +239,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::RUN:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-		    SparkKirbyRenderer_->ChangeAnimation("Run" + Dir_);
+		    SparkRenderer_->ChangeAnimation("Run" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -251,7 +267,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::FLY:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Fly" + Dir_);
+            SparkRenderer_->ChangeAnimation("Fly" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -281,7 +297,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::FLYATTACK:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("FlyAttack" + Dir_);
+            SparkRenderer_->ChangeAnimation("FlyAttack" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -308,7 +324,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::FLYEND:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("FlyEnd" + Dir_);
+            SparkRenderer_->ChangeAnimation("FlyEnd" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -358,7 +374,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::ATTACK:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Attack" + Dir_);
+            SparkRenderer_->ChangeAnimation("Attack" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::PIG)
         {
@@ -385,7 +401,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::ATTACKSTAY:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("AttackStay" + Dir_);
+            SparkRenderer_->ChangeAnimation("AttackStay" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::PIG)
         {
@@ -417,7 +433,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::TAKEDAMAGE:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("TakeDamage" + Dir_);
+            SparkRenderer_->ChangeAnimation("TakeDamage" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -444,7 +460,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::JUMPUP:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("JumpUp" + Dir_);
+            SparkRenderer_->ChangeAnimation("JumpUp" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -471,7 +487,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::JUMPING:
         if (GetKirbyClass() == KirbyClass::SPARK && GetState() != KirbyState::IDLE)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Jumping" + Dir_);
+            SparkRenderer_->ChangeAnimation("Jumping" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT && GetState() != KirbyState::IDLE)
         {
@@ -498,7 +514,7 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::JUMPDOWN:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("JumpDown" + Dir_);
+            SparkRenderer_->ChangeAnimation("JumpDown" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -528,7 +544,7 @@ void Player::SetState(KirbyState _KirbyState)
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
             StartPos_ = GetPosition();
-            SparkKirbyRenderer_->ChangeAnimation("Slide" + Dir_);
+            SparkRenderer_->ChangeAnimation("Slide" + Dir_);
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
@@ -562,34 +578,34 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::DIE:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
-            SparkKirbyRenderer_->ChangeAnimation("Die" + Dir_);
+            Renderer2_->ChangeAnimation("Die");
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
-            Renderer_->ChangeAnimation("Die" + Dir_);
+            Renderer2_->ChangeAnimation("Die");
         }
         if (GetKirbyClass() == KirbyClass::ICE)
         {
-            IceRenderer_->ChangeAnimation("Die" + Dir_);
+            Renderer2_->ChangeAnimation("Die");
         }
         if (GetKirbyClass() == KirbyClass::SWORD)
         {
-            SwordRenderer_->ChangeAnimation("Die" + Dir_);
+            Renderer2_->ChangeAnimation("Die");
         }
         if (GetKirbyClass() == KirbyClass::ANIMAL)
         {
-            AnimalRenderer_->ChangeAnimation("Die" + Dir_);
+            Renderer2_->ChangeAnimation("Die");
         }
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
-            FireRenderer_->ChangeAnimation("Die" + Dir_);
+            Renderer2_->ChangeAnimation("Die");
         }
         break;
 
     //case KirbyState::OPENDOOR:
     //    if (GetKirbyClass() == KirbyClass::SPARK)
     //    {
-    //        SparkKirbyRenderer_->ChangeAnimation("DoorOpen" + Dir_);
+    //        SparkRenderer_->ChangeAnimation("DoorOpen" + Dir_);
     //    }
     //    if (GetKirbyClass() == KirbyClass::DEFAULT)
     //    {
@@ -642,6 +658,21 @@ void Player::Update()
     if (true == GameEngineInput::GetInst()->IsPress("Fire"))
     {
         SetKirbyClass(KirbyClass::FIRE);
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("Sword"))
+    {
+        SetKirbyClass(KirbyClass::SWORD);
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("Animal"))
+    {
+        SetKirbyClass(KirbyClass::ANIMAL);
+    }
+
+    if (true == GameEngineInput::GetInst()->IsPress("Animal"))
+    {
+        SetKirbyClass(KirbyClass::ANIMAL);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Left") &&
@@ -773,7 +804,7 @@ void Player::Update()
                 SetState(KirbyState::ATTACKSTAY);
             }
 
-            else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkKirbyRenderer_->IsEndAnimation())
+            else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkRenderer_->IsEndAnimation())
             {
                 SetState(KirbyState::ATTACKSTAY);
             }
@@ -820,7 +851,7 @@ void Player::Update()
                 SetState(KirbyState::FLYSTAY);
             }
 
-            else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkKirbyRenderer_->IsEndAnimation())
+            else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkRenderer_->IsEndAnimation())
             {
                 SetState(KirbyState::FLYSTAY);
             }
@@ -865,7 +896,7 @@ void Player::Update()
                 SetState(KirbyState::FLYEND);
             }
 
-            else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkKirbyRenderer_->IsEndAnimation())
+            else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkRenderer_->IsEndAnimation())
             {
                 SetState(KirbyState::FLYEND);
             }
@@ -1044,7 +1075,7 @@ void Player::Update()
                     SetState(KirbyState::JUMPDOWN);
                 }
 
-                else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkKirbyRenderer_->IsEndAnimation())
+                else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkRenderer_->IsEndAnimation())
                 {
                     SetState(KirbyState::JUMPDOWN);
                 }
@@ -1287,50 +1318,54 @@ void Player::Die()
 
 void Player::Start()
 {
-        // NormalKirby == DefaultKirby
-		Dir_ = "Right";
-		Level_ = GetLevel();
-		SetHPCount(2);
-		SetHP(9);
+    {
+        Dir_ = "Right";
+        SetHPCount(9);
+        SetHP(1);
         SetSpeed(200);
-		ColMapImage_ = Level_->GetColMapImage();
-        KirbyCol_ = CreateCollision("KirbyCol", float4(50.0f, 50.0f), float4(0.0f,-25.0f));
+        Level_ = GetLevel();
+        ColMapImage_ = Level_->GetColMapImage();
+
+        KirbyCol_ = CreateCollision("KirbyCol", float4(50.0f, 50.0f), float4(0.0f, -25.0f));
         KirbyEatCol_ = CreateCollision("KirbyEatCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
         KirbySlideCol_ = CreateCollision("KirbySlideCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
 
-		Renderer_ = CreateRenderer("Normal.bmp");
-		GameEngineImage* Image_ = Renderer_->GetImage();
+        Renderer_ = CreateRenderer("Normal.bmp");
+        GameEngineImage* Image_ = Renderer_->GetImage();
         Image_->CutCount(10, 18);
+    }
 
-		Renderer_->CreateAnimation("Normal.bmp", "WalkRight", 19, 28, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "WalkLeft", 109, 118, 0.1f, true);
+    {
+        //Default
+        Renderer_->CreateAnimation("Normal.bmp", "WalkRight", 19, 28, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "WalkLeft", 109, 118, 0.1f, true);
 
-		Renderer_->CreateAnimation("Normal.bmp", "RunRight", 29, 36, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "RunLeft", 119, 126, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "RunRight", 29, 36, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "RunLeft", 119, 126, 0.1f, true);
 
-		Renderer_->CreateAnimation("Normal.bmp", "IdleRight", 0, 0, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "IdleLeft", 90, 90, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "IdleRight", 0, 0, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "IdleLeft", 90, 90, 0.1f, true);
 
-		Renderer_->CreateAnimation("Normal.bmp", "FlyRight", 53, 58, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyLeft", 143, 148, 0.1f, true); 
-		Renderer_->CreateAnimation("Normal.bmp", "FlyStayRight", 59, 64, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyStayLeft", 149, 154, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackRight", 74, 74, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyAttackLeft", 164, 164, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyEndRight", 78, 79, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "FlyEndLeft", 168, 169, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyRight", 53, 58, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyLeft", 143, 148, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyStayRight", 59, 64, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyStayLeft", 149, 154, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyAttackRight", 74, 74, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyAttackLeft", 164, 164, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyEndRight", 78, 79, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "FlyEndLeft", 168, 169, 0.1f, true);
 
         Renderer_->CreateAnimation("Normal.bmp", "EatStartRight", 53, 58, 0.1f, false);
         Renderer_->CreateAnimation("Normal.bmp", "EatStartLeft", 143, 148, 0.1f, false);
-		Renderer_->CreateAnimation("Normal.bmp", "EatRight", 74, 75, 0.1f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "EatLeft", 164, 165, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "EatRight", 74, 75, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "EatLeft", 164, 165, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "EatEndRight", 65, 67, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "EatEndLeft", 155, 157, 0.1f, true);
 
-		Renderer_->CreateAnimation("Normal.bmp", "JumpUpRight", 38, 38, 0.5f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 128, 128, 0.5f, true);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.03f, false);
-		Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 129, 134, 0.03f, false);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpUpRight", 38, 38, 0.5f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpUpLeft", 128, 128, 0.5f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpingRight", 39, 44, 0.03f, false);
+        Renderer_->CreateAnimation("Normal.bmp", "JumpingLeft", 129, 134, 0.03f, false);
         Renderer_->CreateAnimation("Normal.bmp", "JumpDownRight", 45, 46, 0.3f, true);
         Renderer_->CreateAnimation("Normal.bmp", "JumpDownLeft", 135, 136, 0.3f, true);
 
@@ -1340,311 +1375,299 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "SlideRight", 47, 47, 0.5f, false);
         Renderer_->CreateAnimation("Normal.bmp", "SlideLeft", 137, 137, 0.5f, false);
 
-        Renderer_->CreateAnimation("Normal.bmp", "TakeDamageRight", 172, 172, 0.1f, true); 
+        Renderer_->CreateAnimation("Normal.bmp", "TakeDamageRight", 172, 172, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "TakeDamageLeft", 82, 82, 0.1f, true);
 
-        Renderer_->CreateAnimation("Normal.bmp", "DieRight", 81, 88, 0.1f, true); 
-        Renderer_->CreateAnimation("Normal.bmp", "DieLeft", 171, 178, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "DoorOpenRight", 49, 52, 0.1f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "DoorOpenLeft", 139, 142, 0.1f, true);
 
-        Renderer_->CreateAnimation("Normal.bmp", "DoorOpenRight", 6, 9, 0.1f, true); // need to chng #
-        Renderer_->CreateAnimation("Normal.bmp", "DoorOpenLeft", 6, 6, 0.1f, true); // need to chng #
-
-        {
-            //pig
-            PigRenderer_ = CreateRenderer("Normal.bmp");
-            PigImage_ = PigRenderer_->GetImage();
-            PigImage_->CutCount(10, 18);
-
-            PigRenderer_->CreateAnimation("Normal.bmp", "IdleRight", 68, 68, 0.1f, true);
-            PigRenderer_->CreateAnimation("Normal.bmp", "IdleLeft", 158, 158, 0.1f, true);
-
-            PigRenderer_->CreateAnimation("Normal.bmp", "WalkRight", 2, 17, 0.1f, true);
-            PigRenderer_->CreateAnimation("Normal.bmp", "WalkLeft", 92, 107, 0.1f, true);
-
-			PigRenderer_->CreateAnimation("Normal.bmp", "TransformRight", 69, 73, 0.3f, false);
-            PigRenderer_->CreateAnimation("Normal.bmp", "TransformLeft", 159, 163, 0.1f, false);
-
-            PigRenderer_->CreateAnimation("Normal.bmp", "AttackRight", 74, 74, 0.1f, true);
-            PigRenderer_->CreateAnimation("Normal.bmp", "AttackLeft", 164, 167, 0.1f, true);
-
-        }
-    {
-        // fire 
-        // Need to chk 이미지 수정으로 인해 애니메이션 안맞음 
-            FireRenderer_ = CreateRenderer("FireKirby.bmp");
-            GameEngineImage* FireKirbyImage = FireRenderer_->GetImage();
-            FireKirbyImage->CutCount(10, 25);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "WalkRight", 2, 11, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "WalkLeft", 148, 159, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "RunRight", 12, 19, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "RunLeft", 160, 167, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "IdleRight", 0, 0, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "IdleLeft", 133, 133, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyRight", 35, 39, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyLeft", 168, 172, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyStayRight", 40, 45, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyStayLeft", 173, 178, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyAttackRight", 52, 54, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyAttackLeft", 179, 181, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyEndRight", 19, 20, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "FlyEndLeft", 191, 192, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "AttackRight", 51, 54, 0.3f, true); // need to chk : 이름 통일
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "AttackLeft", 184, 187, 0.1f, true);
-            /*
-                    FireRenderer_->CreateAnimation("FireKirby.bmp", "StarAttackRight", 87, 102, 0.3f, true);
-                    FireRenderer_->CreateAnimation("FireKirby.bmp", "StarAttackLeft", 220, 235, 0.1f, true);
-            */
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "JumpUpRight", 22, 22, 0.5f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "JumpUpLeft", 135, 135, 0.5f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "JumpingRight", 23, 28, 0.1f, false);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "JumpingLeft", 136, 145, 0.f, false);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "JumpDownRight", 29, 30, 0.5f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "JumpDownLeft", 146, 147, 0.5f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "DownRight", 1, 1, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "DownLeft", 134, 134, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "SlideRight", 20, 21, 0.1f, false); // 루프안돌리고 이미지 이으면?
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "SlideLeft", 182, 182, 0.1f, false);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "TakeDamageRight", 211, 211, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "TakeDamageLeft", 78, 78, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "DieRight", 197, 212, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "DieLeft", 64, 79, 0.1f, true);
-
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "DoorOpenRight", 31, 34, 0.1f, true);
-            FireRenderer_->CreateAnimation("FireKirby.bmp", "DoorOpen", 164, 167, 0.1f, true);
-
+        Renderer2_ = CreateRenderer("KirbyDie.bmp");
+        GameEngineImage* KirbyDieImage = Renderer2_->GetImage();
+        KirbyDieImage->CutCount(10, 2);
+        Renderer2_->CreateAnimation("KirbyDie.bmp", "Die", 0, 15, 0.1f, true);
     }
 
-    {
-        RunEffect_ = CreateRenderer("RunEffect.bmp");
-        GameEngineImage* RunImage = RunEffect_->GetImage();
-        RunImage->CutCount(10, 4);
-        RunEffect_->CreateAnimation("RunEffect.bmp", "RunRight", 0, 18, 0.1f, true);
-        RunEffect_->CreateAnimation("RunEffect.bmp", "RunLeft", 19, 37, 0.1f, true);
-        RunEffect_->ChangeAnimation("RunRight");
-        RunEffect_->SetAlpha(0);
-    }
+	{
+		//pig
+		PigRenderer_ = CreateRenderer("Normal.bmp");
+		PigImage_ = PigRenderer_->GetImage();
+		PigImage_->CutCount(10, 18);
+
+		PigRenderer_->CreateAnimation("Normal.bmp", "IdleRight", 68, 68, 0.1f, true);
+		PigRenderer_->CreateAnimation("Normal.bmp", "IdleLeft", 158, 158, 0.1f, true);
+
+		PigRenderer_->CreateAnimation("Normal.bmp", "WalkRight", 2, 17, 0.1f, true);
+		PigRenderer_->CreateAnimation("Normal.bmp", "WalkLeft", 92, 107, 0.1f, true);
+
+		PigRenderer_->CreateAnimation("Normal.bmp", "TransformRight", 69, 73, 0.3f, false);
+		PigRenderer_->CreateAnimation("Normal.bmp", "TransformLeft", 159, 163, 0.1f, false);
+
+		PigRenderer_->CreateAnimation("Normal.bmp", "AttackRight", 74, 74, 0.1f, true);
+		PigRenderer_->CreateAnimation("Normal.bmp", "AttackLeft", 164, 167, 0.1f, true);
+
+	}
 
     {
-         //Animal
-         //Need to chk 이미지 수정으로 인해 애니메이션 안맞음 
-        AnimalRenderer_ = CreateRenderer("AnimalKirby.bmp");
-        GameEngineImage* AnimalKirbyImage = AnimalRenderer_->GetImage();
-        AnimalKirbyImage->CutCount(10, 25);
+		//Fire
+		FireRenderer_ = CreateRenderer("Fire.bmp");
+		GameEngineImage* FireKirbyImage = FireRenderer_->GetImage();
+		FireKirbyImage->CutCount(10, 62);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "WalkRight", 2, 11, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "WalkLeft", 148, 159, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "WalkRight", 96, 105, 0.07f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "WalkLeft", 406, 415, 0.07f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "RunRight", 12, 19, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "RunLeft", 160, 167, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "RunRight", 106, 123, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "RunLeft", 416, 433, 0.1f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "IdleRight", 0, 0, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "IdleLeft", 133, 133, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "IdleRight", 0, 3, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "IdleLeft", 310, 313, 0.1f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyRight", 35, 39, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyLeft", 168, 172, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyStayRight", 40, 45, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyStayLeft", 173, 178, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyAttackRight", 52, 54, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyAttackLeft", 179, 181, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyEndRight", 19, 20, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "FlyEndLeft", 191, 192, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyRight", 128, 132, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyLeft", 168, 172, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyStayRight", 133, 161, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyStayLeft", 443, 471, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyAttackRight", 162, 163, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyAttackLeft", 472, 473, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyEndRight", 164, 165, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "FlyEndLeft", 474, 475, 0.1f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "AttackRight", 51, 54, 0.3f, true); // need to chk : 이름 통일
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "AttackLeft", 184, 187, 0.1f, true);
-        /*
-                AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "StarAttackRight", 87, 102, 0.3f, true);
-                AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "StarAttackLeft", 220, 235, 0.1f, true);
-        */
+		FireRenderer_->CreateAnimation("Fire.bmp", "AttackRight", 203, 208, 0.3f, true); 
+		FireRenderer_->CreateAnimation("Fire.bmp", "AttackLeft", 513, 518, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "AttackStayRight", 209, 212, 0.3f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "AttackStayLeft", 519, 522, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "AttackEndRight", 213, 214, 0.3f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "AttackEndLeft", 523, 524, 0.1f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "JumpUpRight", 22, 22, 0.5f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "JumpUpLeft", 135, 135, 0.5f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "JumpingRight", 23, 28, 0.1f, false);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "JumpingLeft", 136, 145, 0.f, false);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "JumpDownRight", 29, 30, 0.5f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "JumpDownLeft", 146, 147, 0.5f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "JumpUpRight", 85, 86, 0.5f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "JumpUpLeft", 395, 396, 0.5f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "JumpingRight", 87, 92, 0.1f, false);
+		FireRenderer_->CreateAnimation("Fire.bmp", "JumpingLeft", 397, 402, 0.f, false);
+		FireRenderer_->CreateAnimation("Fire.bmp", "JumpDownRight", 93, 94, 0.5f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "JumpDownLeft", 403, 404, 0.5f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "DownRight", 1, 1, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "DownLeft", 134, 134, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "DownRight", 8, 11, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "DownLeft", 318, 321, 0.1f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "SlideRight", 20, 21, 0.1f, false); // 루프안돌리고 이미지 이으면?
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "SlideLeft", 182, 182, 0.1f, false);
+		FireRenderer_->CreateAnimation("Fire.bmp", "SlideRight", 80, 83, 0.1f, false); 
+		FireRenderer_->CreateAnimation("Fire.bmp", "SlideLeft", 390, 393, 0.1f, false);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "TakeDamageRight", 211, 211, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "TakeDamageLeft", 78, 78, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "TakeDamageRight", 549, 549, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "TakeDamageLeft", 562, 562, 0.1f, true);
 
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "DieRight", 197, 212, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "DieLeft", 64, 79, 0.1f, true);
-       
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "DoorOpenRight", 31, 34, 0.1f, true);
-        AnimalRenderer_->CreateAnimation("AnimalKirby.bmp", "DoorOpen", 164, 167, 0.1f, true);
-
+		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenRight", 546, 541, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenLeft", 236, 231, 0.1f, true);
     }
 
-        SwordRenderer_ = CreateRenderer("SwordKirby.bmp");
-        SwordKirbyImage_ = SwordRenderer_->GetImage();
-        SwordKirbyImage_->CutCount(10, 27);
+	{
+		RunEffect_ = CreateRenderer("RunEffect.bmp");
+		GameEngineImage* RunImage = RunEffect_->GetImage();
+		RunImage->CutCount(10, 4);
+		RunEffect_->CreateAnimation("RunEffect.bmp", "RunRight", 0, 18, 0.1f, true);
+		RunEffect_->CreateAnimation("RunEffect.bmp", "RunLeft", 19, 37, 0.1f, true);
+		RunEffect_->ChangeAnimation("RunRight");
+		RunEffect_->SetAlpha(0);
+	}
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "WalkRight", 15, 26, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "WalkLeft", 148, 159, 0.1f, true);
+	{
+		//Animal
+		AnimalRenderer_ = CreateRenderer("Animal.bmp");
+		GameEngineImage* AnimalImage = AnimalRenderer_->GetImage();
+		AnimalImage->CutCount(10, 42);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "RunRight", 27, 34, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "RunLeft", 160, 167, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "IdleRight", 0, 0, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "IdleLeft", 210, 210, 0.1f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "IdleRight", 0, 0, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "IdleLeft", 133, 133, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "WalkRight", 20, 29, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "WalkLeft", 230, 239, 0.1f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyRight", 35, 39, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyLeft", 168, 172, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyStayRight", 40, 45, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyStayLeft", 173, 178, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyAttackRight", 46, 48, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyAttackLeft", 179, 181, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyEndRight", 58, 59, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "FlyEndLeft", 191, 192, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "RunRight", 31, 38, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "RunLeft", 241, 248, 0.1f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "AttackRight", 51, 54, 0.3f, true); // need to chk : 이름 통일
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "AttackLeft", 184, 187, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyRight", 70, 72, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyLeft", 280, 282, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyStayRight", 73, 78, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyStayLeft", 283, 288, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyAttackRight", 72, 72, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyAttackLeft", 282, 282, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyEndRight", 48, 49, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "FlyEndLeft", 258, 259, 0.1f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "JumpUpRight", 2, 2, 0.5f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "JumpUpLeft", 135, 135, 0.5f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "JumpingRight", 3, 12, 0.1f, false);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "JumpingLeft", 136, 145, 0.f, false);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "JumpDownRight", 13, 14, 0.5f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "JumpDownLeft", 146, 147, 0.5f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "AttackRight", 172, 177, 0.3f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "AttackLeft", 382, 387, 0.1f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "DownRight", 1, 1, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "DownLeft", 134, 134, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpUpRight", 41, 41, 0.5f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpUpLeft", 251, 251, 0.5f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpingRight", 42, 47, 0.1f, false);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpingLeft", 252, 257, 0.f, false);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpDownRight", 48, 49, 0.5f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpDownLeft", 258, 259, 0.5f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "SlideRight", 49,49, 0.1f, false); // 루프안돌리고 이미지 이으면?
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "SlideLeft", 182, 182, 0.1f, false);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "DownRight", 2, 2, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "DownLeft", 212, 212, 0.1f, true);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "TakeDamageRight", 211, 211, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "TakeDamageLeft", 78, 78, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "SlideRight", 39, 39, 0.1f, false);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "SlideLeft", 249, 249, 0.1f, false);
 
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "DieRight", 197, 212, 0.1f, true);
-        SwordRenderer_->CreateAnimation("SwordKirby.bmp", "DieLeft", 64, 79, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "TakeDamageRight", 399, 399, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "TakeDamageLeft", 189, 189, 0.1f, true);
 
-        // IceKirby
-        IceRenderer_ = CreateRenderer("IceKirby.bmp");
-        IceKirbyImage_ = IceRenderer_->GetImage();
-        IceKirbyImage_->CutCount(10, 18);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "DoorOpenRight", 54, 57, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "DoorOpenLeft", 264, 267, 0.1f, true);
 
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "WalkRight", 13, 22, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "WalkLeft", 102, 111, 0.1f, true);
+	}
 
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "RunRight", 23, 30, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "RunLeft", 112, 119, 0.1f, true);
+	{
+		// Ice
+		IceRenderer_ = CreateRenderer("Ice.bmp");
+		IceKirbyImage_ = IceRenderer_->GetImage();
+		IceKirbyImage_->CutCount(10, 18);
 
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "IdleRight", 0, 0, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "IdleLeft", 89, 89, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "WalkRight", 13, 22, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "WalkLeft", 102, 111, 0.1f, true);
 
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyRight", 32, 36, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyLeft", 121, 125, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyStayRight", 37, 42, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyStayLeft", 126, 131, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyAttackRight", 43, 44, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyAttackLeft", 132, 133, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyEndRight", 45, 46, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "FlyEndLeft", 134, 135, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "RunRight", 23, 30, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "RunLeft", 112, 119, 0.1f, true);
 
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "AttackRight", 79, 84, 0.08f, true); // need to chk : 이름 통일
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "AttackLeft", 168, 173, 0.08f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "IdleRight", 0, 0, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "IdleLeft", 89, 89, 0.1f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyRight", 32, 36, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyLeft", 121, 125, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyStayRight", 37, 42, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyStayLeft", 126, 131, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyAttackRight", 43, 44, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyAttackLeft", 132, 133, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyEndRight", 45, 46, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "FlyEndLeft", 134, 135, 0.1f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "AttackRight", 79, 84, 0.08f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "AttackLeft", 168, 173, 0.08f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "AttackStayRight", 85, 86, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "AttackStayLeft", 174, 175, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "AttackEndRight", 87, 88, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "AttackEndLeft", 176, 177, 0.1f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "JumpUpRight", 4, 4, 0.5f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "JumpUpLeft", 93, 93, 0.5f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "JumpingRight", 5, 10, 0.03f, false);
+		IceRenderer_->CreateAnimation("Ice.bmp", "JumpingLeft", 94, 99, 0.03f, false);
+		IceRenderer_->CreateAnimation("Ice.bmp", "JumpDownRight", 11, 12, 0.3f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "JumpDownLeft", 100, 101, 0.3f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "DownRight", 1, 1, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "DownLeft", 90, 90, 0.1f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "SlideRight", 2, 2, 0.1f, false); 
+		IceRenderer_->CreateAnimation("Ice.bmp", "SlideLeft", 91, 91, 0.1f, false);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "TakeDamageRight", 60, 60, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "TakeDamageLeft", 73, 73, 0.1f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "DieRight", 59, 74, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "DieLeft", 148, 163, 0.1f, true);
+
+		IceRenderer_->CreateAnimation("Ice.bmp", "DoorOpenRight", 75, 78, 0.1f, true);
+		IceRenderer_->CreateAnimation("Ice.bmp", "DoorOpenLeft", 164, 167, 0.1f, true);
+	}
+
+	{
+		//Sword
+		SwordRenderer_ = CreateRenderer("Sword.bmp");
+		SwordKirbyImage_ = SwordRenderer_->GetImage();
+		SwordKirbyImage_->CutCount(10, 36);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "WalkRight", 33, 44, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "WalkLeft", 213, 224, 0.1f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "RunRight", 45, 52, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "RunLeft", 225, 167, 0.1f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "IdleRight", 0, 0, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "IdleLeft", 180, 180, 0.1f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyRight", 56, 60, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyLeft", 236, 240, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyStayRight", 61, 78, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyStayLeft", 241, 258, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyAttackRight", 79, 80, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyAttackLeft", 259, 260, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyEndRight", 81, 82, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "FlyEndLeft", 261, 262, 0.1f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "AttackRight", 150, 165, 0.3f, true); 
+		SwordRenderer_->CreateAnimation("Sword.bmp", "AttackLeft", 330, 345, 0.1f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "JumpUpRight", 134, 134, 0.5f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "JumpUpLeft", 314, 314, 0.5f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "JumpingRight", 83, 91, 0.1f, false);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "JumpingLeft", 263, 271, 0.f, false);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "JumpDownRight", 92, 93, 0.5f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "JumpDownLeft", 272, 273, 0.5f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "DownRight", 10, 10, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "DownLeft", 190, 190, 0.1f, true);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "SlideRight", 20, 20, 0.1f, false);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "SlideLeft", 200, 200, 0.1f, false);
+
+		SwordRenderer_->CreateAnimation("Sword.bmp", "TakeDamageRight", 97, 97, 0.1f, true);
+		SwordRenderer_->CreateAnimation("Sword.bmp", "TakeDamageLeft", 277, 277, 0.1f, true);
+
+        SwordRenderer_->CreateAnimation("Sword.bmp", "DoorOpenRight", 75, 78, 0.1f, true); // need to chk
+        SwordRenderer_->CreateAnimation("Sword.bmp", "DoorOpenLeft", 164, 167, 0.1f, true); // need to chk
+	}
+
+
+    {
+		//Spark
+        SparkRenderer_ = CreateRenderer("Spark.bmp");
+        GameEngineImage* SparkImage = SparkRenderer_->GetImage();
+        SparkImage->CutCount(10, 40);
+
+        SparkRenderer_->CreateAnimation("Spark.bmp", "WalkRight", 40, 59, 0.07f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "WalkLeft", 240, 259, 0.07f, true);
         
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "AttackStayRight", 85, 86, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "AttackStayLeft", 174, 175, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "AttackEndRight", 87, 88, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "AttackEndLeft", 176, 177, 0.1f, true);
-
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "JumpUpRight", 4, 4, 0.5f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "JumpUpLeft", 93, 93, 0.5f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "JumpingRight", 5, 10, 0.03f, false);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "JumpingLeft", 94, 99, 0.03f, false);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "JumpDownRight", 11, 12, 0.3f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "JumpDownLeft", 100, 101, 0.3f, true);
-
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "DownRight", 1, 1, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "DownLeft", 90, 90, 0.1f, true);
-
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "SlideRight", 2, 2, 0.1f, false); // 루프안돌리고 이미지 이으면?
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "SlideLeft", 91, 91, 0.1f, false);
-
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "TakeDamageRight", 60, 60, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "TakeDamageLeft", 73, 73, 0.1f, true);
-
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "DieRight", 59, 74, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "DieLeft", 148, 163, 0.1f, true);
-
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "DoorOpenRight", 75, 78, 0.1f, true);
-        IceRenderer_->CreateAnimation("IceKirby.bmp", "DoorOpenLeft", 164, 167, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "RunRight", 60, 67, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "RunLeft", 260, 267, 0.1f, true);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "IdleRight", 0, 3, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "IdleLeft", 200, 203, 0.1f, true);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyRight", 72, 76, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyLeft", 272, 276, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyStayRight", 77, 105, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyStayLeft", 277, 305, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyAttackRight", 106, 107, 0.1f, false);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyAttackLeft", 306, 307, 0.1f, false);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyEndRight", 108, 109, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyEndLeft", 308, 309, 0.1f, true);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "AttackRight", 186, 186, 0.3f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "AttackLeft", 386, 386, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "AttackStayRight", 187, 192, 0.3f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "AttackStayLeft", 387, 392, 0.1f, true);
 
 
-    {
-     //Spark
-     //Need to chk 이미지 수정으로 인해 애니메이션 안맞음
-        SparkKirbyRenderer_ = CreateRenderer("SparkKirby.bmp");
-        GameEngineImage* SparkImage = SparkKirbyRenderer_->GetImage();
-        SparkImage->CutCount(10, 18);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "JumpUpRight", 13, 14, 0.5f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "JumpUpLeft", 213, 214, 0.5f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "JumpingRight", 15, 20, 0.1f, false);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "JumpingLeft", 215, 220, 0.f, false);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "JumpDownRight", 21, 22, 0.5f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "JumpDownLeft", 221, 222, 0.5f, true);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "DownRight", 4, 7, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "DownLeft", 204, 207, 0.1f, true);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "SlideRight", 8, 11, 0.1f, false);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "SlideLeft", 208, 211, 0.1f, false);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "TakeDamageRight", 126, 126, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "TakeDamageLeft", 326, 326, 0.1f, true);
+        
+        SparkRenderer_->CreateAnimation("Spark.bmp", "DoorOpenRight", 181, 185, 0.1f, true); // need to chk
+        SparkRenderer_->CreateAnimation("Spark.bmp", "DoorOpenLeft", 164, 167, 0.1f, true); // need to chk
 
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkRight", 19, 28, 0.1f, true); // 이미지 순서 확인 필요
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkLeft", 107, 126, 0.1f, true);
-                                    
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "RunRight", 38, 45, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "RunLeft", 141, 147, 0.1f, true);
-                                   
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleRight", 3, 3, 0.1f, true); // 머리 바뀌는 이미지로 변경 필요
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleLeft", 116, 116, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyRight", 64, 69, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyLeft", 156, 161, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyStayRight", 70, 75, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyStayLeft", 162, 167, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEndRight", 85, 88, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEndLeft", 177, 180, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Right", 89, 90, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "HoverEnd2Left", 181, 182, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "EatRight", 76, 78, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "EatLeft", 168, 178, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterRight", 79, 79, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "IdleWzMonsterLeft", 171, 171, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterRight", 2, 17, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "WalkWzMonsterLeft", 94, 109, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackRight", 18, 18, 0.3f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "FlyAttackLeft", 110, 110, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "AttackRight", 18, 18, 0.3f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "AttackLeft", 110, 110, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "DownRight", 4, 4, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "DownLeft", 117, 117, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpUpRight", 38, 38, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpUpLeft", 38, 38, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpingRight", 39, 44, 0.1f, true);
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "JumpingLeft", 39, 44, 0.1f, true);
-                           
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideRight", 5, 9, 0.5f, true); 
-        SparkKirbyRenderer_->CreateAnimation("SparkKirby.bmp", "SlideLeft", 118, 122, 0.5f, true);
     }
-
-
 
     SetState(KirbyState::IDLE);
     SetKirbyClass(KirbyClass::DEFAULT);
@@ -1669,11 +1692,11 @@ void Player::Start()
         
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P');
         GameEngineInput::GetInst()->CreateKey("Spark", '1');
-        GameEngineInput::GetInst()->CreateKey("Fire", '2');/*
+        GameEngineInput::GetInst()->CreateKey("Fire", '2');
         GameEngineInput::GetInst()->CreateKey("Sword", '3');
-        GameEngineInput::GetInst()->CreateKey("Animal", '4');*/
+        GameEngineInput::GetInst()->CreateKey("Animal", '4');
         GameEngineInput::GetInst()->CreateKey("Ice", '5');
-        /*GameEngineInput::GetInst()->CreateKey("Default", 'Y');
-        GameEngineInput::GetInst()->CreateKey("AbandonClass", 'O');*/
+        GameEngineInput::GetInst()->CreateKey("Default", 'Y');
+        //GameEngineInput::GetInst()->CreateKey("AbandonClass", 'O');
      }
 }

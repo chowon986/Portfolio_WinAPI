@@ -13,6 +13,7 @@ enum class KirbyClass
 	ICE,
 	ANIMAL,
 	BEAM,
+	DIE,
 	// default , pig, spark, fire, ice
 };
 
@@ -78,8 +79,9 @@ public:
 protected:
 
 private:
-	GameEngineRenderer* Renderer_; // Default
-	GameEngineRenderer* SparkKirbyRenderer_;
+	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* Renderer2_;
+	GameEngineRenderer* SparkRenderer_;
 	GameEngineRenderer* PigRenderer_;
 	GameEngineRenderer* SwordRenderer_;
 	GameEngineRenderer* FireRenderer_;
