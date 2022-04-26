@@ -211,25 +211,34 @@
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="AttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="IceAttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="StarAttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="SparkAttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="FireAttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="SwordAttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="BeamAttackEffect.cpp">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimalEffect.cpp">
+      <Filter>Kirby\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="AbandonEffect.cpp">
+      <Filter>Kirby\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="DieEffect.cpp">
+      <Filter>Monster\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -441,25 +450,34 @@
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="AttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="IceAttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="StarAttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="SparkAttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="FireAttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="SwordAttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="BeamAttackEffect.h">
-      <Filter>Kirby\AttackEffect</Filter>
+      <Filter>Kirby\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimalEffect.h">
+      <Filter>Kirby\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="AbandonEffect.h">
+      <Filter>Kirby\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="DieEffect.h">
+      <Filter>Monster\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -478,8 +496,11 @@
     <Filter Include="Kirby">
       <UniqueIdentifier>{c764010c-f638-4795-bd28-695a8b59084c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kirby\AttackEffect">
+    <Filter Include="Kirby\Effect">
       <UniqueIdentifier>{f123c167-2f35-4021-abe9-4ea4de8bcd35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Monster\Effect">
+      <UniqueIdentifier>{9b007e10-1c08-4749-b2d1-1b13a84f15c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

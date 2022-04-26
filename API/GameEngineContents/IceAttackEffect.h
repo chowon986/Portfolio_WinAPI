@@ -35,10 +35,8 @@ protected:
 	void Render() override;
 private:
 	IceAttackEffectState IceAttackEffectState_;
-	float4 StartPos_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
-	GameEngineCollision* IceEffectCollision_;
 	GameEngineImage* Image_;
 };

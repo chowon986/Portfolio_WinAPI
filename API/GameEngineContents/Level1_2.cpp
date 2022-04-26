@@ -7,27 +7,21 @@
 #include "BotUI.h"
 #include "Monster.h"
 #include "Waddledi.h"
-//#include "Waddledu.h"
-//#include "Sparky.h"
 #include "Box.h"
 #include "Fire.h"
 #include "Brontobert.h"
 #include "BigBox.h"
 #include "Monster1.h"
-//#include "Tomato.h"
-//#include "Bomb.h"
-//#include "Background.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImage.h>
 #include "StarAttackEffect.h"
 #include "IceAttackEffect.h"
 #include "AttackEffect.h"
+#include "SparkAttackEffect.h"
 
 Level1_2::Level1_2()
-	: MapSizeX_(4320)
-	, MapSizeY_(576)
-	, Player_(nullptr)
+	: Player_(nullptr)
 	, MonsterRenderer_(nullptr)
 {
 }
@@ -71,17 +65,17 @@ void Level1_2::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 
@@ -93,6 +87,9 @@ void Level1_2::Update()
 
 void Level1_2::LevelChangeStart()
 {
+	SetMapSizeX(4320);
+	SetMapSizeY(576);
+
 	SetColMapImage("Stage1_2ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -103,13 +100,14 @@ void Level1_2::LevelChangeStart()
 
 	{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(MapSizeX_, MapSizeY_), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1776.0f, 0.0f));
+		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(GetMapSizeX(), GetMapSizeY()), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1776.0f, 0.0f));
 
 	}
 	{
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
 		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(180.0f, 436.0f));
@@ -117,6 +115,7 @@ void Level1_2::LevelChangeStart()
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 	}
 	//{
 	//	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
@@ -206,14 +205,4 @@ void Level1_2::LevelChangeStart()
 		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
 		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
-}
-
-float Level1_2::GetMapSizeY()
-{
-	return MapSizeY_;
-}
-
-float Level1_2::GetMapSizeX()
-{
-	return MapSizeX_;
 }

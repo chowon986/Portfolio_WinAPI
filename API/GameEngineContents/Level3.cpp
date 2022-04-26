@@ -13,8 +13,6 @@
 
 Level3::Level3()
 	: Player_(nullptr)
-	, MapSizeX_(4608)
-	, MapSizeY_(576)
 {
 }
 
@@ -51,17 +49,17 @@ void Level3::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 
@@ -105,14 +103,4 @@ void Level3::LevelChangeStart()
 	BigWaddledee* BigWaddledee_2 = CreateActor<BigWaddledee>((int)ORDER::MONSTER);
 	BigWaddledee_2->SetPosition(float4(200.0f, 200.0f));
 	GameEngineCollision* BigWaddledeeCol_2 = BigWaddledee_2->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
-}
-
-float Level3::GetMapSizeX()
-{
-	return MapSizeX_;
-}
-
-float Level3::GetMapSizeY()
-{
-	return MapSizeY_;
 }

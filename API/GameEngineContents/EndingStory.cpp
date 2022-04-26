@@ -17,6 +17,10 @@ void EndingStory::Loading()
 
 void EndingStory::Update()
 {
+	if (true == EndingVideo_->IsVideoFinished())
+	{
+		GameEngine::GetInst().ChangeLevel("Title");
+	}
 }
 
 void EndingStory::LevelChangeStart()

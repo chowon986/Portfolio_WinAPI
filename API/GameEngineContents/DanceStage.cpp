@@ -33,6 +33,8 @@ void DanceStage::Update()
 
 void DanceStage::LevelChangeStart()
 {
+	SetMapSizeX(768);
+	SetMapSizeY(576);
 	{
 		Background* DanceStage = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameEngineRenderer* DanceStageRenderer = DanceStage->CreateRenderer("DanceStage.bmp");
@@ -40,11 +42,11 @@ void DanceStage::LevelChangeStart()
 
 	{
 		//NEED TO RECHK KIRBY DANCE
-		Player* DanceKirby = CreateActor<Player>((int)ORDER::PLAYER);
-		GameEngineRenderer* DanceKirbyRenderer = DanceKirby->CreateRenderer("DanceKirby.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(245.0f, 150.0f));
-		GameEngineImage* DanceKirbyImage = DanceKirbyRenderer->GetImage();
-		DanceKirbyImage->CutCount(10, 6);
-		DanceKirbyRenderer->CreateAnimation("DanceKirby.bmp", "DanceKirby", 0, 58, 0.1f, true);
-		DanceKirbyRenderer->ChangeAnimation("DanceKirby");
+		//Player* DanceKirby = CreateActor<Player>((int)ORDER::PLAYER);
+		////ameEngineRenderer* DanceKirbyRenderer = DanceKirby->CreateRenderer("DanceKirby.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(245.0f, 150.0f));
+		//GameEngineImage* DanceKirbyImage = DanceKirbyRenderer->GetImage();
+		//DanceKirbyImage->CutCount(10, 6);
+		//DanceKirbyRenderer->CreateAnimation("DanceKirby.bmp", "DanceKirby", 0, 58, 0.1f, true);
+		//DanceKirbyRenderer->ChangeAnimation("DanceKirby");
 	}
 }

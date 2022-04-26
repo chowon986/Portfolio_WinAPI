@@ -15,8 +15,6 @@
 
 Level1_3::Level1_3()
 	: Player_(nullptr)
-	, MapSizeX_(768)
-	, MapSizeY_(1152)
 {
 }
 
@@ -54,23 +52,25 @@ void Level1_3::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 }
 
 void Level1_3::LevelChangeStart()
 {
+	SetMapSizeX(768);
+	SetMapSizeY(1152);
 	SetColMapImage("Stage1_3ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -108,13 +108,4 @@ void Level1_3::LevelChangeStart()
 		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
 		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
-}
-float Level1_3::GetMapSizeY()
-{
-	return MapSizeY_;
-}
-
-float Level1_3::GetMapSizeX()
-{
-	return MapSizeX_;
 }

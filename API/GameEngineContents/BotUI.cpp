@@ -27,7 +27,7 @@ void BotUI::Start()
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Fire", 0, 0, 0.1f, false); // float4(82.0f, 570.0f)
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Sword", 4, 4, 0.1f, false); // float4(49.0f, 570.0f)
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Ice", 6, 6, 0.1f, false); // float4(82.0f, 570.0f)
-	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Animal", 7, 7, 0.1f, false); // float4(48.0f, 570.0f))
+	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Animal", 7, 7, 0.1f, false); 
 	PlayerUI_->ChangeAnimation("Default");
 	PlayerUI_->SetPivot(float4(16.0f, 570.0f));
 
@@ -141,11 +141,14 @@ void BotUI::Update()
 		PlayerUI_->ChangeAnimation("Spark");
 		PlayerUI_->SetPivot(float4(49.0f, 570.0f));
 		break;
+	case KirbyClass::BEAM:
+		PlayerUI_->ChangeAnimation("Beam");
+		PlayerUI_->SetPivot(float4(16.0f, 570.0f));
+		break;
 	case KirbyClass::SWORD:
 		PlayerUI_->ChangeAnimation("Sword");
 		PlayerUI_->SetPivot(float4(49.0f, 570.0f));
 		break; 
-		// beam 16.0f, 570.0f
 	}
 
 	int PlayerHPCount = Player_->GetHPCount();

@@ -19,13 +19,11 @@
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
 #include "BeamAttackEffect.h"
-
-
+#include "FireAttackEffect.h"
+#include "SparkAttackEffect.h"
 
 Level1::Level1()
-	: MapSizeX_(4608)
-	, MapSizeY_(576)
-	, Player_(nullptr)
+	: Player_(nullptr)
 	, PlayerStatus_(nullptr)
 	, ColMapImage_(nullptr)
 {
@@ -44,8 +42,6 @@ void Level1::Loading()
 
 void Level1::Update()
 {
-
-
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
 	if (0 > GetCameraPos().x)
@@ -65,17 +61,17 @@ void Level1::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 
@@ -83,6 +79,8 @@ void Level1::Update()
 
 void Level1::LevelChangeStart()
 {
+	SetMapSizeX(4608);
+	SetMapSizeY(576);
 	SetColMapImage("Stage1ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -142,21 +140,27 @@ void Level1::LevelChangeStart()
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
 		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		//BeamAttackEffect_ = CreateActor<BeamAttackEffect>((int)ORDER::EFFECT);
 		//BeamAttackEffect_->SetPlayer(Player_);
 
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(205.0, 436.0f));
+		Player_->SetPosition(float4(205.0f, 436.0f));
+		Player_->SetMapStartPos(float4(205.0f, 436.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 	}
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
 		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
+		Waddledi_->SetPlayer(Player_);
 	}
 
 	{
@@ -170,15 +174,4 @@ void Level1::LevelChangeStart()
 		Sparky_->SetPosition(float4(3780.0f, 380.0f));
 		GameEngineCollision* SparkyCol = Sparky_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
-}
-
-
-float Level1::GetMapSizeY()
-{
-	return MapSizeY_;
-}
-
-float Level1::GetMapSizeX()
-{
-	return MapSizeX_;
 }

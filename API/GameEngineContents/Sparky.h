@@ -41,4 +41,5 @@ private:
 	GameEngineRenderer* AttackRenderer_;
 	GameEngineLevel* Level_;
 	float4 Dir_;
+	void SetPlayer(Player* _Player) { Player_ = _Player; }
 };

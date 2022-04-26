@@ -11,7 +11,7 @@ class Waddledi : public Monster
 private:
 	Player* Player_;
 	GameEngineImage* ColMapImage_;
-	GameEngineCollision* WaddlediCol_;
+	GameEngineCollision* Collision_;
 	GameEngineCollision* RightDirCol_;
 	GameEngineCollision* LeftDirCol_;
 	GameEngineRenderer* Renderer_;
@@ -36,5 +36,5 @@ public:
 	void Die();
 	void UpdateMove();
 	void SetDir(float4 _Dir) { Dir_ = _Dir; }
-
+	void SetPlayer(Player* _Player) { Player_ = _Player; }
 };

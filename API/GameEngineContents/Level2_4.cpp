@@ -12,8 +12,6 @@
 
 Level2_4::Level2_4()
 	: Player_(nullptr)
-	, MapSizeX_(768)
-	, MapSizeY_(1152)
 {
 }
 
@@ -48,17 +46,17 @@ void Level2_4::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 
@@ -66,6 +64,9 @@ void Level2_4::Update()
 
 void Level2_4::LevelChangeStart()
 {
+	SetMapSizeX(768);
+	SetMapSizeY(1152);
+
 	SetColMapImage("Stage2_4ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -89,14 +90,4 @@ void Level2_4::LevelChangeStart()
 		Sword* Sword_ = CreateActor<Sword>((int)ORDER::MONSTER);
 		Sword_->SetPosition(float4(340.0f, 858.0f));
 	}
-}
-
-float Level2_4::GetMapSizeY()
-{
-	return MapSizeY_;
-}
-
-float Level2_4::GetMapSizeX()
-{
-	return MapSizeX_;
 }

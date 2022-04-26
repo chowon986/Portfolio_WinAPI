@@ -13,8 +13,6 @@ enum class KirbyClass
 	ICE,
 	ANIMAL,
 	BEAM,
-	DIE,
-	// default , pig, spark, fire, ice
 };
 
 enum class KirbyState
@@ -74,13 +72,18 @@ public:
 	inline int GetHPCount() { return HPCount_; }
 
 	void SetKirbyClass(KirbyClass _KirbyClass);
+	void SetState(KirbyState _PrevState);
 	KirbyClass GetKirbyClass();
 	KirbyState GetState() { return KirbyState_; }
+	GameEngineRenderer* GetRenderer() { return Renderer_; }
+	GameEngineRenderer* GetRenderer2() { return Renderer2_; }
+	void SetGravity(float _Gravity) { Gravity_ = _Gravity; }
 protected:
 
 private:
 	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* Renderer2_;
+	GameEngineRenderer* BeamRenderer_;
 	GameEngineRenderer* SparkRenderer_;
 	GameEngineRenderer* PigRenderer_;
 	GameEngineRenderer* SwordRenderer_;
@@ -96,12 +99,15 @@ private:
 	GameEngineCollision* KirbyCol_;
 	GameEngineCollision* KirbyEatCol_;
 	GameEngineCollision* KirbySlideCol_;
+	GameEngineCollision* AnimalCol_;
+	GameEngineCollision* SwordCol_;
 
 	GameEngineImage* Image_;
 	GameEngineImage* SwordKirbyImage_;
 	GameEngineImage* IceKirbyImage_;
 	GameEngineImage* PigImage_;
 	float4 StartPos_;
+	float4 MapStartPos_;
 
 	StarAttackEffect* StarAttackEffect_;
 	AttackEffect* AttackEffect_;
@@ -111,13 +117,11 @@ private:
 	SwordAttackEffect* SwordAttackEffect_;
 	BeamAttackEffect* BeamAttackEffect_;
 
-
 	Monster* Monster_;
 	MonsterClass MonClass_;
 
 
 	int HPCount_;
-	bool Die_;
 	float Gravity_;
 	float JumpHeight_;
 	float Time_;
@@ -128,8 +132,9 @@ private:
 	KirbyState KirbyState_;
 	std::string Dir_;
 
-	void SetState(KirbyState _PrevState);
+
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
+
 
 
 
@@ -144,8 +149,6 @@ private:
 	void CheckCollision();
 	void StateUpdate();
 	bool CheckMapCollision();
-	bool IsDie();
-	void Die();
 
 	void UpdateIdle();
 	void UpdateWalk();
@@ -171,10 +174,16 @@ private:
 	void UpdateTransform();
 	void UpdateTransformEnd();
 	void UpdateTakeDamage();
+	void UpdateAbandon();
 	//void UpdateOpenDoor();
 
 	//void UpdateEffect();
 public:
+	void SetMapStartPos(float4 _MapStartPos)
+	{ 
+		MapStartPos_ = _MapStartPos;
+	}
+
 	void SetStarAttackEffect(StarAttackEffect* _StarAttackEffect)
 	{
 		StarAttackEffect_ = _StarAttackEffect;

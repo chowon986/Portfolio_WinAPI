@@ -32,6 +32,8 @@ void Boss::LevelChangeStart()
 {
 	SetColMapImage("BossColMap.bmp");
 	ColMapImage_ = GetColMapImage();
+	SetMapSizeX(768);
+	SetMapSizeY(576);
 
 	{
 		// Background
@@ -54,7 +56,7 @@ void Boss::LevelChangeStart()
 		// Player
 		// need to chk : kirby pos
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(500.0f, 400.0f));
+		Player_->SetPosition(float4(600.0f, 400.0f));
 	}
 
 	{

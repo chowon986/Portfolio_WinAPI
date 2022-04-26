@@ -15,11 +15,19 @@
 #include "IceAttackEffect.h"
 #include "SparkAttackEffect.h"
 #include "BeamAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "AbandonEffect.h"
 #include "Box.h"
 
 void Player::UpdateIdle()
 {
-
+    KirbyEatCol_->Off();
+    //SparkAttackEffect_->Off();
+    //FireAttackEffect_->Off();
+    //IceAttackEffect_->Off();
+    //AnimalCol_->Off();
+    //SwordCol_->Off();
+    //KirbySlideCol_->Off();
 }
 
 void Player::UpdateTransform()
@@ -39,12 +47,10 @@ void Player::UpdateTransformEnd()
 //	//}
 //}
 
-// need to chk : 왜 여기로 안들어오는지
 void Player::UpdateTakeDamage()
 {
-    SetHP(GetHP() - 1);
     std::vector<GameEngineCollision*> ColResult;
-    if (KirbyCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
     {
         float4 StartPos = GetPosition();
         for (GameEngineCollision* CenterCol : ColResult)
@@ -55,31 +61,30 @@ void Player::UpdateTakeDamage()
                 float MoveDir = CenterColMonster->GetPosition().x - GetPosition().x;
                 if (MoveDir <= 0)
                 {
-                    if (StartPos.x - GetPosition().x > -20)
+                    if (StartPos.x - GetPosition().x < -20)
                     {
                         float4 Dir = float4::RIGHT;
-                        float4 Move = Dir * GameEngineTime::GetDeltaTime() * 20;
+                        float4 Move = Dir * GameEngineTime::GetDeltaTime() * 100;
                         SetMove(Move);
                     }
                 }
                 if (MoveDir > 0)
                 {
-                    if (StartPos.x - GetPosition().x < 20)
+                    if (StartPos.x - GetPosition().x > 20)
                     {
                         float4 Dir = float4::LEFT;
-                        float4 Move = Dir * GameEngineTime::GetDeltaTime() * 20;
+                        float4 Move = Dir * GameEngineTime::GetDeltaTime() * 100;
                         SetMove(Move);
                     }
+                }
+
+                if (GetHP() <= 0)
+                {
+                    SetState(KirbyState::DIE);
                 }
             }
         }
     }
-
-	if (GetHP() <= 0)
-	{
-		SetState(KirbyState::DIE);
-		--HPCount_;
-	}
 }
 
 void Player::UpdateWalk()
@@ -151,6 +156,10 @@ void Player::UpdateFlyStay()
     {
         FireRenderer_->ChangeAnimation("FlyStay" + Dir_);
     }
+    if (GetKirbyClass() == KirbyClass::BEAM)
+    {
+        BeamRenderer_->ChangeAnimation("FlyStay" + Dir_);
+    }
 
     JumpHeight_ = 0;
 
@@ -204,12 +213,48 @@ void Player::UpdateAttack()
         //SetKirbyAttackEffet(KirbyAttackEffect::AttackStart);
         //PigAttackRenderer_->SetPivot(float4(100.0f, 0.0f));
     }
+
+	if (SwordCol_ != nullptr && GetKirbyClass() == KirbyClass::SWORD)
+	{
+		if (Dir_ == "Right")
+		{
+			SwordCol_->On();
+			SwordCol_->SetPivot(float4(50.0f, -30.0f));
+		}
+		else if (Dir_ == "Left")
+		{
+			SwordCol_->On();
+			SwordCol_->SetPivot(float4(-50.0f, -30.0f));
+		}
+	}
+
+    if (AnimalCol_ != nullptr && GetKirbyClass() == KirbyClass::ANIMAL)
+    {
+        if (Dir_ == "Right")
+        {
+            AnimalCol_->On();
+            AnimalCol_->SetPivot(float4(30.0f, -15.0f));
+        }
+        else if (Dir_ == "Left")
+        {
+            AnimalCol_->On();
+            AnimalCol_->SetPivot(float4(-30.0f, -15.0f));
+        }
+    }
 }
 
 void Player::UpdateDie()
 {
-    //need to chk colmap 무시하고 애니메이션 하면서 바닥으로 떨어짐
-   // SetMove(float4::DOWN);
+	float Jump = (Gravity_ * GameEngineTime::GetDeltaTime() * 5);
+	JumpHeight_ = JumpHeight_ - Jump;
+	float4 JumpDirection = JumpHeight_ > 0 ? float4::UP : float4::DOWN;
+    if (GetPosition().y > GetLevel()->GetMapSizeY())
+    {
+        SetState(KirbyState::IDLE);
+        --HPCount_;
+        SetHP(10);
+        SetPosition(MapStartPos_);
+    }
 }
 
 void Player::UpdateUp()
@@ -253,12 +298,14 @@ void Player::UpdateEat()
 {
     if (Dir_ == "Right")
     {
+        KirbyEatCol_->On();
         KirbyEatCol_->SetScale(float4(100.0f, 50.0f));
         KirbyEatCol_->SetPivot(float4(50.0f, -20.0f));
     }
 
     if (Dir_ == "Left")
     {
+        KirbyEatCol_->On();
         KirbyEatCol_->SetScale(float4(100.0f, 50.0f));
         KirbyEatCol_->SetPivot(float4(-50.0f, -20.0f));
     }
@@ -275,7 +322,7 @@ void Player::UpdateEat()
                 float4 MonPos = GetPosition() - Monster_->GetPosition();
                 if (MonPos.x > 0) // 내가 오른쪽
                 {
-                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5); // need to chk : (1) 속도 (2) 애니메이션 반복
+                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5); 
                 }
                 if (MonPos.x < 0) // 내가 왼쪽 
                 {
@@ -293,27 +340,47 @@ void Player::UpdateEatEnd()
         MonClass_ = Monster_->GetMonsterClass();
         Monster_->Death();
         Monster_ = nullptr;
-        KirbyEatCol_->SetScale(float4(0.0f, 0.0f));
     }
+   
+    KirbyEatCol_->Off();
 }
 
 void Player::UpdateAttackStay()
 {
+
     if (IceAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::ICE)
     {
-        IceAttackEffect_->SetPosition(GetPosition()); // need to chk : the pos;
+        IceAttackEffect_->SetPosition(GetPosition());
         if (Dir_ == "Right")
         {
+            IceAttackEffect_->On();
             IceAttackEffect_->SetState(IceAttackEffectState::IceAttackEffectRight);
         }
         else if (Dir_ == "Left")
         {
+            IceAttackEffect_->On();
             IceAttackEffect_->SetState(IceAttackEffectState::IceAttackEffectLeft);
+        }
+    }
+
+    if (FireAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::FIRE)
+    {
+        FireAttackEffect_->SetPosition(GetPosition());
+        if (Dir_ == "Right")
+        {
+            FireAttackEffect_->On();
+            FireAttackEffect_->SetState(FireAttackEffectState::FireAttackEffectRight);
+        }
+        else if (Dir_ == "Left")
+        {
+            FireAttackEffect_->On();
+            FireAttackEffect_->SetState(FireAttackEffectState::FireAttackEffectLeft);
         }
     }
 
     if (SparkAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::SPARK)
     {
+        SparkAttackEffect_->On();
         SparkAttackEffect_->SetPosition(GetPosition());
         SparkAttackEffect_->SetState(SparkAttackEffectState::SparkAttackEffect);
     }
@@ -355,24 +422,96 @@ void Player::UpdateSlide()
     float4 Distance = GetPosition() - StartPos_;
     if (Dir_ == "Right")
     {
+        KirbySlideCol_->On();
         direction = float4::RIGHT;
         Range = 50;
         if (Distance.x < Range)
         {
             SetMove(direction * GameEngineTime::GetDeltaTime() * 100);
         }
-        KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
-        KirbySlideCol_->SetPivot(float4(20.0f, -15.0f));
+		if (GetKirbyClass() == KirbyClass::DEFAULT || 
+            GetKirbyClass() == KirbyClass::ANIMAL ||
+            GetKirbyClass() == KirbyClass::ICE ||
+            GetKirbyClass() == KirbyClass::BEAM)
+		{
+			KirbySlideCol_->SetPivot(float4(20.0f, -15.0f));
+		}
+		if (GetKirbyClass() == KirbyClass::FIRE ||
+            GetKirbyClass() == KirbyClass::SPARK)
+		{
+			KirbySlideCol_->SetPivot(float4(35.0f, -15.0f));
+			KirbySlideCol_->SetScale(float4(50.0f, 35.0f));
+		}
+
+        if (GetKirbyClass() == KirbyClass::SWORD)
+        {
+            KirbySlideCol_->SetPivot(float4(40.0f, -15.0f));
+            KirbySlideCol_->SetScale(float4(60.0f, 35.0f));
+		}
     }
-    else if (Dir_ == "Left")
+    if (Dir_ == "Left")
     {
+        KirbySlideCol_->On();
         direction = float4::LEFT;
         Range = -50;
         if (Distance.x > Range)
         {
             SetMove(direction * GameEngineTime::GetDeltaTime() * 100);
         }
-        KirbySlideCol_->SetScale(float4(30.0f, 30.0f));
-        KirbySlideCol_->SetPivot(float4(-20.0f, -15.0f));
+        if (GetKirbyClass() == KirbyClass::DEFAULT ||
+            GetKirbyClass() == KirbyClass::ANIMAL ||
+            GetKirbyClass() == KirbyClass::ICE)
+        {
+            KirbySlideCol_->SetScale(float4(35.0f, 35.0f));
+            KirbySlideCol_->SetPivot(float4(-20.0f, -15.0f));
+        }
+        if (GetKirbyClass() == KirbyClass::FIRE ||
+            GetKirbyClass() == KirbyClass::SPARK)
+        {
+            KirbySlideCol_->SetPivot(float4(-35.0f, -15.0f));
+            KirbySlideCol_->SetScale(float4(50.0f, 35.0f));
+        }
+
+        if (GetKirbyClass() == KirbyClass::SWORD)
+        {
+            KirbySlideCol_->SetPivot(float4(-40.0f, -15.0f));
+            KirbySlideCol_->SetScale(float4(60.0f, 35.0f));
+        }
     }
+
+    std::vector<GameEngineCollision*> Result;
+    if (true == KirbySlideCol_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
+        Time_ >= 1)
+    {
+		Time_ = 0;
+        for (GameEngineCollision* Collision : Result)
+        {
+            Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
+            if (ColMonster != nullptr)
+            {
+                ColMonster->SetHP(ColMonster->GetHP() - 1);
+            }
+        }
+    }
+
+    std::vector<GameEngineCollision*> MonsterColResult;
+    if ((true == AnimalCol_->CollisionResult("BasicMonster", MonsterColResult, CollisionType::Rect, CollisionType::Rect) ||
+        true == SwordCol_->CollisionResult("BasicMonster", MonsterColResult, CollisionType::Rect, CollisionType::Rect))  &&
+        Time_ >= 1)
+    {
+        Time_ = 0;
+        for (GameEngineCollision* Collision : MonsterColResult)
+        {
+            Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
+            if (ColMonster != nullptr)
+            {
+                ColMonster->SetHP(ColMonster->GetHP() - 2);
+            }
+        }
+    }
+}
+
+void Player::UpdateAbandon()
+{
+
 }

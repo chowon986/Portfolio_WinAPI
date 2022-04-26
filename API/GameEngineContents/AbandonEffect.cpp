@@ -1,4 +1,4 @@
-#include "AttackEffect.h"
+#include "AbandonEffect.h"
 #include "Monster.h"
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
@@ -6,18 +6,18 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
 
-AttackEffect::AttackEffect()
+AbandonEffect::AbandonEffect()
 {
 
 }
 
-AttackEffect::~AttackEffect()
+AbandonEffect::~AbandonEffect()
 {
 }
 
-void AttackEffect::Start()
+void AbandonEffect::Start()
 {
-	Collision_ = CreateCollision("AttackCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
+	Collision_ = CreateCollision("AbandonEffect", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
 	Renderer_ = CreateRenderer("Attack.bmp");
 	Image_ = Renderer_->GetImage();
 	Image_->CutCount(10, 4);
@@ -26,60 +26,56 @@ void AttackEffect::Start()
 	GameEngineLevel* Level = GetLevel();
 	ColMapImage_ = Level->GetColMapImage();
 
-	SetState(AttackEffectState::None);
+	SetState(AbandonEffectState::None);
 }
 
-void AttackEffect::Update()
+void AbandonEffect::Update()
 {
 	StateUpdate();
 }
 
-void AttackEffect::Render()
+void AbandonEffect::Render()
 {
 }
 
-void AttackEffect::SetState(AttackEffectState _AttackEffectState)
+void AbandonEffect::SetState(AbandonEffectState _AbandonEffectState)
 {
-	AttackEffectState_ = _AttackEffectState;
+	AbandonEffectState_ = _AbandonEffectState;
 
-	switch (AttackEffectState_)
+	switch (AbandonEffectState_)
 	{
-	case AttackEffectState::AttackEffectRight:
-		Renderer_->ChangeAnimation("AttackRight");
+	case AbandonEffectState::Abandon:
+		Renderer_->ChangeAnimation("Abandon");
 		StartPos_ = GetPosition();
 		break;
-	case AttackEffectState::AttackEffectLeft:
-		Renderer_->ChangeAnimation("AttackLeft");
-		StartPos_ = GetPosition();
+	case AbandonEffectState::None:
 		break;
 	}
 }
 
-AttackEffectState AttackEffect::GetState()
+AbandonEffectState AbandonEffect::GetState()
 {
-	return AttackEffectState_;
+	return AbandonEffectState_;
 }
 
-void AttackEffect::StateUpdate()
+void AbandonEffect::StateUpdate()
 {
-	switch (AttackEffectState_)
+	switch (AbandonEffectState_)
 	{
-	case AttackEffectState::AttackEffectRight:
-		UpdateAttackEffectRight();
+	case AbandonEffectState::Abandon:
+		UpdateAbandonEffectRight();
 		break;
-	case AttackEffectState::AttackEffectLeft:
-		UpdateAttackEffectLeft();
-		break;
-	case AttackEffectState::None:
+	case AbandonEffectState::None:
 		UpdateNone();
 		break;
 	}
 }
 
-void AttackEffect::UpdateAttackEffectRight()
+void AbandonEffect::UpdateAbandonEffectRight()
 {
 	Renderer_->SetAlpha(255);
-	Renderer_->SetPivot(float4(40.0f, 0.0f));
+	Renderer_->SetPivot(float4(-40.0f, 0.0f));
+	// 위로 갔다가 부딪히면 아래로
 	SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 100);
 	Collision_->SetScale(float4(70.0f, 50.0f));
 	Collision_->SetPivot(float4(20.0f, -25.0f));
@@ -88,7 +84,7 @@ void AttackEffect::UpdateAttackEffectRight()
 	float4 Distance = GetPosition() - StartPos_;
 
 	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("KirbyEatCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{
 		for (GameEngineCollision* Collision : Result)
 		{
@@ -105,13 +101,13 @@ void AttackEffect::UpdateAttackEffectRight()
 	{
 		if (true == Renderer_->IsEndAnimation())
 		{
-			SetState(AttackEffectState::None);
+			SetState(AbandonEffectState::None);
 		}
 
 	}
 }
 
-void AttackEffect::UpdateAttackEffectLeft()
+void AbandonEffect::UpdateAbandonEffectLeft()
 {
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(-150.0f, 0.0f));
@@ -131,7 +127,7 @@ void AttackEffect::UpdateAttackEffectLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->SetHP(Monster_->GetHP() - 2);
+				Monster_->SetHP(Monster_->GetHP() - 1);
 			}
 		}
 	}
@@ -140,12 +136,12 @@ void AttackEffect::UpdateAttackEffectLeft()
 	{
 		if (true == Renderer_->IsEndAnimation())
 		{
-			SetState(AttackEffectState::None);
+			SetState(AbandonEffectState::None);
 		}
 	}
 }
 
-void AttackEffect::UpdateNone()
+void AbandonEffect::UpdateNone()
 {
 	Renderer_->SetAlpha(0);
 	Collision_->Off();

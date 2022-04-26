@@ -23,9 +23,9 @@ void GameOver::Loading()
 
 void GameOver::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{
-		//exit(0);
+		GameEngine::GetInst().ChangeLevel("Title");
 	}
 
 }

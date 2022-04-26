@@ -1,6 +1,10 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+class GameEngineRenderer;
+class GameEngineCollision;
+class Player;
+class GameEngineImage;
 class Cannon : public GameEngineLevel
 {
 public:
@@ -19,5 +23,9 @@ protected:
 
 private:
 	GameEngineRenderer* CanRenderer_;
+	GameEngineRenderer* PlayerRenderer_;
+	GameEngineCollision* CanCol_;
+	Player* Player_;
+	float4 PrevPos_;
 };
 

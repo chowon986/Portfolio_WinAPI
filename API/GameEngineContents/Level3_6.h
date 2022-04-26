@@ -6,9 +6,6 @@ class BotUI;
 class Level3_6 : public GameEngineLevel
 {
 public:
-	float GetMapSizeX() override;
-	float GetMapSizeY() override;
-
 	Level3_6();
 	~Level3_6();
 
@@ -23,8 +20,6 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-	float MapSizeX_;
-	float MapSizeY_;
 	Player* Player_;
 	BotUI* PlayerUI_;
 	GameEngineCollision* Level3_7;

@@ -23,7 +23,7 @@ bool RectToRect(GameEngineCollision* _Left, GameEngineCollision* _Right)
 class CollisionInit
 {
 public:
-	CollisionInit() 
+	CollisionInit()
 	{
 		CollisionCheckArray[static_cast<int>(CollisionType::Rect)][static_cast<int>(CollisionType::Rect)] = RectToRect;
 	}
@@ -32,10 +32,10 @@ public:
 CollisionInit InitInst = CollisionInit();
 
 GameEngineCollision::GameEngineCollision()
-	: Pivot_(float4::ZERO),
-	Scale_(float4::ZERO)
+	: Pivot_(float4::ZERO)
+	, Scale_(float4::ZERO)
+	, IsCameraEffect_(true)
 {
-	// 
 }
 
 GameEngineCollision::~GameEngineCollision()
@@ -46,42 +46,105 @@ bool GameEngineCollision::CollisionCheck(
 	const std::string& _TargetGroup,
 	CollisionType _This /*= CollisionType::Circle*/,
 	CollisionType _Target /*= CollisionType::Rect*/
-	)
+)
 {
-	 std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
+	if (false == IsUpdate() || true == IsDeath())
+	{
+		return false;
+	}
 
-	 if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
-	 {
-		 // MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
 
-		 return false;
-	 }
+	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
+	{
+		// MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
 
-	 if (nullptr == CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)])
-	 {
-		 MsgBoxAssert("처리할수 없는 충돌체크 조합입니다.");
-		 return false;
-	 }
+		return false;
+	}
 
-	 std::list<GameEngineCollision*>& TargetGroup = FindTargetGroup->second;
+	if (nullptr == CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)])
+	{
+		MsgBoxAssert("처리할수 없는 충돌체크 조합입니다.");
+		return false;
+	}
 
-	 std::list<GameEngineCollision*>::iterator StartIter = TargetGroup.begin();
-	 std::list<GameEngineCollision*>::iterator EndIter = TargetGroup.end();
+	std::list<GameEngineCollision*>& TargetGroup = FindTargetGroup->second;
 
-	 for (; StartIter != EndIter; ++StartIter)
-	 {
-		 if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
-		 {
-			 return true;
-		 }
-	 }
+	std::list<GameEngineCollision*>::iterator StartIter = TargetGroup.begin();
+	std::list<GameEngineCollision*>::iterator EndIter = TargetGroup.end();
 
-	 return false;
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-void GameEngineCollision::DebugRender() 
+bool GameEngineCollision::NextPostCollisionCheck(
+	const std::string& _TargetGroup,
+	float4 _NextPos,
+	CollisionType _This /*= CollisionType::Circle*/,
+	CollisionType _Target /*= CollisionType::Circle*/
+)
 {
-	GameEngineRect DebugRect(GetActor()->GetCameraEffectPosition() + Pivot_, Scale_);
+	if (false == IsUpdate() || true == IsDeath())
+	{
+		return false;
+	}
+
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
+
+	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
+	{
+		// MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
+
+		return false;
+	}
+
+	if (nullptr == CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)])
+	{
+		MsgBoxAssert("처리할수 없는 충돌체크 조합입니다.");
+		return false;
+	}
+
+	std::list<GameEngineCollision*>& TargetGroup = FindTargetGroup->second;
+
+	std::list<GameEngineCollision*>::iterator StartIter = TargetGroup.begin();
+	std::list<GameEngineCollision*>::iterator EndIter = TargetGroup.end();
+
+	NextPos_ = _NextPos;
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
+		{
+			return true;
+		}
+	}
+
+	NextPosReset();
+
+	return false;
+}
+
+void GameEngineCollision::DebugRender()
+{
+	if (false == IsUpdate() || true == IsDeath())
+	{
+		return;
+	}
+
+	float4 Pos = GetActor()->GetPosition();
+
+	if (true == IsCameraEffect_)
+	{
+		Pos = GetActor()->GetCameraEffectPosition();
+	}
+	GameEngineRect DebugRect(Pos + Pivot_, Scale_);
 
 	Rectangle(
 		GameEngine::BackBufferDC(),
@@ -98,8 +161,13 @@ bool GameEngineCollision::CollisionResult(
 	std::vector<GameEngineCollision*>& _ColResult,
 	CollisionType _This /*= CollisionType::Circle*/,
 	CollisionType _Target /*= CollisionType::Circle*/
-) 
+)
 {
+	if (false == IsUpdate() || true == IsDeath())
+	{
+		return false;
+	}
+
 	size_t StartSize = _ColResult.size();
 
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);

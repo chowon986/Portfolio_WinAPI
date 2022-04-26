@@ -7,10 +7,6 @@ class GameEngineCollision;
 class Level2 : public GameEngineLevel
 {
 public:
-	float GetMapSizeY() override;
-	float GetMapSizeX() override;
-
-public:
 	Level2();
 	~Level2();
 
@@ -25,8 +21,6 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-	float MapSizeX_;
-	float MapSizeY_;
 	Player* Player_;
 	BotUI* PlayerUI_;
 	GameEngineCollision* DoorCol2_2;

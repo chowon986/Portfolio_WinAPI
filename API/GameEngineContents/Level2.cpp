@@ -15,8 +15,7 @@
 
 Level2::Level2()
 	: Player_(nullptr)
-	, MapSizeX_(1536)
-	, MapSizeY_(573)
+
 {
 }
 
@@ -51,23 +50,26 @@ void Level2::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 }
 
 void Level2::LevelChangeStart()
 {
+	SetMapSizeX(1536);
+	SetMapSizeY(573);
+
 	// 이미지 문제
 	SetColMapImage("Stage2ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
@@ -101,17 +103,6 @@ void Level2::LevelChangeStart()
 		DoorCol2_2 = Door->CreateCollision("DoorCol2_2", float4(48.0f, 64.0f), float4(1078.0f, 70.0f));
 	}
 }
-
-float Level2::GetMapSizeY()
-{
-	return MapSizeY_;
-}
-
-float Level2::GetMapSizeX()
-{
-	return MapSizeX_;
-}
-
 
 	////////////////////////////////
 	// 1. bomb

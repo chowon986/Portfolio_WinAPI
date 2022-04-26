@@ -153,7 +153,7 @@ void StarAttackEffect::UpdateAttackStartLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->SetHP(Monster_->GetHP() - 1);
+				Monster_->SetHP(Monster_->GetHP() - 2);
 				SetState(StarAttackEffectState::AttackEndRight);
 			}
 		}

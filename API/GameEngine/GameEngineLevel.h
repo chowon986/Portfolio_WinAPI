@@ -86,6 +86,12 @@ public:
 
 	virtual float GetMapSizeX() { return MapSizeX_; }
 	virtual float GetMapSizeY() { return MapSizeY_; }
+	virtual void SetMapSizeX(float _MapSizeX) { MapSizeX_ = _MapSizeX; }
+	virtual void SetMapSizeY(float _MapSizeY) { MapSizeY_ = _MapSizeY; }
+
+private:
+	float MapSizeX_;
+	float MapSizeY_;
 
 public:
 	void SetColMapImage(std::string _name);
@@ -111,8 +117,7 @@ private:
 	std::vector<ChangeOrderItem> ChangeOrderList;
 
 	float4 CameraPos_;
-	float MapSizeX_;
-	float MapSizeY_;
+
 
 	void ActorUpdate();
 	void ActorRender();
@@ -130,8 +135,7 @@ private:
 
 
 private:
-	// 삭제는 액터가 하지만 실제 사용은 Level
-	// 여기서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
+	// 삭제는 액터가 하지만 실제 사용은 Level서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
 	std::map<std::string, std::list<GameEngineCollision*>> AllCollision_;
 
 	void AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision);

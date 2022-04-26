@@ -8,8 +8,6 @@ class GameEngineImage;
 class Level1 : public GameEngineLevel
 {
 public:
-	float GetMapSizeX() override;
-	float GetMapSizeY() override;
 	Level1();
 	~Level1();
 
@@ -18,6 +16,8 @@ public:
 	Level1& operator=(const Level1& _Other) = delete;
 	Level1& operator=(Level1&& _Other) noexcept = delete;
 
+
+
 protected:
 	void Loading() override;
 	void Update() override;
@@ -25,11 +25,11 @@ protected:
 
 private:
 	Player* Player_;
-	float MapSizeX_;
-	float MapSizeY_;
 	BotUI* PlayerStatus_;
 	GameEngineCollision* DoorCol1_2;
 	GameEngineImage* ColMapImage_;
+	float4 StartPos_;
+	
 
 private:
 };

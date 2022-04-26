@@ -30,7 +30,5 @@ private:
 	GameEngineImage* BossLevelEndImage_;
 	GameEngineImage* ColMapImage_;
 	Player* Player_;
-	float MapSizeX_;
-	float MapSizeY_;
 };
 

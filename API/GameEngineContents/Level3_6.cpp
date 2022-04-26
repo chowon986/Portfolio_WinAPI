@@ -19,8 +19,6 @@
 
 Level3_6::Level3_6()
 	: Player_(nullptr)
-	, MapSizeX_(4608)
-	, MapSizeY_(576)
 {
 }
 
@@ -57,17 +55,17 @@ void Level3_6::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 
@@ -121,15 +119,6 @@ void Level3_6::LevelChangeStart()
 	Waddledoo_->SetPosition(float4(300.0f, 300.0f));
 }
 
-float Level3_6::GetMapSizeX()
-{
-	return MapSizeX_;
-}
-
-float Level3_6::GetMapSizeY()
-{
-	return MapSizeY_;
-}
 //CreateActor<BigTresureChest>((int)ORDER::MONSTER);
 //CreateActor<Doc>((int)ORDER::MONSTER);
 //CreateActor<Storo>((int)ORDER::MONSTER);

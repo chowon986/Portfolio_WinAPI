@@ -28,7 +28,7 @@ void Tomato::Update()
 			Player* Kirby = dynamic_cast<Player*>(Actor);
 			if (nullptr != Kirby)
 			{
-				Kirby->SetHP(9);
+				Kirby->SetHP(10);
 				Death();
 			}
 		}

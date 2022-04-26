@@ -13,8 +13,7 @@
 
 Level2_2::Level2_2()
 	: Player_(nullptr)
-	, MapSizeX_(2214)
-	, MapSizeY_(576)
+
 {
 }
 
@@ -49,23 +48,25 @@ void Level2_2::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 }
 
 void Level2_2::LevelChangeStart()
 {
+	SetMapSizeX(2214);
+	SetMapSizeY(576);
 	SetColMapImage("Stage2_2ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -100,14 +101,4 @@ void Level2_2::LevelChangeStart()
 		DoorCol2_3 = Door->CreateCollision("DoorCol2_3", float4(48.0f, 64.0f), float4(1078.0f, 70.0f));
 	}
 
-}
-
-float Level2_2::GetMapSizeY()
-{
-	return MapSizeY_;
-}
-
-float Level2_2::GetMapSizeX()
-{
-	return MapSizeX_;
 }

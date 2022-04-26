@@ -157,7 +157,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbandonEffect.h" />
     <ClInclude Include="Animal.h" />
+    <ClInclude Include="AnimalEffect.h" />
     <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BeamAttackEffect.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="DanceStage.h" />
     <ClInclude Include="Dedede.h" />
+    <ClInclude Include="DieEffect.h" />
     <ClInclude Include="Doc.h" />
     <ClInclude Include="Doroach.h" />
     <ClInclude Include="EndingLevel.h" />
@@ -249,7 +252,9 @@
     <ClInclude Include="YellowMouse.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbandonEffect.cpp" />
     <ClCompile Include="Animal.cpp" />
+    <ClCompile Include="AnimalEffect.cpp" />
     <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BeamAttackEffect.cpp" />
@@ -272,6 +277,7 @@
     <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="DanceStage.cpp" />
     <ClCompile Include="Dedede.cpp" />
+    <ClCompile Include="DieEffect.cpp" />
     <ClCompile Include="Doc.cpp" />
     <ClCompile Include="Doroach.cpp" />
     <ClCompile Include="EndingLevel.cpp" />

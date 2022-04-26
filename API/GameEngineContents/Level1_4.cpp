@@ -17,8 +17,6 @@
 
 Level1_4::Level1_4()
 	: Player_(nullptr)
-	, MapSizeX_(4608)
-	, MapSizeY_(576)
 {
 }
 
@@ -61,17 +59,17 @@ void Level1_4::Update()
 	float CameraRectX = 768;
 	float CameraRectY = 576;
 
-	if (MapSizeX_ <= GetCameraPos().x + CameraRectX)
+	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - MapSizeX_);
+		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY_ <= GetCameraPos().y + CameraRectY)
+	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - MapSizeY_);
+		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
 
@@ -79,6 +77,8 @@ void Level1_4::Update()
 
 void Level1_4::LevelChangeStart()
 {
+	SetMapSizeX(4608);
+	SetMapSizeY(576);
 	SetColMapImage("Stage1_4ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -89,7 +89,7 @@ void Level1_4::LevelChangeStart()
 
 	{
 		Background* Stage1_4 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage1_4->CreateRendererToScale("Stage1_4.bmp", float4(MapSizeX_, MapSizeY_), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
+		Stage1_4->CreateRendererToScale("Stage1_4.bmp", float4(GetMapSizeX(), GetMapSizeY()), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 
 	{
@@ -209,14 +209,4 @@ void Level1_4::LevelChangeStart()
 	DoorStarImage->CutCount(6, 2);
 	DoorStarRenderer->CreateAnimation("BigDoorStar.bmp", "BigDoorStar", 0, 11, 0.05f, true);
 	DoorStarRenderer->ChangeAnimation("BigDoorStar");
-}
-
-float Level1_4::GetMapSizeX()
-{
-	return MapSizeX_;
-}
-
-float Level1_4::GetMapSizeY()
-{
-	return MapSizeY_;
 }

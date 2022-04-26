@@ -7,10 +7,6 @@ class GameEngineRenderer;
 class Level1_2 : public GameEngineLevel
 {
 public:
-	float GetMapSizeX() override;
-	float GetMapSizeY() override;
-
-
 	Level1_2();
 	~Level1_2();
 
@@ -27,11 +23,8 @@ protected:
 private:
 	Player* Player_;
 	BotUI* PlayerUI_;
-	float MapSizeX_;
-	float MapSizeY_;
 	GameEngineRenderer* MonsterRenderer_;
 	GameEngineCollision* DoorCol1_3;
 	BotUI* PlayerStatus_;
-
 };
 

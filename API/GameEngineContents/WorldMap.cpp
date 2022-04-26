@@ -49,6 +49,9 @@ void WorldMap::Update()
 
 void WorldMap::LevelChangeStart()
 {
+	SetMapSizeX(768);
+	SetMapSizeY(576);
+
 	{
 		Background* WorldMap = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameEngineRenderer* WorldMapRenderer = WorldMap->CreateRenderer("WorldMap.bmp");

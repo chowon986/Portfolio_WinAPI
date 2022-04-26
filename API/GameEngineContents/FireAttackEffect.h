@@ -35,10 +35,8 @@ protected:
 	void Render() override;
 private:
 	FireAttackEffectState FireAttackEffectState_;
-	float4 StartPos_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
-	GameEngineCollision* FireEffectCollision_;
 	GameEngineImage* Image_;
 };

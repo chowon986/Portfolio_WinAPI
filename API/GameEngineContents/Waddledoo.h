@@ -23,6 +23,7 @@ public:
 	void Die();
 	void UpdateMove();
 	void UpdateAttack();
+	void SetPlayer(Player* _Player) { Player_ = _Player; }
 
 protected:
 
