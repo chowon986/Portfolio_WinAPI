@@ -4,6 +4,7 @@
 enum class DieEffectState
 {
 	DieEffect,
+	CannonEffect,
 	None
 };
 
@@ -24,6 +25,7 @@ public:
 private:
 	void StateUpdate();
 	void UpdateDieEffect();
+	void UpdateCannonEffect();
 	void UpdateNone();
 
 
@@ -36,7 +38,5 @@ private:
 	float4 StartPos_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
-	GameEngineCollision* Collision_;
-	GameEngineCollision* SparkEffectCollision_;
 	GameEngineImage* Image_;
 };

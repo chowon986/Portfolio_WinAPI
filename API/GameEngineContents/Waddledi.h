@@ -1,7 +1,6 @@
 #pragma once
 #include "Monster.h"
 
-class Player;
 class GameEngineImage;
 class GameEngineLevel;
 class GameEngineRenderer;
@@ -9,15 +8,6 @@ class GameEngineCollision;
 class Waddledi : public Monster
 {
 private:
-	Player* Player_;
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* Collision_;
-	GameEngineCollision* RightDirCol_;
-	GameEngineCollision* LeftDirCol_;
-	GameEngineRenderer* Renderer_;
-	GameEngineRenderer* EffectRenderer_;
-	GameEngineLevel* Level_;
-	float4 Dir_;
 
 public:
 	Waddledi();
@@ -32,9 +22,4 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-	bool IsDie();
-	void Die();
-	void UpdateMove();
-	void SetDir(float4 _Dir) { Dir_ = _Dir; }
-	void SetPlayer(Player* _Player) { Player_ = _Player; }
 };

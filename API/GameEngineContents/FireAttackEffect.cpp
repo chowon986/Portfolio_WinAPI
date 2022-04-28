@@ -93,8 +93,6 @@ void FireAttackEffect::UpdateFireAttackEffectRight()
 			{
 				Monster_->SetHP(Monster_->GetHP() - 1);
 				Monster_->SetDir(float4::ZERO);
-				Monster_->RightDirCol_->Off();
-				Monster_->LeftDirCol_->Off();
 			}
 		}
 	}
@@ -126,8 +124,6 @@ void FireAttackEffect::UpdateFireAttackEffectLeft()
 			{
 				Monster_->SetHP(Monster_->GetHP() - 2);
 				Monster_->SetDir(float4::ZERO);
-				Monster_->RightDirCol_->Off();
-				Monster_->LeftDirCol_->Off();
 			}
 		}
 	}

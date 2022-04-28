@@ -1,11 +1,8 @@
 #pragma once
 #include "Monster.h"
 
-class GameEngineImage;
 class GameEngineCollision;
 class GameEngineRenderer;
-class GameEngineLevel;
-class Player;
 class Sparky : public Monster
 {
 public:
@@ -21,25 +18,14 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-protected:
-
-private:
-	void UpdateMove();
+	bool CanWalk() override;
+	void Walk() override;
 	void UpdateAttack();
-	bool IsDie();
-	void Die();
 
 private:
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* SparkyCol_;
-	GameEngineCollision* DirectionCol_;
-	GameEngineCollision* AttackRangeCol_;
-	GameEngineCollision* AttackCol_;
-	Player* Player_;
-
-	GameEngineRenderer* SparkyRenderer_;
 	GameEngineRenderer* AttackRenderer_;
-	GameEngineLevel* Level_;
-	float4 Dir_;
-	void SetPlayer(Player* _Player) { Player_ = _Player; }
+	GameEngineCollision* AttackCol_;
+	GameEngineCollision* AttackRangeCol_;
+	bool CanMove_;
+	float AttackTime_;
 };

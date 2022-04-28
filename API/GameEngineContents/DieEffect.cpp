@@ -17,11 +17,18 @@ DieEffect::~DieEffect()
 
 void DieEffect::Start()
 {
-	Collision_ = CreateCollision("DieCol", float4(150.0f, 150.0f), float4(0.0f, -25.0f));
+	Renderer_ = CreateRenderer("MonsterDie.bmp");
+	Image_ = Renderer_->GetImage();
+	Image_->CutCount(10, 3);
+	Renderer_->CreateAnimation("MonsterDie.bmp", "Die", 0, 23, 0.03f, true);
+	Renderer_->CreateAnimation("MonsterDie.bmp", "Cannon", 14, 23, 0.03f, true);
+	Renderer_->CreateAnimation("MonsterDie.bmp", "None", 14, 14, 0.03f, true);
 
 	GameEngineLevel* Level = GetLevel();
+	if (Level->GetColMapImage() != nullptr)
+	{
 	ColMapImage_ = Level->GetColMapImage();
-
+	}
 	SetState(DieEffectState::None);
 }
 
@@ -51,6 +58,9 @@ void DieEffect::StateUpdate()
 	case DieEffectState::DieEffect:
 		UpdateDieEffect();
 		break;
+	case DieEffectState::CannonEffect:
+		UpdateCannonEffect();
+		break;
 	case DieEffectState::None:
 		UpdateNone();
 		break;
@@ -59,27 +69,16 @@ void DieEffect::StateUpdate()
 
 void DieEffect::UpdateNone()
 {
-	Collision_->Off();
+	Renderer_->ChangeAnimation("None");
 }
 
 void DieEffect::UpdateDieEffect()
 {
-	Collision_->On();
-
-	std::vector<GameEngineCollision*> SparkResult;
-	if (true == Collision_->CollisionResult("BasicMonster", SparkResult, CollisionType::Rect, CollisionType::Rect))
-	{
-		for (GameEngineCollision* SparkCollision : SparkResult)
-		{
-			GameEngineActor* SparkColActor = SparkCollision->GetActor();
-			Monster* Monster_ = dynamic_cast<Monster*>(SparkColActor);
-			if (Monster_ != nullptr)
-			{
-				Monster_->SetDir(float4::ZERO);
-				Monster_->RightDirCol_->Off();
-				Monster_->LeftDirCol_->Off();
-				Monster_->SetHP(Monster_->GetHP() - 1);
-			}
-		}
-	}
+	Renderer_->ChangeAnimation("Die");
 }
+
+void DieEffect::UpdateCannonEffect()
+{
+	Renderer_->ChangeAnimation("Cannon");
+}
+

@@ -3,7 +3,8 @@
 
 class GameEngineImage;
 class GameEngineLevel;
-class Player;
+class GameEngineRenderer;
+class GameEngineCollision;
 class Waddledoo : public Monster
 {
 public:
@@ -19,24 +20,16 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-	bool IsDie();
-	void Die();
-	void UpdateMove();
+	bool CanWalk() override;
+	void Walk() override;
 	void UpdateAttack();
-	void SetPlayer(Player* _Player) { Player_ = _Player; }
 
 protected:
 
 private:
-	float4 Dir_;
-	Player* Player_;
-	GameEngineLevel* Level_;
-	GameEngineImage* ColMapImage_;
-	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* AttackRenderer_;
 	GameEngineCollision* AttackCol_;
-	GameEngineCollision* Collision_;
-	GameEngineCollision* RightDirCol_;
-	GameEngineCollision* LeftDirCol_;
 	GameEngineCollision* AttackRangeCol_;
+	bool CanMove_;
+	float AttackTime_;
 };

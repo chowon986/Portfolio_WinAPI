@@ -56,6 +56,8 @@ class SparkAttackEffect;
 class FireAttackEffect;
 class SwordAttackEffect;
 class BeamAttackEffect;
+class DieEffect;
+class RunEffect;
 class Player : public CharacterBase
 {
 public:
@@ -75,14 +77,12 @@ public:
 	void SetState(KirbyState _PrevState);
 	KirbyClass GetKirbyClass();
 	KirbyState GetState() { return KirbyState_; }
-	GameEngineRenderer* GetRenderer() { return Renderer_; }
-	GameEngineRenderer* GetRenderer2() { return Renderer2_; }
+	GameEngineRenderer* GetRenderer();
 	void SetGravity(float _Gravity) { Gravity_ = _Gravity; }
 protected:
 
 private:
 	GameEngineRenderer* Renderer_;
-	GameEngineRenderer* Renderer2_;
 	GameEngineRenderer* BeamRenderer_;
 	GameEngineRenderer* SparkRenderer_;
 	GameEngineRenderer* PigRenderer_;
@@ -90,7 +90,6 @@ private:
 	GameEngineRenderer* FireRenderer_;
 	GameEngineRenderer* IceRenderer_;
 	GameEngineRenderer* AnimalRenderer_;
-	GameEngineRenderer* RunEffect_;
 
 
 
@@ -116,6 +115,8 @@ private:
 	FireAttackEffect* FireAttackEffect_;
 	SwordAttackEffect* SwordAttackEffect_;
 	BeamAttackEffect* BeamAttackEffect_;
+	DieEffect* DieEffect_;
+	RunEffect* RunEffect_;
 
 	Monster* Monster_;
 	MonsterClass MonClass_;
@@ -175,10 +176,14 @@ private:
 	void UpdateTransformEnd();
 	void UpdateTakeDamage();
 	void UpdateAbandon();
-	//void UpdateOpenDoor();
 
 	//void UpdateEffect();
 public:
+	void SetDieEffect(DieEffect* _DieEffect)
+	{
+		DieEffect_ = _DieEffect;
+	}
+
 	void SetMapStartPos(float4 _MapStartPos)
 	{ 
 		MapStartPos_ = _MapStartPos;
@@ -218,4 +223,11 @@ public:
 	{
 		BeamAttackEffect_ = _BeamAttackEffect;
 	}
+
+	void SetRunEffect(RunEffect* _RunEffect)
+	{
+		RunEffect_ = _RunEffect;
+	}
+
+	void SetHP(int _HP) override;
 };

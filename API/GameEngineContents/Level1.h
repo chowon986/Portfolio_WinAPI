@@ -24,6 +24,7 @@ protected:
 	void LevelChangeStart() override;
 
 private:
+	Player* Star_;
 	Player* Player_;
 	BotUI* PlayerStatus_;
 	GameEngineCollision* DoorCol1_2;

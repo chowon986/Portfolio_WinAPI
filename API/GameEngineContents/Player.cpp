@@ -48,6 +48,42 @@ KirbyClass Player::GetKirbyClass()
 	return KirbyClass_;
 }
 
+GameEngineRenderer* Player::GetRenderer()
+{
+    if (GetKirbyClass() == KirbyClass::ANIMAL)
+    {
+        return AnimalRenderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::BEAM)
+    {
+        return BeamRenderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::DEFAULT)
+    {
+        return Renderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::FIRE)
+    {
+        return FireRenderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::ICE)
+    {
+        return IceRenderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::PIG)
+    {
+        return PigRenderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::SPARK)
+    {
+        return SparkRenderer_;
+    }
+    if (GetKirbyClass() == KirbyClass::SWORD)
+    {
+        return SwordRenderer_;
+    }
+}
+
 void Player::ClassUpdate()
 {
     switch (KirbyClass_)
@@ -1183,18 +1219,10 @@ void Player::Update()
     if (KirbyState::EAT != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyCol_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
-        Time_ >= 1)
+        Time_ >= 2)
     {
+		SetHP(GetHP() - 1);
 		Time_ = 0;
-        SetHP(GetHP() - 1);
-        for (GameEngineCollision* Collision : Result)
-        {
-            Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
-            if (ColMonster != nullptr)
-            {
-                SetState(KirbyState::TAKEDAMAGE);
-            }
-        }
     }
 
     StateUpdate();
@@ -1397,7 +1425,7 @@ void Player::Start()
 {
     {
         Dir_ = "Right";
-        SetHPCount(9);
+        SetHPCount(2);
         SetHP(1);
         SetSpeed(200);
         Level_ = GetLevel();
@@ -1411,7 +1439,7 @@ void Player::Start()
 
         Renderer_ = CreateRenderer("Normal.bmp");
         GameEngineImage* Image_ = Renderer_->GetImage();
-        Image_->CutCount(10, 20);
+        Image_->CutCount(10, 26);
     }
 
     {
@@ -1460,6 +1488,7 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "DoorOpenRight", 49, 52, 0.1f, true);
         Renderer_->CreateAnimation("Normal.bmp", "DoorOpenLeft", 139, 142, 0.1f, true);
 
+        Renderer_->CreateAnimation("Normal.bmp", "Dance", 201, 207, 0.03f, true);
         Renderer_->CreateAnimation("Normal.bmp", "Die", 180, 95, 0.1f, true);
     }
 
@@ -1467,7 +1496,7 @@ void Player::Start()
 		//pig
 		PigRenderer_ = CreateRenderer("Normal.bmp");
 		PigImage_ = PigRenderer_->GetImage();
-		PigImage_->CutCount(10, 20);
+		PigImage_->CutCount(10, 26);
 
 		PigRenderer_->CreateAnimation("Normal.bmp", "IdleRight", 68, 68, 0.1f, true);
 		PigRenderer_->CreateAnimation("Normal.bmp", "IdleLeft", 158, 158, 0.1f, true);
@@ -1585,16 +1614,6 @@ void Player::Start()
 		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenRight", 546, 541, 0.1f, true);
 		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenLeft", 236, 231, 0.1f, true);
     }
-
-	{
-		RunEffect_ = CreateRenderer("RunEffect.bmp");
-		GameEngineImage* RunImage = RunEffect_->GetImage();
-		RunImage->CutCount(10, 4);
-		RunEffect_->CreateAnimation("RunEffect.bmp", "RunRight", 0, 18, 0.1f, true);
-		RunEffect_->CreateAnimation("RunEffect.bmp", "RunLeft", 19, 37, 0.1f, true);
-		RunEffect_->ChangeAnimation("RunRight");
-		RunEffect_->SetAlpha(0);
-	}
 
 	{
 		//Animal
@@ -1814,7 +1833,7 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("Eat", 'X');
         GameEngineInput::GetInst()->CreateKey("Attack", 'C');
         GameEngineInput::GetInst()->CreateKey("Transform", 'V');
-        //GameEngineInput::GetInst()->CreateKey("OpenDoor", VK_SPACE);
+        GameEngineInput::GetInst()->CreateKey("OpenDoor", VK_SPACE);
 
         
         

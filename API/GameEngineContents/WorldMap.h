@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineLevel.h>
 
 class BotUI;
+class Player;
 class WorldMap : public GameEngineLevel
 {
 public:
@@ -19,6 +20,14 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-	BotUI* PlayerUI_;
+	BotUI* PlayerStatus_;
+	Player* Player_;
+	Player* Player2_;
+	GameEngineCollision* Star1_;
+	GameEngineRenderer* WorldMapStarRenderer1;
+	GameEngineRenderer* LittleStarRenderer;
+	GameEngineRenderer* LittleStarRenderer2;
+	GameEngineRenderer* ChooseLevel1_;
+
 };
 

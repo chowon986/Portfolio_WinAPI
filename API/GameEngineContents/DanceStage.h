@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
+class Player;
+class GameEngineRenderer;
 class DanceStage : public GameEngineLevel
 {
 public:
@@ -18,6 +20,8 @@ protected:
 	void LevelChangeStart() override;
 
 private:
-
+	Player* Player_;
+	GameEngineRenderer* PlayerRenderer_;
+	GameEngineRenderer* DanceKirbyRenderer;
 };
 

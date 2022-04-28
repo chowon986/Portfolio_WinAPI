@@ -5,6 +5,7 @@ class GameEngineRenderer;
 class GameEngineCollision;
 class Player;
 class GameEngineImage;
+class DieEffect;
 class Cannon : public GameEngineLevel
 {
 public:
@@ -24,6 +25,8 @@ protected:
 private:
 	GameEngineRenderer* CanRenderer_;
 	GameEngineRenderer* PlayerRenderer_;
+	GameEngineRenderer* CannonRenderer_;
+	GameEngineRenderer* TomatoRenderer_;
 	GameEngineCollision* CanCol_;
 	Player* Player_;
 	float4 PrevPos_;

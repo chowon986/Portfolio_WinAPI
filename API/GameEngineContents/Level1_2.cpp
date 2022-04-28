@@ -19,6 +19,8 @@
 #include "IceAttackEffect.h"
 #include "AttackEffect.h"
 #include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
 
 Level1_2::Level1_2()
 	: Player_(nullptr)
@@ -38,12 +40,6 @@ void Level1_2::Loading()
 
 void Level1_2::Update()
 {
-
-	//if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	//{
-	//	GameEngine::GlobalEngine().ChangeLevel("Level1_3");
-	//}
-
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
 	if (0 > GetCameraPos().x)
@@ -79,10 +75,6 @@ void Level1_2::Update()
 		SetCameraPos(CurCameraPos);
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	{
-		//GameEngine::GlobalEngine().ChangeLevel("Level1_3");
-	}
 }
 
 void Level1_2::LevelChangeStart()
@@ -101,27 +93,28 @@ void Level1_2::LevelChangeStart()
 	{
 		Background* Stage1_2 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		Stage1_2->CreateRendererToScale("Stage1_2.bmp", float4(GetMapSizeX(), GetMapSizeY()), static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1776.0f, 0.0f));
-
 	}
 	{
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
 		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(180.0f, 436.0f));
+		Player_->SetMapStartPos(float4(180.0f, 436.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
+
 	}
-	//{
-	//	Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-	//	Player_->SetPosition(float4(180.0f, 436.0f));
-	//	PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
-	//}
 
 	{
 		Box* Box_1 = CreateActor<Box>((int)ORDER::OBSTRUCTION);

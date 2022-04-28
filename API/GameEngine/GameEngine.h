@@ -69,7 +69,8 @@ protected:
 		AllLevel_.insert(std::make_pair(_Name, NewLevel));
 	}
 
-
+private:
+	static bool ShowCollision_;
 private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
 	static GameEngineLevel* CurrentLevel_;
@@ -84,7 +85,6 @@ private:
 	static void EngineInit();
 	static void EngineLoop();
 	static void EngineEnd();
-
 
 };
 

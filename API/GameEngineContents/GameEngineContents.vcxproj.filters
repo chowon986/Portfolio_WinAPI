@@ -6,9 +6,6 @@
     <ClCompile Include="Animal.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="BeforeTitleLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="BigBomb.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
@@ -27,20 +24,11 @@
     <ClCompile Include="BombBox.cpp">
       <Filter>Obstruction</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Obstruction</Filter>
     </ClCompile>
     <ClCompile Include="Brontobert.cpp">
       <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Cannon.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="DanceStage.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Doc.cpp">
       <Filter>Monster</Filter>
@@ -48,68 +36,8 @@
     <ClCompile Include="Doroach.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingStory.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Fire.cpp">
       <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1_2.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1_3.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1_4.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2_2.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2_3.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2_4.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2_5.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3_2.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3_3.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3_4.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3_5.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3_6.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3_7.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level4.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level4_2.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Monster</Filter>
@@ -132,9 +60,6 @@
     <ClCompile Include="GreenMouse.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="IntroStory.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Sparky.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
@@ -152,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="SwordItem.cpp">
       <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="FireItem.cpp">
       <Filter>Item</Filter>
@@ -177,14 +99,8 @@
     <ClCompile Include="YellowMouse.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="WorldMap.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Obstruction.cpp">
       <Filter>Obstruction</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Kirby</Filter>
@@ -200,12 +116,6 @@
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
       <Filter>Kirby</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoPlayer.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOver.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Dedede.cpp">
       <Filter>Monster</Filter>
@@ -240,6 +150,75 @@
     <ClCompile Include="DieEffect.cpp">
       <Filter>Monster\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="BeforeTitleLevel.cpp">
+      <Filter>Level\00 Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroStory.cpp">
+      <Filter>Level\00 Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceStage.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1_2.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1_3.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1_4.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2_2.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2_3.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2_4.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2_5.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Level3.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level\00 Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoPlayer.cpp">
+      <Filter>Level\00 Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Level\01 Play</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>Level\02 Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingStory.cpp">
+      <Filter>Level\02 Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="RunEffect.cpp">
+      <Filter>Kirby\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -247,9 +226,6 @@
     <ClInclude Include="Kirby.h" />
     <ClInclude Include="Animal.h">
       <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="BeforeTitleLevel.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="BigBomb.h">
       <Filter>Monster</Filter>
@@ -269,20 +245,11 @@
     <ClInclude Include="BombBox.h">
       <Filter>Obstruction</Filter>
     </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Obstruction</Filter>
     </ClInclude>
     <ClInclude Include="Brontobert.h">
       <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Cannon.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="DanceStage.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Doroach.h">
       <Filter>Monster</Filter>
@@ -290,68 +257,8 @@
     <ClInclude Include="Doc.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="EndingLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="EndingStory.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Fire.h">
       <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Level4_2.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1_2.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1_3.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1_4.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2_2.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2_3.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2_4.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2_5.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3_2.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3_3.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3_4.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3_5.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3_6.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3_7.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level4.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Moon.h">
       <Filter>Monster</Filter>
@@ -374,9 +281,6 @@
     <ClInclude Include="GreenMouse.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="IntroStory.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Sparky.h">
       <Filter>Monster</Filter>
     </ClInclude>
@@ -394,9 +298,6 @@
     </ClInclude>
     <ClInclude Include="SwordItem.h">
       <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="FireItem.h">
       <Filter>Item</Filter>
@@ -419,14 +320,8 @@
     <ClInclude Include="YellowMouse.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="WorldMap.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Obstruction.h">
       <Filter>Obstruction</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Kirby</Filter>
@@ -439,12 +334,6 @@
     </ClInclude>
     <ClInclude Include="BotUI.h">
       <Filter>Kirby</Filter>
-    </ClInclude>
-    <ClInclude Include="VideoPlayer.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOver.h">
-      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Dedede.h">
       <Filter>Monster</Filter>
@@ -479,6 +368,75 @@
     <ClInclude Include="DieEffect.h">
       <Filter>Monster\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="BeforeTitleLevel.h">
+      <Filter>Level\00 Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroStory.h">
+      <Filter>Level\00 Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceStage.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1_2.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1_3.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1_4.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2_2.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2_3.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2_4.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2_5.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Level3.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level\00 Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoPlayer.h">
+      <Filter>Level\00 Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>Level\02 Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingStory.h">
+      <Filter>Level\02 Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="RunEffect.h">
+      <Filter>Kirby\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -501,6 +459,15 @@
     </Filter>
     <Filter Include="Monster\Effect">
       <UniqueIdentifier>{9b007e10-1c08-4749-b2d1-1b13a84f15c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\00 Intro">
+      <UniqueIdentifier>{8760f68a-3574-4327-bc36-f5a9e1e9aac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\01 Play">
+      <UniqueIdentifier>{463e9455-4c52-43be-a49f-dabb4e585e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\02 Ending">
+      <UniqueIdentifier>{0fccec4b-53cf-4e79-a19a-eec29ff33e80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

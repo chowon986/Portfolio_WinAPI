@@ -1,8 +1,7 @@
 #pragma once
 #include "Monster.h"
 
-class GameEngineImage;
-class GameEngineLevel;
+class GameEngineRenderer;
 class GameEngineCollision;
 class Fire : public Monster
 {
@@ -19,14 +18,16 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
+	bool CanWalk() override;
+	void Walk() override;
+	void UpdateAttack();
+
 protected:
 
 private:
-	GameEngineImage* ColMapImage_;
-	bool CheckMapCollision();
-	float4 PrevPos_;
-	GameEngineLevel* Level_;
-	GameEngineRenderer* FireRenderer_;
-	GameEngineCollision* FireCol_;
-	GameEngineImage* FireImage_;
+	GameEngineRenderer* AttackRenderer_;
+	GameEngineCollision* AttackCol_;
+	GameEngineCollision* AttackRangeCol_;
+	bool CanMove_;
+	float AttackTime_;
 };

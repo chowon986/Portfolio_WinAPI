@@ -3,6 +3,7 @@
 
 class GameEngineImage;
 class GameEngineLevel;
+class Player;
 class Brontobert : public Monster
 {
 public:
@@ -18,11 +19,9 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
+	void Walk() override;
 protected:
 
 private:
-	GameEngineImage* ColMapImage_;
-	bool CheckMapCollision();
-	float4 PrevPos_;
-	GameEngineLevel* Level_;
+	float4 UpDownDir_;
 };

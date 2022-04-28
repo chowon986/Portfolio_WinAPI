@@ -23,6 +23,7 @@ void GameOver::Loading()
 
 void GameOver::Update()
 {
+
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{
 		GameEngine::GetInst().ChangeLevel("Title");
@@ -36,4 +37,6 @@ void GameOver::LevelChangeStart()
 		Background* GameOver = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameOver->CreateRenderer("GameOver.bmp");
 	}
+
+
 }

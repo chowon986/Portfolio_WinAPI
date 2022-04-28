@@ -25,6 +25,8 @@ enum class MonsterClass
 
 class GameEngineImage;
 class GameEngineLevel;
+class Player;
+class GameEngineRenderer;
 class Monster : public CharacterBase
 {
 public:
@@ -37,21 +39,36 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
 protected:
+	virtual bool IsDie();
+	virtual void Die();
+	virtual void UpdateMove();
+	virtual bool CanWalk();
+	virtual void Walk();
+	void Start();
+	void Update();
+	void Render();
+	
+
+protected:
 	float4 Pos_;
 	float4 Dir_;
-
-private:
-	int Speed_;
-	GameEngineRenderer* WaddlediRenderer_;
+	float Speed_;
+	float Time_;
+	GameEngineRenderer* Renderer_;
+	GameEngineCollision* Collision_;
+	GameEngineCollision* IceEndCol_;
 	MonsterState MonsterState_;
 	GameEngineImage* ColMapImage_;
+	GameEngineRenderer* EffectRenderer_;
+	GameEngineCollision* IceCol_;
+	GameEngineCollision* RightDirCol_;
+	GameEngineCollision* LeftDirCol_;
 	GameEngineLevel* Level_;
 	MonsterClass MonsterClass_;
+	Player* Player_;
 
 
 public:
-	GameEngineCollision* RightDirCol_;
-	GameEngineCollision* LeftDirCol_;
 	void SetMonsterClass(MonsterClass _MonsterClass)
 	{
 		MonsterClass_ = _MonsterClass;
@@ -62,20 +79,16 @@ public:
 		return MonsterClass_;
 	}
 	void SetDir(float4 _Dir) { Dir_ = _Dir; }
+	GameEngineRenderer* GetRenderer() { return Renderer_; }
 
 private:
-	void Walk();
 	void Jump();
-	bool IsDie();
 	void attack();
 	void GetPos(float4 _Pos);
-	void Start();
-	void Update();
 	void SetState(MonsterState _PrevState);
-	void Render();
-	void Die();
 
 public:
-
+	void SetPlayer(Player* _Player) { Player_ = _Player; }
+	Player* GetPlayer() { return Player_; }
 };
 

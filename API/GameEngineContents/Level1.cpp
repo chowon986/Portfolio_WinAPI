@@ -21,6 +21,8 @@
 #include "BeamAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "SparkAttackEffect.h"
+#include "DieEffect.h"
+#include "RunEffect.h"
 
 Level1::Level1()
 	: Player_(nullptr)
@@ -142,9 +144,10 @@ void Level1::LevelChangeStart()
 		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
 		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+
 		//BeamAttackEffect_ = CreateActor<BeamAttackEffect>((int)ORDER::EFFECT);
 		//BeamAttackEffect_->SetPlayer(Player_);
-
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(205.0f, 436.0f));
 		Player_->SetMapStartPos(float4(205.0f, 436.0f));
@@ -155,23 +158,21 @@ void Level1::LevelChangeStart()
 		Player_->SetIceAttackEffect(IceAttackEffect_);
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
 	}
 
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
 		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
-		Waddledi_->SetPlayer(Player_);
 	}
 
 	{
 		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
 		Waddledoo_->SetPosition(float4(2840.0f, 377.0f));
-		GameEngineCollision* WaddledooCol = Waddledoo_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
 		Monster* Sparky_ = CreateActor<Sparky>((int)ORDER::MONSTER);
 		Sparky_->SetPosition(float4(3780.0f, 380.0f));
-		GameEngineCollision* SparkyCol = Sparky_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 }

@@ -157,6 +157,7 @@ void BotUI::Update()
 
 	switch (PlayerHPCount)
 	{
+	case 0:
 	case 1:
 	case 2:
 	case 3:

@@ -14,6 +14,7 @@ GameEngineLevel* GameEngine::PrevLevel_ = nullptr;
 GameEngine* GameEngine::UserContents_ = nullptr;
 GameEngineImage* GameEngine::BackBufferImage_ = nullptr;
 GameEngineImage* GameEngine::WindowMainImage_ = nullptr; // 그려지면 화면에 진짜 나오게 되는 이미지
+bool GameEngine::ShowCollision_ = false;
 
 HDC GameEngine::BackBufferDC()
 {
@@ -60,7 +61,9 @@ void GameEngine::EngineInit()
     WindowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
     BackBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 
+    GameEngineInput::GetInst()->CreateKey("ShowCollision", 'L');
 }
+
 void GameEngine::EngineLoop()
 {
     GameEngineTime::GetInst()->Update();
@@ -101,16 +104,25 @@ void GameEngine::EngineLoop()
     //GameEngineSound::Update();
     GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
 
+    if (GameEngineInput::GetInst()->IsDown("ShowCollision"))
+    {
+        ShowCollision_ = !ShowCollision_;
+    }
+
     // 레벨수준 시간제한이 있는 게임이라면
     // 매 프레임마다 시간을 체크해야하는데 그런일을 
     CurrentLevel_->Update();
     CurrentLevel_->ActorUpdate();
     CurrentLevel_->ActorRender();
-    //CurrentLevel_->CollisionDebugRender(); //need to chk : delete coldebug
+    if (ShowCollision_ == true)
+    {
+		CurrentLevel_->CollisionDebugRender();
+    }
     WindowMainImage_->BitCopy(BackBufferImage_);
 
     CurrentLevel_->ActorRelease();
 
+ 
 }
 
 void GameEngine::EngineEnd()
@@ -128,7 +140,6 @@ void GameEngine::EngineEnd()
         }
         delete StartIter->second;
     }
-
 
     //GameEngineSound::AllResourcesDestroy();
     GameEngineImageManager::Destroy();

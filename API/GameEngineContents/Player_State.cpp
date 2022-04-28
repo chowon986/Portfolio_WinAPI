@@ -18,16 +18,17 @@
 #include "FireAttackEffect.h"
 #include "AbandonEffect.h"
 #include "Box.h"
+#include "RunEffect.h"
 
 void Player::UpdateIdle()
 {
     KirbyEatCol_->Off();
-    //SparkAttackEffect_->Off();
-    //FireAttackEffect_->Off();
-    //IceAttackEffect_->Off();
-    //AnimalCol_->Off();
-    //SwordCol_->Off();
-    //KirbySlideCol_->Off();
+    FireAttackEffect_->Off();
+    IceAttackEffect_->Off();
+    AnimalCol_->Off();
+    SwordCol_->Off();
+    KirbySlideCol_->Off();
+    //RunEffect_->Off();
 }
 
 void Player::UpdateTransform()
@@ -38,14 +39,6 @@ void Player::UpdateTransformEnd()
 {
 
 }
-
-//void Player::UpdateOpenDoor()
-//{
-//	//if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
-//	//{
-//	//	GameEngine::GetInst().ChangeLevel("Level1_2");
-//	//}
-//}
 
 void Player::UpdateTakeDamage()
 {
@@ -77,11 +70,6 @@ void Player::UpdateTakeDamage()
                         SetMove(Move);
                     }
                 }
-
-                if (GetHP() <= 0)
-                {
-                    SetState(KirbyState::DIE);
-                }
             }
         }
     }
@@ -112,12 +100,18 @@ void Player::UpdateRun()
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
+        RunEffect_->On();
+        RunEffect_->SetState(RunEffectState::RunEffectLeft);
+        RunEffect_->SetPosition(float4(-10.0f, 0.0f));
         //Dir_ = "Left";
     }
 
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
+        RunEffect_->On();
+        RunEffect_->SetState(RunEffectState::RunEffectRight);
+        RunEffect_->SetPosition(float4(10.0f, 0.0f));
         //Dir_ = "Right";
 
     }
@@ -252,9 +246,17 @@ void Player::UpdateDie()
     {
         SetState(KirbyState::IDLE);
         --HPCount_;
-        SetHP(10);
-        SetPosition(MapStartPos_);
+        if (HPCount_ == -1)
+		{
+			GameEngine::GetInst().ChangeLevel("GameOver");
+		}
+		else
+		{
+			SetHP(10);
+			SetPosition(MapStartPos_);
+        }
     }
+
 }
 
 void Player::UpdateUp()
@@ -513,5 +515,23 @@ void Player::UpdateSlide()
 
 void Player::UpdateAbandon()
 {
+
+}
+
+void Player::SetHP(int _NewHP)
+{
+    int OldHP = GetHP();
+    CharacterBase::SetHP(_NewHP);
+
+    if (_NewHP <= 0)
+    {
+        SetState(KirbyState::DIE);
+    }
+
+    else if (_NewHP < OldHP)
+    {
+		SetState(KirbyState::TAKEDAMAGE);
+    }
+
 
 }

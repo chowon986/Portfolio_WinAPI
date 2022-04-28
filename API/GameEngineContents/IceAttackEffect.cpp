@@ -25,7 +25,12 @@ void IceAttackEffect::Start()
 	Renderer_->CreateAnimation("IceAtt.bmp", "AttackLeft", 15, 27, 0.03f, true);
 
 	GameEngineLevel* Level = GetLevel();
+
+	if (nullptr != Level->GetColMapImage())
+	{
 	ColMapImage_ = Level->GetColMapImage();
+	}
+	UpdateNone();
 }
 
 void IceAttackEffect::Update()
@@ -77,25 +82,9 @@ void IceAttackEffect::UpdateNone()
 
 void IceAttackEffect::UpdateIceAttackEffectRight()
 {
+	Collision_->On();
 	Renderer_->SetPivot(float4(40.0f, 0.0f));
 	Collision_->SetPivot(float4(100.0f, -25.0f));
-
-	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
-	{
-		for (GameEngineCollision* Collision : Result)
-		{
-			GameEngineActor* ColActor = Collision->GetActor();
-			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
-			if (Monster_ != nullptr)
-			{
-				Monster_->SetHP(Monster_->GetHP() - 1);
-				Monster_->SetDir(float4::ZERO);
-				Monster_->RightDirCol_->Off();
-				Monster_->LeftDirCol_->Off();
-			}
-		}
-	}
 
 	if (true == Renderer_->IsEndAnimation())
 	{
@@ -105,29 +94,13 @@ void IceAttackEffect::UpdateIceAttackEffectRight()
 
 void IceAttackEffect::UpdateIceAttackEffectLeft()
 {
+	Collision_->On();
 	Renderer_->SetPivot(float4(-200.0f, 0.0f));
 	Collision_->SetPivot(float4(-100.0f, -25.0f));
 
 	if (true == Renderer_->IsEndAnimation())
 	{
 		SetState(IceAttackEffectState::None);
-	}
-
-	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
-	{
-		for (GameEngineCollision* Collision : Result)
-		{
-			GameEngineActor* ColActor = Collision->GetActor();
-			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
-			if (Monster_ != nullptr)
-			{
-				Monster_->SetHP(Monster_->GetHP() - 2);
-				Monster_->SetDir(float4::ZERO);
-				Monster_->RightDirCol_->Off();
-				Monster_->LeftDirCol_->Off();
-			}
-		}
 	}
 }
 
