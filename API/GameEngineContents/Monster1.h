@@ -25,8 +25,8 @@ public:
 protected:
 
 private:
+	GameEngineCollision* EatRangeCol_;
 	GameEngineCollision* EatCol_;
-	GameEngineCollision* AttackRangeCol_;
 	bool CanMove_;
-	float AttackTime_;
+	float EatTime_;
 };

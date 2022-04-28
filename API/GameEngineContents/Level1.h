@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 class Player;
 class BotUI;
@@ -30,7 +31,7 @@ private:
 	GameEngineCollision* DoorCol1_2;
 	GameEngineImage* ColMapImage_;
 	float4 StartPos_;
-	
+	GameEngineSoundPlayer BgmPlayer;
 
 private:
 };

@@ -23,6 +23,7 @@
 #include "SparkAttackEffect.h"
 #include "DieEffect.h"
 #include "RunEffect.h"
+#include "GameEngineBase/GameEngineSound.h"
 
 Level1::Level1()
 	: Player_(nullptr)
@@ -85,6 +86,8 @@ void Level1::LevelChangeStart()
 	SetMapSizeY(576);
 	SetColMapImage("Stage1ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
+
+	BgmPlayer = GameEngineSound::SoundPlayControl("Level1.mp3");
 
 	if (ColMapImage_ == nullptr)
 	{

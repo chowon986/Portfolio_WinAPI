@@ -23,12 +23,13 @@
 void Player::UpdateIdle()
 {
     KirbyEatCol_->Off();
-    FireAttackEffect_->Off();
-    IceAttackEffect_->Off();
-    AnimalCol_->Off();
-    SwordCol_->Off();
-    KirbySlideCol_->Off();
-    //RunEffect_->Off();
+    //FireAttackEffect_->Off();
+    //IceAttackEffect_->Off();
+    //AnimalCol_->Off();
+    //SwordCol_->Off();
+    //KirbySlideCol_->Off();
+    ////RunEffect_->Off();
+    ClassUpdate();
 }
 
 void Player::UpdateTransform()
@@ -516,6 +517,18 @@ void Player::UpdateSlide()
 void Player::UpdateAbandon()
 {
 
+}
+
+void Player::UpdateEaten()
+{
+    Renderer_->SetAlpha(0);
+    SparkRenderer_->SetAlpha(0);
+    PigRenderer_->SetAlpha(0);
+    SwordRenderer_->SetAlpha(0);
+    FireRenderer_->SetAlpha(0);
+    IceRenderer_->SetAlpha(0);
+    AnimalRenderer_->SetAlpha(0);
+    BeamRenderer_->SetAlpha(0);
 }
 
 void Player::SetHP(int _NewHP)

@@ -39,6 +39,7 @@ enum class KirbyState
 	JUMPDOWN, // Possible : FLY
 	TAKEDAMAGE, // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE,
 	DIE,
+	EATEN,
 	//OPENDOOR,
 };
 
@@ -132,6 +133,7 @@ private:
 	KirbyClass KirbyClass_;
 	KirbyState KirbyState_;
 	std::string Dir_;
+	bool IsGround_;
 
 
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
@@ -176,6 +178,7 @@ private:
 	void UpdateTransformEnd();
 	void UpdateTakeDamage();
 	void UpdateAbandon();
+	void UpdateEaten();
 
 	//void UpdateEffect();
 public:

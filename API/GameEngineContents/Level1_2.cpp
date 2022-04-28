@@ -152,7 +152,7 @@ void Level1_2::LevelChangeStart()
 
 	{
 		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
-		Monster1_->SetPosition(float4(3630.0f, 380.0f));
+		Monster1_->SetPosition(float4(3630.0f, 425.0f));
 	}
 
 	{

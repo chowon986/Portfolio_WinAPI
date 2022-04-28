@@ -29,6 +29,7 @@ Player::Player()
     , SwordKirbyImage_(nullptr)
     , StarAttackEffect_(nullptr)
     , BeamRenderer_(nullptr)
+    , IsGround_(false)
 {
 }
 
@@ -769,11 +770,12 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Jump") &&
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == IsGround_ &&
         ColMapImage_ != nullptr)
 
     {
@@ -788,10 +790,11 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
         KirbyState::DIE != GetState() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == IsGround_ &&
         ColMapImage_ != nullptr)
 
     {
@@ -805,11 +808,12 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Jump") &&
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() && 
         KirbyState::TRANSFORM != GetState() &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == IsGround_ &&
         ColMapImage_ != nullptr)
     {
         SetState(KirbyState::RUN);
@@ -821,17 +825,19 @@ void Player::Update()
         false == GameEngineInput::GetInst()->IsPress("Jump") &&
         false == GameEngineInput::GetInst()->IsPress("Eat") &&
         false == GameEngineInput::GetInst()->IsPress("Abandon") && 
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == IsGround_ &&
         ColMapImage_ != nullptr)
     {
         SetState(KirbyState::RUN);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Up") &&
+        KirbyState::EATEN != GetState() &&
         KirbyClass::ANIMAL == GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
         KirbyState::SLIDE != GetState() &&
@@ -845,6 +851,7 @@ void Player::Update()
         KirbyClass::PIG != GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
         KirbyState::SLIDE != GetState() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState())
     {
         SetState(KirbyState::DOWN);
@@ -854,6 +861,7 @@ void Player::Update()
         KirbyState::DOWN == GetState() &&
         KirbyClass::PIG != GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState())
     {
         SetState(KirbyState::SLIDE);
@@ -867,6 +875,7 @@ void Player::Update()
 
     if (true == GameEngineInput::GetInst()->IsPress("Attack") &&
         KirbyClass::DEFAULT != GetKirbyClass() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
         KirbyState::DIE != GetState())
     {
@@ -909,6 +918,7 @@ void Player::Update()
         GetState() != KirbyState::JUMPUP &&
         GetState() != KirbyState::JUMPING &&
         GetState() != KirbyState::JUMPDOWN &&
+        KirbyState::EATEN != GetState() &&
         KirbyClass::PIG != GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
         GetState() != KirbyState::DIE)
@@ -960,6 +970,7 @@ void Player::Update()
     else if (true == GameEngineInput::GetInst()->IsFree("Fly") &&
         (KirbyState::FLYSTAY == GetState() || KirbyState::FLYATTACK == GetState() || KirbyState::FLYEND == GetState()) &&
         KirbyClass::PIG != GetKirbyClass() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyState::TRANSFORM != GetState())
     {
@@ -1010,9 +1021,10 @@ void Player::Update()
 
     if (true == GameEngineInput::GetInst()->IsUp("Jump") &&
         KirbyClass::PIG != GetKirbyClass() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == IsGround_ &&
         ColMapImage_ != nullptr) // 공중에서 점프 불가
     {
         JumpHeight_ = 200;
@@ -1021,6 +1033,7 @@ void Player::Update()
    
     if (true == GameEngineInput::GetInst()->IsUp("Transform") &&
         KirbyState::DIE != GetState() &&
+        KirbyState::EATEN != GetState() &&
         MonClass_ != MonsterClass::NONE &&
         MonClass_ != MonsterClass::DEFAULT &&
         MonClass_ != MonsterClass::BOSS)
@@ -1036,6 +1049,7 @@ void Player::Update()
     if (true == GameEngineInput::GetInst()->IsPress("Eat") &&
         KirbyState::DIE != GetState() &&
         KirbyState::ATTACK != GetState() &&
+        KirbyState::EATEN != GetState() &&
         KirbyState::DOWN != GetState() &&
         KirbyState::FLY != GetState() &&
         KirbyState::FLYSTAY != GetState() &&
@@ -1071,23 +1085,45 @@ void Player::Update()
     }
 
     SetMove(JumpDirection * Jump);
+    
+    bool OnTheObstruction = false;
+    // 장애물에 부딪혔을 때
+    std::vector<GameEngineCollision*> BoxResult;
+    if(true == KirbyCol_->CollisionResult("Obstruction", BoxResult, CollisionType::Rect, CollisionType::Rect))
+    {
+        for (GameEngineCollision* Collision : BoxResult)
+        {
+            if (nullptr != Collision->GetActor())
+            {
+                float Offset = Collision->GetActor()->GetPosition().y - GetPosition().y;
+
+                if (Offset > 0)
+                {
+                    OnTheObstruction = true;
+                }
+            }
+        }
+	}
+
     // 땅에 닿았을 때
     if (ColMapImage_ != nullptr && 
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true ) &&
         JumpDirection.y > 0 && 
         GetState() != KirbyState::DIE)
-    {
+	{
+        IsGround_ = true;
         while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
         {
             SetMove(float4::UP);
         }
         // need to chk** : 아래부분 남기면 오른쪽으로 이동하는 속도 느려짐
-        //SetPosition(float4(GetPosition().ix(), GetPosition().iy()));
+        // SetPosition(float4(GetPosition().ix(), GetPosition().iy()));
 
         JumpHeight_ = 0;
         float4 Distance = GetPosition() - StartPos_;
         float DistanceX = Distance.x < 0 ? Distance.x * -1 : Distance.x;
         if (GetState() != KirbyState::DIE &&
+            GetState() != KirbyState::EATEN  &&
             true == GameEngineInput::GetInst()->IsFree("Left") &&
             true == GameEngineInput::GetInst()->IsFree("Right") &&
             true == GameEngineInput::GetInst()->IsFree("Down") &&
@@ -1155,6 +1191,7 @@ void Player::Update()
     // 떠 있을 때
     else
     {
+        IsGround_ = false;
         if (GetState() != KirbyState::FLYSTAY &&
             GetState() != KirbyState::DIE &&
             GetState() != KirbyState::FLY &&
@@ -1224,6 +1261,8 @@ void Player::Update()
 		SetHP(GetHP() - 1);
 		Time_ = 0;
     }
+
+
 
     StateUpdate();
     CheckCollision();
@@ -1315,6 +1354,39 @@ void Player::CheckCollision()
         SetPosition(float4(GetPosition().x, 70));
     }
 
+    std::vector<GameEngineCollision*> ColResult;
+    while (true == KirbyCol_->CollisionResult("Obstruction", ColResult, CollisionType::Rect, CollisionType::Rect))
+    {
+        for (GameEngineCollision* BoxCollision : ColResult)
+        {
+            GameEngineActor* CollisionActor = BoxCollision->GetActor();
+            if (CollisionActor != nullptr)
+            {
+                float XDir = CollisionActor->GetPosition().x - GetPosition().x;
+                float YDir = CollisionActor->GetPosition().y - GetPosition().y;
+            
+                if (YDir > 0)
+                {
+                    SetMove(float4::UP);
+                }
+                else if (XDir <= 0)
+                {
+                    SetMove(float4::RIGHT);
+                }
+
+                else if (XDir > 0)
+                {
+                    SetMove(float4::LEFT);
+                }
+
+                else if (YDir <= 0)
+                {
+                    SetMove(float4::DOWN);
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -1387,6 +1459,9 @@ void Player::StateUpdate()
         break;
     case KirbyState::ABANDON:
         UpdateAbandon();
+        break;
+    case KirbyState::EATEN:
+        UpdateEaten();
         break;
     //case KirbyState::OPENDOOR:
     //    UpdateOpenDoor();
