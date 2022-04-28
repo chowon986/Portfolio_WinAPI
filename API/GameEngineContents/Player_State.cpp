@@ -23,12 +23,12 @@
 void Player::UpdateIdle()
 {
     KirbyEatCol_->Off();
-    //FireAttackEffect_->Off();
-    //IceAttackEffect_->Off();
-    //AnimalCol_->Off();
-    //SwordCol_->Off();
-    //KirbySlideCol_->Off();
-    ////RunEffect_->Off();
+    FireAttackEffect_->Off();
+    IceAttackEffect_->Off();
+    AnimalCol_->Off();
+    SwordCol_->Off();
+    KirbySlideCol_->Off();
+    //RunEffect_->Off();
     ClassUpdate();
 }
 
