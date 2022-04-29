@@ -62,7 +62,11 @@ class RunEffect;
 class Player : public CharacterBase
 {
 public:
-	float4 PrevPos_;
+	static int HP_COUNT;
+	static int HP;
+	static KirbyClass KIRBYCLASS;
+	
+public:
 	Player();
 	~Player();
 
@@ -91,8 +95,6 @@ private:
 	GameEngineRenderer* FireRenderer_;
 	GameEngineRenderer* IceRenderer_;
 	GameEngineRenderer* AnimalRenderer_;
-
-
 
 	GameEngineRenderer* AttackEffectRenderer_;
 
@@ -137,9 +139,6 @@ private:
 
 
 	void SetSpeed(float _Speed) { Speed_ = _Speed; }
-
-
-
 
 	void ClassUpdate();
 

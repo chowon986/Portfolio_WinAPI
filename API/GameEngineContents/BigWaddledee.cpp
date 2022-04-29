@@ -8,11 +8,6 @@
 
 BigWaddledee::BigWaddledee()
 	: Monster()
-	, HP_(1)
-	, ColMapImage_(nullptr)
-	,Level_(nullptr)
-	,BigWaddledeeCol_(nullptr)
-	,BigWaddledeeRenderer_(nullptr)
 {
 }
 
@@ -22,49 +17,27 @@ BigWaddledee::~BigWaddledee()
 
 void BigWaddledee::Start()
 {
-	GameEngineLevel* Level = GetLevel();
-	ColMapImage_ = Level->GetColMapImage();
+	Monster::Start();
 
-	//SetState(::WALK);
-	BigWaddledeeRenderer_ = CreateRenderer("monster0.bmp");
-	GameEngineImage* BigWaddledeeImage = BigWaddledeeRenderer_->GetImage();
-	BigWaddledeeImage->CutCount(10, 26);
-	BigWaddledeeRenderer_->CreateAnimation("monster0.bmp", "BigWaddledeeIdle", 0, 5, 0.3f, true);
-	BigWaddledeeRenderer_->ChangeAnimation("BigWaddledeeIdle");
-
-	BigWaddledeeCol_ = CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
-}
-
-void BigWaddledee::Render()
-{
+	Renderer_ = CreateRenderer("monster1.bmp");
+	GameEngineImage* Image = Renderer_->GetImage();
+	Image->CutCount(10, 52);
+	Renderer_->CreateAnimation("Monster1.bmp", "WalkRight", 0, 4, 0.3f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "WalkLeft", 259, 263, 0.3f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "CollisionLeft", 5, 5, 0.5f, false);
+	Renderer_->CreateAnimation("Monster1.bmp", "CollisionRight", 264, 264, 0.5f, false);
+	Renderer_->CreateAnimation("Monster1.bmp", "DieLeft", 5, 6, 0.5f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "DieRight", 264, 265, 0.5f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "Ice", 519, 519, 0.5f, false);
+	Renderer_->ChangeAnimation("WalkRight");
 }
 
 void BigWaddledee::Update()
 {
-	//PrevPos_ = GetPosition();
-
-	//float4 NewPos;
-	//NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
-	//NewPos.y = GetPosition().y;
-	//SetPosition(NewPos);
-
-	//// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
-	//if (true == BigWaddledeeCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
-	//{
-	//	SetHP(GetHP() - 1);
-	//	// BigWaddledeeRenderer_->ChangeAnimation("BigWaddledeedeee");
-	//	// BigWaddledeeCol_->Death();
-	//	// BigWaddledeeRenderer_->Death();
-	//}
-
-	//if (true == CheckMapCollision())
-	//{
-	//	SetPosition(PrevPos_);
-	//}
-
+	UpdateMove();
+	Die();
 }
 
-bool BigWaddledee::CheckMapCollision()
+void BigWaddledee::Render()
 {
-	return true;
 }

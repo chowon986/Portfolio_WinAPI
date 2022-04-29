@@ -5,7 +5,6 @@
 
 Background::Background()
 {
-	// Level_ = nullptr;
 }
 
 Background::~Background()

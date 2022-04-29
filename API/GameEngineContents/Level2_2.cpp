@@ -10,6 +10,13 @@
 #include "Waddledi.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
+#include <GameEngine/GameEngineImage.h>
 
 Level2_2::Level2_2()
 	: Player_(nullptr)
@@ -82,8 +89,67 @@ void Level2_2::LevelChangeStart()
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(900, 320));
-		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		Player_->SetPosition(float4(200, 320));
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
+
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
+	}
+	{
+		Background* Grass8 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* Grass8Renderer = Grass8->CreateRenderer("grass8.bmp");
+		GameEngineImage* Grass8Image = Grass8Renderer->GetImage();
+		Grass8Image->CutCount(4, 1);
+		Grass8Renderer->CreateAnimation("grass8.bmp", "grass8", 0, 3, 0.5f, true);
+		Grass8Renderer->ChangeAnimation("grass8");
+		Grass8Renderer->SetPivot(float4(-48.0f, 102.0f));
+
+		Background* Grass9 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* Grass9Renderer = Grass9->CreateRenderer("Grass9.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(480.0f, 150.0f));
+		GameEngineImage* Grass9Image = Grass9Renderer->GetImage();
+		Grass9Image->CutCount(4, 1);
+		Grass9Renderer->CreateAnimation("Grass9.bmp", "Grass9", 0, 3, 0.5f, true);
+		Grass9Renderer->ChangeAnimation("Grass9");
+
+		Background* Grass10 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* Grass10Renderer = Grass10->CreateRenderer("Grass10.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(936.0f, 102.0f));
+		GameEngineImage* Grass10Image = Grass10Renderer->GetImage();
+		Grass10Image->CutCount(4, 1);
+		Grass10Renderer->CreateAnimation("Grass10.bmp", "Grass10", 0, 3, 0.5f, true);
+		Grass10Renderer->ChangeAnimation("Grass10");
+
+		Background* Grass11 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* Grass11Renderer = Grass11->CreateRenderer("Grass11.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1452.0f, 102.0f));
+		GameEngineImage* Grass11Image = Grass11Renderer->GetImage();
+		Grass11Image->CutCount(4, 1);
+		Grass11Renderer->CreateAnimation("Grass11.bmp", "Grass11", 0, 3, 0.5f, true);
+		Grass11Renderer->ChangeAnimation("Grass11");
+	}
+
+	{ 
+		// Door
+		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1705.0f, 70.0f));
+		DoorCol2_3 = Door->CreateCollision("DoorCol2_3", float4(48.0f, 64.0f), float4(1705.0f, 70.0f));
+
+		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1705, 25.0f));
+		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+		DoorStarImage->CutCount(6, 2);
+		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
+		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 
 	{
@@ -94,11 +160,6 @@ void Level2_2::LevelChangeStart()
 	{
 		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
 		Waddledi_->SetPosition(float4(1170.0f, 393.0f));
-	}
-
-	{
-		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
-		DoorCol2_3 = Door->CreateCollision("DoorCol2_3", float4(48.0f, 64.0f), float4(1078.0f, 70.0f));
 	}
 
 }

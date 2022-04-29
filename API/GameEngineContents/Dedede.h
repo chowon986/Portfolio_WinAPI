@@ -25,13 +25,6 @@ protected:
 private:
 	int HP_;
 	float4 PrevPos_;
-	//bool CheckMapCollision();
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* DededeCol_;
-	GameEngineRenderer* DededeRenderer_;
-	GameEngineImage* DededeImage_;
-	GameEngineLevel* Level_;
-	
 
 private:
 };

@@ -11,6 +11,9 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Monster.h"
 
+int Player::HP_COUNT = 2;
+int Player::HP = 10;
+KirbyClass Player::KIRBYCLASS = KirbyClass::DEFAULT;
 Player::Player()
     : Renderer_(nullptr)
     , Gravity_(5.0f)
@@ -1308,27 +1311,82 @@ void Player::CheckCollision()
 {
     if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
     {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
         GameEngine::GetInst().ChangeLevel("Level1_2");
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect))
     {
+       HP_COUNT = GetHPCount();
+       HP = GetHP();
+       KIRBYCLASS = GetKirbyClass();
        GameEngine::GetInst().ChangeLevel("Level1_3");
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect))
     {
+       HP_COUNT = GetHPCount();
+       HP = GetHP();
+       KIRBYCLASS = GetKirbyClass();
        GameEngine::GetInst().ChangeLevel("Level1_4");
     }
 
     if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect))
     {
+       HP_COUNT = GetHPCount();
+       HP = GetHP();
+       KIRBYCLASS = GetKirbyClass();
        GameEngine::GetInst().ChangeLevel("Cannon");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DorrCol2_2", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect))
     {
+       HP_COUNT = GetHPCount();
+       HP = GetHP();
+       KIRBYCLASS = GetKirbyClass();
        GameEngine::GetInst().ChangeLevel("Level2_2");
+    }
+
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_3", CollisionType::Rect, CollisionType::Rect))
+    {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
+        GameEngine::GetInst().ChangeLevel("Level2_3");
+    }
+
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_4", CollisionType::Rect, CollisionType::Rect))
+    {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
+        GameEngine::GetInst().ChangeLevel("Level2_4");
+    }
+
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_5", CollisionType::Rect, CollisionType::Rect))
+    {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
+        GameEngine::GetInst().ChangeLevel("Level2_5");
+    }
+
+    if (true == KirbyCol_->CollisionCheck("DoorCol3", CollisionType::Rect, CollisionType::Rect))
+    {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
+        GameEngine::GetInst().ChangeLevel("Level3");
+    }
+
+    if (true == KirbyCol_->CollisionCheck("Boss", CollisionType::Rect, CollisionType::Rect))
+    {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
+        GameEngine::GetInst().ChangeLevel("Boss");
     }
 
     if (true == KirbyCol_->CollisionCheck("CanCol", CollisionType::Rect, CollisionType::Rect))
@@ -1521,8 +1579,6 @@ void Player::Start()
 {
     {
         Dir_ = "Right";
-        SetHPCount(2);
-        SetHP(1);
         SetSpeed(200);
         Level_ = GetLevel();
         ColMapImage_ = Level_->GetColMapImage();
@@ -1913,7 +1969,9 @@ void Player::Start()
     }
 
     SetState(KirbyState::IDLE);
-    SetKirbyClass(KirbyClass::DEFAULT);
+    SetHPCount(HP_COUNT);
+    SetHP(HP);
+    SetKirbyClass(KIRBYCLASS);
     if (false == GameEngineInput::GetInst()->IsKey("Left"))
     {
         GameEngineInput::GetInst()->CreateKey("Left", VK_LEFT);

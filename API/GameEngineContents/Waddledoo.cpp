@@ -15,7 +15,7 @@ Waddledoo::Waddledoo()
 	, AttackRangeCol_(nullptr)
 	, AttackTime_(1.0f)
 {
-	//SetMonsterClass(MonsterClass::BEAM);
+	SetMonsterClass(MonsterClass::BEAM);
 }
 
 Waddledoo::~Waddledoo()

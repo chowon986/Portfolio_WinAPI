@@ -38,8 +38,9 @@ void Monster1::Start()
 
 	Renderer_->ChangeAnimation("WalkRight");
 	EatRangeCol_ = CreateCollision("EatRangeCol", float4(100.0f, 50.0f), float4(0.0f, 0.0f));
-	EatCol_ = CreateCollision("EatCol", float4(30.0f, 50.0f), float4(0.0f, 0.0f));
+	EatCol_ = CreateCollision("EatCol", float4(30.0f, 50.0f), float4(0.0f, -30.0f));
 	EatRangeCol_->Off();
+
 }
 
 void Monster1::Render()
@@ -183,3 +184,43 @@ void Monster1::UpdateAttack()
 		Collision_->On();
 	}
 }
+
+void Monster1::UpdateMove()
+{
+	Monster::UpdateMove();
+	std::vector<GameEngineCollision*> ColResult;
+	while (true == Collision_->CollisionResult("Obstruction", ColResult, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* BoxCollision : ColResult)
+		{
+			GameEngineActor* CollisionActor = BoxCollision->GetActor();
+			if (CollisionActor != nullptr)
+			{
+				float XDir = CollisionActor->GetPosition().x - GetPosition().x;
+				float YDir = CollisionActor->GetPosition().y - GetPosition().y;
+
+				if (YDir > 0)
+				{
+					SetMove(float4::UP);
+				}
+				else if (XDir <= 0)
+				{
+					SetMove(float4::RIGHT);
+					Dir_ = float4::RIGHT;
+				}
+
+				else if (XDir > 0)
+				{
+					SetMove(float4::LEFT);
+					Dir_ = float4::LEFT;
+				}
+
+				else if (YDir <= 0)
+				{
+					SetMove(float4::DOWN);
+				}
+			}
+		}
+	}
+}
+

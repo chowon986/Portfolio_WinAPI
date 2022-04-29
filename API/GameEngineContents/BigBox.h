@@ -17,6 +17,6 @@ protected:
 	void Update();
 
 private:
-	GameEngineRenderer* BigBoxRenderer_;
-	GameEngineCollision* BigBoxCol_;
+	GameEngineRenderer* Renderer_;
+	GameEngineCollision* Collision_;
 };

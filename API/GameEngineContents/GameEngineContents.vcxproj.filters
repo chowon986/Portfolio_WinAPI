@@ -207,9 +207,6 @@
     <ClCompile Include="WorldMap.cpp">
       <Filter>Level\01 Play</Filter>
     </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Level\01 Play</Filter>
-    </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level\02 Ending</Filter>
     </ClCompile>
@@ -218,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="RunEffect.cpp">
       <Filter>Kirby\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Level\01 Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -425,9 +425,6 @@
     <ClInclude Include="WorldMap.h">
       <Filter>Level\01 Play</Filter>
     </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Level\01 Play</Filter>
-    </ClInclude>
     <ClInclude Include="EndingLevel.h">
       <Filter>Level\02 Ending</Filter>
     </ClInclude>
@@ -436,6 +433,9 @@
     </ClInclude>
     <ClInclude Include="RunEffect.h">
       <Filter>Kirby\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Level\01 Play</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

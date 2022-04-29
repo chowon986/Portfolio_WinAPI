@@ -1,7 +1,8 @@
 #include "Obstruction.h"
+#include <GameEngine/GameEngineCollision.h>
+#include "Player.h"
 
 Obstruction::Obstruction()
-	:HP_(1)
 {
 }
 
@@ -9,12 +10,34 @@ Obstruction::~Obstruction()
 {
 }
 
-void Obstruction::SetHP(int _HP)
+void Obstruction::Start()
 {
-	HP_ = _HP;
+	Renderer_ = CreateRenderer("Box.bmp");
+	Collision_ = CreateCollision("Obstruction", float4(41.0f, 41.0f), float4(0.0f, 0.0f));
 }
 
-int Obstruction::GetHP()
+void Obstruction::ColUpdate()
 {
-	return HP_;
+	std::vector<GameEngineCollision*> Result;
+	if (true == Collision_->CollisionResult("KirbySlideCol", Result, CollisionType::Rect, CollisionType::Rect) ||
+		true == Collision_->CollisionResult("AttackCol", Result, CollisionType::Rect, CollisionType::Rect) ||
+		true == Collision_->CollisionResult("FireAttackCol", Result, CollisionType::Rect, CollisionType::Rect) ||
+		true == Collision_->CollisionResult("IceAttackCol", Result, CollisionType::Rect, CollisionType::Rect) ||
+		true == Collision_->CollisionResult("SparkAttackCol", Result, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* Collision : Result)
+		{
+			Player* Player_ = dynamic_cast<Player*>(Collision->GetActor());
+			SetPlayer(Player_);
+			if (Player_ != nullptr)
+			{
+				Death();
+			}
+		}
+	}
+}
+
+void Obstruction::Update()
+{
+	ColUpdate();
 }

@@ -20,16 +20,4 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
-protected:
-
-private:
-	int HP_;
-	float4 PrevPos_;
-	bool CheckMapCollision();
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* BigWaddledeeCol_;
-	GameEngineRenderer* BigWaddledeeRenderer_;
-	GameEngineLevel* Level_;
-
-private:
 };

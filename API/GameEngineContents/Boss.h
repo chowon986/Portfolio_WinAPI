@@ -5,6 +5,7 @@ class Player;
 class Background;
 class GameEngineImage;
 class GameEngineRenderer;
+class BotUI;
 class Boss : public GameEngineLevel
 {
 public:
@@ -30,5 +31,6 @@ private:
 	GameEngineImage* BossLevelEndImage_;
 	GameEngineImage* ColMapImage_;
 	Player* Player_;
+	BotUI* PlayerStatus_;
 };
 

@@ -30,7 +30,7 @@ void IceAttackEffect::Start()
 	{
 	ColMapImage_ = Level->GetColMapImage();
 	}
-	UpdateNone();
+	SetState(IceAttackEffectState::None);
 }
 
 void IceAttackEffect::Update()

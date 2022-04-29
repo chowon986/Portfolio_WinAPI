@@ -1,6 +1,9 @@
 #pragma once
 #include "GameEngine/GameEngineActor.h"
 
+class Player;
+class GameEngineRenderer;
+class GameEngineCollision;
 class Obstruction : public GameEngineActor
 {
 public:
@@ -12,9 +15,16 @@ public:
 	Obstruction& operator=(Obstruction&& _Other) noexcept = delete;
 
 public:
-	void SetHP(int _HP);
-	int GetHP();
+	void SetPlayer(Player* _Player) { Player_ = _Player; }
+	Player* GetPlayer() { return Player_; }
+	void Start();
+	void Update();
 private:
-	int HP_;
+
+protected:
+	virtual void ColUpdate();
+	GameEngineRenderer* Renderer_;
+	GameEngineCollision* Collision_;
+	Player* Player_;
 };
 

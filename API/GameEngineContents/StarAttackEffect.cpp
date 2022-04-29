@@ -158,6 +158,7 @@ void StarAttackEffect::UpdateAttackStartLeft()
 			}
 		}
 	}
+
 }
 
 void StarAttackEffect::UpdateAttackEndRight()

@@ -10,6 +10,7 @@
 #include "Level2_2.h"
 #include "Level2_3.h"
 #include "Level2_4.h"
+#include "Level2_5.h"
 #include "Level3.h"
 #include "Boss.h"
 #include "Cannon.h"
@@ -130,13 +131,14 @@ void Kirby::GameInit()
     CreateLevel<Level2_2>("Level2_2");
     CreateLevel<Level2_3>("Level2_3");
     CreateLevel<Level2_4>("Level2_4");
+    CreateLevel<Level2_5>("Level2_5");
     CreateLevel<Level3>("Level3");
     CreateLevel<Boss>("Boss");
     CreateLevel<EndingStory>("EndingStory");
     CreateLevel<EndingLevel>("Ending");
     CreateLevel<GameOver>("GameOver");
 
-    ChangeLevel("Cannon");
+    ChangeLevel("Boss");
 }
 
 void Kirby::GameLoop()

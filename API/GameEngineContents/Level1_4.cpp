@@ -14,6 +14,13 @@
 #include "Box.h"
 #include "BombBox.h"
 #include "Bomb.h"
+#include "BotUI.h"
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
 
 Level1_4::Level1_4()
 	: Player_(nullptr)
@@ -31,13 +38,7 @@ void Level1_4::Loading()
 
 void Level1_4::Update()
 {
-	//if (true == GameEngineInput::GetInst()->IsPress("LevelChange"))
-	//{
-	//	GameEngine::GlobalEngine().ChangeLevel("Cannon");
-	//}
 
-
-	// CHK : CAMERA SETTING
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
 	if (0 > GetCameraPos().x)
@@ -95,23 +96,38 @@ void Level1_4::LevelChangeStart()
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(205.0f, 430.0f));
+		Player_->SetMapStartPos(float4(205.0f, 430.0f));
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
+
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
 	}
 
 	{
 		Box* Box_ = CreateActor<Box>((int)ORDER::OBSTRUCTION);
-		Box_->CreateRenderer("Box.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(890.0f, 350.0f));
+		Box_->SetPosition(float4(890.0f, 350.0f));
 	}
 
 	{
 		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
 		Fire_->SetPosition(float4(950.0f, 380.0f));
-		GameEngineCollision* FireCol = Fire_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
 		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
 		Monster1_->SetPosition(float4(1500.0f, 380.0f));
-		GameEngineCollision* Monster1Col = Monster1_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	}
 
 	{
@@ -129,16 +145,8 @@ void Level1_4::LevelChangeStart()
 	}
 
 	{
-		// 물에 빠지게 하기 (왼쪽 이동)
-		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(2480.0f, 290.0f));
-		GameEngineCollision* WaddlediCol = Waddledi_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
-	}
-
-	{
 		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
-		Monster1_->SetPosition(float4(2900.0f, 190.0f));
-		GameEngineCollision* Monster1Col = Monster1_->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
+		Monster1_->SetPosition(float4(3300.0f, 480.0f));
 	}
 
 	{

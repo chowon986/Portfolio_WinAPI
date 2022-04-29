@@ -8,8 +8,6 @@
 
 Tiktik::Tiktik()
 	: Monster()
-	, Level_(nullptr)
-	, ColMapImage_(nullptr)
 {
 }
 
@@ -19,37 +17,27 @@ Tiktik::~Tiktik()
 
 void Tiktik::Start()
 {
-	GameEngineLevel* Level = GetLevel();
-	ColMapImage_ = Level->GetColMapImage();
+	Monster::Start();
 
-	GameEngineRenderer* TiktikRenderer = CreateRenderer("monster0.bmp");
-	GameEngineImage* TiktikImage = TiktikRenderer->GetImage();
-	TiktikImage->CutCount(10, 26);
-	TiktikRenderer->CreateAnimation("monster0.bmp", "TiktikIdle", 137, 145, 0.3f, true);
-	TiktikRenderer->ChangeAnimation("TiktikIdle");
-}
-
-
-void Tiktik::Render()
-{
+	Renderer_ = CreateRenderer("monster1.bmp");
+	GameEngineImage* Image = Renderer_->GetImage();
+	Image->CutCount(10, 52);
+	Renderer_->CreateAnimation("monster1.bmp", "WalkRight", 137, 145, 0.3f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "WalkLeft", 396, 404, 0.3f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "CollisionLeft", 146, 146, 0.5f, false);
+	Renderer_->CreateAnimation("Monster1.bmp", "CollisionRight", 405, 405, 0.5f, false);
+	Renderer_->CreateAnimation("Monster1.bmp", "DieLeft", 146, 147, 0.5f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "DieRight", 405, 406, 0.5f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "Ice", 519, 519, 0.5f, false);
+	Renderer_->ChangeAnimation("WalkRight");
 }
 
 void Tiktik::Update()
 {
-	//PrevPos_ = GetPosition();
-
-	//float4 NewPos;
-	//NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
-	//NewPos.y = GetPosition().y;
-	//SetPosition(NewPos);
-
-	//if (true == CheckMapCollision())
-	//{
-	//	SetPosition(PrevPos_);
-	//}
+	UpdateMove();
+	Die();
 }
 
-bool Tiktik::CheckMapCollision()
+void Tiktik::Render()
 {
-	return true;
 }

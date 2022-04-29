@@ -97,7 +97,7 @@ void Cannon::LevelChangeStart()
 		CanRenderer_->CreateAnimation("can.bmp", "CanStop", 0, 2, 0.08f, false);
 
 		CanRenderer_->ChangeAnimation("CanIdle");
-		CanCol_ = Can->CreateCollision("CanCol", float4(10.0f, 10.0f), float4(0.0f, 30.0f));
+		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 10.0f), float4(0.0f, 30.0f));
 
 	}
 	{

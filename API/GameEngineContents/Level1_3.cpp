@@ -10,6 +10,12 @@
 #include "Player.h"
 #include "Monster.h"
 #include "HPUp.h"
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
 
 
 
@@ -29,8 +35,6 @@ void Level1_3::Loading()
 
 void Level1_3::Update()
 {
-
-	// CHK : CAMERA SETTING
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
 	if (0 > GetCameraPos().x)
@@ -85,9 +89,24 @@ void Level1_3::LevelChangeStart()
 	}
 
 	{
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(45, 960));
-		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
+
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
 	}
 
 	{

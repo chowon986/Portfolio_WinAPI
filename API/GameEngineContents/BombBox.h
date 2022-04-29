@@ -12,11 +12,14 @@ public:
 	BombBox& operator=(const BombBox& _Other) = delete;
 	BombBox& operator=(BombBox&& _Other) noexcept = delete;
 
+
 protected:
 	void Start();
 	void Update();
 
 private:
-	GameEngineRenderer* BombBoxRenderer_;
-	GameEngineCollision* BombBoxCol_;
+	GameEngineCollision* Collision_;
+	GameEngineCollision* Collision2_;
+	GameEngineRenderer* Renderer_;
+
 };

@@ -8,6 +8,11 @@
 
 Fire::Fire()
 	: Monster()
+	, AttackCol_(nullptr)
+	, AttackRangeCol_(nullptr)
+	, AttackRenderer_(nullptr)
+	, AttackTime_(0.0f)
+	, CanMove_(false)
 {
 	SetMonsterClass(MonsterClass::FIRE);
 }

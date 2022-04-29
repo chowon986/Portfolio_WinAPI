@@ -17,8 +17,8 @@ protected:
 	void Update();
 
 private:
-	GameEngineCollision* BoxCol_;
-	GameEngineCollision* BoxBlockCol_;
-	GameEngineRenderer* BoxRenderer_;
+	GameEngineCollision* Collision_;
+	GameEngineRenderer* Renderer_;
 
+public:
 };

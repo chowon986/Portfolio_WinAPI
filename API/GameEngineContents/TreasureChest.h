@@ -20,6 +20,4 @@ public:
 protected:
 
 private:
-	GameEngineCollision* TreasureChestCol_;
-	GameEngineRenderer* TreasureChestRenderer_;
 };

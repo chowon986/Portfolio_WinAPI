@@ -22,7 +22,7 @@ protected:
 
 private:
 	Player* Player_;
-	BotUI* PlayerUI_;
+	BotUI* PlayerStatus_;
 	GameEngineCollision* DoorCol2_3;
 };
 

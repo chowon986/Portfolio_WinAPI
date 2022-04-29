@@ -33,6 +33,7 @@ private:
 	float4 StartPos_;
 	GameEngineSoundPlayer BgmPlayer;
 
+
 private:
 };
 

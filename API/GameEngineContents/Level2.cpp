@@ -12,6 +12,12 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
 
 Level2::Level2()
 	: Player_(nullptr)
@@ -68,7 +74,7 @@ void Level2::Update()
 void Level2::LevelChangeStart()
 {
 	SetMapSizeX(1536);
-	SetMapSizeY(573);
+	SetMapSizeY(576);
 
 	// 이미지 문제
 	SetColMapImage("Stage2ColMap.bmp");
@@ -81,13 +87,28 @@ void Level2::LevelChangeStart()
 
 	{
 		Background* Stage2 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		Stage2->CreateRenderer("Stage2.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER,float4(384.0f,0.0f));
+		Stage2->CreateRenderer("Stage2_1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER,float4(384.0f,0.0f));
 	}
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(45, 320));
-		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
+
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
 	}
 
 	Monster* SwrodItem = CreateActor<Monster>((int)ORDER::MONSTER);
@@ -98,9 +119,16 @@ void Level2::LevelChangeStart()
 	SwrodItemRenderer->ChangeAnimation("SwordItem");
 
 	{
-		// Door won't work -> need to chk
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1078.0f, 70.0f));
 		DoorCol2_2 = Door->CreateCollision("DoorCol2_2", float4(48.0f, 64.0f), float4(1078.0f, 70.0f));
+
+		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1078.0f, 20.0f));
+		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+		DoorStarImage->CutCount(6, 2);
+		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
+		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 }
 

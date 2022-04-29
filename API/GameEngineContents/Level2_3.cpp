@@ -9,6 +9,13 @@
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "Tomato.h"
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
+#include <GameEngine/GameEngineImage.h>
 
 Level2_3::Level2_3()
 	: Player_(nullptr)
@@ -81,11 +88,40 @@ void Level2_3::LevelChangeStart()
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(50, 320));
-		PlayerUI_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
+
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
 	}
 
 	{
 	Tomato* Tomato_ = CreateActor<Tomato>((int)ORDER::ITEM);
-	Tomato_->CreateRenderer("Tomato.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(384, 100));
+	Tomato_->SetPosition(float4(384, 100));
+	}
+
+	{
+		// Door
+		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorRenderer = Door->CreateRenderer("Door.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(313.0f, 60.0f));
+		DoorCol2_4 = Door->CreateCollision("DoorCol2_4", float4(48.0f, 64.0f), float4(313.0f, 70.0f));
+
+		Background* DoorStar = CreateActor<Background>((int)ORDER::BACKGROUND);
+		GameEngineRenderer* DoorStarRenderer = DoorStar->CreateRenderer("DoorStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(313.0f, 25.0f));
+		GameEngineImage* DoorStarImage = DoorStarRenderer->GetImage();
+		DoorStarImage->CutCount(6, 2);
+		DoorStarRenderer->CreateAnimation("DoorStar.bmp", "DoorStar", 0, 11, 0.05f, true);
+		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 }

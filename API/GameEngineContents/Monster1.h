@@ -21,6 +21,7 @@ public:
 	bool CanWalk() override;
 	void Walk() override;
 	void UpdateAttack();
+	void UpdateMove() override;
 
 protected:
 

@@ -3,6 +3,9 @@
 #include <GameEngine/GameEngineCollision.h>
 
 BigBox::BigBox()
+	:Obstruction()
+	, Collision_(nullptr)
+	, Renderer_(nullptr)
 {
 }
 
@@ -12,14 +15,12 @@ BigBox::~BigBox()
 
 void BigBox::Start()
 {
-	BigBoxRenderer_ = CreateRenderer("BigBox.bmp");
-	BigBoxCol_ = CreateCollision("Obstruction", float4(80.0f, 80.0f), float4(0.0f, 0.0f));
+	Obstruction::Start();
+	Renderer_ = CreateRenderer("BigBox.bmp");
+	Collision_ = CreateCollision("Obstruction", float4(81.0f, 81.0f), float4(0.0f, 0.0f));
 }
 
 void BigBox::Update()
 {
-	if (true) // chk : 공격을 받으면
-	{
-		//Death();
-	}
+
 }

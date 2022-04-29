@@ -84,10 +84,10 @@ void Level1::LevelChangeStart()
 {
 	SetMapSizeX(4608);
 	SetMapSizeY(576);
+	BgmPlayer = GameEngineSound::SoundPlayControl("Level1.mp3");
 	SetColMapImage("Stage1ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
-	BgmPlayer = GameEngineSound::SoundPlayControl("Level1.mp3");
 
 	if (ColMapImage_ == nullptr)
 	{
@@ -96,9 +96,6 @@ void Level1::LevelChangeStart()
 
 	{
 		Background* Stage1 = CreateActor<Background>((int)ORDER::BACKGROUND);
-		
-		//Colmap È®ÀÎ¿ë
-		//Stage1->CreateRenderer("Stage1ColMap.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 		Stage1->CreateRenderer("Stage1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1920.0f, 0.0f));
 	}
 

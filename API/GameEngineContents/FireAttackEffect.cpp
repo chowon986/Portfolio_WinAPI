@@ -7,6 +7,11 @@
 #include <vector>
 
 FireAttackEffect::FireAttackEffect()
+	:Collision_(nullptr)
+	,ColMapImage_(nullptr)
+	,FireAttackEffectState_(FireAttackEffectState::None)
+	,Image_(nullptr)
+	,Renderer_(nullptr)
 {
 
 }

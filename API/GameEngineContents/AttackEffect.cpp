@@ -7,6 +7,11 @@
 #include <vector>
 
 AttackEffect::AttackEffect()
+	: Collision_(nullptr)
+	, AttackEffectState_(AttackEffectState::None)
+	, ColMapImage_(nullptr)
+	, Image_(nullptr)
+	, Renderer_(nullptr)
 {
 
 }

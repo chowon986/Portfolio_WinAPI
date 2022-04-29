@@ -8,6 +8,13 @@
 #include <vector>
 
 BeamAttackEffect::BeamAttackEffect()
+	: BeamAttackEffectState_(BeamAttackEffectState::None)
+	, CollisionOne_(nullptr)
+	, CollisionTwo_(nullptr)
+	, CollisionThree_(nullptr)
+	, ColMapImage_(nullptr)
+	, Player_(nullptr)
+
 {
 
 }

@@ -18,11 +18,15 @@ public:
 	void Start() override;
 	void Render() override;
 	void Update() override;
+	bool CanWalk() override;
+	void Walk() override;
+	void UpdateAttack();
+
 protected:
 
 private:
-	GameEngineImage* ColMapImage_;
-	bool CheckMapCollision();
-	float4 PrevPos_;
-	GameEngineLevel* Level_;
+	GameEngineCollision* AttackCol_;
+	GameEngineCollision* AttackRangeCol_;
+	bool CanMove_;
+	float AttackTime_;
 };
