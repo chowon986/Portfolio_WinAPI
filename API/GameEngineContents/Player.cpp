@@ -30,9 +30,28 @@ Player::Player()
     , StarAttackEffect_(nullptr)
     , BeamRenderer_(nullptr)
     , IsGround_(false)
+    , SwordCol_(nullptr)
+    , SwordAttackEffect_(nullptr)
+    , Speed_(20.0f)
+    , RunEffect_(nullptr)
+    , PigRenderer_(nullptr)
+    , PigImage_(nullptr)
+    , Monster_(nullptr)
+    , KirbyState_(KirbyState::IDLE)
+    , KirbySlideCol_(nullptr)
+    , KirbyCol_(nullptr)
+    , Image_(nullptr)
+    , IceRenderer_(nullptr)
+    , IceAttackEffect_(nullptr)
+    , FireAttackEffect_(nullptr)
+    , DieEffect_(nullptr)
+    , BeamAttackEffect_(nullptr)
+    , AttackEffect_(nullptr)
+    , SparkAttackEffect_(nullptr)
+    , SparkRenderer_(nullptr)
 {
-}
 
+}
 Player::~Player()
 {
 }
@@ -55,31 +74,31 @@ GameEngineRenderer* Player::GetRenderer()
     {
         return AnimalRenderer_;
     }
-    if (GetKirbyClass() == KirbyClass::BEAM)
+    else if (GetKirbyClass() == KirbyClass::BEAM)
     {
         return BeamRenderer_;
     }
-    if (GetKirbyClass() == KirbyClass::DEFAULT)
+    else if (GetKirbyClass() == KirbyClass::DEFAULT)
     {
         return Renderer_;
     }
-    if (GetKirbyClass() == KirbyClass::FIRE)
+    else if (GetKirbyClass() == KirbyClass::FIRE)
     {
         return FireRenderer_;
     }
-    if (GetKirbyClass() == KirbyClass::ICE)
+    else if (GetKirbyClass() == KirbyClass::ICE)
     {
         return IceRenderer_;
     }
-    if (GetKirbyClass() == KirbyClass::PIG)
+    else if (GetKirbyClass() == KirbyClass::PIG)
     {
         return PigRenderer_;
     }
-    if (GetKirbyClass() == KirbyClass::SPARK)
+    else if (GetKirbyClass() == KirbyClass::SPARK)
     {
         return SparkRenderer_;
     }
-    if (GetKirbyClass() == KirbyClass::SWORD)
+    else if (GetKirbyClass() == KirbyClass::SWORD)
     {
         return SwordRenderer_;
     }
@@ -1254,6 +1273,8 @@ void Player::Update()
 
     std::vector<GameEngineCollision*> Result;
     if (KirbyState::EAT != GetState() &&
+        KirbyState::EATSTART != GetState() &&
+        KirbyState::EATEND != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyCol_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
         Time_ >= 2)
@@ -1317,11 +1338,11 @@ void Player::CheckCollision()
 
     if (ColMapImage_ != nullptr &&
         GetState() != KirbyState::DIE &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y) &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y - 25))
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
     {
-        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y) &&
-               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y - 25))
+        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
         {
             SetMove(float4::LEFT);
         }
@@ -1329,11 +1350,11 @@ void Player::CheckCollision()
 
     if (ColMapImage_ != nullptr &&
         GetState() != KirbyState::DIE &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y) &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y - 25))
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f)))
     {
-        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y) &&
-               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y - 25))
+        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
+               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f)))
         {
             SetMove(float4::RIGHT);
         }

@@ -8,6 +8,10 @@
 Animal::Animal()
 	: Monster()
 	, HP_(1)
+	,AnimalCol_(nullptr)
+	,AnimalRenderer_(nullptr)
+	,Level_(nullptr)
+	, ColMapImage_(nullptr)
 {
 	SetMonsterClass(MonsterClass::ANIMAL);
 }
@@ -37,46 +41,30 @@ void Animal::Render()
 
 void Animal::Update()
 {
-	PrevPos_ = GetPosition();
+	//PrevPos_ = GetPosition();
 
-	float4 NewPos;
-	NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
-	NewPos.y = GetPosition().y;
-	SetPosition(NewPos);
+	//float4 NewPos;
+	//NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
+	//NewPos.y = GetPosition().y;
+	//SetPosition(NewPos);
 
-	// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
-	if (true == AnimalCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
-	{
-		SetHP(GetHP() - 1);
-		// AnimalRenderer_->ChangeAnimation("Animaldeee");
-		// AnimalCol_->Death();
-		// AnimalRenderer_->Death();
-	}
+	//// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
+	//if (true == AnimalCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
+	//{
+	//	SetHP(GetHP() - 1);
+	//	// AnimalRenderer_->ChangeAnimation("Animaldeee");
+	//	// AnimalCol_->Death();
+	//	// AnimalRenderer_->Death();
+	//}
 
-	if (true == CheckMapCollision())
-	{
-		SetPosition(PrevPos_);
-	}
+	//if (true == CheckMapCollision())
+	//{
+	//	SetPosition(PrevPos_);
+	//}
 
 }
 
 bool Animal::CheckMapCollision()
 {
-	if (nullptr != ColMapImage_)
-	{
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
-		{
-			return true;
-		}
-
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
-		{
-			return true;
-		}
-
-		// 왼쪽, 오른쪽, 위쪽으로 이동 금지
-		if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50) {
-			return true;
-		}
-	}
+	return true;
 }

@@ -19,6 +19,12 @@
 #include "FireAttackEffect.h"
 
 Cannon::Cannon()
+	:CanCol_(nullptr)
+	,CannonRenderer_(nullptr)
+	,CanRenderer_(nullptr)
+	,PlayerRenderer_(nullptr)
+	,Player_(nullptr)
+	,TomatoRenderer_(nullptr)
 {
 }
 
@@ -30,7 +36,7 @@ void Cannon::Update()
 {
 	if (Player_->GetPosition().x >= GetMapSizeX() - 20)
 	{
-		//GameEngine::GetInst().ChangeLevel("DanceStage");
+		GameEngine::GetInst().ChangeLevel("DanceStage");
 	}
 
 	if (true == CanRenderer_->IsAnimationName("CanStop") && true == CanRenderer_->IsEndAnimation())
@@ -60,7 +66,7 @@ void Cannon::Update()
 
 	}
 
-	if (/*RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Player_->GetPosition() + float4::DOWN)*/CanCol_->CollisionCheck("KirbyCol",CollisionType::Rect,CollisionType::Rect) &&
+	if (CanCol_->CollisionCheck("KirbyCol",CollisionType::Rect,CollisionType::Rect) &&
 		true != CanRenderer_->IsAnimationName("CanMove") &&
 		true != CanRenderer_->IsAnimationName("CanStop"))
 	{

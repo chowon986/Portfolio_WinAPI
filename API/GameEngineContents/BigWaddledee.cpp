@@ -9,6 +9,10 @@
 BigWaddledee::BigWaddledee()
 	: Monster()
 	, HP_(1)
+	, ColMapImage_(nullptr)
+	,Level_(nullptr)
+	,BigWaddledeeCol_(nullptr)
+	,BigWaddledeeRenderer_(nullptr)
 {
 }
 
@@ -37,46 +41,30 @@ void BigWaddledee::Render()
 
 void BigWaddledee::Update()
 {
-	PrevPos_ = GetPosition();
+	//PrevPos_ = GetPosition();
 
-	float4 NewPos;
-	NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
-	NewPos.y = GetPosition().y;
-	SetPosition(NewPos);
+	//float4 NewPos;
+	//NewPos.x = GetPosition().x + GameEngineTime::GetDeltaTime() * GetSpeed();
+	//NewPos.y = GetPosition().y;
+	//SetPosition(NewPos);
 
-	// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
-	if (true == BigWaddledeeCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
-	{
-		SetHP(GetHP() - 1);
-		// BigWaddledeeRenderer_->ChangeAnimation("BigWaddledeedeee");
-		// BigWaddledeeCol_->Death();
-		// BigWaddledeeRenderer_->Death();
-	}
+	//// 커비의 공격에만 체력 감소함 -> 커비 공격 구현 이후 변경 필요
+	//if (true == BigWaddledeeCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
+	//{
+	//	SetHP(GetHP() - 1);
+	//	// BigWaddledeeRenderer_->ChangeAnimation("BigWaddledeedeee");
+	//	// BigWaddledeeCol_->Death();
+	//	// BigWaddledeeRenderer_->Death();
+	//}
 
-	if (true == CheckMapCollision())
-	{
-		SetPosition(PrevPos_);
-	}
+	//if (true == CheckMapCollision())
+	//{
+	//	SetPosition(PrevPos_);
+	//}
 
 }
 
 bool BigWaddledee::CheckMapCollision()
 {
-	if (nullptr != ColMapImage_)
-	{
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
-		{
-			return true;
-		}
-
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
-		{
-			return true;
-		}
-
-		// 왼쪽, 오른쪽, 위쪽으로 이동 금지
-		if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50) {
-			return true;
-		}
-	}
+	return true;
 }

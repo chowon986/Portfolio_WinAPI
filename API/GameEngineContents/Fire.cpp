@@ -75,6 +75,7 @@ void Fire::Walk()
 
 void Fire::UpdateAttack()
 {
+
 	if (true == Collision_->CollisionCheck("KirbyEatCol", CollisionType::Rect, CollisionType::Rect))
 	{
 		return;

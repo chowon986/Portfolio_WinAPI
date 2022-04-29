@@ -9,6 +9,8 @@
 
 Monster3::Monster3()
 	: Monster()
+	, ColMapImage_(nullptr)
+	, Level_(nullptr)
 {
 }
 
@@ -52,22 +54,5 @@ void Monster3::Update()
 
 bool Monster3::CheckMapCollision()
 {
-	if (nullptr != ColMapImage_)
-	{
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x + 20, GetPosition().y))
-		{
-			return true;
-		}
-
-		if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x - 20, GetPosition().y))
-		{
-			return true;
-		}
-
-		// 왼쪽, 오른쪽, 위쪽으로 이동 금지
-		if (GetPosition().x < 0 || GetPosition().x > GetLevel()->GetMapSizeX() || GetPosition().y < 50) 
-		{
-			return true;
-		}
-	}
+	return true;
 }

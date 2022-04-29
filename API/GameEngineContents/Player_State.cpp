@@ -278,7 +278,7 @@ void Player::UpdateUp()
 
 void Player::UpdateDown()
 {
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition().x, GetPosition().y+1))
+    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x), int(GetPosition().y+1)))
     {
         SetMove(float4::DOWN);
     }
