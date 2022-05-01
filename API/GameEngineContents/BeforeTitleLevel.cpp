@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineTime.h>
 
+
 BeforeTitleLevel::BeforeTitleLevel()
 	:BeforeTitleVideo_(nullptr)
 {
@@ -21,26 +22,21 @@ void BeforeTitleLevel::Loading()
 
 }
 
-void BeforeTitleLevel::LevelChangeStart()
+
+void BeforeTitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	BeforeTitleVideo_ = CreateActor<VideoPlayer>();
 	BeforeTitleVideo_->SetInfo("intro_frame_", 0, 400, 30.0f);
-	//
-	//BgmPlayer = GameEngineSound::SoundPlayControl("00.mp3");
-	//Time = 5.0f;
+
+	BgmPlayer = GameEngineSound::SoundPlayControl("BeforeTitle.mp3");
 }
+
 
 void BeforeTitleLevel::Update()
 {
 	if (true == BeforeTitleVideo_->IsVideoFinished())
 	{
-			GameEngine::GetInst().ChangeLevel("Title");
+		BgmPlayer.Stop();
+		GameEngine::GetInst().ChangeLevel("Title");
 	}
-
-	//Time -= GameEngineTime::GetDeltaTime();
-
-	//if (0 >= Time)
-	//{
-	//	BgmPlayer.Stop();
-	//}
 }

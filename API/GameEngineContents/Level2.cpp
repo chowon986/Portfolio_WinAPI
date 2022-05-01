@@ -71,12 +71,11 @@ void Level2::Update()
 	}
 }
 
-void Level2::LevelChangeStart()
+void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	SetMapSizeX(1536);
 	SetMapSizeY(576);
 
-	// 이미지 문제
 	SetColMapImage("Stage2ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -131,51 +130,3 @@ void Level2::LevelChangeStart()
 		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 }
-
-	////////////////////////////////
-	// 1. bomb
-	// 2. waddledi
-	// 3. grass -> 구현 여부 정하기
-	// 4. bomb
-	// 5. bigwaddledi
-	// 6. bomb
-	//////////////////////////////
-	// 1. hpup
-	//////////////////////////////
-	// 7. moon
-	// 8. monster1
-	// 9. bigwaddledi
-	///////////////////////
-	// 1. waddledi
-	// 2. monster1
-	// 3. fireitem
-	// 4. 얼음 쏘는애
-	/////////////////////
-	// monster3 (악마같이 생긴애)
-	// monster3
-	// monster3
-	/////////////////////
-	// 1. bigbomb
-	// 2. bigbomb + box
-	// 3. animal
-	// 4. hpup
-	// 5. waddledi
-	// 6. animal
-	// 7. treasurechest
-	// 8. bigwaddledi
-	// 9. bigbomb
-	///////////////////////////
-	// big treasurechest
-	// 쥐들
-	// monster2던가 그 파란색
-	// waddledoo
-	//////////////////////////
-
-	//////////////////////////
-	// 1. warpstar
-	/////////////////////////
-	// pengy
-	// cherry
-	//////////////////////////
-	// boss
-

@@ -23,7 +23,7 @@ void EndingStory::Update()
 	}
 }
 
-void EndingStory::LevelChangeStart()
+void EndingStory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	VideoPlayer* EndingVideo = CreateActor<VideoPlayer>();
 	EndingVideo->SetInfo("ending_frame_", 0, 1030, 60);

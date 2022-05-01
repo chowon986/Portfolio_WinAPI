@@ -8,6 +8,7 @@ enum class AnimalEffectState
 	None,
 };
 
+class GameEngineImage;
 class AnimalEffect : public GameEngineActor
 {
 public:

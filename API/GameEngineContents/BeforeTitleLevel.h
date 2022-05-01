@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineSound.h>
 
 class VideoPlayer;
+class GameEngineSoundPlayer;
 class BeforeTitleLevel : public GameEngineLevel
 {
 public:
@@ -14,16 +15,15 @@ public:
 	BeforeTitleLevel& operator=(const BeforeTitleLevel& _Other) = delete;
 	BeforeTitleLevel& operator=(BeforeTitleLevel&& _Other) noexcept = delete;
 
-	float Time;
-
-	GameEngineSoundPlayer BgmPlayer;
 
 protected:
 	void Loading() override;
 	void Update() override;
-	void LevelChangeStart() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	//void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
+	GameEngineSoundPlayer BgmPlayer;
 	VideoPlayer* BeforeTitleVideo_;
 };
 

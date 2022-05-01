@@ -6,6 +6,7 @@ class Background;
 class GameEngineImage;
 class GameEngineRenderer;
 class BotUI;
+class Dedede;
 class Boss : public GameEngineLevel
 {
 public:
@@ -20,7 +21,7 @@ public:
 protected:
 	void Loading() override;
 	void Update() override;
-	void LevelChangeStart() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 private:
 	Background* BossLevelStart_;
@@ -32,5 +33,6 @@ private:
 	GameEngineImage* ColMapImage_;
 	Player* Player_;
 	BotUI* PlayerStatus_;
+	Dedede* Dedede_;
 };
 

@@ -77,7 +77,7 @@ void Cannon::Update()
 }
 
 
-void Cannon::LevelChangeStart()
+void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	SetMapSizeX(768);
 	SetMapSizeY(576);
@@ -136,6 +136,10 @@ void Cannon::LevelChangeStart()
 		Player_->SetIceAttackEffect(IceAttackEffect_);
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 	}
+}
+
+void Cannon::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
 }
 
 void Cannon::Loading()

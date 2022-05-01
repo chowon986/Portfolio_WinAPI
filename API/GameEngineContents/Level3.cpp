@@ -2,6 +2,7 @@
 #include "GameEngineBase/GameEngineInput.h"
 #include "GameEngine/GameEngine.h"
 #include "Player.h"
+#include "BotUI.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "Background.h"
 #include "Monster.h"
@@ -10,6 +11,12 @@
 #include "Waddledi.h"
 #include "BigWaddledee.h"
 #include "ContentsEnum.h"
+#include "StarAttackEffect.h"
+#include "IceAttackEffect.h"
+#include "AttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "RunEffect.h"
 
 Level3::Level3()
 	: Player_(nullptr)
@@ -65,8 +72,10 @@ void Level3::Update()
 
 }
 
-void Level3::LevelChangeStart()
+void Level3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	SetMapSizeX(768);
+	SetMapSizeY(576);
 
 	SetColMapImage("Stage3ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
@@ -76,31 +85,32 @@ void Level3::LevelChangeStart()
 		MsgBoxAssert("충돌맵 이미지를 찾지 못했습니다.")
 	}
 
-	Monster* Bomb1 = CreateActor<Monster>((int)ORDER::MONSTER);
-	Bomb1->CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2140.0f, 100));
+	{
+		Background* Stage3 = CreateActor<Background>((int)ORDER::BACKGROUND);
+		Stage3->CreateRenderer("Stage3.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 0.0f));
+		Stage3->CreateCollision("Boss", float4(50.0f, 50.0f), float4(345.0f, 110.0f));
+	}
 
-	Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-	Waddledi_->SetPosition(float4(100.0f, 100.0f));
+	{
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player_->SetPosition(float4(50, 320));
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
 
-	Monster* Bomb2 = CreateActor<Monster>((int)ORDER::MONSTER);
-	Bomb2->CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2140.0f, 100));
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 
-	BigWaddledee* BigWaddledee_1 = CreateActor<BigWaddledee>((int)ORDER::MONSTER);
-	BigWaddledee_1->SetPosition(float4(100.0f, 100.0f));
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
+	}
 
-	Monster* Bomb3 = CreateActor<Monster>((int)ORDER::MONSTER);
-	Bomb3->CreateRenderer("Bomb.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(2140.0f, 100));
 
-	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
-	Level3_2 = Door->CreateCollision("Level3_2", float4(90.0f, 70.0f), float4(4120.0f, -87.0f));
-
-	Monster* Moon_ = CreateActor<Moon>((int)ORDER::MONSTER);
-	Moon_->SetPosition(float4(100.0f, 100.0f));
-
-	Monster* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
-	Monster1_->SetPosition(float4(100.0f, 100.0f));
-
-	BigWaddledee* BigWaddledee_2 = CreateActor<BigWaddledee>((int)ORDER::MONSTER);
-	BigWaddledee_2->SetPosition(float4(200.0f, 200.0f));
-	GameEngineCollision* BigWaddledeeCol_2 = BigWaddledee_2->CreateCollision("BasicMonster", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 }

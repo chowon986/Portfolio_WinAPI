@@ -44,9 +44,7 @@ GameEngineSound::~GameEngineSound()
 
 bool GameEngineSound::Load(const std::string& _Path)
 {
-	//FMOD.MODE.OPENMEMORY | FMOD.MODE.OPENRAW | FMOD.MODE.CREATESAMPLE
-	FMOD_RESULT result = SoundSystem_->createSound(_Path.c_str(), FMOD_LOOP_NORMAL, nullptr, &Sound);
-	if (FMOD_OK != result)
+	if (FMOD_OK != SoundSystem_->createSound(_Path.c_str(), FMOD_LOOP_NORMAL, nullptr, &Sound))
 	{
 		MsgBoxAssertString("사운드 로드에 실패했습니다.\n 경로 : " + _Path);
 		return false;

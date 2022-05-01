@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
-#include <GameEngineBase/GameEngineSound.h>
+//#include <GameEngineBase/GameEngineSound.h>
 
 class Player;
 class BotUI;
@@ -22,7 +22,7 @@ public:
 protected:
 	void Loading() override;
 	void Update() override;
-	void LevelChangeStart() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 private:
 	Player* Star_;
@@ -31,7 +31,7 @@ private:
 	GameEngineCollision* DoorCol1_2;
 	GameEngineImage* ColMapImage_;
 	float4 StartPos_;
-	GameEngineSoundPlayer BgmPlayer;
+	//GameEngineSoundPlayer BgmPlayer;
 
 
 private:

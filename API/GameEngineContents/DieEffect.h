@@ -8,6 +8,7 @@ enum class DieEffectState
 	None
 };
 
+class GameEngineImage;
 class DieEffect : public GameEngineActor
 {
 public:

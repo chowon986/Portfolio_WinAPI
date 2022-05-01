@@ -63,9 +63,15 @@ void Boss::Update()
 		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
+
+	if (Dedede_->GetHP() <= 0)
+	{
+		BossLevelStartRenderer_->SetAlpha(0);
+		BossLevelEndRenderer_->SetAlpha(255);
+	}
 }
 
-void Boss::LevelChangeStart()
+void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	SetColMapImage("BossColMap.bmp");
 	ColMapImage_ = GetColMapImage();
@@ -75,24 +81,26 @@ void Boss::LevelChangeStart()
 
 	{
 		// Background
-		//BossLevelEnd_ = CreateActor<Background>((int)ORDER::BACKGROUND);
-		//BossLevelEndRenderer_ = BossLevelEnd_->CreateRenderer("BossLevelEnd.bmp");
-		//BossLevelEndImage_ = BossLevelEndRenderer_->GetImage();
-		//BossLevelEndImage_->CutCount(6, 2);
-		//BossLevelEndRenderer_->CreateAnimation("BossLevelEnd.bmp", "End", 0, 11, 0.1f, true);
 
 		BossLevelStart_ = CreateActor<Background>((int)ORDER::BACKGROUND);
 		BossLevelStartRenderer_ = BossLevelStart_->CreateRenderer("BossLevelStart.bmp");
 		BossLevelStartImage_ = BossLevelStartRenderer_->GetImage();
 		BossLevelStartImage_->CutCount(6, 2);
 		BossLevelStartRenderer_->CreateAnimation("BossLevelStart.bmp", "Start", 0, 11, 0.1f, true);
-
 		BossLevelStartRenderer_->ChangeAnimation("Start");
+
+		BossLevelEnd_ = CreateActor<Background>((int)ORDER::BACKGROUND);
+		BossLevelEndRenderer_ = BossLevelEnd_->CreateRenderer("BossLevelEnd.bmp");
+		BossLevelEndImage_ = BossLevelEndRenderer_->GetImage();
+		BossLevelEndImage_->CutCount(6, 2);
+		BossLevelEndRenderer_->CreateAnimation("BossLevelEnd.bmp", "End", 0, 11, 0.1f, true);
+		BossLevelEndRenderer_->ChangeAnimation("End");
+		BossLevelEndRenderer_->SetAlpha(0);
 	} 
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(600.0f, 400.0f));
+		Player_->SetPosition(float4(150.0f, 400.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 
@@ -112,9 +120,9 @@ void Boss::LevelChangeStart()
 	}
 
 	{
-		// Boss
-		Dedede* Dedede_ = CreateActor<Dedede>((int)ORDER::MONSTER);
-		Dedede_->SetPosition(float4(640.0f, 440.0f));
+		Dedede_ = CreateActor<Dedede>((int)ORDER::MONSTER);
+		Dedede_->SetPosition(float4(640.0f, 320.0f));
+		Dedede_->SetPlayer(Player_);
 	}
 
 }

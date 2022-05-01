@@ -219,6 +219,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Level\01 Play</Filter>
     </ClCompile>
+    <ClCompile Include="Dedede_State.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />

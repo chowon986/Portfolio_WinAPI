@@ -270,6 +270,7 @@
     <ClCompile Include="CharacterBase.cpp" />
     <ClCompile Include="DanceStage.cpp" />
     <ClCompile Include="Dedede.cpp" />
+    <ClCompile Include="Dedede_State.cpp" />
     <ClCompile Include="DieEffect.cpp" />
     <ClCompile Include="Doc.cpp" />
     <ClCompile Include="Doroach.cpp" />

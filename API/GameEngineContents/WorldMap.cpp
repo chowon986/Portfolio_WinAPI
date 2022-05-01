@@ -62,7 +62,7 @@ void WorldMap::Update()
 	//}
 }
 
-void WorldMap::LevelChangeStart()
+void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	SetMapSizeX(768);
 	SetMapSizeY(576);

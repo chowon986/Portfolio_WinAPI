@@ -1,9 +1,11 @@
 #pragma once
 #include <list>
 #include <map>
+#include <set>
 #include <vector>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include <string>
 
 class GameEngineActor;
 struct ChangeOrderItem
@@ -15,7 +17,7 @@ struct ChangeOrderItem
 class GameEngine;
 class GameEngineActor;
 class GameEngineCollision;
-class GameEngineRenderer; 
+class GameEngineRenderer;
 class GameEngineImage;
 class GameEngineLevel : public GameEngineNameObject
 {
@@ -37,6 +39,20 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
+	static void IsDebugModeOn()
+	{
+		IsDebug = true;
+	}
+
+	static void IsDebugModeOff()
+	{
+		IsDebug = false;
+	}
+
+	static void IsDebugModeSwitch()
+	{
+		IsDebug = !IsDebug;
+	}
 
 	template<typename ActorType>
 	ActorType* CreateActor(int _Order = 0, const std::string& _Name = "")
@@ -69,9 +85,14 @@ public:
 		return NewActor;
 	}
 
-	inline float4 GetCameraPos() 
+	inline float4 GetCameraPos()
 	{
 		return CameraPos_;
+	}
+
+	inline void ResetOn()
+	{
+		IsReset = true;
 	}
 
 	inline void MoveCameraPos(const float4& _Value)
@@ -79,19 +100,34 @@ public:
 		CameraPos_ += _Value;
 	}
 
-	inline void SetCameraPos(const float4& _Value )
+	inline void SetCameraPos(const float4& _Value)
 	{
-		CameraPos_  = _Value;
+		CameraPos_ = _Value;
+	}
+
+	template<typename ConvertType>
+	ConvertType* FindActor(const std::string& _Name)
+	{
+		return dynamic_cast<ConvertType*>(FindActor(_Name));
+	}
+
+	GameEngineActor* FindActor(const std::string& _Name);
+
+	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
+
+	// 이 오더는 sort를 하겠다.
+	void YSortOn(int _SortOrder)
+	{
+		IsYSort_.insert(_SortOrder);
 	}
 
 	virtual float GetMapSizeX() { return MapSizeX_; }
 	virtual float GetMapSizeY() { return MapSizeY_; }
 	virtual void SetMapSizeX(float _MapSizeX) { MapSizeX_ = _MapSizeX; }
 	virtual void SetMapSizeY(float _MapSizeY) { MapSizeY_ = _MapSizeY; }
-
-private:
-	float MapSizeX_;
-	float MapSizeY_;
+	private:
+		float MapSizeX_;
+		float MapSizeY_;
 
 public:
 	void SetColMapImage(std::string _name);
@@ -106,18 +142,31 @@ protected:
 	// 이 레벨이 현재 레벨일때 해야할일을 실행한다.
 	virtual void Update() = 0;
 	// Current레벨 => Next레벨로 이전할때 현재레벨이 실행하는 함수.
-	virtual void LevelChangeStart() {}
+	void ActorLevelChangeStart(GameEngineLevel* _PrevLevel);
+	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) {}
 	// Current레벨 => Next레벨로 이전할때 이전레벨이 실행하는 함수.
-	virtual void LevelChangeEnd() {}
+	void ActorLevelChangeEnd(GameEngineLevel* _NextLevel);
+	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) {}
+
+	void ObjectLevelMoveCheck(GameEngineLevel* _NextLevel);
+
+	void Reset();
+
+	virtual void UserResetEnd() {}
 
 private:
+	static bool IsDebug;
+
+	bool IsReset;
+
 	// std::vector로 관리하는게 더 좋다고 생각..
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+
+	std::map<std::string, GameEngineActor*> RegistActor_;
 
 	std::vector<ChangeOrderItem> ChangeOrderList;
 
 	float4 CameraPos_;
-
 
 	void ActorUpdate();
 	void ActorRender();
@@ -127,6 +176,9 @@ private:
 private:
 	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
 
+	// 존재하냐 안하냐
+	std::set<int> IsYSort_;
+
 	void AddRenderer(GameEngineRenderer* _Renderer);
 
 	void ChangeUpdateOrder(GameEngineActor* _Actor, int _Oreder);
@@ -135,7 +187,8 @@ private:
 
 
 private:
-	// 삭제는 액터가 하지만 실제 사용은 Level서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
+	// 삭제는 액터가 하지만 실제 사용은 Level
+	// 여기서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
 	std::map<std::string, std::list<GameEngineCollision*>> AllCollision_;
 
 	void AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision);

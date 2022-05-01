@@ -68,7 +68,7 @@ void Level2_3::Update()
 	}
 }
 
-void Level2_3::LevelChangeStart()
+void Level2_3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	SetMapSizeX(768);
 	SetMapSizeY(576);

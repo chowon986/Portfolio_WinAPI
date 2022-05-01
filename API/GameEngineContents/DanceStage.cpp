@@ -36,7 +36,7 @@ void DanceStage::Update()
 	}
 }
 
-void DanceStage::LevelChangeStart()
+void DanceStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	SetMapSizeX(768);
 	SetMapSizeY(576);

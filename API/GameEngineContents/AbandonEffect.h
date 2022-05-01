@@ -1,12 +1,14 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
+
 enum class AbandonEffectState
 {
 	Abandon,
 	None,
 };
 
+class GameEngineImage;
 class AbandonEffect : public GameEngineActor
 {
 public:

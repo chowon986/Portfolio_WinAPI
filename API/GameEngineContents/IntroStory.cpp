@@ -22,12 +22,14 @@ void IntroStory::Update()
 {
 	if (true == IntroVideo_->IsVideoFinished())
 	{
-			GameEngine::GetInst().ChangeLevel("Level1");
+		BgmPlayer.Stop();
+		GameEngine::GetInst().ChangeLevel("Level1");
 	}
 }
 
-void IntroStory::LevelChangeStart()
+void IntroStory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	IntroVideo_ = CreateActor<VideoPlayer>();
 	IntroVideo_->SetInfo("intro_frame_", 438, 1200, 30);
+	BgmPlayer = GameEngineSound::SoundPlayControl("IntroStory.mp3");
 }

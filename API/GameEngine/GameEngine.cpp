@@ -14,7 +14,6 @@ GameEngineLevel* GameEngine::PrevLevel_ = nullptr;
 GameEngine* GameEngine::UserContents_ = nullptr;
 GameEngineImage* GameEngine::BackBufferImage_ = nullptr;
 GameEngineImage* GameEngine::WindowMainImage_ = nullptr; // 그려지면 화면에 진짜 나오게 되는 이미지
-bool GameEngine::ShowCollision_ = false;
 
 HDC GameEngine::BackBufferDC()
 {
@@ -47,7 +46,7 @@ void GameEngine::GameEnd()
 
 void GameEngine::WindowCreate()
 {
-    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Kirby Squeak Squad");
+    GameEngineWindow::GetInst().CreateGameWindow(nullptr, "GameWindow");
     GameEngineWindow::GetInst().ShowGameWindow();
     GameEngineWindow::GetInst().MessageLoop(EngineInit, EngineLoop);
 }
@@ -61,9 +60,7 @@ void GameEngine::EngineInit()
     WindowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
     BackBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 
-    GameEngineInput::GetInst()->CreateKey("ShowCollision", 'L');
 }
-
 void GameEngine::EngineLoop()
 {
     GameEngineTime::GetInst()->Update();
@@ -76,17 +73,20 @@ void GameEngine::EngineLoop()
     if (nullptr != NextLevel_)
     {
         PrevLevel_ = CurrentLevel_;
-
         if (nullptr != CurrentLevel_)
         {
-            CurrentLevel_->LevelChangeEnd();
+            CurrentLevel_->ActorLevelChangeEnd(NextLevel_);
+            CurrentLevel_->LevelChangeEnd(NextLevel_);
+            CurrentLevel_->ObjectLevelMoveCheck(NextLevel_);
         }
 
+        GameEngineLevel* PrevLevel = CurrentLevel_;
         CurrentLevel_ = NextLevel_;
 
         if (nullptr != CurrentLevel_)
         {
-            CurrentLevel_->LevelChangeStart();
+            CurrentLevel_->LevelChangeStart(PrevLevel);
+            CurrentLevel_->ActorLevelChangeStart(PrevLevel);
         }
 
         NextLevel_ = nullptr;
@@ -101,28 +101,27 @@ void GameEngine::EngineLoop()
         MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
     }
 
-    //GameEngineSound::Update();
+    GameEngineSound::Update();
     GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
-
-    if (GameEngineInput::GetInst()->IsDown("ShowCollision"))
-    {
-        ShowCollision_ = !ShowCollision_;
-    }
 
     // 레벨수준 시간제한이 있는 게임이라면
     // 매 프레임마다 시간을 체크해야하는데 그런일을 
     CurrentLevel_->Update();
     CurrentLevel_->ActorUpdate();
     CurrentLevel_->ActorRender();
-    if (ShowCollision_ == true)
-    {
-		CurrentLevel_->CollisionDebugRender();
-    }
+    CurrentLevel_->CollisionDebugRender();
     WindowMainImage_->BitCopy(BackBufferImage_);
 
     CurrentLevel_->ActorRelease();
 
- 
+    if (true == CurrentLevel_->IsReset)
+    {
+        CurrentLevel_->Reset();
+        // 리셋되고 나서 로딩을 다시 호출하건 자신만의 뭐가 있건 알아서 해라.
+        CurrentLevel_->UserResetEnd();
+        CurrentLevel_->IsReset = false;
+    }
+
 }
 
 void GameEngine::EngineEnd()
@@ -141,7 +140,8 @@ void GameEngine::EngineEnd()
         delete StartIter->second;
     }
 
-    //GameEngineSound::AllResourcesDestroy();
+
+    GameEngineSound::AllResourcesDestroy();
     GameEngineImageManager::Destroy();
     GameEngineInput::Destroy();
     GameEngineTime::Destroy();

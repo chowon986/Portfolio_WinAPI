@@ -31,7 +31,7 @@ void GameOver::Update()
 
 }
 
-void GameOver::LevelChangeStart()
+void GameOver::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	{
 		Background* GameOver = CreateActor<Background>((int)ORDER::BACKGROUND);

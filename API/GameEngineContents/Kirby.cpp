@@ -107,11 +107,11 @@ void Kirby::GameInit()
         ResourcesDir.Move("Resources");
         ResourcesDir.Move("Sound");
 
-        std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
+        std::vector<GameEngineFile> AllSoundFileList = ResourcesDir.GetAllFile();
 
-        for (size_t i = 0; i < AllImageFileList.size(); i++)
+        for (size_t i = 0; i < AllSoundFileList.size(); i++)
         {
-            GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
+            GameEngineSound::LoadRes(AllSoundFileList[i].GetFullPath());
         }
     }
 

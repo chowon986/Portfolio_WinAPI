@@ -71,10 +71,16 @@ public:
 		return RenderImageScale_;
 	}
 
+	inline float4 GetSortingPivot()
+	{
+		return GetActor()->GetPosition() + RenderPivot_ + SortingPivot;
+	}
+
 	inline GameEngineImage* GetImage()
 	{
 		return Image_;
 	}
+
 
 	inline void SetAlpha(unsigned int _Alpha)
 	{
@@ -122,6 +128,8 @@ public:
 
 	void SetIndex(size_t _Index, float4 _Scale = { -1.0f, -1.0f });
 
+	void SetImageAnimationReset(const std::string& _Name);
+
 	void SetOrder(int _Order) override;
 
 
@@ -144,13 +152,34 @@ private:
 	float4 RenderImagePivot_;	// 복사받으려는 이미지 시작 좌표
 	float4 RenderImageScale_;	// 복사받으려는 이미지 한칸의 크기
 
+	float4 SortingPivot;	// 복사받으려는 이미지 한칸의 크기
+
 	unsigned int TransColor_;	// TransParents 에서 쓸 제외할 RGB 값
 	unsigned int Alpha_;
+
 
 
 	bool IsCameraEffect_;		// 해당 렌더러가 카메라의 영향을 받는가 안받는가, EX) UI 는 카메라의 영향을 안받는다.
 	bool Pause_;
 
+
+	/// <summary>
+	/// ////////////////////////////////////////////// 회전용 트랜스 이미지
+	/// </summary>
+
+	float RotZ_;
+	GameEngineImage* RotationFilterImage_;
+
+public:
+	void SetRotationFilter(const std::string& _ImageName);
+
+
+
+	void SetRotationZ(float _RotZ)
+	{
+		RotZ_ = _RotZ;
+		Alpha_ = 255;
+	}
 
 	//////////////////////////////////////////////////
 	//// Animation
