@@ -28,6 +28,8 @@ class GameEngineImage;
 class GameEngineLevel;
 class Player;
 class GameEngineRenderer;
+class FireAttackEffect;
+class SparkAttackEffect;
 class Monster : public CharacterBase
 {
 public:
@@ -67,6 +69,8 @@ protected:
 	GameEngineLevel* Level_;
 	MonsterClass MonsterClass_;
 	Player* Player_;
+	FireAttackEffect* Fire_;
+	SparkAttackEffect* Spark_;
 
 
 public:
@@ -96,6 +100,11 @@ private:
 
 public:
 	void SetPlayer(Player* _Player) { Player_ = _Player; }
-	Player* GetPlayer() { return Player_; }
+	Player* GetPlayer() { return Player_; }	
+	void SetFireEffect(FireAttackEffect* _Fire) { Fire_ = _Fire; }
+	FireAttackEffect* GetFireEffect() { return Fire_; }
+	void SetSparkEffect(SparkAttackEffect* _Spark) { Spark_ = _Spark; }
+	SparkAttackEffect* GetSparkEffect() { return Spark_; }
+
 };
 

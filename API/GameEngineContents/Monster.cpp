@@ -118,11 +118,11 @@ void Monster::Die()
 			{
 				Death();
 
-				if (DieEffect_ != nullptr)
-				{
-					DieEffect_->SetPosition(GetPosition());
-					DieEffect_->SetState(DieEffectState::DieEffect);
-				}
+				//if (DieEffect_ != nullptr)
+				//{
+				//	DieEffect_->SetState(DieEffectState::DieEffect);
+				//	DieEffect_->SetPosition(GetPosition());
+				//}
 				//EffectRenderer_->SetAlpha(255);
 				//EffectRenderer_->ChangeAnimation("DieEffect");
 				//if (EffectRenderer_->IsEndAnimation())
@@ -132,18 +132,27 @@ void Monster::Die()
 			}
 		}
 
-		if (Player_->GetPosition().x - GetPosition().x > 0 && true != Renderer_->IsAnimationName("DieLeft"))
+		if (true != Renderer_->IsAnimationName("DieLeft"))
 		{
-			Dir_ = float4::LEFT;
-			Renderer_->ChangeAnimation("DieLeft");
+			if ((Player_ != nullptr && Player_->GetPosition().x - GetPosition().x > 0) ||
+				(Fire_ != nullptr && Fire_->GetPosition().x - GetPosition().x > 0) ||
+				(Spark_ != nullptr && Spark_->GetPosition().x - GetPosition().x > 0))
+			{
+				Dir_ = float4::LEFT;
+				Renderer_->ChangeAnimation("DieLeft");
+			}
 		}
 
-		if (Player_->GetPosition().x - GetPosition().x <= 0 && true != Renderer_->IsAnimationName("DieRight"))
+		if (true != Renderer_->IsAnimationName("DieRight"))
 		{
-			Dir_ = float4::RIGHT;
-			Renderer_->ChangeAnimation("DieRight");
+			if (Player_ != nullptr && Player_->GetPosition().x - GetPosition().x <= 0 ||
+				(Fire_ != nullptr && Fire_->GetPosition().x - GetPosition().x <= 0) ||
+				(Spark_ != nullptr && Spark_->GetPosition().x - GetPosition().x <= 0))
+			{
+				Dir_ = float4::RIGHT;
+				Renderer_->ChangeAnimation("DieRight");
+			}
 		}
-
 	}
 }
 
@@ -291,6 +300,7 @@ void Monster::UpdateMove()
 		for (GameEngineCollision* Collision : FireAttackColResult)
 		{
 			FireAttackEffect* FireAttackEffect_ = dynamic_cast<FireAttackEffect*>(Collision->GetActor());
+			SetFireEffect(FireAttackEffect_);
 			if (FireAttackEffect_ != nullptr)
 			{
 				float Direction = FireAttackEffect_->GetPosition().x - GetPosition().x;
@@ -313,6 +323,7 @@ void Monster::UpdateMove()
 		for (GameEngineCollision* Collision : SparkAttackColResult)
 		{
 			SparkAttackEffect* SparkAttackEffect_ = dynamic_cast<SparkAttackEffect*>(Collision->GetActor());
+			SetSparkEffect(SparkAttackEffect_);
 			if (SparkAttackEffect_ != nullptr)
 			{
 				float Direction = SparkAttackEffect_->GetPosition().x - GetPosition().x;
