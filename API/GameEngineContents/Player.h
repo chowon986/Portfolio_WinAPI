@@ -13,7 +13,6 @@ enum class KirbyClass
 	FIRE,
 	ICE,
 	ANIMAL,
-	BEAM,
 };
 
 enum class KirbyState
@@ -57,7 +56,6 @@ class IceAttackEffect;
 class SparkAttackEffect;
 class FireAttackEffect;
 class SwordAttackEffect;
-class BeamAttackEffect;
 class DieEffect;
 class RunEffect;
 class GroundStarEffect;
@@ -91,9 +89,9 @@ protected:
 
 private:
 	GameEngineRenderer* Renderer_;
-	GameEngineRenderer* BeamRenderer_;
 	GameEngineRenderer* SparkRenderer_;
 	GameEngineRenderer* PigRenderer_;
+	GameEngineRenderer* SwimRenderer_;
 	GameEngineRenderer* SwordRenderer_;
 	GameEngineRenderer* FireRenderer_;
 	GameEngineRenderer* IceRenderer_;
@@ -111,6 +109,7 @@ private:
 	GameEngineImage* SwordKirbyImage_;
 	GameEngineImage* IceKirbyImage_;
 	GameEngineImage* PigImage_;
+	GameEngineImage* SwimImage_;
 	float4 StartPos_;
 	float4 MapStartPos_;
 
@@ -120,7 +119,6 @@ private:
 	SparkAttackEffect* SparkAttackEffect_;
 	FireAttackEffect* FireAttackEffect_;
 	SwordAttackEffect* SwordAttackEffect_;
-	BeamAttackEffect* BeamAttackEffect_;
 	TransformEffect* TransformEffect_;
 	DieEffect* DieEffect_;
 	RunEffect* RunEffect_;
@@ -224,11 +222,6 @@ public:
 	void SetFireAttackEffect(FireAttackEffect* _FireAttackEffect)
 	{
 		FireAttackEffect_ = _FireAttackEffect;
-	}
-
-	void SetBeamAttackEffect(BeamAttackEffect* _BeamAttackEffect)
-	{
-		BeamAttackEffect_ = _BeamAttackEffect;
 	}
 
 	void SetTransformEffect(TransformEffect* _TransformEffect)

@@ -21,6 +21,9 @@
 #include "SparkAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
+#include "Ground.h"
+#include "GameEngineBase/GameEngineSound.h"
+#include "Animal.h"
 
 Level1_4::Level1_4()
 	: Player_(nullptr)
@@ -74,6 +77,10 @@ void Level1_4::Update()
 		SetCameraPos(CurCameraPos);
 	}
 
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 void Level1_4::LevelChangeEnd(GameEngineLevel* _PrevLevel)
@@ -137,16 +144,214 @@ void Level1_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Tomato* Tomato_ = CreateActor<Tomato>((int)ORDER::ITEM);
-		Tomato_->SetPosition(float4(2140.0f, 100.0f));
+		Tomato_->SetPosition(float4(2140.0f, 400.0f));
 	}
 
 	{
-		Background* Wave = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* WaveRenderer = Wave->CreateRenderer("Wave.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(1751.0f, 80.0f));
-		GameEngineImage* WaveImage = WaveRenderer->GetImage();
-		WaveImage->CutCount(2, 2);
-		WaveRenderer->CreateAnimation("Wave.bmp", "Wave", 0, 3, 0.5f, true);
-		WaveRenderer->ChangeAnimation("Wave");
+		Animal* Animal_ = CreateActor<Animal>((int)ORDER::MONSTER);
+		Animal_->SetPosition(float4(1750.0f, 290.0f));
+	}
+
+	{
+		Ground* Ground0 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground0->GetRenderer()->ChangeAnimation("0");
+		Ground0->GetRenderer()->SetPivot(float4(1853.0f, 283.0f));
+
+		Ground* Ground1 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground1->GetRenderer()->ChangeAnimation("1");
+		Ground1->GetRenderer()->SetPivot(float4(1916.0f, 283.0f));
+
+		Ground* Ground2 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground2->GetRenderer()->ChangeAnimation("2");
+		Ground2->GetRenderer()->SetPivot(float4(1979.0f, 283.0f));
+
+		Ground* Ground3 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground3->GetRenderer()->ChangeAnimation("3");
+		Ground3->GetRenderer()->SetPivot(float4(2042.0f, 283.0f));
+
+		Ground* Ground4 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground4->GetRenderer()->ChangeAnimation("4");
+		Ground4->GetRenderer()->SetPivot(float4(2105.0f, 283.0f));
+
+		Ground* Ground5 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground5->GetRenderer()->ChangeAnimation("5");
+		Ground5->GetRenderer()->SetPivot(float4(2168.0f, 283.0f));
+
+		Ground* Ground6 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground6->GetRenderer()->ChangeAnimation("6");
+		Ground6->GetRenderer()->SetPivot(float4(2231.0f, 283.0f));
+
+		Ground* Ground7 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground7->GetRenderer()->ChangeAnimation("7");
+		Ground7->GetRenderer()->SetPivot(float4(2294.0f, 283.0f));
+
+		Ground* Ground8 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground8->GetRenderer()->ChangeAnimation("8");
+		Ground8->GetRenderer()->SetPivot(float4(2357.0f, 283.0f));
+
+		Ground* Ground9 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground9->GetRenderer()->ChangeAnimation("9");
+		Ground9->GetRenderer()->SetPivot(float4(2420.0f, 283.0f));
+
+		Ground* Ground10 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground10->GetRenderer()->ChangeAnimation("10");
+		Ground10->GetRenderer()->SetPivot(float4(1853.0f, 325.0f));
+
+		Ground* Ground11 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground11->GetRenderer()->ChangeAnimation("11");
+		Ground11->GetRenderer()->SetPivot(float4(1916.0f, 325.0f));
+
+		Ground* Ground12 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground12->GetRenderer()->ChangeAnimation("12");
+		Ground12->GetRenderer()->SetPivot(float4(1979.0f, 325.0f));
+
+		Ground* Ground13 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground13->GetRenderer()->ChangeAnimation("13");
+		Ground13->GetRenderer()->SetPivot(float4(2042.0f, 325.0f));
+
+		Ground* Ground14 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground14->GetRenderer()->ChangeAnimation("14");
+		Ground14->GetRenderer()->SetPivot(float4(2105.0f, 325.0f));
+
+		Ground* Ground15 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground15->GetRenderer()->ChangeAnimation("15");
+		Ground15->GetRenderer()->SetPivot(float4(2168.0f, 325.0f));
+
+		Ground* Ground16 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground16->GetRenderer()->ChangeAnimation("16");
+		Ground16->GetRenderer()->SetPivot(float4(2231.0f, 325.0f));
+
+		Ground* Ground17 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground17->GetRenderer()->ChangeAnimation("17");
+		Ground17->GetRenderer()->SetPivot(float4(2294.0f, 325.0f));
+
+		Ground* Ground18 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground18->GetRenderer()->ChangeAnimation("18");
+		Ground18->GetRenderer()->SetPivot(float4(2357.0f, 325.0f));
+
+		Ground* Ground19 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground19->GetRenderer()->ChangeAnimation("19");
+		Ground19->GetRenderer()->SetPivot(float4(2420.0f, 325.0f));
+
+		Ground* Ground20 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground20->GetRenderer()->ChangeAnimation("20");
+		Ground20->GetRenderer()->SetPivot(float4(1853.0f, 367.0f));
+
+		Ground* Ground21 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground21->GetRenderer()->ChangeAnimation("21");
+		Ground21->GetRenderer()->SetPivot(float4(1916.0f, 367.0f));
+
+		Ground* Ground22 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground22->GetRenderer()->ChangeAnimation("22");
+		Ground22->GetRenderer()->SetPivot(float4(1979.0f, 367.0f));
+
+		Ground* Ground23 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground23->GetRenderer()->ChangeAnimation("23");
+		Ground23->GetRenderer()->SetPivot(float4(2042.0f, 367.0f));
+
+		Ground* Ground24 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground24->GetRenderer()->ChangeAnimation("24");
+		Ground24->GetRenderer()->SetPivot(float4(2105.0f, 367.0f));
+
+		Ground* Ground25 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground25->GetRenderer()->ChangeAnimation("25");
+		Ground25->GetRenderer()->SetPivot(float4(2168.0f, 367.0f));
+
+		Ground* Ground26 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground26->GetRenderer()->ChangeAnimation("26");
+		Ground26->GetRenderer()->SetPivot(float4(2231.0f, 367.0f));
+
+		Ground* Ground27 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground27->GetRenderer()->ChangeAnimation("27");
+		Ground27->GetRenderer()->SetPivot(float4(2294.0f, 367.0f));
+
+		Ground* Ground28 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground28->GetRenderer()->ChangeAnimation("28");
+		Ground28->GetRenderer()->SetPivot(float4(2357.0f, 367.0f));
+
+		Ground* Ground29 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground29->GetRenderer()->ChangeAnimation("29");
+		Ground29->GetRenderer()->SetPivot(float4(2420.0f, 367.0f));
+
+		Ground* Ground30 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground30->GetRenderer()->ChangeAnimation("30");
+		Ground30->GetRenderer()->SetPivot(float4(1852.0f, 409.0f));
+
+		Ground* Ground31 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground31->GetRenderer()->ChangeAnimation("31");
+		Ground31->GetRenderer()->SetPivot(float4(1915.0f, 409.0f));
+
+		Ground* Ground32 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground32->GetRenderer()->ChangeAnimation("32");
+		Ground32->GetRenderer()->SetPivot(float4(1978.0f, 409.0f));
+
+		Ground* Ground33 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground33->GetRenderer()->ChangeAnimation("33");
+		Ground33->GetRenderer()->SetPivot(float4(2041.0f, 409.0f));
+
+		Ground* Ground34 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground34->GetRenderer()->ChangeAnimation("34");
+		Ground34->GetRenderer()->SetPivot(float4(2104.0f, 409.0f));
+
+		Ground* Ground35 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground35->GetRenderer()->ChangeAnimation("35");
+		Ground35->GetRenderer()->SetPivot(float4(2167.0f, 409.0f));
+
+		Ground* Ground36 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground36->GetRenderer()->ChangeAnimation("36");
+		Ground36->GetRenderer()->SetPivot(float4(2230.0f, 409.0f));
+
+		Ground* Ground37 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground37->GetRenderer()->ChangeAnimation("37");
+		Ground37->GetRenderer()->SetPivot(float4(2293.0f, 409.0f));
+
+		Ground* Ground38 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground38->GetRenderer()->ChangeAnimation("38");
+		Ground38->GetRenderer()->SetPivot(float4(2356.0f, 409.0f));
+
+		Ground* Ground39 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground39->GetRenderer()->ChangeAnimation("39");
+		Ground39->GetRenderer()->SetPivot(float4(2419.0f, 409.0f));
+
+		Ground* Ground40 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground40->GetRenderer()->ChangeAnimation("40");
+		Ground40->GetRenderer()->SetPivot(float4(1850.0f, 451.0f));
+
+		Ground* Ground41 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground41->GetRenderer()->ChangeAnimation("41");
+		Ground41->GetRenderer()->SetPivot(float4(1913.0f, 451.0f));
+
+		Ground* Ground42 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground42->GetRenderer()->ChangeAnimation("42");
+		Ground42->GetRenderer()->SetPivot(float4(1976.0f, 451.0f));
+
+		Ground* Ground43 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground43->GetRenderer()->ChangeAnimation("43");
+		Ground43->GetRenderer()->SetPivot(float4(2039.0f, 451.0f));
+
+		Ground* Ground44 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground44->GetRenderer()->ChangeAnimation("44");
+		Ground44->GetRenderer()->SetPivot(float4(2102.0f, 451.0f));
+
+		Ground* Ground45 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground45->GetRenderer()->ChangeAnimation("45");
+		Ground45->GetRenderer()->SetPivot(float4(2165.0f, 451.0f));
+
+		Ground* Ground46 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground46->GetRenderer()->ChangeAnimation("46");
+		Ground46->GetRenderer()->SetPivot(float4(2228.0f, 451.0f));
+
+		Ground* Ground47 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground47->GetRenderer()->ChangeAnimation("47");
+		Ground47->GetRenderer()->SetPivot(float4(2291.0f, 451.0f));
+
+		Ground* Ground48 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground48->GetRenderer()->ChangeAnimation("48");
+		Ground48->GetRenderer()->SetPivot(float4(2354.0f, 451.0f));
+
+		Ground* Ground49 = CreateActor<Ground>((int)ORDER::OBSTRUCTION);
+		Ground49->GetRenderer()->ChangeAnimation("49");
+		Ground49->GetRenderer()->SetPivot(float4(2417.0f, 451.0f));
 	}
 
 	{
@@ -158,6 +363,7 @@ void Level1_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Bomb* Bomb_ = CreateActor<Bomb>((int)ORDER::OBSTRUCTION);
 		Bomb_->SetPosition(float4(3920.0f, 210.0f));
 	}
+
 
 	{
 		BombBox* BombBox1 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);

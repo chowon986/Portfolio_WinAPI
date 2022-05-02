@@ -31,8 +31,8 @@ void Dedede::Start()
 	Renderer_->CreateAnimation("KingDedede.bmp", "WalkRight", 4, 7, 0.1f, true);
 	Renderer_->CreateAnimation("KingDedede.bmp", "WalkLeft", 36, 39, 0.1f, true);
 
-	Renderer_->CreateAnimation("KingDedede.bmp", "JumpRight", 8, 10, 0.5f, true);
-	Renderer_->CreateAnimation("KingDedede.bmp", "JumpLeft", 40, 42, 0.5f, true);
+	Renderer_->CreateAnimation("KingDedede.bmp", "JumpRight", 8, 10, 0.6f, true);
+	Renderer_->CreateAnimation("KingDedede.bmp", "JumpLeft", 40, 42, 0.6f, true);
 
 	Renderer_->CreateAnimation("KingDedede.bmp", "AttackRight", 11, 20, 0.1f, true);
 	Renderer_->CreateAnimation("KingDedede.bmp", "AttackLeft", 43, 52, 0.1f, true);

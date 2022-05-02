@@ -25,7 +25,7 @@ void FireAttackEffect::Start()
 	Collision_ = CreateCollision("FireAttackCol", float4(150.0f, 50.0f), float4(100.0f, -25.0f));
 	Renderer_ = CreateRenderer("FireAtt.bmp");
 	Image_ = Renderer_->GetImage();
-	Image_->CutCount(7, 4);
+	Image_->CutCount(10, 3);
 	Renderer_->CreateAnimation("FireAtt.bmp", "AttackRight", 0, 13, 0.03f, true);
 	Renderer_->CreateAnimation("FireAtt.bmp", "AttackLeft", 14, 27, 0.03f, true);
 
@@ -110,7 +110,7 @@ void FireAttackEffect::UpdateFireAttackEffectRight()
 
 void FireAttackEffect::UpdateFireAttackEffectLeft()
 {
-	Renderer_->SetPivot(float4(-200.0f, 0.0f));
+	Renderer_->SetPivot(float4(-40.0f, 0.0f));
 	Collision_->SetPivot(float4(-100.0f, -25.0f));
 
 	if (true == Renderer_->IsEndAnimation())

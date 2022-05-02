@@ -1,11 +1,13 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 class GameEngineRenderer;
 class GameEngineCollision;
 class Player;
 class GameEngineImage;
 class DieEffect;
+class GameEngineSoundPlayer;
 class Cannon : public GameEngineLevel
 {
 public:
@@ -31,5 +33,6 @@ private:
 	GameEngineCollision* CanCol_;
 	Player* Player_;
 	float4 PrevPos_;
+	GameEngineSoundPlayer BgmPlayer_;
 };
 

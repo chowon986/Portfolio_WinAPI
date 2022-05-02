@@ -21,6 +21,7 @@
 #include "SparkAttackEffect.h"
 #include "RunEffect.h"
 #include "GroundStarEffect.h"
+#include "GameEngineBase/GameEngineSound.h"
 
 Cannon::Cannon()
 	:CanCol_(nullptr)
@@ -46,10 +47,11 @@ void Cannon::Update()
 	if (true == CanRenderer_->IsAnimationName("CanStop") && true == CanRenderer_->IsEndAnimation())
 	{
 		Player_->SetGravity(0.0f);
-		if (true != CannonRenderer_->IsAnimationName("None2") && false == CannonRenderer_->IsAnimationName("Cannon"))
-		{
-			CannonRenderer_->ChangeAnimation("Cannon");
-		}
+		//if (true != CannonRenderer_->IsAnimationName("None2") && false == CannonRenderer_->IsAnimationName("Cannon"))
+		//{
+		//	//CannonRenderer_->ChangeAnimation("Cannon");
+		//	//CannonRenderer_->SetPivot(float4(0.0f, 50.0f));
+		//}
 
 		if ((PrevPos_.x - Player_->GetPosition().x) > -1000)
 		{
@@ -59,15 +61,14 @@ void Cannon::Update()
 		}
 	}
 
-	if (true == CannonRenderer_->IsAnimationName("Cannon") && true == CannonRenderer_->IsEndAnimation())
-	{
-		CannonRenderer_->ChangeAnimation("None2");
-	}
+	//if (true == CannonRenderer_->IsAnimationName("Cannon") && true == CannonRenderer_->IsEndAnimation())
+	//{
+	//	CannonRenderer_->ChangeAnimation("None2");
+	//}
 
 	if (true == CanRenderer_->IsAnimationName("CanMove") && true == CanRenderer_->IsEndAnimation() && true != CanRenderer_->IsAnimationName("CanStop"))
 	{
 		CanRenderer_->ChangeAnimation("CanStop");
-
 	}
 
 	if (CanCol_->CollisionCheck("KirbyCol",CollisionType::Rect,CollisionType::Rect) &&
@@ -78,11 +79,20 @@ void Cannon::Update()
 		PlayerRenderer_->GetActor()->Off();
 		CanRenderer_->ChangeAnimation("CanMove");
 	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 
 void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	BgmPlayer_ = GameEngineSound::SoundPlayControl("Cannon.mp3");
+	SetColMapImage("Cannon.bmp");
+	ColMapImage_ = GetColMapImage();
+
 	SetMapSizeX(768);
 	SetMapSizeY(576);
 	{
@@ -90,7 +100,6 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Cannon->CreateRenderer("Cannon.bmp");
 		SetColMapImage("CannonColMap.bmp");
 		ColMapImage_ = GetColMapImage();
-
 	}
 
 	{
@@ -103,7 +112,7 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		CanRenderer_->CreateAnimation("can.bmp", "CanStop", 0, 2, 0.08f, false);
 
 		CanRenderer_->ChangeAnimation("CanIdle");
-		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 50.0f), float4(0.0f, 30.0f));
+		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 10.0f), float4(0.0f, 30.0f));
 
 	}
 	{
@@ -140,23 +149,21 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 
 
-		Background* CannonEffect_ = CreateActor<Background>((int)ORDER::BACKGROUND);
-		CannonRenderer_ = CannonEffect_->CreateRenderer("MonsterDie.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
-		GameEngineImage* CannonImage = CannonRenderer_->GetImage();
-		CannonImage->CutCount(10, 3);
-		CannonRenderer_->CreateAnimation("MonsterDie.bmp", "Cannon", 14, 20, 0.03f, true);
-		CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None1", 14, 14, 0.03f, true);
-		CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None2", 14, 14, 0.03f, true);
-		CannonRenderer_->ChangeAnimation("None1");
+		//Background* CannonEffect_ = CreateActor<Background>((int)ORDER::BACKGROUND);
+		//CannonRenderer_ = CannonEffect_->CreateRenderer("MonsterDie.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
+		//GameEngineImage* CannonImage = CannonRenderer_->GetImage();
+		//CannonImage->CutCount(10, 3);
+		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "Cannon", 14, 20, 0.03f, true);
+		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None1", 14, 14, 0.03f, true);
+		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None2", 14, 14, 0.03f, true);
+		//CannonRenderer_->ChangeAnimation("None1");
 	}
 
-	{
-
-	}
 }
 
 void Cannon::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	BgmPlayer_.Stop();
 }
 
 void Cannon::Loading()

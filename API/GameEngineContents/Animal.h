@@ -5,6 +5,7 @@ class GameEngineImage;
 class GameEngineCollision;
 class GameEngineRenderer;
 class GameEngineLevel;
+class Player;
 class Animal : public Monster
 {
 public:
@@ -18,19 +19,7 @@ public:
 
 public:
 	void Start() override;
-	void Render() override;
+	void UpdateMove() override;
 	void Update() override;
-protected:
 
-private:
-	int HP_;
-	float4 PrevPos_;
-	GameEngineLevel* Level_;
-	GameEngineImage* ColMapImage_;
-	GameEngineCollision* AnimalCol_;
-	GameEngineRenderer* AnimalRenderer_;
-
-	bool CheckMapCollision();
-
-private:
 };

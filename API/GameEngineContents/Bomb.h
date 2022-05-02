@@ -1,7 +1,6 @@
 #pragma once
 #include "Obstruction.h"
 
-class GameEngineRenderer;
 class GameEngineCollision;
 class Bomb : public Obstruction
 {
@@ -17,9 +16,11 @@ public:
 protected:
 	void Start();
 	void Update();
+	void ColUpdate() override;
+	bool ColOn();
 
 private:
-	GameEngineCollision* Collision_;
-	GameEngineRenderer* Renderer_;
-
+	GameEngineCollision* Collision2_;
+	float Time_;
+	bool Col_;
 };

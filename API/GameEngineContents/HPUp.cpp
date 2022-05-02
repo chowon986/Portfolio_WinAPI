@@ -3,6 +3,7 @@
 #include "Player.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 HPUp::HPUp()
 	: HPUpCol_(nullptr)

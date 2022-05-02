@@ -9,6 +9,12 @@
 #include <GameEngineContents/ContentsEnum.h>
 #include "BotUI.h"
 #include <vector>
+#include "StarAttackEffect.h"
+#include "AttackEffect.h"
+#include "IceAttackEffect.h"
+#include "FireAttackEffect.h"
+#include "SparkAttackEffect.h"
+#include "RunEffect.h"
 
 WorldMap::WorldMap()
 {
@@ -95,6 +101,8 @@ void WorldMap::Update()
 
 void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	BgmPlayer_ = GameEngineSound::SoundPlayControl("SelectStage.mp3");
+
 	SetMapSizeX(768);
 	SetMapSizeY(576);
 
@@ -106,17 +114,39 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		GameEngineRenderer* WorldMapRenderer = WorldMap->CreateRenderer("WorldMap.bmp");
 	}
 
+
+	{
+
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(147.0f, 100.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 		Player_->GetRenderer()->ChangeAnimation("Dance");
 
-		{
-			Player2_ = CreateActor<Player>((int)ORDER::PLAYER);
-			Player2_->GetRenderer()->ChangeAnimation("Dance");
-			Player2_->Off();
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
+
+		Player2_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player2_->GetRenderer()->ChangeAnimation("Dance");
+		Player2_->Off();
+
+		Player2_->SetStarAttackEffect(StarAttackEffect_);
+		Player2_->SetAttackEffect(AttackEffect_);
+		Player2_->SetIceAttackEffect(IceAttackEffect_);
+		Player2_->SetFireAttackEffect(FireAttackEffect_);
+		Player2_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player2_->SetRunEffect(RunEffect_);
 		}
 
 
@@ -201,4 +231,9 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		GameEngineRenderer* WorldMapUIRenderer = WorldMapUI->CreateRenderer("WorldMapUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-100,-240));
 	}
 
+}
+
+void WorldMap::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
+	BgmPlayer_.Stop();
 }

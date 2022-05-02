@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 class Player;
 class GameEngineRenderer;
@@ -18,10 +19,14 @@ protected:
 	void Loading() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
 	Player* Player_;
 	GameEngineRenderer* PlayerRenderer_;
+	GameEngineRenderer* BasicRenderer_;
 	GameEngineRenderer* DanceKirbyRenderer;
+	GameEngineSoundPlayer BgmPlayer_;
+
 };
 

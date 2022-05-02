@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
+
 
 class BotUI;
 class Player;
@@ -18,6 +20,7 @@ protected:
 	void Loading() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
 	BotUI* PlayerStatus_;
@@ -28,6 +31,7 @@ private:
 	GameEngineRenderer* LittleStarRenderer;
 	GameEngineRenderer* LittleStarRenderer2;
 	GameEngineRenderer* ChooseLevel1_;
+	GameEngineSoundPlayer BgmPlayer_;
 
 };
 

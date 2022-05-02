@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Waddledee.h"
-#include "Waddledoo.h"
+#include "Monster1.h"
 #include "Sparky.h"
 #include "BotUI.h"
 #include "ContentsEnum.h"
@@ -18,7 +18,6 @@
 #include "StarAttackEffect.h"
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
-#include "BeamAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "SparkAttackEffect.h"
 #include "DieEffect.h"
@@ -82,6 +81,10 @@ void Level1::Update()
 		SetCameraPos(CurCameraPos);
 	}
 
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -153,8 +156,6 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
 		GroundStarEffect* GroundStarEffect_ = CreateActor<GroundStarEffect>((int)ORDER::EFFECT);
 
-		//BeamAttackEffect_ = CreateActor<BeamAttackEffect>((int)ORDER::EFFECT);
-		//BeamAttackEffect_->SetPlayer(Player_);
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(205.0f, 436.0f));
 		Player_->SetMapStartPos(float4(205.0f, 436.0f));
@@ -179,11 +180,11 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
-		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
-		Waddledoo_->SetPosition(float4(2840.0f, 377.0f));
+		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
+		Monster1_->SetPosition(float4(2840.0f, 377.0f));
 
 		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
-		Waddledoo_->SetDieEffect(DieEffect_);
+		Monster1_->SetDieEffect(DieEffect_);
 	}
 
 	{

@@ -82,7 +82,7 @@ void Monster1::UpdateAttack()
 	{
 		EatRangeCol_->On();
 		EatRangeCol_->SetPivot(float4(50.0f, -20.0f));
-		if (true == Renderer_->IsAnimationName("EatStartRight"))
+		if (true == Renderer_->IsAnimationName("EatStartRight") && Player_->GetKirbyClass() == KirbyClass::DEFAULT)
 		{
 			Player_->SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_ * 10);
 		}
@@ -92,7 +92,7 @@ void Monster1::UpdateAttack()
 	{
 		EatRangeCol_->On();
 		EatRangeCol_->SetPivot(float4(-50.0f, -20.0f));
-		if (true == Renderer_->IsAnimationName("EatStartLeft"))
+		if (true == Renderer_->IsAnimationName("EatStartLeft") && Player_->GetKirbyClass() == KirbyClass::DEFAULT)
 		{
 			Player_->SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_ * 10);
 		}
@@ -162,17 +162,21 @@ void Monster1::UpdateAttack()
 			if (nullptr != ColPlayer)
 			{
 				float4 MonPos = ColPlayer->GetPosition() - GetPosition();
-				if (MonPos.x < 0)
+				if (MonPos.x < 0 && ColPlayer->GetKirbyClass() == KirbyClass::DEFAULT)
 				{
 					Renderer_->ChangeAnimation("EatStartLeft");
 					CanMove_ = false;
 					Collision_->Off();
 				}
-				else if (MonPos.x > 0)
+				else if (MonPos.x > 0 && ColPlayer->GetKirbyClass() == KirbyClass::DEFAULT)
 				{
 					Renderer_->ChangeAnimation("EatStartRight");
 					CanMove_ = false;
 					Collision_->Off();
+				}
+				else
+				{
+					return;
 				}
 			}
 		}

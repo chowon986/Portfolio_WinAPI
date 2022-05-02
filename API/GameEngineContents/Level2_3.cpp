@@ -65,6 +65,11 @@ void Level2_3::Update()
 		CurCameraPos.y = static_cast<int>(GetCameraPos().iy() - (GetCameraPos().iy() + CameraRectY - GetMapSizeY()));
 		SetCameraPos(CurCameraPos);
 	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 void Level2_3::LevelChangeStart(GameEngineLevel* _PrevLevel)

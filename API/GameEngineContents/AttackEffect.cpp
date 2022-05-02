@@ -86,8 +86,8 @@ void AttackEffect::UpdateAttackEffectRight()
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(40.0f, 0.0f));
 	SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 100);
-	Collision_->SetScale(float4(70.0f, 50.0f));
-	Collision_->SetPivot(float4(20.0f, -25.0f));
+	Collision_->SetScale(float4(90.0f, 50.0f));
+	Collision_->SetPivot(float4(90.0f, -25.0f));
 	Collision_->On();
 
 	float4 Distance = GetPosition() - StartPos_;
@@ -121,8 +121,8 @@ void AttackEffect::UpdateAttackEffectLeft()
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(-150.0f, 0.0f));
 	SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 100);
-	Collision_->SetScale(float4(70.0f, 50.0f));
-	Collision_->SetPivot(float4(-20.0f, -25.0f));
+	Collision_->SetScale(float4(90.0f, 50.0f));
+	Collision_->SetPivot(float4(-90.0f, -25.0f));
 	Collision_->On();
 
 	float4 Distance = GetPosition() - StartPos_;

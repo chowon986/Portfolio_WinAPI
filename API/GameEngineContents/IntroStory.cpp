@@ -25,41 +25,12 @@ void IntroStory::Update()
 		BgmPlayer.Stop();
 		GameEngine::GetInst().ChangeLevel("Level1");
 	}
-	if (0 >= GetCameraPos().x)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = 0;
-		SetCameraPos(CurCameraPos);
-	}
 
-	if (0 >= GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = 0;
-		SetCameraPos(CurCameraPos);
-	}
-
-	float CameraRectX = 768;
-	float CameraRectY = 576;
-
-	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = static_cast<int>(GetCameraPos().ix() - (GetCameraPos().ix() + CameraRectX - GetMapSizeX()));
-		SetCameraPos(CurCameraPos);
-	}
-
-	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = static_cast<int>(GetCameraPos().iy() - (GetCameraPos().iy() + CameraRectY - GetMapSizeY()));
-		SetCameraPos(CurCameraPos);
-	}
 }
 
 void IntroStory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	IntroVideo_ = CreateActor<VideoPlayer>();
-	IntroVideo_->SetInfo("intro_frame_", 438, 1200, 30);
-	BgmPlayer = GameEngineSound::SoundPlayControl("IntroStory.mp3");
+	IntroVideo_->SetInfo("intro_frame_", 438, 1200, 43.0f);
+	BgmPlayer = GameEngineSound::SoundPlayControl("Test1.mp3");
 }

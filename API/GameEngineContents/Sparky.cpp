@@ -30,7 +30,7 @@ void Sparky::Start()
 	AttackRenderer_->CreateAnimation("Monster1.bmp", "Attack", 118, 119, 0.3f, true);
 	AttackRenderer_->ChangeAnimation("Attack");
 	AttackRenderer_->SetAlpha(255);
-	AttackCol_ = CreateCollision("AttackCol", float4(150.0f, 150.0f), float4(0.0f, -15.0f));
+	AttackCol_ = CreateCollision("SparkyAttackCol", float4(150.0f, 150.0f), float4(0.0f, -15.0f));
 	AttackRangeCol_ = CreateCollision("AttackRangeCol", float4(100.0f, 50.0f), float4(0.0f, -25.0f));
 	AttackCol_->Off();
 

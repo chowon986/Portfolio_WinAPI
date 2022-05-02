@@ -23,7 +23,6 @@ void BotUI::Start()
 	StatusImage->CutCount(3, 3);
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Default", 8, 8, 0.1f, false); // 16.0f, 570.0f
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Spark", 1, 1, 0.1f, false); // 49.0f, 570.0f
-	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Beam", 2, 2, 0.1f, false); // float4(16.0f, 570.0f)
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Fire", 0, 0, 0.1f, false); // float4(82.0f, 570.0f)
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Sword", 4, 4, 0.1f, false); // float4(49.0f, 570.0f)
 	PlayerUI_->CreateAnimation("CharacterStatus.bmp", "Ice", 6, 6, 0.1f, false); // float4(82.0f, 570.0f)
@@ -140,10 +139,6 @@ void BotUI::Update()
 	case KirbyClass::SPARK:
 		PlayerUI_->ChangeAnimation("Spark");
 		PlayerUI_->SetPivot(float4(49.0f, 570.0f));
-		break;
-	case KirbyClass::BEAM:
-		PlayerUI_->ChangeAnimation("Beam");
-		PlayerUI_->SetPivot(float4(16.0f, 570.0f));
 		break;
 	case KirbyClass::SWORD:
 		PlayerUI_->ChangeAnimation("Sword");

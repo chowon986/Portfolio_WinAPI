@@ -16,10 +16,13 @@ public:
 protected:
 	void Start();
 	void Update();
+	bool ColOn();
 
 private:
-	GameEngineCollision* Collision_;
 	GameEngineCollision* Collision2_;
+	GameEngineCollision* Collision3_;
 	GameEngineRenderer* Renderer_;
+	float Time_;
+	bool Col_;
 
 };

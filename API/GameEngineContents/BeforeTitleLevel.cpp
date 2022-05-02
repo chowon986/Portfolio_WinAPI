@@ -26,7 +26,7 @@ void BeforeTitleLevel::Loading()
 void BeforeTitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	BeforeTitleVideo_ = CreateActor<VideoPlayer>();
-	BeforeTitleVideo_->SetInfo("intro_frame_", 0, 400, 30.0f);
+	BeforeTitleVideo_->SetInfo("intro_frame_", 0, 430, 28.5f);
 
 	BgmPlayer = GameEngineSound::SoundPlayControl("BeforeTitle.mp3");
 }
@@ -39,34 +39,5 @@ void BeforeTitleLevel::Update()
 		BgmPlayer.Stop();
 		GameEngine::GetInst().ChangeLevel("Title");
 	}
-	if (0 >= GetCameraPos().x)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = 0;
-		SetCameraPos(CurCameraPos);
-	}
 
-	if (0 >= GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = 0;
-		SetCameraPos(CurCameraPos);
-	}
-
-	float CameraRectX = 768;
-	float CameraRectY = 576;
-
-	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = static_cast<int>(GetCameraPos().ix() - (GetCameraPos().ix() + CameraRectX - GetMapSizeX()));
-		SetCameraPos(CurCameraPos);
-	}
-
-	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = static_cast<int>(GetCameraPos().iy() - (GetCameraPos().iy() + CameraRectY - GetMapSizeY()));
-		SetCameraPos(CurCameraPos);
-	}
 }

@@ -13,6 +13,8 @@
 #include "GroundStarEffect.h"
 #include "Monster.h"
 #include "RunEffect.h"
+#include <GameEngineBase/GameEngineSound.h>
+
 
 int Player::HP_COUNT = 2;
 int Player::HP = 10;
@@ -34,7 +36,6 @@ Player::Player()
     , SwordRenderer_(nullptr)
     , SwordKirbyImage_(nullptr)
     , StarAttackEffect_(nullptr)
-    , BeamRenderer_(nullptr)
     , IsGround_(false)
     , SwordCol_(nullptr)
     , SwordAttackEffect_(nullptr)
@@ -51,7 +52,6 @@ Player::Player()
     , IceAttackEffect_(nullptr)
     , FireAttackEffect_(nullptr)
     , DieEffect_(nullptr)
-    , BeamAttackEffect_(nullptr)
     , AttackEffect_(nullptr)
     , SparkAttackEffect_(nullptr)
     , SparkRenderer_(nullptr)
@@ -83,10 +83,6 @@ GameEngineRenderer* Player::GetRenderer()
     if (GetKirbyClass() == KirbyClass::ANIMAL)
     {
         return AnimalRenderer_;
-    }
-    else if (GetKirbyClass() == KirbyClass::BEAM)
-    {
-        return BeamRenderer_;
     }
     else if (GetKirbyClass() == KirbyClass::DEFAULT)
     {
@@ -126,7 +122,6 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(0);
         break;
     case KirbyClass::ANIMAL:
         Renderer_->SetAlpha(0);
@@ -136,7 +131,6 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(255);
-        BeamRenderer_->SetAlpha(0);
         break;
     case KirbyClass::DEFAULT:
         Renderer_->SetAlpha(255);
@@ -146,7 +140,6 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(0);
         break;
     case KirbyClass::ICE:
         Renderer_->SetAlpha(0);
@@ -156,7 +149,6 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(255);
         AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(0);
         break;
     case KirbyClass::SWORD:
         Renderer_->SetAlpha(0);
@@ -166,7 +158,6 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(0);
         break;
     case KirbyClass::FIRE:
         Renderer_->SetAlpha(0);
@@ -176,7 +167,6 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(255);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(0);
         break;
     case KirbyClass::PIG:
         Renderer_->SetAlpha(0);
@@ -186,18 +176,8 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(0);
         break;
-    case KirbyClass::BEAM:
-        Renderer_->SetAlpha(0);
-        SparkRenderer_->SetAlpha(0);
-        PigRenderer_->SetAlpha(0);
-        SwordRenderer_->SetAlpha(0);
-        FireRenderer_->SetAlpha(0);
-        IceRenderer_->SetAlpha(0);
-        AnimalRenderer_->SetAlpha(0);
-        BeamRenderer_->SetAlpha(255);
-        break;
+
     default:
         break;
     }
@@ -238,10 +218,6 @@ void Player::SetState(KirbyState _KirbyState)
         {
             PigRenderer_->ChangeAnimation("Idle" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Idle" + Dir_);
-        }
         break;
 
     case KirbyState::UP: // Animal 사용
@@ -271,10 +247,6 @@ void Player::SetState(KirbyState _KirbyState)
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
             FireRenderer_->ChangeAnimation("Down" + Dir_);
-        }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Down" + Dir_);
         }
         break;
 
@@ -307,10 +279,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             PigRenderer_->ChangeAnimation("Walk" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Walk" + Dir_);
-        }
+
         break;
 
     case KirbyState::RUN:
@@ -338,10 +307,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Run" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Run" + Dir_);
-        }
+
         break;
 
 
@@ -370,10 +336,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Fly" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Fly" + Dir_);
-        }
+
         break;
 
     case KirbyState::FLYSTAY:
@@ -404,10 +367,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("FlyAttack" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("FlyAttack" + Dir_);
-        }
+
         break;
 
     case KirbyState::FLYEND:
@@ -435,10 +395,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("FlyEnd" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("FlyEnd" + Dir_);
-        }
+
         break;
 
 
@@ -489,10 +446,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Attack" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Attack" + Dir_);
-        }
+
         break;
 
     case KirbyState::ATTACKSTAY:
@@ -512,16 +466,14 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("AttackStay" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("AttackStay" + Dir_);
-        }
+
         break;
 
     case KirbyState::TRANSFORM:
         PigRenderer_->ChangeAnimation("Transform" + Dir_);
         if (TransformEffect_ != nullptr)
         {
+            GameEngineSound::SoundPlayOneShot("Transform.wav", 0);
             TransformEffect_->SetPosition(GetPosition());
             TransformEffect_->SetState(TransformEffectState::TransformEffect);
         }
@@ -553,10 +505,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("TakeDamage" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("TakeDamage" + Dir_);
-        }
+
         break;
 
     case KirbyState::JUMPUP:
@@ -584,10 +533,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("JumpUp" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("JumpUp" + Dir_);
-        }
+
         break;
 
     case KirbyState::JUMPING:
@@ -615,10 +561,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Jumping" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM && GetState() != KirbyState::IDLE)
-        {
-            BeamRenderer_->ChangeAnimation("Jumping" + Dir_);
-        }
+
         break;
 
     case KirbyState::JUMPDOWN:
@@ -646,10 +589,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("JumpDown" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("JumpDown" + Dir_);
-        }
+
         break;
 
 
@@ -687,10 +627,7 @@ void Player::SetState(KirbyState _KirbyState)
             StartPos_ = GetPosition();
             FireRenderer_->ChangeAnimation("Slide" + Dir_);
         }
-        if (GetKirbyClass() == KirbyClass::BEAM)
-        {
-            BeamRenderer_->ChangeAnimation("Slide" + Dir_);
-        }
+
         break;
 
     case KirbyState::DIE:
@@ -700,7 +637,6 @@ void Player::SetState(KirbyState _KirbyState)
 		SwordRenderer_->SetAlpha(0);
 		AnimalRenderer_->SetAlpha(0);
 		FireRenderer_->SetAlpha(0);
-		BeamRenderer_->SetAlpha(0);
 		Renderer_->ChangeAnimation("Die");
         JumpHeight_ = 200;
         StartPos_ = GetPosition();
@@ -767,14 +703,9 @@ void Player::Update()
         SetKirbyClass(KirbyClass::FIRE);
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("Beam"))
+    if (true == GameEngineInput::GetInst()->IsPress("BossMap"))
     {
-        SetKirbyClass(KirbyClass::BEAM);
-    }
-
-    if (true == GameEngineInput::GetInst()->IsPress("Sword"))
-    {
-        SetKirbyClass(KirbyClass::SWORD);
+        GameEngine::GetInst().ChangeLevel("Boss");
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Animal"))
@@ -934,12 +865,6 @@ void Player::Update()
             {
                 SetState(KirbyState::ATTACKSTAY);
             }
-
-            else if (GetKirbyClass() == KirbyClass::BEAM && true == BeamRenderer_->IsEndAnimation())
-            {
-                SetState(KirbyState::ATTACKSTAY);
-            }
-            //////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
 
@@ -989,10 +914,6 @@ void Player::Update()
                 SetState(KirbyState::FLYSTAY);
             }
 
-            else if (GetKirbyClass() == KirbyClass::BEAM && true == BeamRenderer_->IsEndAnimation())
-            {
-                SetState(KirbyState::FLYSTAY);
-            }
         }
 
     }
@@ -1037,11 +958,6 @@ void Player::Update()
             }
 
             else if (GetKirbyClass() == KirbyClass::SPARK && true == SparkRenderer_->IsEndAnimation())
-            {
-                SetState(KirbyState::FLYEND);
-            }
-
-            else if (GetKirbyClass() == KirbyClass::BEAM && true == BeamRenderer_->IsEndAnimation())
             {
                 SetState(KirbyState::FLYEND);
             }
@@ -1135,9 +1051,12 @@ void Player::Update()
         }
 	}
 
+
+
     // 땅에 닿았을 때
     if (ColMapImage_ != nullptr && 
-        (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true ) &&
+        ((RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true ) ||
+        (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true)) &&
         JumpDirection.y > 0 && 
         GetState() != KirbyState::DIE)
     {
@@ -1146,7 +1065,13 @@ void Player::Update()
         {
             SetMove(float4::UP);
         }
-        // need to chk**
+
+        while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
+        {
+            SetMove(float4::UP);
+        }
+
+        // **need to chk**
          SetPosition(float4(GetPosition().x, GetPosition().iy()));
 
         JumpHeight_ = 0;
@@ -1169,8 +1094,7 @@ void Player::Update()
                 GetKirbyClass() != KirbyClass::FIRE &&
                 GetKirbyClass() != KirbyClass::ICE &&
                 GetKirbyClass() != KirbyClass::SPARK &&
-                GetKirbyClass() != KirbyClass::SWORD &&
-                GetKirbyClass() != KirbyClass::BEAM)
+                GetKirbyClass() != KirbyClass::SWORD)
             {
                 if (MonClass_ == MonsterClass::NONE)
                 {
@@ -1203,9 +1127,7 @@ void Player::Update()
                     case MonsterClass::ICE:
                         SetKirbyClass(KirbyClass::ICE);
                         break;
-                    case MonsterClass::BEAM:
-                        SetKirbyClass(KirbyClass::BEAM);
-                        break;
+
                     }
                     MonClass_ = MonsterClass::NONE;
                     SetState(KirbyState::IDLE);
@@ -1226,7 +1148,8 @@ void Player::Update()
             GetState() != KirbyState::DIE &&
             GetState() != KirbyState::FLY &&
             GetState() != KirbyState::FLYATTACK &&
-            GetState() != KirbyState::FLYEND)
+            GetState() != KirbyState::FLYEND ||
+            RGB(255, 0, 0) != ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
         {
             if (KirbyState::JUMPUP == GetState() &&
                 JumpHeight_ < 0)
@@ -1265,10 +1188,6 @@ void Player::Update()
                     SetState(KirbyState::JUMPDOWN);
                 }
 
-                else if (GetKirbyClass() == KirbyClass::BEAM && true == BeamRenderer_->IsEndAnimation())
-                {
-                    SetState(KirbyState::JUMPDOWN);
-                }
             }
         }
     }
@@ -1395,18 +1314,26 @@ void Player::CheckCollision()
         GameEngine::GetInst().ChangeLevel("Boss");
     }
 
-    if (true == KirbyCol_->CollisionCheck("CanCol", CollisionType::Rect, CollisionType::Rect))
-    {
-        KirbyCol_->Off();
-    }
+    //if (true == KirbyCol_->CollisionCheck("CanCol", CollisionType::Rect, CollisionType::Rect))
+    //{
+    //    KirbyCol_->Off();
+    //}
 
     if (ColMapImage_ != nullptr &&
         GetState() != KirbyState::DIE &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
+		(RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+	     RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25))) ||
+		(RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+		 RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y))))
     {
         while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
                RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
+        {
+            SetMove(float4::LEFT);
+        }
+
+        while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
         {
             SetMove(float4::LEFT);
         }
@@ -1414,11 +1341,19 @@ void Player::CheckCollision()
 
     if (ColMapImage_ != nullptr &&
         GetState() != KirbyState::DIE &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f)))
+        (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
+        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f))) ||
+        (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y)) &&
+            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y))))
     {
         while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
                RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f)))
+        {
+            SetMove(float4::RIGHT);
+        }
+
+        while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y)) &&
+            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y - 25)))
         {
             SetMove(float4::RIGHT);
         }
@@ -1454,6 +1389,7 @@ void Player::CheckCollision()
         }
 
     }
+
 
     std::vector<GameEngineCollision*> ColResult;
     while (true == KirbyCol_->CollisionResult("Obstruction", ColResult, CollisionType::Rect, CollisionType::Rect))
@@ -1685,58 +1621,6 @@ void Player::Start()
 		PigRenderer_->CreateAnimation("Normal.bmp", "AttackLeft", 164, 167, 0.1f, true);
 
 	}
-
-    {
-        //Beam
-        BeamRenderer_ = CreateRenderer("Beam.bmp");
-        GameEngineImage* BeamKirbyImage = BeamRenderer_->GetImage();
-        BeamKirbyImage->CutCount(10, 30);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "WalkRight", 20, 31, 0.05f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "WalkLeft", 170, 181, 0.05f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "RunRight", 32, 40, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "RunLeft", 182, 190, 0.1f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "IdleRight", 0, 0, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "IdleLeft", 150, 150, 0.1f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyRight", 69, 73, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyLeft", 219, 223, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyStayRight", 74, 82, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyStayLeft", 224, 232, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyAttackRight", 83, 84, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyAttackLeft", 233, 234, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyEndRight", 66, 67, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "FlyEndLeft", 216, 217, 0.1f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "AttackRight", 115, 116, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "AttackLeft", 265, 266, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "AttackStayRight", 117, 148, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "AttackStayLeft", 267, 298, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "AttackEndRight", 149, 149, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "AttackEndLeft", 299, 299, 0.1f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "JumpUpRight", 41, 42, 0.5f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "JumpUpLeft", 191, 192, 0.5f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "JumpingRight", 43, 48, 0.03f, false);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "JumpingLeft", 193, 198, 0.03f, false);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "JumpDownRight", 49, 50, 0.5f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "JumpDownLeft", 199, 200, 0.5f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "DownRight", 11, 11, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "DownLeft", 161, 161, 0.1f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "SlideRight", 17, 18, 0.1f, false);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "SlideLeft", 167, 168, 0.1f, false);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "TakeDamageRight", 86, 86, 0.1f, true);
-        BeamRenderer_->CreateAnimation("Beam.bmp", "TakeDamageLeft", 236, 236, 0.1f, true);
-
-        BeamRenderer_->CreateAnimation("Beam.bmp", "DoorOpenRight", 0, 0, 0.1f, true); // 이미지 없음
-        BeamRenderer_->CreateAnimation("Beam.bmp", "DoorOpenLeft", 0, 0, 0.1f, true);
-    }
-
 
     {
 		//Fire
@@ -2010,16 +1894,15 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("Attack", 'C');
         GameEngineInput::GetInst()->CreateKey("Transform", 'V');
         GameEngineInput::GetInst()->CreateKey("OpenDoor", VK_SPACE);
-
+        GameEngineInput::GetInst()->CreateKey("BossMap", '7');
         
         
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P');
         GameEngineInput::GetInst()->CreateKey("Spark", '1');
         GameEngineInput::GetInst()->CreateKey("Fire", '2');
-        GameEngineInput::GetInst()->CreateKey("Sword", '3');
-        GameEngineInput::GetInst()->CreateKey("Animal", '4');
-        GameEngineInput::GetInst()->CreateKey("Ice", '5');
-        GameEngineInput::GetInst()->CreateKey("Beam", '6');
+        GameEngineInput::GetInst()->CreateKey("Animal", '3');
+        GameEngineInput::GetInst()->CreateKey("Ice", '4');
+        //GameEngineInput::GetInst()->CreateKey("Sword", '3');
         //GameEngineInput::GetInst()->CreateKey("AbandonClass", 'O');
      }
 }

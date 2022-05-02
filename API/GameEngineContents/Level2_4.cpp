@@ -68,6 +68,11 @@ void Level2_4::Update()
 		SetCameraPos(CurCameraPos);
 	}
 
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
+
 }
 
 void Level2_4::LevelChangeStart(GameEngineLevel* _PrevLevel)

@@ -20,7 +20,7 @@ void IceAttackEffect::Start()
 	Collision_ = CreateCollision("IceAttackCol", float4(150.0f, 50.0f), float4(100.0f, -25.0f));
 	Renderer_ = CreateRenderer("IceAtt.bmp");
 	Image_ = Renderer_->GetImage();
-	Image_->CutCount(5, 6);
+	Image_->CutCount(10, 3);
 	Renderer_->CreateAnimation("IceAtt.bmp", "AttackRight", 0, 12, 0.03f, true);
 	Renderer_->CreateAnimation("IceAtt.bmp", "AttackLeft", 15, 27, 0.03f, true);
 
@@ -95,7 +95,7 @@ void IceAttackEffect::UpdateIceAttackEffectRight()
 void IceAttackEffect::UpdateIceAttackEffectLeft()
 {
 	Collision_->On();
-	Renderer_->SetPivot(float4(-200.0f, 0.0f));
+	Renderer_->SetPivot(float4(-40.0f, 0.0f));
 	Collision_->SetPivot(float4(-100.0f, -25.0f));
 
 	if (true == Renderer_->IsEndAnimation())

@@ -15,7 +15,6 @@ enum class MonsterClass
 	NONE,
 	DEFAULT,
 	SPARK,
-	BEAM,
 	SWORD,
 	FIRE,
 	ICE,

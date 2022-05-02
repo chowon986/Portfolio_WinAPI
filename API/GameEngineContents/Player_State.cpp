@@ -14,7 +14,6 @@
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
 #include "SparkAttackEffect.h"
-#include "BeamAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "AbandonEffect.h"
 #include "TransformEffect.h"
@@ -152,10 +151,7 @@ void Player::UpdateFlyStay()
     {
         FireRenderer_->ChangeAnimation("FlyStay" + Dir_);
     }
-    if (GetKirbyClass() == KirbyClass::BEAM)
-    {
-        BeamRenderer_->ChangeAnimation("FlyStay" + Dir_);
-    }
+
 
     JumpHeight_ = 0;
 
@@ -389,19 +385,6 @@ void Player::UpdateAttackStay()
         SparkAttackEffect_->SetState(SparkAttackEffectState::SparkAttackEffect);
     }
 
-    if (BeamAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::BEAM)
-    {
-        BeamAttackEffect_->SetPosition(GetPosition());
-        if (Dir_ == "Right")
-        {
-            BeamAttackEffect_->SetState(BeamAttackEffectState::BeamRightAttackEffect);
-
-        }
-        else if (Dir_ == "Left")
-        {
-            BeamAttackEffect_->SetState(BeamAttackEffectState::BeamLeftAttackEffect);
-        }
-    }
 }
 
 void Player::UpdateJumpUp()
@@ -435,8 +418,7 @@ void Player::UpdateSlide()
         }
 		if (GetKirbyClass() == KirbyClass::DEFAULT || 
             GetKirbyClass() == KirbyClass::ANIMAL ||
-            GetKirbyClass() == KirbyClass::ICE ||
-            GetKirbyClass() == KirbyClass::BEAM)
+            GetKirbyClass() == KirbyClass::ICE)
 		{
 			KirbySlideCol_->SetPivot(float4(20.0f, -15.0f));
 		}
@@ -513,6 +495,7 @@ void Player::UpdateSlide()
             }
         }
     }
+
 }
 
 void Player::UpdateAbandon()
@@ -523,13 +506,6 @@ void Player::UpdateAbandon()
 void Player::UpdateEaten()
 {
     Renderer_->SetAlpha(0);
-    SparkRenderer_->SetAlpha(0);
-    PigRenderer_->SetAlpha(0);
-    SwordRenderer_->SetAlpha(0);
-    FireRenderer_->SetAlpha(0);
-    IceRenderer_->SetAlpha(0);
-    AnimalRenderer_->SetAlpha(0);
-    BeamRenderer_->SetAlpha(0);
 }
 
 void Player::SetHP(int _NewHP)
@@ -546,6 +522,5 @@ void Player::SetHP(int _NewHP)
     {
 		SetState(KirbyState::TAKEDAMAGE);
     }
-
 
 }

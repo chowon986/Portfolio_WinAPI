@@ -63,9 +63,6 @@
     <ClCompile Include="Waddledee.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Waddledoo.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Obstruction.cpp">
       <Filter>Obstruction</Filter>
     </ClCompile>
@@ -103,12 +100,6 @@
       <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="SwordAttackEffect.cpp">
-      <Filter>Kirby\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="BeamAttackEffect.cpp">
-      <Filter>Kirby\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimalEffect.cpp">
       <Filter>Kirby\Effect</Filter>
     </ClCompile>
     <ClCompile Include="AbandonEffect.cpp">
@@ -195,6 +186,9 @@
     <ClCompile Include="GroundStarEffect.cpp">
       <Filter>Kirby\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Obstruction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -260,9 +254,6 @@
     <ClInclude Include="Waddledee.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Waddledoo.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Obstruction.h">
       <Filter>Obstruction</Filter>
     </ClInclude>
@@ -297,12 +288,6 @@
       <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="SwordAttackEffect.h">
-      <Filter>Kirby\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="BeamAttackEffect.h">
-      <Filter>Kirby\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimalEffect.h">
       <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="AbandonEffect.h">
@@ -385,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="GroundStarEffect.h">
       <Filter>Kirby\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Obstruction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

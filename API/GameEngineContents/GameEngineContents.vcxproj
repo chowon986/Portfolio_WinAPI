@@ -159,10 +159,8 @@
   <ItemGroup>
     <ClInclude Include="AbandonEffect.h" />
     <ClInclude Include="Animal.h" />
-    <ClInclude Include="AnimalEffect.h" />
     <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="Background.h" />
-    <ClInclude Include="BeamAttackEffect.h" />
     <ClInclude Include="BeforeTitleLevel.h" />
     <ClInclude Include="BigBomb.h" />
     <ClInclude Include="BigBox.h" />
@@ -189,6 +187,7 @@
     <ClInclude Include="FireAttackEffect.h" />
     <ClInclude Include="FireItem.h" />
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="GroundStarEffect.h" />
     <ClInclude Include="HPUp.h" />
     <ClInclude Include="IceAttackEffect.h" />
@@ -232,16 +231,13 @@
     <ClInclude Include="TreasureChest.h" />
     <ClInclude Include="VideoPlayer.h" />
     <ClInclude Include="Waddledee.h" />
-    <ClInclude Include="Waddledoo.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbandonEffect.cpp" />
     <ClCompile Include="Animal.cpp" />
-    <ClCompile Include="AnimalEffect.cpp" />
     <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="Background.cpp" />
-    <ClCompile Include="BeamAttackEffect.cpp" />
     <ClCompile Include="BeforeTitleLevel.cpp" />
     <ClCompile Include="BigBomb.cpp" />
     <ClCompile Include="BigBox.cpp" />
@@ -268,6 +264,7 @@
     <ClCompile Include="FireAttackEffect.cpp" />
     <ClCompile Include="FireItem.cpp" />
     <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="GroundStarEffect.cpp" />
     <ClCompile Include="HPUp.cpp" />
     <ClCompile Include="IceAttackEffect.cpp" />
@@ -312,7 +309,6 @@
     <ClCompile Include="TreasureChest.cpp" />
     <ClCompile Include="VideoPlayer.cpp" />
     <ClCompile Include="Waddledee.cpp" />
-    <ClCompile Include="Waddledoo.cpp" />
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>

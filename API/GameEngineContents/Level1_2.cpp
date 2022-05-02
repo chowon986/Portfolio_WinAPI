@@ -77,6 +77,10 @@ void Level1_2::Update()
 		IsDebugModeOn();
 	}
 
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 void Level1_2::LevelChangeStart(GameEngineLevel* _PrevLevel)

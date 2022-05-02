@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 class Player;
 class BotUI;
@@ -26,5 +27,6 @@ private:
 	Player* Player_;
 	BotUI* PlayerStatus_;
 	GameEngineCollision* Cannon_;
+	GameEngineSoundPlayer BgmPlayer_;
 };
 
