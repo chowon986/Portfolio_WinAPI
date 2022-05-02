@@ -24,6 +24,7 @@
 #include "Ground.h"
 #include "GameEngineBase/GameEngineSound.h"
 #include "Animal.h"
+#include "BombBomb.h"
 
 Level1_4::Level1_4()
 	: Player_(nullptr)
@@ -107,7 +108,7 @@ void Level1_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(205.0f, 430.0f));
+		Player_->SetPosition(float4(/*205.0f, 430.0f*/3800.0f,0.0f));
 		Player_->SetMapStartPos(float4(205.0f, 430.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
@@ -360,63 +361,67 @@ void Level1_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
-		Bomb* Bomb_ = CreateActor<Bomb>((int)ORDER::OBSTRUCTION);
-		Bomb_->SetPosition(float4(3920.0f, 210.0f));
+		BombBomb* BombBomb_ = CreateActor<BombBomb>((int)ORDER::OBSTRUCTION);
+		BombBomb_->SetPosition(float4(4200.0f, -5.0f));
 	}
+	//{
+	//	Bomb* Bomb_ = CreateActor<Bomb>((int)ORDER::OBSTRUCTION);
+	//	Bomb_->SetPosition(float4(3920.0f, 210.0f));
+	//}
 
 
-	{
-		BombBox* BombBox1 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox1->SetPosition(float4(3965.0f, 210.0f));
-		BombBox* BombBox2 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox2->SetPosition(float4(4010.0f, 210.0f));
-		BombBox* BombBox3 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox3->SetPosition(float4(4055.0f, 210.0f));
-		BombBox* BombBox4 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox4->SetPosition(float4(4100.0f, 210.0f));
-		BombBox* BombBox5 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox5->SetPosition(float4(4145.0f, 210.0f));
-		BombBox* BombBox6 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox6->SetPosition(float4(3965.0f, 165.0f));
-		BombBox* BombBox7 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox7->SetPosition(float4(4010.0f, 165.0f));
-		BombBox* BombBox8 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox8->SetPosition(float4(4055.0f, 165.0f));
-		BombBox* BombBox9 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox9->SetPosition(float4(4100.0f, 165.0f));
-		BombBox* BombBox10 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox10->SetPosition(float4(4145.0f, 165.0f));
-		BombBox* BombBox11 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox11->SetPosition(float4(3965.0f, 120.0f));
-		BombBox* BombBox12 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox12->SetPosition(float4(4010.0f, 120.0f));
-		BombBox* BombBox13 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox13->SetPosition(float4(4055.0f, 120.0f));
-		BombBox* BombBox14 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox14->SetPosition(float4(4100.0f, 120.0f));
-		BombBox* BombBox15 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox15->SetPosition(float4(4145.0f, 120.0f));
-		BombBox* BombBox16 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox16->SetPosition(float4(3965.0f, 75.0f));
-		BombBox* BombBox17 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox17->SetPosition(float4(4010.0f, 75.0f));
-		BombBox* BombBox18 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox18->SetPosition(float4(4055.0f, 75.0f));
-		BombBox* BombBox19 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox19->SetPosition(float4(4100.0f, 75.0f));
-		BombBox* BombBox20 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox20->SetPosition(float4(4145.0f, 75.0f));
-		BombBox* BombBox21 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox21->SetPosition(float4(3965.0f, 30.0f));
-		BombBox* BombBox22 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox22->SetPosition(float4(4010.0f, 30.0f));
-		BombBox* BombBox23 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox23->SetPosition(float4(4055.0f, 30.0f));
-		BombBox* BombBox24 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox24->SetPosition(float4(4100.0f, 30.0f));
-		BombBox* BombBox25 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
-		BombBox25->SetPosition(float4(4145.0f, 30.0f));
-	}
+	//{
+	//	BombBox* BombBox1 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox1->SetPosition(float4(3965.0f, 210.0f));
+	//	BombBox* BombBox2 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox2->SetPosition(float4(4010.0f, 210.0f));
+	//	BombBox* BombBox3 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox3->SetPosition(float4(4055.0f, 210.0f));
+	//	BombBox* BombBox4 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox4->SetPosition(float4(4100.0f, 210.0f));
+	//	BombBox* BombBox5 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox5->SetPosition(float4(4145.0f, 210.0f));
+	//	BombBox* BombBox6 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox6->SetPosition(float4(3965.0f, 165.0f));
+	//	BombBox* BombBox7 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox7->SetPosition(float4(4010.0f, 165.0f));
+	//	BombBox* BombBox8 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox8->SetPosition(float4(4055.0f, 165.0f));
+	//	BombBox* BombBox9 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox9->SetPosition(float4(4100.0f, 165.0f));
+	//	BombBox* BombBox10 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox10->SetPosition(float4(4145.0f, 165.0f));
+	//	BombBox* BombBox11 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox11->SetPosition(float4(3965.0f, 120.0f));
+	//	BombBox* BombBox12 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox12->SetPosition(float4(4010.0f, 120.0f));
+	//	BombBox* BombBox13 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox13->SetPosition(float4(4055.0f, 120.0f));
+	//	BombBox* BombBox14 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox14->SetPosition(float4(4100.0f, 120.0f));
+	//	BombBox* BombBox15 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox15->SetPosition(float4(4145.0f, 120.0f));
+	//	BombBox* BombBox16 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox16->SetPosition(float4(3965.0f, 75.0f));
+	//	BombBox* BombBox17 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox17->SetPosition(float4(4010.0f, 75.0f));
+	//	BombBox* BombBox18 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox18->SetPosition(float4(4055.0f, 75.0f));
+	//	BombBox* BombBox19 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox19->SetPosition(float4(4100.0f, 75.0f));
+	//	BombBox* BombBox20 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox20->SetPosition(float4(4145.0f, 75.0f));
+	//	BombBox* BombBox21 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox21->SetPosition(float4(3965.0f, 30.0f));
+	//	BombBox* BombBox22 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox22->SetPosition(float4(4010.0f, 30.0f));
+	//	BombBox* BombBox23 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox23->SetPosition(float4(4055.0f, 30.0f));
+	//	BombBox* BombBox24 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox24->SetPosition(float4(4100.0f, 30.0f));
+	//	BombBox* BombBox25 = CreateActor<BombBox>((int)ORDER::OBSTRUCTION);
+	//	BombBox25->SetPosition(float4(4145.0f, 30.0f));
+	//}
 
 	Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);
 	GameEngineRenderer* DoorRenderer = Door->CreateRenderer("BigDoor.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(4120.0f, -117.0f));

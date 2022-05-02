@@ -167,6 +167,7 @@
     <ClInclude Include="BigTreasureChest.h" />
     <ClInclude Include="BigWaddledee.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombBomb.h" />
     <ClInclude Include="BombBox.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BotUI.h">
@@ -244,6 +245,7 @@
     <ClCompile Include="BigTreasureChest.cpp" />
     <ClCompile Include="BigWaddledee.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="BombBomb.cpp" />
     <ClCompile Include="BombBox.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BotUI.cpp">

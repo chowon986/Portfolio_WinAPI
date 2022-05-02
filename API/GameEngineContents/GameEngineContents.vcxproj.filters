@@ -189,6 +189,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Obstruction</Filter>
     </ClCompile>
+    <ClCompile Include="BombBomb.cpp">
+      <Filter>Obstruction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -372,6 +375,9 @@
       <Filter>Kirby\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
+      <Filter>Obstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="BombBomb.h">
       <Filter>Obstruction</Filter>
     </ClInclude>
   </ItemGroup>
