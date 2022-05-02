@@ -34,6 +34,7 @@ void HPUp::Update()
 			{
 				Kirby->SetHPCount(Kirby->GetHPCount() + 1);
 				Death();
+				GameEngineSound::SoundPlayOneShot("EatItem.wav", 1);
 			}
 		}
 	}

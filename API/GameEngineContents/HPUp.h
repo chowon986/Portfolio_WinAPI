@@ -1,5 +1,7 @@
 #pragma once
 #include "Item.h"
+#include <GameEngineBase/GameEngineSound.h>
+
 
 class GameEngineCollision;
 class Player;
@@ -24,4 +26,5 @@ protected:
 private:
 	GameEngineCollision* HPUpCol_;
 	GameEngineRenderer* HPUpRenderer_;
+	GameEngineSoundPlayer BgmPlayer_;
 };

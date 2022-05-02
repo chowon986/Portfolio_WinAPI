@@ -48,7 +48,6 @@ public:
 protected:
 
 private:
-	int HP_;
 	float4 PrevPos_;
 	float4 PlayerPos_;
 	float Time_;

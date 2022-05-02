@@ -15,9 +15,6 @@
     <ClCompile Include="BigWaddledee.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="BlueMouse.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Obstruction</Filter>
     </ClCompile>
@@ -30,12 +27,6 @@
     <ClCompile Include="Brontobert.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Doc.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Doroach.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Fire.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
@@ -45,28 +36,7 @@
     <ClCompile Include="Monster1.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Monster2.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster3.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Moon.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Frosty.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="GreenMouse.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Sparky.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Spinni.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Storo.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="Sword.cpp">
@@ -90,13 +60,10 @@
     <ClCompile Include="TreasureChest.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="Waddledi.cpp">
+    <ClCompile Include="Waddledee.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="Waddledoo.cpp">
-      <Filter>Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="YellowMouse.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
     <ClCompile Include="Obstruction.cpp">
@@ -222,6 +189,12 @@
     <ClCompile Include="Dedede_State.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
+    <ClCompile Include="TransformEffect.cpp">
+      <Filter>Kirby\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundStarEffect.cpp">
+      <Filter>Kirby\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -235,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="BigBox.h">
       <Filter>Obstruction</Filter>
-    </ClInclude>
-    <ClInclude Include="BlueMouse.h">
-      <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="BigWaddledee.h">
       <Filter>Monster</Filter>
@@ -254,16 +224,7 @@
     <ClInclude Include="Brontobert.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Doroach.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Doc.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Fire.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Moon.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
@@ -272,25 +233,7 @@
     <ClInclude Include="Monster1.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Monster2.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster3.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Frosty.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="GreenMouse.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Sparky.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Spinni.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Storo.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Sword.h">
@@ -314,13 +257,10 @@
     <ClInclude Include="TreasureChest.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="Waddledi.h">
+    <ClInclude Include="Waddledee.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Waddledoo.h">
-      <Filter>Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="YellowMouse.h">
       <Filter>Monster</Filter>
     </ClInclude>
     <ClInclude Include="Obstruction.h">
@@ -439,6 +379,12 @@
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Level\01 Play</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformEffect.h">
+      <Filter>Kirby\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundStarEffect.h">
+      <Filter>Kirby\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

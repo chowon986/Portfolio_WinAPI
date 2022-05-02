@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include "CharacterBase.h"
+#include <string>
 
 
 enum class KirbyClass
@@ -59,6 +60,8 @@ class SwordAttackEffect;
 class BeamAttackEffect;
 class DieEffect;
 class RunEffect;
+class GroundStarEffect;
+class TransformEffect;
 class Player : public CharacterBase
 {
 public:
@@ -118,8 +121,10 @@ private:
 	FireAttackEffect* FireAttackEffect_;
 	SwordAttackEffect* SwordAttackEffect_;
 	BeamAttackEffect* BeamAttackEffect_;
+	TransformEffect* TransformEffect_;
 	DieEffect* DieEffect_;
 	RunEffect* RunEffect_;
+	GroundStarEffect* GroundStarEffect_;
 
 	Monster* Monster_;
 	MonsterClass MonClass_;
@@ -226,9 +231,19 @@ public:
 		BeamAttackEffect_ = _BeamAttackEffect;
 	}
 
+	void SetTransformEffect(TransformEffect* _TransformEffect)
+	{
+		TransformEffect_ = _TransformEffect;
+	}
+
 	void SetRunEffect(RunEffect* _RunEffect)
 	{
 		RunEffect_ = _RunEffect;
+	}
+
+	void SetGroundStarEffect(GroundStarEffect* _GroundStarEffect)
+	{
+		GroundStarEffect_ = _GroundStarEffect;
 	}
 
 	void SetHP(int _HP) override;

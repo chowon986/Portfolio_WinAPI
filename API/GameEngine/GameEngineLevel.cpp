@@ -10,6 +10,10 @@ bool GameEngineLevel::IsDebug = false;
 GameEngineLevel::GameEngineLevel()
 	: CameraPos_(float4::ZERO)
 	, IsReset(false)
+	, MapSizeX_(0.0f)
+	, MapSizeY_(0.0f)
+	, ColMapImage_(nullptr)
+
 {
 }
 

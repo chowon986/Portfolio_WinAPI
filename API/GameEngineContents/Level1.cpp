@@ -5,7 +5,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Monster.h"
-#include "Waddledi.h"
+#include "Waddledee.h"
 #include "Waddledoo.h"
 #include "Sparky.h"
 #include "BotUI.h"
@@ -24,11 +24,15 @@
 #include "DieEffect.h"
 #include "RunEffect.h"
 #include "GameEngineBase/GameEngineSound.h"
+#include "TransformEffect.h"
+#include "GroundStarEffect.h"
 
 Level1::Level1()
 	: Player_(nullptr)
 	, PlayerStatus_(nullptr)
 	, ColMapImage_(nullptr)
+	, Star_(nullptr)
+	, DoorCol1_2(nullptr)
 {
 
 }
@@ -85,7 +89,7 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetMapSizeX(4608);
 	SetMapSizeY(576);
 
-	//BgmPlayer = GameEngineSound::SoundPlayControl("Stage1.mp3");
+	BgmPlayer = GameEngineSound::SoundPlayControl("Stage1.mp3");
 	SetColMapImage("Stage1ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -146,6 +150,8 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
+		GroundStarEffect* GroundStarEffect_ = CreateActor<GroundStarEffect>((int)ORDER::EFFECT);
 
 		//BeamAttackEffect_ = CreateActor<BeamAttackEffect>((int)ORDER::EFFECT);
 		//BeamAttackEffect_->SetPlayer(Player_);
@@ -160,20 +166,31 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 		Player_->SetRunEffect(RunEffect_);
+		Player_->SetTransformEffect(TransformEffect_);
+		Player_->SetGroundStarEffect(GroundStarEffect_);
 	}
 
 	{
-		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(1200.0f, 430.0f));
+		Waddledee* Waddledee_ = CreateActor<Waddledee>((int)ORDER::MONSTER);
+		Waddledee_->SetPosition(float4(1200.0f, 430.0f));
+
+		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
+		Waddledee_->SetDieEffect(DieEffect_);
 	}
 
 	{
 		Waddledoo* Waddledoo_ = CreateActor<Waddledoo>((int)ORDER::MONSTER);
 		Waddledoo_->SetPosition(float4(2840.0f, 377.0f));
+
+		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
+		Waddledoo_->SetDieEffect(DieEffect_);
 	}
 
 	{
 		Monster* Sparky_ = CreateActor<Sparky>((int)ORDER::MONSTER);
 		Sparky_->SetPosition(float4(3780.0f, 380.0f));
+
+		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
+		Sparky_->SetDieEffect(DieEffect_);
 	}
 }

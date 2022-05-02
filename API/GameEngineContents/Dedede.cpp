@@ -8,6 +8,8 @@
 Dedede::Dedede()
 	: Monster()
 	, Time_(0.0f)
+	, AttTime_(0.0f)
+	, DededeState_(DededeState::IDLE)
 {
 	SetMonsterClass(MonsterClass::BOSS);
 }
@@ -120,7 +122,7 @@ void Dedede::UpdateMove()
 
 	if (GetState() != DededeState::WALK && true == Renderer_->IsEndAnimation())
 	{
-		SetState(DededeState::IDLE());
+		SetState(DededeState::IDLE);
 	}
 
 }

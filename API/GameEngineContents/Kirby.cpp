@@ -116,6 +116,7 @@ void Kirby::GameInit()
     }
 
     GameEngineInput::GetInst()->CreateKey("LevelChange", VK_RETURN);
+    GameEngineInput::GetInst()->CreateKey("Collision", '9');
 
     CreateLevel<BeforeTitleLevel>("BeforeTitle");
     CreateLevel<TitleLevel>("Title");
@@ -138,7 +139,7 @@ void Kirby::GameInit()
     CreateLevel<EndingLevel>("Ending");
     CreateLevel<GameOver>("GameOver");
 
-    ChangeLevel("Boss");
+    ChangeLevel("Level1");
 }
 
 void Kirby::GameLoop()

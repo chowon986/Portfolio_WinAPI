@@ -29,12 +29,12 @@ void DieEffect::Start()
 	{
 	ColMapImage_ = Level->GetColMapImage();
 	}
-	SetState(DieEffectState::None);
+	Renderer_->ChangeAnimation("None");
 }
 
 void DieEffect::Update()
 {
-
+	StateUpdate();
 }
 
 void DieEffect::Render()
@@ -44,6 +44,19 @@ void DieEffect::Render()
 void DieEffect::SetState(DieEffectState _DieEffectState)
 {
 	DieEffectState_ = _DieEffectState;
+	switch (DieEffectState_)
+	{
+	case DieEffectState::DieEffect:
+		Renderer_->ChangeAnimation("Die");
+		break;
+	case DieEffectState::CannonEffect:
+		Renderer_->ChangeAnimation("Cannon");
+		break;
+	case DieEffectState::None:
+		Renderer_->ChangeAnimation("None");
+		break;
+	}
+	StateUpdate();
 }
 
 DieEffectState DieEffect::GetState()
@@ -69,16 +82,21 @@ void DieEffect::StateUpdate()
 
 void DieEffect::UpdateNone()
 {
-	Renderer_->ChangeAnimation("None");
 }
 
 void DieEffect::UpdateDieEffect()
 {
-	Renderer_->ChangeAnimation("Die");
+	if (Renderer_->IsAnimationName("Die") && Renderer_->IsEndAnimation())
+	{
+		SetState(DieEffectState::None);
+	}
 }
 
 void DieEffect::UpdateCannonEffect()
 {
-	Renderer_->ChangeAnimation("Cannon");
+	if (Renderer_->IsEndAnimation())
+	{
+		SetState(DieEffectState::None);
+	}
 }
 

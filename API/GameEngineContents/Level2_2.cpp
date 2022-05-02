@@ -7,7 +7,7 @@
 #include "Monster.h"
 #include "BotUI.h"
 #include "BigWaddledee.h"
-#include "Waddledi.h"
+#include "Waddledee.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "StarAttackEffect.h"
@@ -158,8 +158,8 @@ void Level2_2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
-		Waddledi* Waddledi_ = CreateActor<Waddledi>((int)ORDER::MONSTER);
-		Waddledi_->SetPosition(float4(1170.0f, 393.0f));
+		Waddledee* Waddledee_ = CreateActor<Waddledee>((int)ORDER::MONSTER);
+		Waddledee_->SetPosition(float4(1170.0f, 393.0f));
 	}
 
 }

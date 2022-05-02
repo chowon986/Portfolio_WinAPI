@@ -4,6 +4,10 @@
 #include "Player.h"
 #include <GameEngine/GameEngineCollision.h>
 #include "IceAttackEffect.h"
+#include "DieEffect.h"
+#include "FireAttackEffect.h"
+#include "SparkAttackEffect.h"
+
 
 Monster::Monster()
 	: Pos_(0, 0)
@@ -17,6 +21,12 @@ Monster::Monster()
 	, LeftDirCol_(nullptr)
 	, RightDirCol_(nullptr)
 	, EffectRenderer_(nullptr)
+	, MonsterState_(MonsterState::WALK)
+	, Level_(nullptr)
+	, IceEndCol_(nullptr)
+	, IceCol_(nullptr)
+	, DieEffect_(nullptr)
+	, ColMapImage_(nullptr)
 {
 }
 
@@ -26,15 +36,20 @@ Monster::~Monster()
 
 void Monster::Walk()
 {
-	if (true != Renderer_->IsAnimationName("Ice"))
+	if (true != Renderer_->IsAnimationName("DieRight") &&
+		true != Renderer_->IsAnimationName("DieLeft"))
 	{
-		if (Dir_.x == 1)
+
+		if (true != Renderer_->IsAnimationName("Ice"))
 		{
-			Renderer_->ChangeAnimation("WalkRight");
-		}
-		else if (Dir_.x == -1)
-		{
-			Renderer_->ChangeAnimation("WalkLeft");
+			if (Dir_.x == 1)
+			{
+				Renderer_->ChangeAnimation("WalkRight");
+			}
+			else if (Dir_.x == -1)
+			{
+				Renderer_->ChangeAnimation("WalkLeft");
+			}
 		}
 	}
 	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * Speed_);
@@ -69,13 +84,6 @@ void Monster::Start()
 	SetHP(2);
 	SetSpeed(20);
 
-	EffectRenderer_ = CreateRenderer("MonsterDie.bmp");
-	GameEngineImage* EffectImage = EffectRenderer_->GetImage();
-	EffectImage->CutCount(10, 3);
-	EffectRenderer_->CreateAnimation("MonsterDie.bmp", "DieEffect", 0, 24, 0.05f, true);
-	EffectRenderer_->ChangeAnimation("DieEffect");
-	EffectRenderer_->SetAlpha(0);
-
 	Collision_ = CreateCollision("BasicMonster", float4(48.0f, 48.0f), float4(0.0f, -30.0f));
 	IceCol_ = CreateCollision("IceCol", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
 	IceEndCol_ = CreateCollision("IceEndCol", float4(50.0f, 50.0f), float4(0.0f, -30.0f));
@@ -96,44 +104,44 @@ void Monster::Render()
 
 void Monster::Die()
 {
-	if (Player_ == nullptr)
-	{
-		return;
-	}
+	//if (Player_ == nullptr)
+	//{
+	//	return;
+	//}
 
 	if (true == IsDie())
 	{
-		if (Player_->GetPosition().x - GetPosition().x > 0) 
+		if (true == Renderer_->IsAnimationName("DieLeft") ||
+			true == Renderer_->IsAnimationName("DieRight"))
 		{
-			Dir_ = float4::LEFT;
-			Renderer_->ChangeAnimation("DieLeft");
-			if (Renderer_->IsEndAnimation())
+			if (true == Renderer_->IsEndAnimation())
 			{
 				Death();
 
-				EffectRenderer_->SetAlpha(255);
-				EffectRenderer_->ChangeAnimation("DieEffect");
-				if (EffectRenderer_->IsEndAnimation())
+				if (DieEffect_ != nullptr)
 				{
-					EffectRenderer_->SetAlpha(0);
+					DieEffect_->SetPosition(GetPosition());
+					DieEffect_->SetState(DieEffectState::DieEffect);
 				}
+				//EffectRenderer_->SetAlpha(255);
+				//EffectRenderer_->ChangeAnimation("DieEffect");
+				//if (EffectRenderer_->IsEndAnimation())
+				//{
+				//	EffectRenderer_->SetAlpha(0);
+				//}
 			}
 		}
 
-		if (Player_->GetPosition().x - GetPosition().x <= 0)
+		if (Player_->GetPosition().x - GetPosition().x > 0 && true != Renderer_->IsAnimationName("DieLeft"))
+		{
+			Dir_ = float4::LEFT;
+			Renderer_->ChangeAnimation("DieLeft");
+		}
+
+		if (Player_->GetPosition().x - GetPosition().x <= 0 && true != Renderer_->IsAnimationName("DieRight"))
 		{
 			Dir_ = float4::RIGHT;
 			Renderer_->ChangeAnimation("DieRight");
-			if (Renderer_->IsEndAnimation())
-			{
-				Death();
-				EffectRenderer_->SetAlpha(255);
-				EffectRenderer_->ChangeAnimation("DieEffect");
-				if (EffectRenderer_->IsEndAnimation())
-				{
-					EffectRenderer_->SetAlpha(0);
-				}
-			}
 		}
 
 	}
@@ -145,12 +153,12 @@ void Monster::UpdateMove()
 	if (true == IceEndCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect))
 	{
 		Death();
-		EffectRenderer_->ChangeAnimation("DieEffect");
-		EffectRenderer_->SetAlpha(255);
-		if (EffectRenderer_->IsEndAnimation())
-		{
-			EffectRenderer_->Death();
-		}
+		//EffectRenderer_->ChangeAnimation("DieEffect");
+		//EffectRenderer_->SetAlpha(255);
+		//if (EffectRenderer_->IsEndAnimation())
+		//{
+		//	EffectRenderer_->Death();
+		//}
 	}
 
 	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(20.0f, 0.0f)) || (GetPosition().x > GetLevel()->GetMapSizeX() - 1))
@@ -264,6 +272,50 @@ void Monster::UpdateMove()
 			if (ColPlayer != nullptr)
 			{
 				float Direction = ColPlayer->GetPosition().x - GetPosition().x;
+				if (Direction <= 0) // 몬스터가 오른쪽
+				{
+					Renderer_->ChangeAnimation("CollisionRight");
+				}
+
+				else // 몬스터가 왼쪽
+				{
+					Renderer_->ChangeAnimation("CollisionLeft");
+				}
+			}
+		}
+	}
+
+	std::vector<GameEngineCollision*> FireAttackColResult;
+	if (true == Collision_->CollisionResult("FireAttackCol", FireAttackColResult, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* Collision : FireAttackColResult)
+		{
+			FireAttackEffect* FireAttackEffect_ = dynamic_cast<FireAttackEffect*>(Collision->GetActor());
+			if (FireAttackEffect_ != nullptr)
+			{
+				float Direction = FireAttackEffect_->GetPosition().x - GetPosition().x;
+				if (Direction <= 0) // 몬스터가 오른쪽
+				{
+					Renderer_->ChangeAnimation("CollisionRight");
+				}
+
+				else // 몬스터가 왼쪽
+				{
+					Renderer_->ChangeAnimation("CollisionLeft");
+				}
+			}
+		}
+	}
+
+	std::vector<GameEngineCollision*> SparkAttackColResult;
+	if (true == Collision_->CollisionResult("SparkAttackCol", SparkAttackColResult, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* Collision : SparkAttackColResult)
+		{
+			SparkAttackEffect* SparkAttackEffect_ = dynamic_cast<SparkAttackEffect*>(Collision->GetActor());
+			if (SparkAttackEffect_ != nullptr)
+			{
+				float Direction = SparkAttackEffect_->GetPosition().x - GetPosition().x;
 				if (Direction <= 0) // 몬스터가 오른쪽
 				{
 					Renderer_->ChangeAnimation("CollisionRight");

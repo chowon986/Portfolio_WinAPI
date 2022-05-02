@@ -25,6 +25,7 @@ protected:
 	virtual void ColUpdate();
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
+	GameEngineCollision* BigBoxCollision_;
 	Player* Player_;
 };
 

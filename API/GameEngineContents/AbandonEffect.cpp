@@ -7,6 +7,12 @@
 #include <vector>
 
 AbandonEffect::AbandonEffect()
+	: AbandonEffectState_(AbandonEffectState::None)
+	, StartPos_()
+	, ColMapImage_(nullptr)
+	, Renderer_(nullptr)
+	, Collision_(nullptr)
+	, Image_(nullptr)
 {
 
 }
@@ -83,6 +89,7 @@ void AbandonEffect::UpdateAbandonEffectRight()
 
 	float4 Distance = GetPosition() - StartPos_;
 
+	// need to chk
 	std::vector<GameEngineCollision*> Result;
 	if (true == Collision_->CollisionResult("KirbyEatCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{

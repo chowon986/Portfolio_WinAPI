@@ -23,6 +23,7 @@ enum class MonsterClass
 	BOSS
 };
 
+class DieEffect;
 class GameEngineImage;
 class GameEngineLevel;
 class Player;
@@ -81,11 +82,17 @@ public:
 	void SetDir(float4 _Dir) { Dir_ = _Dir; }
 	GameEngineRenderer* GetRenderer() { return Renderer_; }
 
+	void SetDieEffect(DieEffect* _DieEffect)
+	{
+		DieEffect_ = _DieEffect;
+	}
+
 private:
 	void Jump();
 	void attack();
 	void GetPos(float4 _Pos);
 	void SetState(MonsterState _PrevState);
+	DieEffect* DieEffect_;
 
 public:
 	void SetPlayer(Player* _Player) { Player_ = _Player; }

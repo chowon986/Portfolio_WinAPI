@@ -168,7 +168,6 @@
     <ClInclude Include="BigBox.h" />
     <ClInclude Include="BigTreasureChest.h" />
     <ClInclude Include="BigWaddledee.h" />
-    <ClInclude Include="BlueMouse.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="BombBox.h" />
     <ClInclude Include="Boss.h" />
@@ -184,16 +183,13 @@
     <ClInclude Include="DanceStage.h" />
     <ClInclude Include="Dedede.h" />
     <ClInclude Include="DieEffect.h" />
-    <ClInclude Include="Doc.h" />
-    <ClInclude Include="Doroach.h" />
     <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="EndingStory.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FireAttackEffect.h" />
     <ClInclude Include="FireItem.h" />
-    <ClInclude Include="Frosty.h" />
     <ClInclude Include="GameOver.h" />
-    <ClInclude Include="GreenMouse.h" />
+    <ClInclude Include="GroundStarEffect.h" />
     <ClInclude Include="HPUp.h" />
     <ClInclude Include="IceAttackEffect.h" />
     <ClInclude Include="IntroStory.h" />
@@ -216,9 +212,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Monster1.h" />
-    <ClInclude Include="Monster2.h" />
-    <ClInclude Include="Monster3.h" />
-    <ClInclude Include="Moon.h" />
     <ClInclude Include="Obstruction.h" />
     <ClInclude Include="Player.h">
       <SubType>
@@ -228,21 +221,19 @@
     <ClInclude Include="RunEffect.h" />
     <ClInclude Include="SparkAttackEffect.h" />
     <ClInclude Include="Sparky.h" />
-    <ClInclude Include="Spinni.h" />
     <ClInclude Include="StarAttackEffect.h" />
-    <ClInclude Include="Storo.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="SwordAttackEffect.h" />
     <ClInclude Include="SwordItem.h" />
     <ClInclude Include="Tiktik.h" />
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="Tomato.h" />
+    <ClInclude Include="TransformEffect.h" />
     <ClInclude Include="TreasureChest.h" />
     <ClInclude Include="VideoPlayer.h" />
-    <ClInclude Include="Waddledi.h" />
+    <ClInclude Include="Waddledee.h" />
     <ClInclude Include="Waddledoo.h" />
     <ClInclude Include="WorldMap.h" />
-    <ClInclude Include="YellowMouse.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbandonEffect.cpp" />
@@ -256,7 +247,6 @@
     <ClCompile Include="BigBox.cpp" />
     <ClCompile Include="BigTreasureChest.cpp" />
     <ClCompile Include="BigWaddledee.cpp" />
-    <ClCompile Include="BlueMouse.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="BombBox.cpp" />
     <ClCompile Include="Boss.cpp" />
@@ -272,16 +262,13 @@
     <ClCompile Include="Dedede.cpp" />
     <ClCompile Include="Dedede_State.cpp" />
     <ClCompile Include="DieEffect.cpp" />
-    <ClCompile Include="Doc.cpp" />
-    <ClCompile Include="Doroach.cpp" />
     <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="EndingStory.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FireAttackEffect.cpp" />
     <ClCompile Include="FireItem.cpp" />
-    <ClCompile Include="Frosty.cpp" />
     <ClCompile Include="GameOver.cpp" />
-    <ClCompile Include="GreenMouse.cpp" />
+    <ClCompile Include="GroundStarEffect.cpp" />
     <ClCompile Include="HPUp.cpp" />
     <ClCompile Include="IceAttackEffect.cpp" />
     <ClCompile Include="IntroStory.cpp" />
@@ -304,9 +291,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Monster1.cpp" />
-    <ClCompile Include="Monster2.cpp" />
-    <ClCompile Include="Monster3.cpp" />
-    <ClCompile Include="Moon.cpp" />
     <ClCompile Include="Obstruction.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
@@ -317,21 +301,19 @@
     <ClCompile Include="RunEffect.cpp" />
     <ClCompile Include="SparkAttackEffect.cpp" />
     <ClCompile Include="Sparky.cpp" />
-    <ClCompile Include="Spinni.cpp" />
     <ClCompile Include="StarAttackEffect.cpp" />
-    <ClCompile Include="Storo.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SwordAttackEffect.cpp" />
     <ClCompile Include="SwordItem.cpp" />
     <ClCompile Include="Tiktik.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="Tomato.cpp" />
+    <ClCompile Include="TransformEffect.cpp" />
     <ClCompile Include="TreasureChest.cpp" />
     <ClCompile Include="VideoPlayer.cpp" />
-    <ClCompile Include="Waddledi.cpp" />
+    <ClCompile Include="Waddledee.cpp" />
     <ClCompile Include="Waddledoo.cpp" />
     <ClCompile Include="WorldMap.cpp" />
-    <ClCompile Include="YellowMouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngineBase\GameEngineBase.vcxproj">

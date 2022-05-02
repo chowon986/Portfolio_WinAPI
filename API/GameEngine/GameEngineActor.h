@@ -6,11 +6,6 @@
 #include "GameEngineEnum.h"
 #include <list>
 
-// 
-
-// #define RENDERORDERMAX 2147483647
-
-// Ό³Έν :
 class GameEngineLevel;
 class GameEngineRenderer;
 class GameEngineCollision;

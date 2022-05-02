@@ -1,4 +1,4 @@
-#include "Waddledi.h"
+#include "Waddledee.h"
 #include "Player.h"
 #include "Monster.h"
 #include "IceAttackEffect.h"
@@ -9,16 +9,16 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <vector>
 
-Waddledi::Waddledi()
+Waddledee::Waddledee()
 	: Monster()
 {
 }
 
-Waddledi::~Waddledi()
+Waddledee::~Waddledee()
 {
 }
 
-void Waddledi::Start()
+void Waddledee::Start()
 {
 	Monster::Start();
 	Renderer_ = CreateRenderer("Monster1.bmp");
@@ -34,12 +34,12 @@ void Waddledi::Start()
 	Renderer_->ChangeAnimation("WalkRight");
 }
 
-void Waddledi::Update()
+void Waddledee::Update()
 {
 	UpdateMove();
 	Die();
 }
 
-void Waddledi::Render()
+void Waddledee::Render()
 {
 }

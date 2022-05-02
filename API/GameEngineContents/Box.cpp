@@ -3,10 +3,9 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Player.h"
 
+
 Box::Box()
 	:Obstruction()
-	, Collision_(nullptr)
-	, Renderer_(nullptr)
 {
 }
 
@@ -17,6 +16,7 @@ Box::~Box()
 void Box::Start()
 {
 	Obstruction::Start();
+	Renderer_ = CreateRenderer("Box.bmp");
 }
 
 void Box::Update()

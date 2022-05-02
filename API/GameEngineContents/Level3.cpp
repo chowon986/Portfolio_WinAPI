@@ -7,8 +7,7 @@
 #include "Background.h"
 #include "Monster.h"
 #include "Monster1.h"
-#include "Moon.h"
-#include "Waddledi.h"
+#include "Waddledee.h"
 #include "BigWaddledee.h"
 #include "ContentsEnum.h"
 #include "StarAttackEffect.h"
@@ -20,6 +19,8 @@
 
 Level3::Level3()
 	: Player_(nullptr)
+	, PlayerStatus_(nullptr)
+	, Boss(nullptr)
 {
 }
 

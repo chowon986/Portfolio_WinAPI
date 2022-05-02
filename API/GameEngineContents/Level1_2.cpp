@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "BotUI.h"
 #include "Monster.h"
-#include "Waddledi.h"
+#include "Waddledee.h"
 #include "Box.h"
 #include "Fire.h"
 #include "Brontobert.h"
@@ -73,6 +73,11 @@ void Level1_2::Update()
 		float4 CurCameraPos = GetCameraPos();
 		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
 	}
 
 }

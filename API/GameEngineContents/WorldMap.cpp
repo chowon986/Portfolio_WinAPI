@@ -75,6 +75,20 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		GameEngineRenderer* WorldMapRenderer = WorldMap->CreateRenderer("WorldMap.bmp");
 	}
 
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player_->SetPosition(float4(147.0f, 100.0f));
+		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
+		PlayerStatus_->SetPlayer(Player_);
+		Player_->GetRenderer()->ChangeAnimation("Dance");
+
+		{
+			Player2_ = CreateActor<Player>((int)ORDER::PLAYER);
+			Player2_->GetRenderer()->ChangeAnimation("Dance");
+			Player2_->Off();
+
+		}
+
+
 	{
 		Background* WorldMap0 = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameEngineRenderer* ChooseLevel0_ = WorldMap0->CreateRenderer("WorldMap1.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-240, 90));
@@ -156,15 +170,4 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		GameEngineRenderer* WorldMapUIRenderer = WorldMapUI->CreateRenderer("WorldMapUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-100,-240));
 	}
 
-	{
-		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(147.0f, 100.0f));
-		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
-		PlayerStatus_->SetPlayer(Player_);
-		Player_->GetRenderer()->ChangeAnimation("Dance");
-
-		Player2_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player2_->GetRenderer()->ChangeAnimation("Dance");
-		Player2_->Off();
-	}
 }

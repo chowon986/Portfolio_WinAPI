@@ -34,8 +34,8 @@ void Fire::Start()
 	Renderer_->CreateAnimation("Monster1.bmp", "AttackLeft", 424, 426, 0.3f, true);
 	Renderer_->CreateAnimation("Monster1.bmp", "CollisionLeft", 179, 179, 0.5f, false);
 	Renderer_->CreateAnimation("Monster1.bmp", "CollisionRight", 438, 438, 0.5f, false);
-	Renderer_->CreateAnimation("Monster1.bmp", "DieLeft", 179, 180, 0.5f, true);
-	Renderer_->CreateAnimation("Monster1.bmp", "DieRight", 438, 439, 0.5f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "DieLeft", 179, 180, 0.3f, true);
+	Renderer_->CreateAnimation("Monster1.bmp", "DieRight", 438, 439, 0.3f, true);
 	Renderer_->CreateAnimation("Monster1.bmp", "Ice", 519, 519, 0.5f, false);
 
 	Renderer_->ChangeAnimation("WalkRight");

@@ -17,6 +17,4 @@ protected:
 	void Update();
 
 private:
-	GameEngineRenderer* Renderer_;
-	GameEngineCollision* Collision_;
 };

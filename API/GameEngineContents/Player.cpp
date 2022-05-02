@@ -9,7 +9,10 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "TransformEffect.h"
+#include "GroundStarEffect.h"
 #include "Monster.h"
+#include "RunEffect.h"
 
 int Player::HP_COUNT = 2;
 int Player::HP = 10;
@@ -52,6 +55,10 @@ Player::Player()
     , AttackEffect_(nullptr)
     , SparkAttackEffect_(nullptr)
     , SparkRenderer_(nullptr)
+    , TransformEffect_(nullptr)
+    , KirbyClass_(KirbyClass::DEFAULT)
+    , GroundStarEffect_(nullptr)
+    , AnimalCol_(nullptr)
 {
 
 }
@@ -513,6 +520,11 @@ void Player::SetState(KirbyState _KirbyState)
 
     case KirbyState::TRANSFORM:
         PigRenderer_->ChangeAnimation("Transform" + Dir_);
+        if (TransformEffect_ != nullptr)
+        {
+            TransformEffect_->SetPosition(GetPosition());
+            TransformEffect_->SetState(TransformEffectState::TransformEffect);
+        }
 		break;
 
 
@@ -730,11 +742,6 @@ void Player::Update()
 {
     float AddTime = GameEngineTime::GetDeltaTime();
     Time_ += AddTime;
-
-    if (true == GameEngineInput::GetInst()->IsDown("Collision"))
-    {
-        KirbyCol_->Off();
-    }
 
     if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
@@ -1122,6 +1129,7 @@ void Player::Update()
                 if (Offset > 0)
                 {
                     OnTheObstruction = true;
+                    //GroundStarEffect_->SetState(GroundStarEffectState::GroundStarEffect);
                 }
             }
         }
@@ -1132,7 +1140,7 @@ void Player::Update()
         (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true ) &&
         JumpDirection.y > 0 && 
         GetState() != KirbyState::DIE)
-	{
+    {
         IsGround_ = true;
         while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
         {
@@ -1286,8 +1294,6 @@ void Player::Update()
 		Time_ = 0;
     }
 
-
-
     StateUpdate();
     CheckCollision();
 
@@ -1431,6 +1437,22 @@ void Player::CheckCollision()
     if (GetPosition().y < 70)
     {
         SetPosition(float4(GetPosition().x, 70));
+    }
+
+    if (RGB(16, 184, 152) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
+    {
+        if (HPCount_ == 0)
+        {
+            GameEngine::GetInst().ChangeLevel("GameOver");
+        }
+
+        if (HPCount_ != 0)
+        {
+			--HPCount_;
+			SetHP(10);
+			SetPosition(StartPos_);
+        }
+
     }
 
     std::vector<GameEngineCollision*> ColResult;
@@ -1932,8 +1954,8 @@ void Player::Start()
         SparkRenderer_->CreateAnimation("Spark.bmp", "IdleRight", 0, 2, 0.1f, true);
         SparkRenderer_->CreateAnimation("Spark.bmp", "IdleLeft", 200, 203, 0.1f, true);
         
-        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyRight", 72, 76, 0.1f, true);
-        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyLeft", 272, 276, 0.1f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyRight", 72, 76, 0.05f, true);
+        SparkRenderer_->CreateAnimation("Spark.bmp", "FlyLeft", 272, 276, 0.05f, true);
         SparkRenderer_->CreateAnimation("Spark.bmp", "FlyStayRight", 77, 105, 0.1f, true);
         SparkRenderer_->CreateAnimation("Spark.bmp", "FlyStayLeft", 277, 305, 0.1f, true);
         SparkRenderer_->CreateAnimation("Spark.bmp", "FlyAttackRight", 106, 107, 0.1f, false);
@@ -1998,8 +2020,6 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("Animal", '4');
         GameEngineInput::GetInst()->CreateKey("Ice", '5');
         GameEngineInput::GetInst()->CreateKey("Beam", '6');
-
-        GameEngineInput::GetInst()->CreateKey("Collision", '9');
         //GameEngineInput::GetInst()->CreateKey("AbandonClass", 'O');
      }
 }

@@ -17,6 +17,7 @@
 #include "BeamAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "AbandonEffect.h"
+#include "TransformEffect.h"
 #include "Box.h"
 #include "RunEffect.h"
 
@@ -28,12 +29,13 @@ void Player::UpdateIdle()
     AnimalCol_->Off();
     SwordCol_->Off();
     KirbySlideCol_->Off();
-    //RunEffect_->Off();
-    ClassUpdate();
+    //RunEffect_->Off();z
+    SparkAttackEffect_->Off();
 }
 
 void Player::UpdateTransform()
 {
+
 }
 
 void Player::UpdateTransformEnd()
@@ -83,13 +85,14 @@ void Player::UpdateWalk()
     {
         direction = float4::LEFT;
         //Dir_ = "Left";
+        RunEffect_->SetState(RunEffectState::None);
     }
     
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
         //Dir_ = "Right";
-
+        RunEffect_->SetState(RunEffectState::None);
     }
 
     SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_);
@@ -101,20 +104,17 @@ void Player::UpdateRun()
     if (true == GameEngineInput::GetInst()->IsPress("Left"))
     {
         direction = float4::LEFT;
-        RunEffect_->On();
         RunEffect_->SetState(RunEffectState::RunEffectLeft);
-        RunEffect_->SetPosition(float4(-10.0f, 0.0f));
+        RunEffect_->SetPosition(GetPosition());
         //Dir_ = "Left";
     }
 
     else if (true == GameEngineInput::GetInst()->IsPress("Right"))
     {
         direction = float4::RIGHT;
-        RunEffect_->On();
         RunEffect_->SetState(RunEffectState::RunEffectRight);
-        RunEffect_->SetPosition(float4(10.0f, 0.0f));
+        RunEffect_->SetPosition(GetPosition());
         //Dir_ = "Right";
-
     }
 
 

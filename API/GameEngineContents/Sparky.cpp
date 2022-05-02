@@ -24,6 +24,15 @@ Sparky::~Sparky()
 void Sparky::Start()
 {
 	Monster::Start();
+	AttackRenderer_ = CreateRenderer("Monster1.bmp");
+	GameEngineImage* AttackImage = AttackRenderer_->GetImage();
+	AttackImage->CutCount(10, 52);
+	AttackRenderer_->CreateAnimation("Monster1.bmp", "Attack", 118, 119, 0.3f, true);
+	AttackRenderer_->ChangeAnimation("Attack");
+	AttackRenderer_->SetAlpha(255);
+	AttackCol_ = CreateCollision("AttackCol", float4(150.0f, 150.0f), float4(0.0f, -15.0f));
+	AttackRangeCol_ = CreateCollision("AttackRangeCol", float4(100.0f, 50.0f), float4(0.0f, -25.0f));
+	AttackCol_->Off();
 
 	Renderer_ = CreateRenderer("Monster1.bmp");
 	GameEngineImage* Image = Renderer_->GetImage();
@@ -39,15 +48,6 @@ void Sparky::Start()
 
 	Renderer_->ChangeAnimation("WalkRight");
 
-	AttackRenderer_ = CreateRenderer("Monster1.bmp");
-	GameEngineImage* AttackImage = AttackRenderer_->GetImage();
-	AttackImage->CutCount(10, 52);
-	AttackRenderer_->CreateAnimation("Monster1.bmp", "Attack", 118, 119, 0.3f, true);
-	AttackRenderer_->ChangeAnimation("Attack");
-	AttackRenderer_->SetAlpha(255);
-	AttackCol_ = CreateCollision("AttackCol", float4(150.0f, 150.0f), float4(0.0f, -15.0f));
-	AttackRangeCol_ = CreateCollision("AttackRangeCol", float4(100.0f, 50.0f), float4(0.0f, -25.0f));
-	AttackCol_->Off();
 
 }
 
@@ -85,6 +85,7 @@ void Sparky::UpdateAttack()
 	{
 		return;
 	}
+
 	std::vector<GameEngineCollision*> Result;
 	if (AttackRangeCol_->CollisionResult("KirbyCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{
@@ -105,6 +106,7 @@ void Sparky::UpdateAttack()
 	else
 	{
 		AttackRenderer_->SetAlpha(0);
+		AttackCol_->Off();
 		CanMove_ = true;
 	}
 

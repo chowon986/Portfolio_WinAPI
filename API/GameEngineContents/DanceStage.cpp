@@ -9,6 +9,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 DanceStage::DanceStage()
+	:DanceKirbyRenderer(nullptr)
+	,PlayerRenderer_(nullptr)
+	,Player_(nullptr)
 {
 }
 

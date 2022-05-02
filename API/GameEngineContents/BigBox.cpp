@@ -4,8 +4,6 @@
 
 BigBox::BigBox()
 	:Obstruction()
-	, Collision_(nullptr)
-	, Renderer_(nullptr)
 {
 }
 
@@ -17,10 +15,10 @@ void BigBox::Start()
 {
 	Obstruction::Start();
 	Renderer_ = CreateRenderer("BigBox.bmp");
-	Collision_ = CreateCollision("Obstruction", float4(81.0f, 81.0f), float4(0.0f, 0.0f));
+	Collision_->SetScale(float4(82.0f, 82.0f));
 }
 
 void BigBox::Update()
 {
-
+	ColUpdate();
 }

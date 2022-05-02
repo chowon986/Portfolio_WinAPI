@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Monster1.h"
 #include "Fire.h"
-#include "Waddledi.h"
+#include "Waddledee.h"
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImage.h>
@@ -24,6 +24,8 @@
 
 Level1_4::Level1_4()
 	: Player_(nullptr)
+	, PlayerStatus_(nullptr)
+	, Cannon_(nullptr)
 {
 }
 
@@ -73,6 +75,11 @@ void Level1_4::Update()
 		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
 		SetCameraPos(CurCameraPos);
 	}
+
+}
+
+void Level1_4::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
 
 }
 
