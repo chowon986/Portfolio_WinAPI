@@ -38,15 +38,14 @@ void Level2::Update()
 {
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
-	if (0 > GetCameraPos().x)
+	if (0 >= GetCameraPos().x)
 	{
 		float4 CurCameraPos = GetCameraPos();
 		CurCameraPos.x = 0;
 		SetCameraPos(CurCameraPos);
 	}
 
-
-	if (0 > GetCameraPos().y)
+	if (0 >= GetCameraPos().y)
 	{
 		float4 CurCameraPos = GetCameraPos();
 		CurCameraPos.y = 0;
@@ -59,14 +58,14 @@ void Level2::Update()
 	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = GetCameraPos().x - (GetCameraPos().x + CameraRectX - GetMapSizeX());
+		CurCameraPos.x = static_cast<int>(GetCameraPos().ix() - (GetCameraPos().ix() + CameraRectX - GetMapSizeX()));
 		SetCameraPos(CurCameraPos);
 	}
 
 	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
 	{
 		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = GetCameraPos().y - (GetCameraPos().y + CameraRectY - GetMapSizeY());
+		CurCameraPos.y = static_cast<int>(GetCameraPos().iy() - (GetCameraPos().iy() + CameraRectY - GetMapSizeY()));
 		SetCameraPos(CurCameraPos);
 	}
 }

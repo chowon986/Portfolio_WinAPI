@@ -1146,8 +1146,8 @@ void Player::Update()
         {
             SetMove(float4::UP);
         }
-        // need to chk** : 아래부분 남기면 오른쪽으로 이동하는 속도 느려짐
-        // SetPosition(float4(GetPosition().ix(), GetPosition().iy()));
+        // need to chk**
+         SetPosition(float4(GetPosition().x, GetPosition().iy()));
 
         JumpHeight_ = 0;
         float4 Distance = GetPosition() - StartPos_;
