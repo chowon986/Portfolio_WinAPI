@@ -23,6 +23,7 @@
 
 void Player::UpdateIdle()
 {
+    GetRenderer()->SetAlpha(255);
     KirbyEatCol_->Off();
     FireAttackEffect_->Off();
     IceAttackEffect_->Off();
