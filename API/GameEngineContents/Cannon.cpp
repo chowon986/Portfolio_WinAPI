@@ -17,6 +17,10 @@
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
 #include "FireAttackEffect.h"
+#include "TransformEffect.h"
+#include "SparkAttackEffect.h"
+#include "RunEffect.h"
+#include "GroundStarEffect.h"
 
 Cannon::Cannon()
 	:CanCol_(nullptr)
@@ -84,6 +88,8 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Background* Cannon = CreateActor<Background>((int)ORDER::BACKGROUND);
 		Cannon->CreateRenderer("Cannon.bmp");
+		SetColMapImage("CannonColMap.bmp");
+		ColMapImage_ = GetColMapImage();
 
 	}
 
@@ -97,7 +103,7 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		CanRenderer_->CreateAnimation("can.bmp", "CanStop", 0, 2, 0.08f, false);
 
 		CanRenderer_->ChangeAnimation("CanIdle");
-		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 10.0f), float4(0.0f, 30.0f));
+		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 50.0f), float4(0.0f, 30.0f));
 
 	}
 	{
@@ -110,10 +116,29 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
+		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
+		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
+		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
+		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
+		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
+		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
+		GroundStarEffect* GroundStarEffect_ = CreateActor<GroundStarEffect>((int)ORDER::EFFECT);
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(384.0f, 0.0f));
 		PlayerRenderer_ = Player_->GetRenderer();
 		PlayerRenderer_->ChangeAnimation("JumpDownRight");
+		
+		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetAttackEffect(AttackEffect_);
+		Player_->SetIceAttackEffect(IceAttackEffect_);
+		Player_->SetFireAttackEffect(FireAttackEffect_);
+		Player_->SetSparkAttackEffect(SparkAttackEffect_);
+		Player_->SetRunEffect(RunEffect_);
+		Player_->SetTransformEffect(TransformEffect_);
+		Player_->SetGroundStarEffect(GroundStarEffect_);
+
+
 
 		Background* CannonEffect_ = CreateActor<Background>((int)ORDER::BACKGROUND);
 		CannonRenderer_ = CannonEffect_->CreateRenderer("MonsterDie.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
@@ -126,15 +151,7 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
-		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
-		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
-		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
-		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 
-		Player_->SetStarAttackEffect(StarAttackEffect_);
-		Player_->SetAttackEffect(AttackEffect_);
-		Player_->SetIceAttackEffect(IceAttackEffect_);
-		Player_->SetFireAttackEffect(FireAttackEffect_);
 	}
 }
 

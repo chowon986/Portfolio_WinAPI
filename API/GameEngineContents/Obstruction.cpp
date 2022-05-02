@@ -40,9 +40,9 @@ void Obstruction::ColUpdate()
 	}
 
 	std::vector<GameEngineCollision*> SparkAttColResult;
-	if (true == Collision_->CollisionResult("SparkAttackCol", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("SparkAttackCol", SparkAttColResult, CollisionType::Rect, CollisionType::Rect))
 	{
-		for (GameEngineCollision* Collision : Result)
+		for (GameEngineCollision* Collision : SparkAttColResult)
 		{
 			SparkAttackEffect* SparkAttackEffect_ = dynamic_cast<SparkAttackEffect*>(Collision->GetActor());
 			if (SparkAttackEffect_ != nullptr)
@@ -54,9 +54,9 @@ void Obstruction::ColUpdate()
 
 
 	std::vector<GameEngineCollision*> FireAttColResult;
-	if (true == Collision_->CollisionResult("FireAttackCol", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("FireAttackCol", FireAttColResult, CollisionType::Rect, CollisionType::Rect))
 	{
-		for (GameEngineCollision* Collision : Result)
+		for (GameEngineCollision* Collision : FireAttColResult)
 		{
 			FireAttackEffect* FireAttackEffect_ = dynamic_cast<FireAttackEffect*>(Collision->GetActor());
 			if (FireAttackEffect_ != nullptr)
@@ -68,9 +68,9 @@ void Obstruction::ColUpdate()
 
 
 	std::vector<GameEngineCollision*> IceAttColResult;
-	if (true == Collision_->CollisionResult("IceAttackCol", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("IceAttackCol", IceAttColResult, CollisionType::Rect, CollisionType::Rect))
 	{
-		for (GameEngineCollision* Collision : Result)
+		for (GameEngineCollision* Collision : IceAttColResult)
 		{
 			IceAttackEffect* IceAttackEffect_ = dynamic_cast<IceAttackEffect*>(Collision->GetActor());
 			if (IceAttackEffect_ != nullptr)
