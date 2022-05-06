@@ -53,7 +53,7 @@ void Sword::Render()
 {
 }
 
-void Sword::Update()
+void Sword::DelayUpdate	()
 {
 	UpdateAttack();
 	UpdateMove();

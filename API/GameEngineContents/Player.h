@@ -60,6 +60,7 @@ class DieEffect;
 class RunEffect;
 class GroundStarEffect;
 class TransformEffect;
+class AbandonEffect;
 class Player : public CharacterBase
 {
 public:
@@ -85,7 +86,6 @@ public:
 	KirbyState GetState() { return KirbyState_; }
 	GameEngineRenderer* GetRenderer();
 	void SetGravity(float _Gravity) { Gravity_ = _Gravity; }
-protected:
 
 private:
 	GameEngineRenderer* Renderer_;
@@ -112,6 +112,7 @@ private:
 	float4 StartPos_;
 	float4 MapStartPos_;
 
+	AbandonEffect* AbandonEffect_;
 	StarAttackEffect* StarAttackEffect_;
 	AttackEffect* AttackEffect_;
 	IceAttackEffect* IceAttackEffect_;
@@ -145,7 +146,7 @@ private:
 	void ClassUpdate();
 
 	virtual void Start() override;
-	virtual void Update() override;
+	virtual void DelayUpdate() override;
 	virtual void Render() override;
 
 	void CorrectPos();
@@ -191,6 +192,11 @@ public:
 	void SetMapStartPos(float4 _MapStartPos)
 	{ 
 		MapStartPos_ = _MapStartPos;
+	}
+
+	void SetAbandonEffect(AbandonEffect* _AbandonEffect)
+	{
+		AbandonEffect_ = _AbandonEffect;
 	}
 
 	void SetStarAttackEffect(StarAttackEffect* _StarAttackEffect)

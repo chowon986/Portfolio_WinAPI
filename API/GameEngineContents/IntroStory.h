@@ -1,9 +1,9 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include "GameEngineLevelBase.h"
 
 class VideoPlayer;
-class IntroStory : public GameEngineLevel
+class IntroStory : public GameEngineLevelBase
 {
 public:
 	IntroStory();
@@ -15,7 +15,7 @@ public:
 	IntroStory& operator=(IntroStory&& _Other) noexcept = delete;
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 private:

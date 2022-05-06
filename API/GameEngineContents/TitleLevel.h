@@ -1,7 +1,7 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
+#include "GameEngineLevelBase.h"
 
-class TitleLevel : public GameEngineLevel
+class TitleLevel : public GameEngineLevelBase
 {
 
 public:
@@ -15,7 +15,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 
 private:
 

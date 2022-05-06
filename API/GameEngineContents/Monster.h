@@ -47,7 +47,6 @@ protected:
 	virtual bool CanWalk();
 	virtual void Walk();
 	void Start();
-	void Update();
 	void Render();
 	
 

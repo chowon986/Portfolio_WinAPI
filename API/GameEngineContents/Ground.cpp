@@ -6,7 +6,8 @@
 
 
 Ground::Ground()
-	:Obstruction()
+	: Renderer_(nullptr)
+	, Collision_(nullptr)
 {
 }
 
@@ -16,8 +17,8 @@ Ground::~Ground()
 
 void Ground::Start()
 {
-	Obstruction::Start();
-	Collision_->SetScale(float4(50.0f, 50.0f));
+	Collision_ = CreateCollision("Ground", float4(10.0f, 10.0f), float4(0.0f, 0.0f));
+	MoveCollision_ = CreateCollision("MoveGround", float4(50.0f, 70.0f), float4(0.0f, 10.0f));
 	Renderer_ = CreateRenderer("Ground.bmp");
 	GameEngineImage* Image = Renderer_->GetImage();
 	Image->CutCount(10, 5);
@@ -82,21 +83,23 @@ void Ground::Start()
 void Ground::Update()
 {
 	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("AnimalCol", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("KirbyCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{
 		for (GameEngineCollision* Collision : Result)
 		{
-			Player* Player_ = dynamic_cast<Player*>(Collision->GetActor());
-			SetPlayer(Player_);
-			if (Player_ != nullptr)
+			Player* Player_ = dynamic_cast<Player*>(Collision->GetActor());			
+			if (Player_ != nullptr &&
+				Player_->GetKirbyClass() == KirbyClass::ANIMAL)
 			{
-				Death();
+				KirbyState State_ = Player_->GetState();
+				if (State_ == KirbyState::DOWN ||
+					State_ == KirbyState::UP ||
+					State_ == KirbyState::WALK)
+				{
+					Death();
+				}				
 			}
 		}
 	}
-}
-
-void Ground::ColUpdate()
-{
 }
 

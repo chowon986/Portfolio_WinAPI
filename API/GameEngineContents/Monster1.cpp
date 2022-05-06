@@ -47,7 +47,7 @@ void Monster1::Render()
 {
 }
 
-void Monster1::Update()
+void Monster1::DelayUpdate()
 {
 	UpdateAttack();
 	UpdateMove();

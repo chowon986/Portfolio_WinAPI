@@ -1,12 +1,11 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include "GameEngineLevelBase.h"
 
 
 class BotUI;
 class Player;
-class AnimationKirby;
-class WorldMap : public GameEngineLevel
+class WorldMap : public GameEngineLevelBase
 {
 public:
 	WorldMap();
@@ -19,7 +18,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
@@ -28,14 +27,12 @@ private:
 	BotUI* PlayerStatus2_;
 	Player* Player_;
 	Player* Player2_;
-	AnimationKirby* Kirby1_;
-	AnimationKirby* Kirby2_;
 	GameEngineCollision* Star1_;
 	GameEngineRenderer* WorldMapStarRenderer1;
 	GameEngineRenderer* LittleStarRenderer;
 	GameEngineRenderer* LittleStarRenderer2;
 	GameEngineRenderer* ChooseLevel1_;
 	GameEngineSoundPlayer BgmPlayer_;
-
+	int Level_;
 };
 

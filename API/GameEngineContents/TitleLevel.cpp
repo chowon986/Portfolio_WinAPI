@@ -8,6 +8,7 @@
 
 TitleLevel::TitleLevel()
 {
+	DelayTime_ = 0.0f;
 }
 
 TitleLevel::~TitleLevel()
@@ -25,7 +26,7 @@ void TitleLevel::Loading()
 	TitleRenderer->ChangeAnimation("Title");
 }
 
-void TitleLevel::Update()
+void TitleLevel::DelayUpdate()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{

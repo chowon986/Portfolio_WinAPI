@@ -31,7 +31,7 @@ void BombBox::Start()
 	Collision3_->Off();
 }
 
-void BombBox::Update()
+void BombBox::DelayUpdate()
 {
 
 	if (true == Collision_->CollisionCheck("Bomb"))

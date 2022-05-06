@@ -5,6 +5,7 @@
 
 EndingStory::EndingStory()
 {
+	DelayTime_ = 0.0f;
 }
 
 EndingStory::~EndingStory()
@@ -15,7 +16,7 @@ void EndingStory::Loading()
 {
 }
 
-void EndingStory::Update()
+void EndingStory::DelayUpdate()
 {
 	if (0 >= GetCameraPos().x)
 	{
@@ -56,6 +57,7 @@ void EndingStory::Update()
 
 void EndingStory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	VideoPlayer* EndingVideo = CreateActor<VideoPlayer>();
 	EndingVideo->SetInfo("ending_frame_", 0, 1030, 60);
 }

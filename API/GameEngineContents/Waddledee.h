@@ -21,5 +21,5 @@ public:
 public:
 	void Start() override;
 	void Render() override;
-	void Update() override;
+	void DelayUpdate() override;
 };

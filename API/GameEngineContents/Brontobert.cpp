@@ -39,7 +39,7 @@ void Brontobert::Render()
 {
 }
 
-void Brontobert::Update()
+void Brontobert::DelayUpdate()
 {
 	UpdateMove();
 	Die();

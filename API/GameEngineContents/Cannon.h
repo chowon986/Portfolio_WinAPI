@@ -1,6 +1,6 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include "GameEngineLevelBase.h"
 
 class GameEngineRenderer;
 class GameEngineCollision;
@@ -8,7 +8,7 @@ class Player;
 class GameEngineImage;
 class DieEffect;
 class GameEngineSoundPlayer;
-class Cannon : public GameEngineLevel
+class Cannon : public GameEngineLevelBase
 {
 public:
 	Cannon();
@@ -21,9 +21,10 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
+
+	void DelayUpdate() override;
 
 private:
 	GameEngineRenderer* CanRenderer_;
@@ -34,7 +35,8 @@ private:
 	Player* Player_;
 	float4 PrevPos_;
 	GameEngineSoundPlayer BgmPlayer_;
-	GameEngineRenderer* AlphaRenderer_;
 	float Time_;
+	bool Rotation_;
+	int Index_;
 };
 

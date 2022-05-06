@@ -1,7 +1,7 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
+#include "GameEngineLevelBase.h"
 
-class EndingLevel : public GameEngineLevel
+class EndingLevel : public GameEngineLevelBase
 {
 public:
 	EndingLevel();
@@ -14,7 +14,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 
 private:
 

@@ -32,7 +32,7 @@ void Tiktik::Start()
 	Renderer_->ChangeAnimation("WalkRight");
 }
 
-void Tiktik::Update()
+void Tiktik::DelayUpdate()
 {
 	UpdateMove();
 	Die();

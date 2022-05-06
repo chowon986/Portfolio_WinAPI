@@ -19,6 +19,7 @@
 #include "TransformEffect.h"
 #include "Box.h"
 #include "RunEffect.h"
+#include "AbandonEffect.h"
 
 void Player::UpdateIdle()
 {
@@ -57,7 +58,7 @@ void Player::UpdateTakeDamage()
                 float MoveDir = CenterColMonster->GetPosition().x - GetPosition().x;
                 if (MoveDir <= 0)
                 {
-                    if (StartPos.x - GetPosition().x < -20)
+                    if (StartPos.x - GetPosition().x < -40)
                     {
                         float4 Dir = float4::RIGHT;
                         float4 Move = Dir * GameEngineTime::GetDeltaTime() * 100;
@@ -66,13 +67,43 @@ void Player::UpdateTakeDamage()
                 }
                 if (MoveDir > 0)
                 {
-                    if (StartPos.x - GetPosition().x > 20)
+                    if (StartPos.x - GetPosition().x > 40)
                     {
                         float4 Dir = float4::LEFT;
                         float4 Move = Dir * GameEngineTime::GetDeltaTime() * 100;
                         SetMove(Move);
                     }
                 }
+            }
+        }
+    }
+    
+    MonsterClass MonClass = MonsterClass::NONE;
+    switch (KirbyClass_)
+    {
+    case KirbyClass::ANIMAL: MonClass = MonsterClass::ANIMAL; break;
+    case KirbyClass::FIRE: MonClass = MonsterClass::FIRE; break;
+    case KirbyClass::ICE: MonClass = MonsterClass::ICE; break;
+    case KirbyClass::SPARK: MonClass = MonsterClass::SPARK; break;
+    case KirbyClass::SWORD: MonClass = MonsterClass::SWORD; break;
+    default: MonClass = MonsterClass::NONE; break;
+    }
+
+    if (MonsterClass::NONE != MonClass)
+    {
+        if (AbandonEffect_ != nullptr)
+        {
+            SetKirbyClass(KirbyClass::DEFAULT);
+            AbandonEffect_->On();
+            AbandonEffect_->SetMonsterClass(MonClass);
+            AbandonEffect_->SetPosition(GetPosition()); // need to chk : the pos;
+            if (Dir_ == "Right")
+            {
+                AbandonEffect_->SetState(AbandonEffectState::Left);
+            }
+            else if (Dir_ == "Left")
+            {
+                AbandonEffect_->SetState(AbandonEffectState::Right);
             }
         }
     }
@@ -259,23 +290,17 @@ void Player::UpdateDie()
 
 void Player::UpdateUp()
 {
-    //if (GetKirbyClass() == KirbyClass::ANIMAL)
-    //{
-	/*JumpHeight_ = 0;
-	SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
-	UpdateWalk();
-	UpdateRun();*/
-    //}
-    //else
-    //{
-    //    SetKirbyClass(KirbyClass::DEFAULT);
-    //    SetState(KirbyState::IDLE);
-    //}
+    if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == KirbyCol_->CollisionCheck("MoveGround", CollisionType::Rect, CollisionType::Rect))
+    {
+        SetMove(float4::UP);
+    }
 }
 
 void Player::UpdateDown()
 {
-    if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x), int(GetPosition().y+1)))
+    if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) &&
+        true == KirbyCol_->CollisionCheck("MoveGround", CollisionType::Rect, CollisionType::Rect))
     {
         SetMove(float4::DOWN);
     }
@@ -311,22 +336,30 @@ void Player::UpdateEat()
     }
 
 	std::vector <GameEngineCollision*> ColResult;
-    if (true == KirbyEatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyEatCol_->CollisionResult("BasicMonster", ColResult, CollisionType::Rect, CollisionType::Rect) ||
+        true == KirbyEatCol_->CollisionResult("AbandonEffect", ColResult, CollisionType::Rect, CollisionType::Rect))
     {
         for (GameEngineCollision* Collision : ColResult)
         {
             GameEngineActor* Actor = Collision->GetActor();
             Monster_ = dynamic_cast<Monster*>(Actor);
-            if (nullptr != Monster_)
+            AbandonEffect* Effect_ = dynamic_cast<AbandonEffect*>(Actor);
+            if (nullptr != Monster_ ||
+                nullptr != Effect_)
             {
-                float4 MonPos = GetPosition() - Monster_->GetPosition();
-                if (MonPos.x > 0) // 내가 오른쪽
+                float4 Pos = GetPosition() - Actor->GetPosition();
+                if (Pos.x > 0) // 내가 오른쪽
                 {
-                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5); 
+                    Actor->SetMove(Pos * GameEngineTime::GetDeltaTime()* 5);
                 }
-                if (MonPos.x < 0) // 내가 왼쪽 
+                if (Pos.x < 0) // 내가 왼쪽 
                 {
-                    Monster_->SetMove(MonPos * GameEngineTime::GetDeltaTime()* 5);
+                    Actor->SetMove(Pos * GameEngineTime::GetDeltaTime()* 5);
+                }
+
+                if (Effect_ != nullptr)
+                {
+                    Effect_->SetState(AbandonEffectState::Eaten);
                 }
             }
         }
@@ -340,6 +373,16 @@ void Player::UpdateEatEnd()
         MonClass_ = Monster_->GetMonsterClass();
         Monster_->Death();
         Monster_ = nullptr;
+    }
+
+    if (nullptr != AbandonEffect_)
+    {
+        MonsterClass Class = AbandonEffect_->GetMonsterClass();
+        if (Class != MonsterClass::NONE)
+        {
+            MonClass_ = AbandonEffect_->GetMonsterClass();
+            AbandonEffect_->Off();
+        }
     }
    
     KirbyEatCol_->Off();

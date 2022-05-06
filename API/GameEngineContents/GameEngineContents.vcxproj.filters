@@ -198,6 +198,7 @@
     <ClCompile Include="AnimationKirby.cpp">
       <Filter>Kirby</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineLevelBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -392,6 +393,7 @@
     <ClInclude Include="AnimationKirby.h">
       <Filter>Kirby</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineLevelBase.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

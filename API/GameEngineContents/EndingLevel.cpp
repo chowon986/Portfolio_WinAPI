@@ -16,7 +16,7 @@ void EndingLevel::Loading()
 
 }
 
-void EndingLevel::Update()
+void EndingLevel::DelayUpdate()
 {
 
 }

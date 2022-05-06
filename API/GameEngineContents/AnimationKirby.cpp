@@ -91,7 +91,7 @@ void AnimationKirby::Start()
     StartPos_ = GetPosition();
 }
 
-void AnimationKirby::Update()
+void AnimationKirby::DelayUpdate()
 {
     Time_ += GameEngineTime::GetDeltaTime();
     if (GetClass() == AnimationKirbyClass::DANCE)

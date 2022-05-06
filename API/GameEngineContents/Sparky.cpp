@@ -56,7 +56,7 @@ void Sparky::Render()
 {
 }
 
-void Sparky::Update()
+void Sparky::DelayUpdate()
 {
 	UpdateAttack();
 	UpdateMove();

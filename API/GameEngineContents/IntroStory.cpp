@@ -6,6 +6,7 @@
 IntroStory::IntroStory()
 	:IntroVideo_(nullptr)
 {
+	DelayTime_ = 0.0f;
 }
 
 IntroStory::~IntroStory()
@@ -18,7 +19,7 @@ void IntroStory::Loading()
 
 }
 
-void IntroStory::Update()
+void IntroStory::DelayUpdate()
 {
 	if (true == IntroVideo_->IsVideoFinished())
 	{
@@ -30,6 +31,7 @@ void IntroStory::Update()
 
 void IntroStory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	IntroVideo_ = CreateActor<VideoPlayer>();
 	IntroVideo_->SetInfo("intro_frame_", 438, 1200, 43.0f);
 	BgmPlayer = GameEngineSound::SoundPlayControl("Test1.mp3");

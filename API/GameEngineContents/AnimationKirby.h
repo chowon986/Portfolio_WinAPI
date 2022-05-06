@@ -48,7 +48,7 @@ private:
 
 
 	virtual void Start() override;
-	virtual void Update() override;
+	virtual void DelayUpdate() override;
 	virtual void Render() override;
 
 	void CheckCollision();

@@ -55,7 +55,7 @@ void Fire::Render()
 {
 }
 
-void Fire::Update()
+void Fire::DelayUpdate()
 {
 	UpdateAttack();
 	UpdateMove();

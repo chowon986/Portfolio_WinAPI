@@ -15,6 +15,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include "AbandonEffect.h"
 #include "StarAttackEffect.h"
 #include "AttackEffect.h"
 #include "IceAttackEffect.h"
@@ -25,7 +26,6 @@
 #include "GameEngineBase/GameEngineSound.h"
 #include "TransformEffect.h"
 #include "GroundStarEffect.h"
-#include "AnimationKirby.h"
 
 Level1::Level1()
 	: Player_(nullptr)
@@ -46,7 +46,7 @@ void Level1::Loading()
 
 }
 
-void Level1::Update()
+void Level1::DelayUpdate()
 {
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -89,6 +89,7 @@ void Level1::Update()
 
 void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetMapSizeX(4608);
 	SetMapSizeY(576);
 
@@ -147,6 +148,7 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
+		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
 		IceAttackEffect* IceAttackEffect_ = CreateActor<IceAttackEffect>((int)ORDER::EFFECT);
@@ -169,9 +171,7 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetRunEffect(RunEffect_);
 		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetGroundStarEffect(GroundStarEffect_);
-
-		AnimationKirby_ = CreateActor<AnimationKirby>((int)ORDER::ANIMATION);
-		AnimationKirby_->SetPosition(float4(0.0f, 60.0f));
+		Player_->SetAbandonEffect(AbandonEffect_);
 	}
 
 	{

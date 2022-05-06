@@ -16,6 +16,7 @@
 #include "SparkAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
+#include "AbandonEffect.h"
 
 
 
@@ -33,7 +34,7 @@ void Level1_3::Loading()
 {
 }
 
-void Level1_3::Update()
+void Level1_3::DelayUpdate()
 {
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -76,6 +77,7 @@ void Level1_3::Update()
 
 void Level1_3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetMapSizeX(768);
 	SetMapSizeY(1152);
 	SetColMapImage("Stage1_3ColMap.bmp");
@@ -98,8 +100,9 @@ void Level1_3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
-
+		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetPosition(float4(45, 960));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);

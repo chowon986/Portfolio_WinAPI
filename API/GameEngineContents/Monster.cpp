@@ -39,7 +39,6 @@ void Monster::Walk()
 	if (true != Renderer_->IsAnimationName("DieRight") &&
 		true != Renderer_->IsAnimationName("DieLeft"))
 	{
-
 		if (true != Renderer_->IsAnimationName("Ice"))
 		{
 			if (Dir_.x == 1)
@@ -51,8 +50,8 @@ void Monster::Walk()
 				Renderer_->ChangeAnimation("WalkLeft");
 			}
 		}
+		SetMove(Dir_ * GameEngineTime::GetDeltaTime() * Speed_);
 	}
-	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * Speed_);
 }
 
 void Monster::Jump()
@@ -91,11 +90,6 @@ void Monster::Start()
 	LeftDirCol_ = CreateCollision("LeftDirCol", float4(10.0f, 50.0f), float4(-80.0f, -30.0f));
 	IceCol_->Off();
 	IceEndCol_->Off();
-}
-
-void Monster::Update()
-{
-
 }
 
 void Monster::Render()
@@ -393,6 +387,12 @@ void Monster::UpdateMove()
 
 bool Monster::CanWalk()
 {
+	if (true == Renderer_->IsAnimationName("DieRight") ||
+		true == Renderer_->IsAnimationName("DieLeft"))
+	{
+		return false;
+	}
+
 	if (Renderer_->IsAnimationName("CollisionRight") ||
 		Renderer_->IsAnimationName("CollisionLeft"))
 	{

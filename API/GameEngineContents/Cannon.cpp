@@ -21,15 +21,18 @@
 #include "SparkAttackEffect.h"
 #include "RunEffect.h"
 #include "GroundStarEffect.h"
+#include "AbandonEffect.h"
 #include "GameEngineBase/GameEngineSound.h"
 
 Cannon::Cannon()
 	:CanCol_(nullptr)
-	,CannonRenderer_(nullptr)
-	,CanRenderer_(nullptr)
-	,PlayerRenderer_(nullptr)
-	,Player_(nullptr)
-	,TomatoRenderer_(nullptr)
+	, CannonRenderer_(nullptr)
+	, CanRenderer_(nullptr)
+	, PlayerRenderer_(nullptr)
+	, Player_(nullptr)
+	, TomatoRenderer_(nullptr)
+	, Rotation_(false)
+	, Index_(-1)
 {
 }
 
@@ -37,62 +40,12 @@ Cannon::~Cannon()
 {
 }
 
-void Cannon::Update()
-{
-
-		AlphaRenderer_->SetAlpha(0);
-
-		if (Player_->GetPosition().x >= GetMapSizeX() - 20)
-		{
-			GameEngine::GetInst().ChangeLevel("DanceStage");
-		}
-
-		if (true == CanRenderer_->IsAnimationName("CanStop") && true == CanRenderer_->IsEndAnimation())
-		{
-			Player_->SetGravity(0.0f);
-			//if (true != CannonRenderer_->IsAnimationName("None2") && false == CannonRenderer_->IsAnimationName("Cannon"))
-			//{
-			//	//CannonRenderer_->ChangeAnimation("Cannon");
-			//	//CannonRenderer_->SetPivot(float4(0.0f, 50.0f));
-			//}
-
-			if ((PrevPos_.x - Player_->GetPosition().x) > -1000)
-			{
-				PlayerRenderer_->ChangeAnimation("Die");
-				PlayerRenderer_->GetActor()->On();
-				Player_->SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 5000);
-			}
-		}
-
-		//if (true == CannonRenderer_->IsAnimationName("Cannon") && true == CannonRenderer_->IsEndAnimation())
-		//{
-		//	CannonRenderer_->ChangeAnimation("None2");
-		//}
-
-		if (true == CanRenderer_->IsAnimationName("CanMove") && true == CanRenderer_->IsEndAnimation() && true != CanRenderer_->IsAnimationName("CanStop"))
-		{
-			CanRenderer_->ChangeAnimation("CanStop");
-		}
-
-		if (CanCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect) &&
-			true != CanRenderer_->IsAnimationName("CanMove") &&
-			true != CanRenderer_->IsAnimationName("CanStop"))
-		{
-			PrevPos_.x = Player_->GetPosition().x;
-			PlayerRenderer_->GetActor()->Off();
-			CanRenderer_->ChangeAnimation("CanMove");
-		}
-
-		if (true == GameEngineInput::GetInst()->IsDown("Collision"))
-		{
-			IsDebugModeOn();
-		}
-	
-}
-
-
 void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
+
+	DelayTime_ = 1.0f;
+
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("Cannon.mp3");
 	SetColMapImage("Cannon.bmp");
 	ColMapImage_ = GetColMapImage();
@@ -111,11 +64,16 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		CanRenderer_ = Can->CreateRenderer("can.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 30.0f));
 		GameEngineImage* CanImage = CanRenderer_->GetImage();
 		CanImage->CutCount(4, 2);
-		CanRenderer_->CreateAnimation("can.bmp", "CanIdle", 0, 0, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "CanMove", 0, 7, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "CanStop", 0, 2, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can0", 0, 0, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can1", 1, 1, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can2", 2, 2, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can3", 3, 3, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can4", 4, 4, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can5", 5, 5, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can6", 6, 6, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can7", 7, 7, 0.08f, false);
 
-		CanRenderer_->ChangeAnimation("CanIdle");
+		CanRenderer_->ChangeAnimation("Can0");
 		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 10.0f), float4(0.0f, 30.0f));
 
 	}
@@ -139,10 +97,12 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
 		GroundStarEffect* GroundStarEffect_ = CreateActor<GroundStarEffect>((int)ORDER::EFFECT);
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
+		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetPosition(float4(384.0f, 0.0f));
 		PlayerRenderer_ = Player_->GetRenderer();
 		PlayerRenderer_->ChangeAnimation("JumpDownRight");
-		
+
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
@@ -151,10 +111,7 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetRunEffect(RunEffect_);
 		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetGroundStarEffect(GroundStarEffect_);
-
-		Background* AlphaBlack = CreateActor<Background>((int)ORDER::ALPHA);
-		AlphaRenderer_ = AlphaBlack->CreateRenderer("Black.bmp");
-		AlphaRenderer_->SetAlpha(255);
+		Player_->SetDelayTime(DelayTime_);
 
 
 		//Background* CannonEffect_ = CreateActor<Background>((int)ORDER::BACKGROUND);
@@ -167,11 +124,86 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		//CannonRenderer_->ChangeAnimation("None1");
 	}
 
+	GameEngineInput::GetInst()->CreateKey("Stop", VK_SPACE);
 }
 
 void Cannon::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	BgmPlayer_.Stop();
+}
+
+void Cannon::DelayUpdate()
+{	
+	if (-1 != Index_ && RGB(152,184,16) == ColMapImage_->GetImagePixel(Player_->GetPosition()))
+	{
+		GameEngine::GetInst().ChangeLevel("DanceStage");
+	}
+
+
+	// 커비와 부딪히면
+	if (-1 == Index_ && CanCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
+	{
+		Rotation_ = true;
+		PrevPos_.x = Player_->GetPosition().x;
+		PlayerRenderer_->GetActor()->Off();
+	}
+
+	if (true == Rotation_)
+	{
+		Time_ += GameEngineTime::GetDeltaTime(); // 0.1
+		int Index = (int)(Time_ * 12) % 8;
+		std::string AnimationName = "Can" + std::to_string(Index);
+		CanRenderer_->ChangeAnimation(AnimationName);
+
+		if (true == GameEngineInput::GetInst()->IsDown("Stop"))
+		{
+			Rotation_ = false;
+			Index_ = Index;
+			Player_->SetGravity(0.0f);
+		}
+	}
+
+	float deltaMove = GameEngineTime::GetDeltaTime() * 500;
+	switch (Index_)
+	{
+	case 0:		
+		Player_->On();
+		Player_->SetMove(float4(0, -deltaMove));
+		break;
+	case 1:
+		Player_->On();
+		Player_->SetMove(float4(deltaMove, -deltaMove));
+		break;
+	case 2:
+		Player_->On();
+		Player_->SetMove(float4(deltaMove, 0));
+		break;
+	case 3:
+		Player_->On();
+		Player_->SetMove(float4(deltaMove, deltaMove));
+		break;
+	case 4:
+		Player_->On();
+		Player_->SetMove(float4(0, deltaMove));
+		break;
+	case 5:
+		Player_->On();
+		Player_->SetMove(float4(-deltaMove, deltaMove));
+		break;
+	case 6:
+		Player_->On();
+		Player_->SetMove(float4(-deltaMove, 0));
+		break;
+	case 7:
+		Player_->On();
+		Player_->SetMove(float4(-deltaMove, -deltaMove));
+		break;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 void Cannon::Loading()

@@ -20,6 +20,6 @@ public:
 public:
 	void Start() override;
 	void UpdateMove() override;
-	void Update() override;
+	void DelayUpdate() override;
 
 };

@@ -31,7 +31,7 @@ void BombBomb::Start()
 	Collision_->SetPivot(float4(-270, 220));
 }
 
-void BombBomb::Update()
+void BombBomb::DelayUpdate()
 {
 	ColUpdate();
 }

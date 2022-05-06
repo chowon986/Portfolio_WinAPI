@@ -1,11 +1,11 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include "GameEngineLevelBase.h"
 
 class Player;
 class BotUI;
 class GameEngineCollision;
-class Level1_4 : public GameEngineLevel
+class Level1_4 : public GameEngineLevelBase
 {
 public:
 
@@ -19,7 +19,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 

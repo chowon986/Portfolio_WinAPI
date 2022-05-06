@@ -1,5 +1,6 @@
 #include "RunEffect.h"
 #include "Monster.h"
+#include "AbandonEffect.h"
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>

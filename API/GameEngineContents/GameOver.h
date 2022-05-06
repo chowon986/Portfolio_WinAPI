@@ -1,8 +1,8 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
+#include "GameEngineLevelBase.h"
 
 class GameEngineImage;
-class GameOver : public GameEngineLevel
+class GameOver : public GameEngineLevelBase
 {
 public:
 	GameOver();
@@ -15,7 +15,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 private:

@@ -1,5 +1,5 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
+#include "GameEngineLevelBase.h"
 
 class Player;
 class Background;
@@ -7,7 +7,7 @@ class GameEngineImage;
 class GameEngineRenderer;
 class BotUI;
 class Dedede;
-class Boss : public GameEngineLevel
+class Boss : public GameEngineLevelBase
 {
 public:
 	Boss();
@@ -20,8 +20,9 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+
+	void DelayUpdate() override;
 
 private:
 	Background* BossLevelStart_;

@@ -19,7 +19,7 @@ void Box::Start()
 	Renderer_ = CreateRenderer("Box.bmp");
 }
 
-void Box::Update()
+void Box::DelayUpdate()
 {
 	ColUpdate();
 }

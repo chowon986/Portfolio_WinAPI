@@ -15,6 +15,8 @@
 #include "SparkAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
+#include "AbandonEffect.h"
+
 
 Boss::Boss()
 {
@@ -29,7 +31,7 @@ void Boss::Loading()
 {
 }
 
-void Boss::Update()
+void Boss::DelayUpdate()
 {
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -73,6 +75,7 @@ void Boss::Update()
 
 void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetColMapImage("BossColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 
@@ -96,7 +99,7 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		BossLevelEndRenderer_->CreateAnimation("BossLevelEnd.bmp", "End", 0, 11, 0.1f, true);
 		BossLevelEndRenderer_->ChangeAnimation("End");
 		BossLevelEndRenderer_->SetAlpha(0);
-	} 
+	}
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
@@ -110,7 +113,8 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
-
+		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
@@ -124,5 +128,4 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Dedede_->SetPosition(float4(640.0f, 320.0f));
 		Dedede_->SetPlayer(Player_);
 	}
-
 }

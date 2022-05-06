@@ -34,7 +34,7 @@ void Waddledee::Start()
 	Renderer_->ChangeAnimation("WalkRight");
 }
 
-void Waddledee::Update()
+void Waddledee::DelayUpdate()
 {
 	UpdateMove();
 	Die();

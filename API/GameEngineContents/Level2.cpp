@@ -18,6 +18,7 @@
 #include "SparkAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
+#include "AbandonEffect.h"
 
 Level2::Level2()
 	: Player_(nullptr)
@@ -34,7 +35,7 @@ void Level2::Loading()
 {
 }
 
-void Level2::Update()
+void Level2::DelayUpdate()
 {
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -77,6 +78,7 @@ void Level2::Update()
 
 void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetMapSizeX(1536);
 	SetMapSizeY(576);
 
@@ -105,7 +107,8 @@ void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
-
+		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);

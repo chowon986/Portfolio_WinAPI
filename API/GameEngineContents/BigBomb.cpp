@@ -40,7 +40,7 @@ void BigBomb::Render()
 {
 }
 
-void BigBomb::Update()
+void BigBomb::DelayUpdate()
 {
 	//PrevPos_ = GetPosition();
 

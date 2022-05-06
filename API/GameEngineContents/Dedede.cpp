@@ -65,7 +65,7 @@ void Dedede::Start()
 }
 
 
-void Dedede::Update()
+void Dedede::DelayUpdate()
 {
 	Time_ += GameEngineTime::GetDeltaTime();
 	AttTime_ += GameEngineTime::GetDeltaTime();

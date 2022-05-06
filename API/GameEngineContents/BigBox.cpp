@@ -18,7 +18,7 @@ void BigBox::Start()
 	Collision_->SetScale(float4(82.0f, 82.0f));
 }
 
-void BigBox::Update()
+void BigBox::DelayUpdate()
 {
 	ColUpdate();
 }

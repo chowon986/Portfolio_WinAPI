@@ -15,7 +15,7 @@ public:
 
 protected:
 	void Start();
-	void Update();
+	void DelayUpdate();
 	bool ColOn();
 
 private:

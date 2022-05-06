@@ -9,6 +9,8 @@ private:
 	float Speed_;
 	float JumpMaxHeight_;
 	float JumpHeight_;
+	float DelayTime_;
+	float ElapsedTime_;
 	float4 JumpDirection_;
 
 protected:
@@ -21,6 +23,8 @@ protected:
 	CharacterBase& operator=(CharacterBase&& _Other) noexcept = delete;
 
 protected:
+	void Update() override;
+	virtual void DelayUpdate() {}
 
 public:
 	virtual void SetHP(int _HP) { HP_ = _HP; }
@@ -39,6 +43,7 @@ public:
 	float GetJumpHeight() { return JumpHeight_; }
 	float GetJumpMaxHeight() { return JumpMaxHeight_; }
 	float4 GetJumpDirection() { return JumpDirection_; }
+	void SetDelayTime(float _DelayTime) { DelayTime_ = _DelayTime; }
 
 	virtual void Walk() {}
 	virtual void Run() {}

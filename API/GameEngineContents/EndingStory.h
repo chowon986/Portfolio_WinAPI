@@ -1,8 +1,8 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
+#include "GameEngineLevelBase.h"
 
 class VideoPlayer;
-class EndingStory : public GameEngineLevel
+class EndingStory : public GameEngineLevelBase
 {
 public:
 	EndingStory();
@@ -15,7 +15,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 private:

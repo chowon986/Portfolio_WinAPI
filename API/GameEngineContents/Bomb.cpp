@@ -28,7 +28,7 @@ void Bomb::Start()
 	Collision2_->Off();
 }
 
-void Bomb::Update()
+void Bomb::DelayUpdate()
 {
 	ColUpdate();
 }

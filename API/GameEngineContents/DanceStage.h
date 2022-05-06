@@ -1,9 +1,9 @@
 #pragma once
-#include <GameEngine/GameEngineLevel.h>
+#include "GameEngineLevelBase.h"
 
 class AnimationKirby;
 class GameEngineRenderer;
-class DanceStage : public GameEngineLevel
+class DanceStage : public GameEngineLevelBase
 {
 public:
 	DanceStage();
@@ -16,7 +16,7 @@ public:
 
 protected:
 	void Loading() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 

@@ -14,7 +14,7 @@ public:
 
 protected:
 	void Start();
-	void Update();
+	void DelayUpdate();
 	void ColUpdate() override;
 
 private:

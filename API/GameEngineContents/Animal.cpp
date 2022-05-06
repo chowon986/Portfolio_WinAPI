@@ -20,7 +20,7 @@ Animal::~Animal()
 }
 
 
-void Animal::Update()
+void Animal::DelayUpdate()
 {
 	UpdateMove();
 	Die();

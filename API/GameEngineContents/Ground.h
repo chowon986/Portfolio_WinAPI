@@ -1,7 +1,7 @@
 #pragma once
 #include "Obstruction.h"
 
-class Ground : public Obstruction
+class Ground : public GameEngineActor
 {
 public:
 	Ground();
@@ -15,9 +15,11 @@ public:
 protected:
 	void Start() override;
 	void Update() override;
-	void ColUpdate() override;
 
 private:
+	GameEngineCollision* Collision_;
+	GameEngineCollision* MoveCollision_;
+	GameEngineRenderer* Renderer_;
 
 public:
 	GameEngineRenderer* GetRenderer() { return Renderer_; }

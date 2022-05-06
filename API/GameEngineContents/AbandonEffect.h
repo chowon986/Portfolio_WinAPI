@@ -4,9 +4,13 @@
 
 enum class AbandonEffectState
 {
-	Abandon,
+	Left,
+	Right,
+	Eaten,
 	None,
 };
+
+enum class MonsterClass;
 
 class GameEngineImage;
 class AbandonEffect : public GameEngineActor
@@ -23,10 +27,14 @@ public:
 public:
 	void SetState(AbandonEffectState _AbandonEffectState);
 	AbandonEffectState GetState();
+
+	void SetMonsterClass(MonsterClass _MonsterClass) { MonsterClass_ = _MonsterClass; }
+	MonsterClass GetMonsterClass() { return MonsterClass_; }
 private:
 	void StateUpdate();
 	void UpdateAbandonEffectRight();
 	void UpdateAbandonEffectLeft();
+	void UpdateEaten();
 	void UpdateNone();
 
 
@@ -34,11 +42,14 @@ protected:
 	void Start() override;
 	void Update() override;
 	void Render() override;
+
 private:
+	MonsterClass MonsterClass_;
 	AbandonEffectState AbandonEffectState_;
 	float4 StartPos_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 	GameEngineImage* Image_;
+	float Time_;
 };

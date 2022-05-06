@@ -21,7 +21,7 @@ void GameOver::Loading()
 	CreateActor<Background>((int)ORDER::BACKGROUND);
 }
 
-void GameOver::Update()
+void GameOver::DelayUpdate()
 {
 
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
@@ -33,6 +33,7 @@ void GameOver::Update()
 
 void GameOver::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	{
 		Background* GameOver = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameOver->CreateRenderer("GameOver.bmp");

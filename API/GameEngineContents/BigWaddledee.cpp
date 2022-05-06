@@ -32,7 +32,7 @@ void BigWaddledee::Start()
 	Renderer_->ChangeAnimation("WalkRight");
 }
 
-void BigWaddledee::Update()
+void BigWaddledee::DelayUpdate()
 {
 	UpdateMove();
 	Die();

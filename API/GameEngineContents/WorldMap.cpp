@@ -15,8 +15,10 @@
 #include "FireAttackEffect.h"
 #include "SparkAttackEffect.h"
 #include "RunEffect.h"
+#include "AbandonEffect.h"
 
 WorldMap::WorldMap()
+	: Level_(0)
 {
 }
 
@@ -31,39 +33,8 @@ void WorldMap::Loading()
 
 }
 
-void WorldMap::Update()
+void WorldMap::DelayUpdate()
 {
-	if (0 >= GetCameraPos().x)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = 0;
-		SetCameraPos(CurCameraPos);
-	}
-
-	if (0 >= GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = 0;
-		SetCameraPos(CurCameraPos);
-	}
-
-	float CameraRectX = 768;
-	float CameraRectY = 576;
-
-	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = static_cast<int>(GetCameraPos().ix() - (GetCameraPos().ix() + CameraRectX - GetMapSizeX()));
-		SetCameraPos(CurCameraPos);
-	}
-
-	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = static_cast<int>(GetCameraPos().iy() - (GetCameraPos().iy() + CameraRectY - GetMapSizeY()));
-		SetCameraPos(CurCameraPos);
-	}
-
 	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Player_->GetPosition() + float4::DOWN))
 	{
 		LittleStarRenderer->On();
@@ -72,30 +43,65 @@ void WorldMap::Update()
 		ChooseLevel1_->On();
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("Right"))
+	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(Player_->GetPosition() + float4::DOWN))
 	{
-		Player_->SetPosition(float4(382.0f, 330.0f));
-	}
+		if (true == GameEngineInput::GetInst()->IsDown("Right"))
+		{
+			Level_++;
+			if (Level_ > GameEngineLevelBase::MAJOR_LEVEL + 1)
+			{
+				Level_ = GameEngineLevelBase::MAJOR_LEVEL + 1;
+				if (Level_ > 3)
+				{
+					Level_ = 3;
+				}
+			}
+		}
 
-	if (true == GameEngineInput::GetInst()->IsDown("Left"))
-	{
+		if (true == GameEngineInput::GetInst()->IsDown("Left"))
+		{
+			Level_--;
+			if (Level_ < 1)
+			{
+				Level_ = 1;
+			}
+		}
 
-		Player_->SetPosition(float4(147.0f, 330.0f));
-	}
 
-	if (300.0f < Player_->GetPosition().x && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
-	{
-		GameEngine::GetInst().ChangeLevel("Level2");
-	}
+		switch (Level_)
+		{
+		case 1:
+			Player_->SetPosition(float4(147.0f, Player_->GetPosition().y));
+			break;
+		case 2:
+			Player_->SetPosition(float4(382.0f, Player_->GetPosition().y));
+			break;
+		case 3:
+			Player_->SetPosition(float4(617.0f, Player_->GetPosition().y));
+			break;
+		}
 
-	if (300.0f > Player_->GetPosition().x && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
-	{
-		GameEngine::GetInst().ChangeLevel("Level1");
+		if (3 == Level_ && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
+		{
+			GameEngine::GetInst().ChangeLevel("Boss");
+		}
+
+		if (2 == Level_ && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
+		{
+			GameEngine::GetInst().ChangeLevel("Level2");
+		}
+
+		if (1 == Level_ && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
+		{
+			GameEngine::GetInst().ChangeLevel("Level1");
+		}
 	}
 }
 
 void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
+	DelayTime_ = 1.0f;
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("SelectStage.mp3");
 
 	SetMapSizeX(768);
@@ -109,14 +115,13 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		GameEngineRenderer* WorldMapRenderer = WorldMap->CreateRenderer("WorldMap.bmp");
 	}
 
-
 	{
 
-		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(147.0f, 100.0f));
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);		
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 		Player_->GetRenderer()->ChangeAnimation("Dance");
+		Player_->SetDelayTime(DelayTime_);
 
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
@@ -124,15 +129,15 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		FireAttackEffect* FireAttackEffect_ = CreateActor<FireAttackEffect>((int)ORDER::EFFECT);
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
-
+		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 		Player_->SetRunEffect(RunEffect_);
-		}
-
+	}
 
 	{
 		Background* WorldMap0 = CreateActor<Background>((int)ORDER::BACKGROUND);
@@ -170,7 +175,7 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Background* WorldMapStar = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* WorldMapStarRenderer = WorldMapStar->CreateRenderer("WorldMapStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-240,100));
+		GameEngineRenderer* WorldMapStarRenderer = WorldMapStar->CreateRenderer("WorldMapStar.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-240, 100));
 		GameEngineImage* WorldMapStarImage = WorldMapStarRenderer->GetImage();
 		WorldMapStarImage->CutCount(6, 2);
 		WorldMapStarRenderer->CreateAnimation("WorldMapStar.bmp", "WorldMapStar0", 0, 11, 0.08f, true);
@@ -212,9 +217,23 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Background* WorldMapUI = CreateActor<Background>((int)ORDER::BACKGROUND);
-		GameEngineRenderer* WorldMapUIRenderer = WorldMapUI->CreateRenderer("WorldMapUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-100,-240));
+		GameEngineRenderer* WorldMapUIRenderer = WorldMapUI->CreateRenderer("WorldMapUI.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-100, -240));
 	}
 
+	GameEngineLevelBase::MAJOR_LEVEL = 1;
+	Level_ = GameEngineLevelBase::MAJOR_LEVEL;
+	switch (Level_)
+	{
+	case 1:
+		Player_->SetPosition(float4(147.0f, 100.0f));
+		break;
+	case 2:
+		Player_->SetPosition(float4(382.0f, 100.0f));
+		break;
+	case 3:
+		Player_->SetPosition(float4(617.0f, 100.0f));
+		break;
+	}
 }
 
 void WorldMap::LevelChangeEnd(GameEngineLevel* _PrevLevel)

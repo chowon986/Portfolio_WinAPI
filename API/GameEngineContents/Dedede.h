@@ -32,7 +32,7 @@ public:
 public:
 	void Start() override;
 	void Render() override;
-	void Update() override;
+	void DelayUpdate() override;
 	void UpdateMove() override;
 	void StateUpdate();
 	void SetState(DededeState _DededeState);

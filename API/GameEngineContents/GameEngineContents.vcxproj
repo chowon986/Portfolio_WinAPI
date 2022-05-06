@@ -188,6 +188,7 @@
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FireAttackEffect.h" />
     <ClInclude Include="FireItem.h" />
+    <ClInclude Include="GameEngineLevelBase.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="GroundStarEffect.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FireAttackEffect.cpp" />
     <ClCompile Include="FireItem.cpp" />
+    <ClCompile Include="GameEngineLevelBase.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="GroundStarEffect.cpp" />

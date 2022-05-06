@@ -13,6 +13,7 @@
 #include "FireAttackEffect.h"
 #include "SparkAttackEffect.h"
 #include "RunEffect.h"
+#include "AbandonEffect.h"
 #include "AnimationKirby.h"
 #include "GameEngineBase/GameEngineSound.h"
 
@@ -32,12 +33,13 @@ void DanceStage::Loading()
 {
 }
 
-void DanceStage::Update()
+void DanceStage::DelayUpdate()
 {
 }
 
 void DanceStage::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetMapSizeX(768);
 	SetMapSizeY(576);
 
