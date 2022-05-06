@@ -2,10 +2,12 @@
 #include <GameEngine/GameEngineLevel.h>
 
 class GameEngineRenderer;
+class GameEngineSoundPlayer;
 class GameEngineLevelBase : public GameEngineLevel
 {
 public:
 	static int MAJOR_LEVEL;
+	static GameEngineSoundPlayer LEVEL_BGM;
 public:
 	GameEngineLevelBase();
 	~GameEngineLevelBase();

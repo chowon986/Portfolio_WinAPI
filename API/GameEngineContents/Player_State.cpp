@@ -27,11 +27,11 @@ void Player::UpdateIdle()
     KirbyEatCol_->Off();
     FireAttackEffect_->Off();
     IceAttackEffect_->Off();
+    SparkAttackEffect_->Off();
     AnimalCol_->Off();
     SwordCol_->Off();
     KirbySlideCol_->Off();
-    //RunEffect_->Off();z
-    SparkAttackEffect_->Off();
+    //RunEffect_->Off();
 }
 
 void Player::UpdateTransform()
@@ -549,6 +549,10 @@ void Player::UpdateAbandon()
 void Player::UpdateEaten()
 {
     Renderer_->SetAlpha(0);
+}
+
+void Player::UpdateOpenDoor()
+{
 }
 
 void Player::SetHP(int _NewHP)

@@ -28,7 +28,7 @@ void BigWaddledee::Start()
 	Renderer_->CreateAnimation("Monster1.bmp", "CollisionRight", 264, 264, 0.5f, false);
 	Renderer_->CreateAnimation("Monster1.bmp", "DieLeft", 5, 6, 0.3f, true);
 	Renderer_->CreateAnimation("Monster1.bmp", "DieRight", 264, 265, 0.3f, true);
-	Renderer_->CreateAnimation("Monster1.bmp", "Ice", 519, 519, 0.5f, false);
+	Renderer_->CreateAnimation("Monster1.bmp", "Ice", 518, 518, 0.5f, false);
 	Renderer_->ChangeAnimation("WalkRight");
 }
 

@@ -93,7 +93,7 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetMapSizeX(4608);
 	SetMapSizeY(576);
 
-	BgmPlayer = GameEngineSound::SoundPlayControl("Stage1.mp3");
+	LEVEL_BGM = GameEngineSound::SoundPlayControl("Stage1.mp3");
 	SetColMapImage("Stage1ColMap.bmp");
 	ColMapImage_ = GetColMapImage();
 

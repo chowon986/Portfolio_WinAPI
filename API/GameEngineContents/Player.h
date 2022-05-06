@@ -40,7 +40,7 @@ enum class KirbyState
 	TAKEDAMAGE, // possible : ATTACK, FLY, JUMP, EAT, ABANDON, SLIDE,
 	DIE,
 	EATEN,
-	//OPENDOOR,
+	OPENDOOR,
 };
 
 class GameEngineImage;
@@ -181,6 +181,7 @@ private:
 	void UpdateTakeDamage();
 	void UpdateAbandon();
 	void UpdateEaten();
+	void UpdateOpenDoor();
 
 	//void UpdateEffect();
 public:

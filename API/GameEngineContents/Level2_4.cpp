@@ -17,6 +17,7 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 Level2_4::Level2_4()
 	: Player_(nullptr)
@@ -136,5 +137,10 @@ void Level2_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		DoorStarRenderer->ChangeAnimation("DoorStar");
 	}
 
+}
+
+void Level2_4::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
+	LEVEL_BGM.Stop();
 }
 

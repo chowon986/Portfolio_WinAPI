@@ -2,8 +2,10 @@
 #include <GameEngineContents/Background.h>
 #include <GameEngineContents/ContentsEnum.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 int GameEngineLevelBase::MAJOR_LEVEL = 1;
+GameEngineSoundPlayer GameEngineLevelBase::LEVEL_BGM;
 
 GameEngineLevelBase::GameEngineLevelBase()
 	: AlphaRenderer_(nullptr)

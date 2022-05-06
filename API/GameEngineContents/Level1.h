@@ -29,7 +29,6 @@ private:
 	BotUI* PlayerStatus_;
 	GameEngineCollision* DoorCol1_2;
 	GameEngineImage* ColMapImage_;
-	GameEngineSoundPlayer BgmPlayer;
 
 
 private:

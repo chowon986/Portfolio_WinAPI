@@ -87,7 +87,7 @@ void Level1_4::DelayUpdate()
 
 void Level1_4::LevelChangeEnd(GameEngineLevel* _PrevLevel)
 {
-
+	LEVEL_BGM.Stop();
 }
 
 void Level1_4::LevelChangeStart(GameEngineLevel* _PrevLevel)

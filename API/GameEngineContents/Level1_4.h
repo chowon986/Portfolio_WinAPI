@@ -27,6 +27,5 @@ private:
 	Player* Player_;
 	BotUI* PlayerStatus_;
 	GameEngineCollision* Cannon_;
-	GameEngineSoundPlayer BgmPlayer_;
 };
 

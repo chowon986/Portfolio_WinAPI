@@ -19,6 +19,7 @@
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
 #include "AbandonEffect.h"
+#include "GameEngineBase/GameEngineSound.h"
 
 Level2::Level2()
 	: Player_(nullptr)
@@ -78,6 +79,7 @@ void Level2::DelayUpdate()
 
 void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	LEVEL_BGM = GameEngineSound::SoundPlayControl("Stage2.mp3");
 	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetMapSizeX(1536);
 	SetMapSizeY(576);

@@ -648,32 +648,28 @@ void Player::SetState(KirbyState _KirbyState)
         StartPos_ = GetPosition();
 		break;
 
-    //case KirbyState::OPENDOOR:
-    //    if (GetKirbyClass() == KirbyClass::SPARK)
-    //    {
-    //        SparkRenderer_->ChangeAnimation("DoorOpen" + Dir_);
-    //    }
-    //    if (GetKirbyClass() == KirbyClass::DEFAULT)
-    //    {
-    //        Renderer_->ChangeAnimation("DoorOpen" + Dir_);
-    //    }
-    //    if (GetKirbyClass() == KirbyClass::ICE)
-    //    {
-    //        IceRenderer_->ChangeAnimation("DoorOpen" + Dir_);
-    //    }
-    //    if (GetKirbyClass() == KirbyClass::SWORD)
-    //    {
-    //        SwordRenderer_->ChangeAnimation("DoorOpen" + Dir_);
-    //    }
-    //    if (GetKirbyClass() == KirbyClass::ANIMAL)
-    //    {
-    //        AnimalRenderer_->ChangeAnimation("DoorOpen" + Dir_);
-    //    }
-    //    if (GetKirbyClass() == KirbyClass::FIRE)
-    //    {
-    //        FireRenderer_->ChangeAnimation("DoorOpen" + Dir_);
-    //    }
-    //    break;
+    case KirbyState::OPENDOOR:
+        if (GetKirbyClass() == KirbyClass::SPARK)
+        {
+            SparkRenderer_->ChangeAnimation("DoorOpen" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::DEFAULT)
+        {
+            Renderer_->ChangeAnimation("DoorOpen" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::ICE)
+        {
+            IceRenderer_->ChangeAnimation("DoorOpen" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::ANIMAL)
+        {
+            AnimalRenderer_->ChangeAnimation("DoorOpen" + Dir_);
+        }
+        if (GetKirbyClass() == KirbyClass::FIRE)
+        {
+            FireRenderer_->ChangeAnimation("DoorOpen" + Dir_);
+        }
+        break;
     default:
         break;
     }
@@ -840,12 +836,6 @@ void Player::DelayUpdate()
     {
         SetState(KirbyState::SLIDE);
     }
-
-    //if (true == GameEngineInput::GetInst()->IsDown("OpenDoor")
-    //    /*true == Renderer_->IsEndAnimation()*/)
-    //{
-    //    SetState(KirbyState::OPENDOOR);
-    //}
 
     if (true == GameEngineInput::GetInst()->IsPress("Attack") &&
         KirbyClass::DEFAULT != GetKirbyClass() &&
@@ -1115,6 +1105,7 @@ void Player::DelayUpdate()
 			float DistanceX = Distance.x < 0 ? Distance.x * -1 : Distance.x;
 			if (GetState() != KirbyState::DIE &&
 				GetState() != KirbyState::EATEN &&
+				GetState() != KirbyState::OPENDOOR &&
 				true == GameEngineInput::GetInst()->IsFree("Left") &&
 				true == GameEngineInput::GetInst()->IsFree("Right") &&
 				true == GameEngineInput::GetInst()->IsFree("Down") &&
@@ -1272,23 +1263,35 @@ void Player::CorrectPos()
 
 void Player::CheckCollision()
 {
-    if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect))
+    if (true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Level1_2");
+        SetState(KirbyState::OPENDOOR);
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect))
-    {
-       HP_COUNT = GetHPCount();
-       HP = GetHP();
-       KIRBYCLASS = GetKirbyClass();
-       GameEngine::GetInst().ChangeLevel("Level1_3");
+	if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect) &&
+		GetState() == KirbyState::OPENDOOR)
+	{
+		if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+			GetRenderer()->IsEndAnimation())
+		{
+			HP_COUNT = GetHPCount();
+			HP = GetHP();
+			KIRBYCLASS = GetKirbyClass();
+			GameEngine::GetInst().ChangeLevel("Level1_2");
+		}
+	}
+
+	if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect) &&
+		GetState() == KirbyState::OPENDOOR)
+	{
+		HP_COUNT = GetHPCount();
+		HP = GetHP();
+		KIRBYCLASS = GetKirbyClass();
+		GameEngine::GetInst().ChangeLevel("Level1_3");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
        HP_COUNT = GetHPCount();
        HP = GetHP();
@@ -1296,14 +1299,16 @@ void Player::CheckCollision()
        GameEngine::GetInst().ChangeLevel("Level1_4");
     }
 
-    if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
        HP_COUNT = GetHPCount();
        HP = GetHP();
        GameEngine::GetInst().ChangeLevel("Cannon");
     }
     
-    if (true == KirbyCol_->CollisionCheck("DoorCol2", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol2", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
         HP_COUNT = GetHPCount();
         HP = GetHP();
@@ -1311,7 +1316,8 @@ void Player::CheckCollision()
         GameEngine::GetInst().ChangeLevel("Level2");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
        HP_COUNT = GetHPCount();
        HP = GetHP();
@@ -1319,7 +1325,8 @@ void Player::CheckCollision()
        GameEngine::GetInst().ChangeLevel("Level2_2");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_3", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_3", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
         HP_COUNT = GetHPCount();
         HP = GetHP();
@@ -1327,7 +1334,8 @@ void Player::CheckCollision()
         GameEngine::GetInst().ChangeLevel("Level2_3");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_4", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_4", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
         HP_COUNT = GetHPCount();
         HP = GetHP();
@@ -1335,7 +1343,8 @@ void Player::CheckCollision()
         GameEngine::GetInst().ChangeLevel("Level2_4");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_5", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol2_5", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
         HP_COUNT = GetHPCount();
         HP = GetHP();
@@ -1343,7 +1352,8 @@ void Player::CheckCollision()
         GameEngine::GetInst().ChangeLevel("Level2_5");
     }
 
-    if (true == KirbyCol_->CollisionCheck("DoorCol3", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("DoorCol3", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
         HP_COUNT = GetHPCount();
         HP = GetHP();
@@ -1351,7 +1361,8 @@ void Player::CheckCollision()
         GameEngine::GetInst().ChangeLevel("Level3");
     }
 
-    if (true == KirbyCol_->CollisionCheck("Boss", CollisionType::Rect, CollisionType::Rect))
+    if (true == KirbyCol_->CollisionCheck("Boss", CollisionType::Rect, CollisionType::Rect) &&
+        GetState() == KirbyState::OPENDOOR)
     {
         HP_COUNT = GetHPCount();
         HP = GetHP();
