@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="AbandonEffect.h" />
     <ClInclude Include="Animal.h" />
+    <ClInclude Include="AnimationKirby.h" />
     <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BeforeTitleLevel.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Level2_4.h" />
     <ClInclude Include="Level2_5.h" />
     <ClInclude Include="Level3.h" />
+    <ClInclude Include="MonBotUI.h" />
     <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
@@ -237,6 +239,7 @@
   <ItemGroup>
     <ClCompile Include="AbandonEffect.cpp" />
     <ClCompile Include="Animal.cpp" />
+    <ClCompile Include="AnimationKirby.cpp" />
     <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BeforeTitleLevel.cpp" />
@@ -285,6 +288,7 @@
     <ClCompile Include="Level2_4.cpp" />
     <ClCompile Include="Level2_5.cpp" />
     <ClCompile Include="Level3.cpp" />
+    <ClCompile Include="MonBotUI.cpp" />
     <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>

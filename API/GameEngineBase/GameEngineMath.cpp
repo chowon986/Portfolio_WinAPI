@@ -14,8 +14,12 @@ GameEngineMath::~GameEngineMath()
 }
 
 float4 float4::LEFT = { -1.0f, 0.0f, 0.0f, 1.0f };
-float4 float4::RIGHT = { 1.0f, 0.0f, 0.0f, 1.0f };;
+float4 float4::RIGHT = { 1.0f, 0.0f, 0.0f, 1.0f };
 float4 float4::UP = { 0.0f, -1.0f, 0.0f, 1.0f };;
 float4 float4::DOWN = { 0.0f, 1.0f, 0.0f, 1.0f };;
-float4 float4::ZERO = { 0.0f, 0.0f, 0.0f, 0.0f };;
+float4 float4::ZERO = { 0.0f, 0.0f, 0.0f, 0.0f };
 
+//float4 float4::RIGHTDOWN = { 1.5f, 0.2f, 0.0f, 1.0f };
+//float4 float4::RIGHTUP = { 1.5f, -0.1f, 0.0f, 1.0f };
+//float4 float4::LEFTDOWN = { -1.5f, 0.1f, 0.0f, 1.0f };
+//float4 float4::LEFTUP = { -1.5f, -0.1f, 0.0f, 1.0f };

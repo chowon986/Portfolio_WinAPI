@@ -34,5 +34,7 @@ private:
 	Player* Player_;
 	float4 PrevPos_;
 	GameEngineSoundPlayer BgmPlayer_;
+	GameEngineRenderer* AlphaRenderer_;
+	float Time_;
 };
 

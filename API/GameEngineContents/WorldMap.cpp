@@ -74,29 +74,24 @@ void WorldMap::Update()
 
 	if (true == GameEngineInput::GetInst()->IsDown("Right"))
 	{
-		Player_->Off();
-		Player2_->On();
-		Player2_->SetPosition(float4(382.0f, 150.0f));
-		Player2_->GetRenderer()->ChangeAnimation("Dance");
+		Player_->SetPosition(float4(382.0f, 330.0f));
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("Left"))
 	{
-		Player2_->Off();
-		Player_->On();
-		Player_->SetPosition(float4(147.0f, 150.0f));
-		Player_->GetRenderer()->ChangeAnimation("Dance");
+
+		Player_->SetPosition(float4(147.0f, 330.0f));
 	}
 
-	if (382.0f == Player2_->GetPosition().x && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
+	if (300.0f < Player_->GetPosition().x && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
 	{
 		GameEngine::GetInst().ChangeLevel("Level2");
 	}
 
-	//if (147.0f == Player_->GetPosition().x && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
-	//{
-	//	GameEngine::GetInst().ChangeLevel("Level1");
-	//}
+	if (300.0f > Player_->GetPosition().x && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
+	{
+		GameEngine::GetInst().ChangeLevel("Level1");
+	}
 }
 
 void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -136,17 +131,6 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 		Player_->SetRunEffect(RunEffect_);
-
-		Player2_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player2_->GetRenderer()->ChangeAnimation("Dance");
-		Player2_->Off();
-
-		Player2_->SetStarAttackEffect(StarAttackEffect_);
-		Player2_->SetAttackEffect(AttackEffect_);
-		Player2_->SetIceAttackEffect(IceAttackEffect_);
-		Player2_->SetFireAttackEffect(FireAttackEffect_);
-		Player2_->SetSparkAttackEffect(SparkAttackEffect_);
-		Player2_->SetRunEffect(RunEffect_);
 		}
 
 

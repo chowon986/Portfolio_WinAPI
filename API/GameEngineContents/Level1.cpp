@@ -25,12 +25,12 @@
 #include "GameEngineBase/GameEngineSound.h"
 #include "TransformEffect.h"
 #include "GroundStarEffect.h"
+#include "AnimationKirby.h"
 
 Level1::Level1()
 	: Player_(nullptr)
 	, PlayerStatus_(nullptr)
 	, ColMapImage_(nullptr)
-	, Star_(nullptr)
 	, DoorCol1_2(nullptr)
 {
 
@@ -169,6 +169,9 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetRunEffect(RunEffect_);
 		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetGroundStarEffect(GroundStarEffect_);
+
+		AnimationKirby_ = CreateActor<AnimationKirby>((int)ORDER::ANIMATION);
+		AnimationKirby_->SetPosition(float4(0.0f, 60.0f));
 	}
 
 	{

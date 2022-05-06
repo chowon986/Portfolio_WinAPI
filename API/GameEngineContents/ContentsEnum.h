@@ -9,5 +9,7 @@ enum class ORDER
 	MONSTER,
 	BOTUI,
 	ITEM,
+	ANIMATION,
+	ALPHA,
 };
 

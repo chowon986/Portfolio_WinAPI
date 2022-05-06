@@ -109,7 +109,6 @@ private:
 	GameEngineImage* SwordKirbyImage_;
 	GameEngineImage* IceKirbyImage_;
 	GameEngineImage* PigImage_;
-	GameEngineImage* SwimImage_;
 	float4 StartPos_;
 	float4 MapStartPos_;
 

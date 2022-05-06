@@ -84,10 +84,7 @@ GameEngineRenderer* Player::GetRenderer()
     {
         return AnimalRenderer_;
     }
-    else if (GetKirbyClass() == KirbyClass::DEFAULT)
-    {
-        return Renderer_;
-    }
+
     else if (GetKirbyClass() == KirbyClass::FIRE)
     {
         return FireRenderer_;
@@ -107,6 +104,10 @@ GameEngineRenderer* Player::GetRenderer()
     else if (GetKirbyClass() == KirbyClass::SWORD)
     {
         return SwordRenderer_;
+    }
+    else
+    {
+        return Renderer_;
     }
 }
 
@@ -131,6 +132,7 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(255);
+
         break;
     case KirbyClass::DEFAULT:
         Renderer_->SetAlpha(255);
@@ -140,6 +142,7 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
+
         break;
     case KirbyClass::ICE:
         Renderer_->SetAlpha(0);
@@ -149,6 +152,7 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(255);
         AnimalRenderer_->SetAlpha(0);
+
         break;
     case KirbyClass::SWORD:
         Renderer_->SetAlpha(0);
@@ -158,6 +162,7 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
+
         break;
     case KirbyClass::FIRE:
         Renderer_->SetAlpha(0);
@@ -167,6 +172,7 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(255);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
+
         break;
     case KirbyClass::PIG:
         Renderer_->SetAlpha(0);
@@ -176,8 +182,8 @@ void Player::ClassUpdate()
         FireRenderer_->SetAlpha(0);
         IceRenderer_->SetAlpha(0);
         AnimalRenderer_->SetAlpha(0);
-        break;
 
+        break;
     default:
         break;
     }
@@ -222,7 +228,6 @@ void Player::SetState(KirbyState _KirbyState)
 
     case KirbyState::UP: // Animal 사용
         break;
-
     case KirbyState::DOWN:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
@@ -1054,92 +1059,92 @@ void Player::Update()
 
 
     // 땅에 닿았을 때
-    if (ColMapImage_ != nullptr && 
-        ((RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true ) ||
-        (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true)) &&
-        JumpDirection.y > 0 && 
-        GetState() != KirbyState::DIE)
-    {
-        IsGround_ = true;
-        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
-        {
-            SetMove(float4::UP);
-        }
+	if (ColMapImage_ != nullptr &&
+		((RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true) ||
+			(RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN) || OnTheObstruction == true)) &&
+		JumpDirection.y > 0 &&
+		GetState() != KirbyState::DIE)
+		{
+			IsGround_ = true;
+			while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
+			{
+				SetMove(float4::UP);
+			}
 
-        while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
-        {
-            SetMove(float4::UP);
-        }
+			while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition()) && ColMapImage_ != nullptr)
+			{
+				SetMove(float4::UP);
+			}
 
-        // **need to chk**
-         SetPosition(float4(GetPosition().x, GetPosition().iy()));
+			// **need to chk**
+			SetPosition(float4(GetPosition().x, GetPosition().iy()));
 
-        JumpHeight_ = 0;
-        float4 Distance = GetPosition() - StartPos_;
-        float DistanceX = Distance.x < 0 ? Distance.x * -1 : Distance.x;
-        if (GetState() != KirbyState::DIE &&
-            GetState() != KirbyState::EATEN  &&
-            true == GameEngineInput::GetInst()->IsFree("Left") &&
-            true == GameEngineInput::GetInst()->IsFree("Right") &&
-            true == GameEngineInput::GetInst()->IsFree("Down") &&
-            true == GameEngineInput::GetInst()->IsFree("Slide")&&
-            true == GameEngineInput::GetInst()->IsFree("Jump") &&
-            true == GameEngineInput::GetInst()->IsFree("Fly") &&
-            true == GameEngineInput::GetInst()->IsFree("Attack") &&
-            (KirbyState::TAKEDAMAGE != GetState() || KirbyState::TAKEDAMAGE == GetState() && true == Renderer_->IsEndAnimation()) &&
-            (true == GameEngineInput::GetInst()->IsFree("Eat") || (KirbyState::EATEND == GetState() && true == Renderer_->IsEndAnimation())))
-            /////////////////////////need to chk : isendanimation
-        {
-            if (GetKirbyClass() != KirbyClass::ANIMAL &&
-                GetKirbyClass() != KirbyClass::FIRE &&
-                GetKirbyClass() != KirbyClass::ICE &&
-                GetKirbyClass() != KirbyClass::SPARK &&
-                GetKirbyClass() != KirbyClass::SWORD)
-            {
-                if (MonClass_ == MonsterClass::NONE)
-                {
-                    SetKirbyClass(KirbyClass::DEFAULT);
-                }
-                else
-                {
-                    SetKirbyClass(KirbyClass::PIG);
-                }
-            }
+			JumpHeight_ = 0;
+			float4 Distance = GetPosition() - StartPos_;
+			float DistanceX = Distance.x < 0 ? Distance.x * -1 : Distance.x;
+			if (GetState() != KirbyState::DIE &&
+				GetState() != KirbyState::EATEN &&
+				true == GameEngineInput::GetInst()->IsFree("Left") &&
+				true == GameEngineInput::GetInst()->IsFree("Right") &&
+				true == GameEngineInput::GetInst()->IsFree("Down") &&
+				true == GameEngineInput::GetInst()->IsFree("Slide") &&
+				true == GameEngineInput::GetInst()->IsFree("Jump") &&
+				true == GameEngineInput::GetInst()->IsFree("Fly") &&
+				true == GameEngineInput::GetInst()->IsFree("Attack") &&
+				(KirbyState::TAKEDAMAGE != GetState() || KirbyState::TAKEDAMAGE == GetState() && true == Renderer_->IsEndAnimation()) &&
+				(true == GameEngineInput::GetInst()->IsFree("Eat") || (KirbyState::EATEND == GetState() && true == Renderer_->IsEndAnimation())))
+				/////////////////////////need to chk : isendanimation
+			{
+				if (GetKirbyClass() != KirbyClass::ANIMAL &&
+					GetKirbyClass() != KirbyClass::FIRE &&
+					GetKirbyClass() != KirbyClass::ICE &&
+					GetKirbyClass() != KirbyClass::SPARK &&
+					GetKirbyClass() != KirbyClass::SWORD)
+				{
+					if (MonClass_ == MonsterClass::NONE)
+					{
+						SetKirbyClass(KirbyClass::DEFAULT);
+					}
+					else
+					{
+						SetKirbyClass(KirbyClass::PIG);
+					}
+				}
 
-            if (KirbyState::TRANSFORM == GetState())
-            {
-                if (true == PigRenderer_->IsEndAnimation())
-                {
-                    switch (MonClass_)
-                    {
-                    case MonsterClass::ANIMAL:
-                        SetKirbyClass(KirbyClass::ANIMAL);
-                        break;
-                    case MonsterClass::SPARK:
-                        SetKirbyClass(KirbyClass::SPARK);
-                        break;
-                    case MonsterClass::SWORD:
-                        SetKirbyClass(KirbyClass::SWORD);
-                        break;
-                    case MonsterClass::FIRE:
-                        SetKirbyClass(KirbyClass::FIRE);
-                        break;
-                    case MonsterClass::ICE:
-                        SetKirbyClass(KirbyClass::ICE);
-                        break;
+				if (KirbyState::TRANSFORM == GetState())
+				{
+					if (true == PigRenderer_->IsEndAnimation())
+					{
+						switch (MonClass_)
+						{
+						case MonsterClass::ANIMAL:
+							SetKirbyClass(KirbyClass::ANIMAL);
+							break;
+						case MonsterClass::SPARK:
+							SetKirbyClass(KirbyClass::SPARK);
+							break;
+						case MonsterClass::SWORD:
+							SetKirbyClass(KirbyClass::SWORD);
+							break;
+						case MonsterClass::FIRE:
+							SetKirbyClass(KirbyClass::FIRE);
+							break;
+						case MonsterClass::ICE:
+							SetKirbyClass(KirbyClass::ICE);
+							break;
 
-                    }
-                    MonClass_ = MonsterClass::NONE;
-                    SetState(KirbyState::IDLE);
-                }
-            }
-            else
-            {
-                SetState(KirbyState::IDLE);
-            }
-            
-        }
-    }
+						}
+						MonClass_ = MonsterClass::NONE;
+						SetState(KirbyState::IDLE);
+					}
+				}
+				else
+				{
+					SetState(KirbyState::IDLE);
+				}
+
+			}
+		}
     // 떠 있을 때
     else
     {
@@ -1264,6 +1269,14 @@ void Player::CheckCollision()
        HP = GetHP();
        KIRBYCLASS = GetKirbyClass();
        GameEngine::GetInst().ChangeLevel("Cannon");
+    }
+    
+    if (true == KirbyCol_->CollisionCheck("DoorCol2", CollisionType::Rect, CollisionType::Rect))
+    {
+        HP_COUNT = GetHPCount();
+        HP = GetHP();
+        KIRBYCLASS = GetKirbyClass();
+        GameEngine::GetInst().ChangeLevel("Level2");
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect))
@@ -1599,6 +1612,7 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "DoorOpenLeft", 139, 142, 0.1f, true);
 
         Renderer_->CreateAnimation("Normal.bmp", "Dance", 201, 207, 0.03f, true);
+        Renderer_->CreateAnimation("Normal.bmp", "Dance1", 80, 80, 0.03f, true);
         Renderer_->CreateAnimation("Normal.bmp", "Die", 180, 95, 0.1f, true);
     }
 

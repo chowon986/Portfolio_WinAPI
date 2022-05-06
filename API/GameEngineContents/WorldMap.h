@@ -5,6 +5,7 @@
 
 class BotUI;
 class Player;
+class AnimationKirby;
 class WorldMap : public GameEngineLevel
 {
 public:
@@ -24,8 +25,11 @@ protected:
 
 private:
 	BotUI* PlayerStatus_;
+	BotUI* PlayerStatus2_;
 	Player* Player_;
 	Player* Player2_;
+	AnimationKirby* Kirby1_;
+	AnimationKirby* Kirby2_;
 	GameEngineCollision* Star1_;
 	GameEngineRenderer* WorldMapStarRenderer1;
 	GameEngineRenderer* LittleStarRenderer;

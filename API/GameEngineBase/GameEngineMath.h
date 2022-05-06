@@ -93,6 +93,10 @@ public:
 	static float4 UP;
 	static float4 DOWN;
 	static float4 ZERO;
+	static float4 RIGHTDOWN;
+	static float4 LEFTDOWN;
+	static float4 LEFTUP;
+	static float4 RIGHTUP;
 
 public:
 	float x;

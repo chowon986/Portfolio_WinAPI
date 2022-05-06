@@ -192,6 +192,12 @@
     <ClCompile Include="BombBomb.cpp">
       <Filter>Obstruction</Filter>
     </ClCompile>
+    <ClCompile Include="MonBotUI.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationKirby.cpp">
+      <Filter>Kirby</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -379,6 +385,12 @@
     </ClInclude>
     <ClInclude Include="BombBomb.h">
       <Filter>Obstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="MonBotUI.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationKirby.h">
+      <Filter>Kirby</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

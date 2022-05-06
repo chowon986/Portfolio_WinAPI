@@ -39,51 +39,55 @@ Cannon::~Cannon()
 
 void Cannon::Update()
 {
-	if (Player_->GetPosition().x >= GetMapSizeX() - 20)
-	{
-		GameEngine::GetInst().ChangeLevel("DanceStage");
-	}
 
-	if (true == CanRenderer_->IsAnimationName("CanStop") && true == CanRenderer_->IsEndAnimation())
-	{
-		Player_->SetGravity(0.0f);
-		//if (true != CannonRenderer_->IsAnimationName("None2") && false == CannonRenderer_->IsAnimationName("Cannon"))
+		AlphaRenderer_->SetAlpha(0);
+
+		if (Player_->GetPosition().x >= GetMapSizeX() - 20)
+		{
+			GameEngine::GetInst().ChangeLevel("DanceStage");
+		}
+
+		if (true == CanRenderer_->IsAnimationName("CanStop") && true == CanRenderer_->IsEndAnimation())
+		{
+			Player_->SetGravity(0.0f);
+			//if (true != CannonRenderer_->IsAnimationName("None2") && false == CannonRenderer_->IsAnimationName("Cannon"))
+			//{
+			//	//CannonRenderer_->ChangeAnimation("Cannon");
+			//	//CannonRenderer_->SetPivot(float4(0.0f, 50.0f));
+			//}
+
+			if ((PrevPos_.x - Player_->GetPosition().x) > -1000)
+			{
+				PlayerRenderer_->ChangeAnimation("Die");
+				PlayerRenderer_->GetActor()->On();
+				Player_->SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 5000);
+			}
+		}
+
+		//if (true == CannonRenderer_->IsAnimationName("Cannon") && true == CannonRenderer_->IsEndAnimation())
 		//{
-		//	//CannonRenderer_->ChangeAnimation("Cannon");
-		//	//CannonRenderer_->SetPivot(float4(0.0f, 50.0f));
+		//	CannonRenderer_->ChangeAnimation("None2");
 		//}
 
-		if ((PrevPos_.x - Player_->GetPosition().x) > -1000)
+		if (true == CanRenderer_->IsAnimationName("CanMove") && true == CanRenderer_->IsEndAnimation() && true != CanRenderer_->IsAnimationName("CanStop"))
 		{
-			PlayerRenderer_->ChangeAnimation("Die");
-			PlayerRenderer_->GetActor()->On();
-			Player_->SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 5000);
+			CanRenderer_->ChangeAnimation("CanStop");
 		}
-	}
 
-	//if (true == CannonRenderer_->IsAnimationName("Cannon") && true == CannonRenderer_->IsEndAnimation())
-	//{
-	//	CannonRenderer_->ChangeAnimation("None2");
-	//}
+		if (CanCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect) &&
+			true != CanRenderer_->IsAnimationName("CanMove") &&
+			true != CanRenderer_->IsAnimationName("CanStop"))
+		{
+			PrevPos_.x = Player_->GetPosition().x;
+			PlayerRenderer_->GetActor()->Off();
+			CanRenderer_->ChangeAnimation("CanMove");
+		}
 
-	if (true == CanRenderer_->IsAnimationName("CanMove") && true == CanRenderer_->IsEndAnimation() && true != CanRenderer_->IsAnimationName("CanStop"))
-	{
-		CanRenderer_->ChangeAnimation("CanStop");
-	}
-
-	if (CanCol_->CollisionCheck("KirbyCol",CollisionType::Rect,CollisionType::Rect) &&
-		true != CanRenderer_->IsAnimationName("CanMove") &&
-		true != CanRenderer_->IsAnimationName("CanStop"))
-	{
-		PrevPos_.x = Player_->GetPosition().x;
-		PlayerRenderer_->GetActor()->Off();
-		CanRenderer_->ChangeAnimation("CanMove");
-	}
-
-	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
-	{
-		IsDebugModeOn();
-	}
+		if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+		{
+			IsDebugModeOn();
+		}
+	
 }
 
 
@@ -124,6 +128,7 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		TomatoRenderer_->ChangeAnimation("Tomato");
 	}
 
+
 	{
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
 		AttackEffect* AttackEffect_ = CreateActor<AttackEffect>((int)ORDER::EFFECT);
@@ -147,6 +152,9 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetGroundStarEffect(GroundStarEffect_);
 
+		Background* AlphaBlack = CreateActor<Background>((int)ORDER::ALPHA);
+		AlphaRenderer_ = AlphaBlack->CreateRenderer("Black.bmp");
+		AlphaRenderer_->SetAlpha(255);
 
 
 		//Background* CannonEffect_ = CreateActor<Background>((int)ORDER::BACKGROUND);
@@ -168,4 +176,5 @@ void Cannon::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 void Cannon::Loading()
 {
+
 }
