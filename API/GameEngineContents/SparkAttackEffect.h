@@ -39,4 +39,5 @@ private:
 	GameEngineCollision* Collision_;
 	GameEngineCollision* SparkEffectCollision_;
 	GameEngineImage* Image_;
+	float Time_;
 };

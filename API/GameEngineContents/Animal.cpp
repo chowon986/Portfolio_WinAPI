@@ -80,7 +80,7 @@ void Animal::UpdateMove()
 		Death();
 	}
 
-	if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(10.0f, 0.0f)) || (GetPosition().x > GetLevel()->GetMapSizeX() - 1))
+	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(10.0f, 0.0f)) || (GetPosition().x > GetLevel()->GetMapSizeX() - 1))
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
@@ -88,7 +88,7 @@ void Animal::UpdateMove()
 		}
 	}
 
-	if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(-10.0f, 0.0f)) || GetPosition().x < 0)
+	if (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(GetPosition() + float4(-10.0f, 0.0f)) || GetPosition().x < 0)
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{

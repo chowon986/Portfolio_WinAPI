@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
+#include "MonBotUI.h"
 
 SparkAttackEffect::SparkAttackEffect()
 {
@@ -76,7 +77,8 @@ void SparkAttackEffect::UpdateSparkAttackEffect()
 			if (Monster_ != nullptr)
 			{
 				Monster_->SetDir(float4::ZERO);
-				Monster_->SetHP(Monster_->GetHP() - 2);
+				Monster_->GetUI()->On();
+				Monster_->SetHP(Monster_->GetHP() - 1);
 			}
 		}
 	}

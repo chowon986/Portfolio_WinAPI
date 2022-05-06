@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
+#include "MonBotUI.h"
 
 FireAttackEffect::FireAttackEffect()
 	:Collision_(nullptr)
@@ -86,6 +87,7 @@ void FireAttackEffect::UpdateFireAttackEffectRight()
 {
 	Renderer_->SetPivot(float4(40.0f, 0.0f));
 	Collision_->SetPivot(float4(100.0f, -25.0f));
+	Collision_->On();
 
 	std::vector<GameEngineCollision*> Result;
 	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
@@ -96,6 +98,7 @@ void FireAttackEffect::UpdateFireAttackEffectRight()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
+				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
 				Monster_->SetDir(float4::ZERO);
 			}
@@ -112,6 +115,7 @@ void FireAttackEffect::UpdateFireAttackEffectLeft()
 {
 	Renderer_->SetPivot(float4(-40.0f, 0.0f));
 	Collision_->SetPivot(float4(-100.0f, -25.0f));
+	Collision_->On();
 
 	if (true == Renderer_->IsEndAnimation())
 	{
@@ -127,7 +131,8 @@ void FireAttackEffect::UpdateFireAttackEffectLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->SetHP(Monster_->GetHP() - 2);
+				Monster_->GetUI()->On();
+				Monster_->SetHP(Monster_->GetHP() - 1);
 				Monster_->SetDir(float4::ZERO);
 			}
 		}

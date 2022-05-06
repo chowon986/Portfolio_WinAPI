@@ -95,7 +95,7 @@ void Level2_2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(200, 320));
+		Player_->SetPosition(float4(200, 380));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 

@@ -111,7 +111,7 @@ void Level1_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(/*205.0f, 430.0f*/3800.0f,0.0f));
+		Player_->SetPosition(float4(205.0f, 430.0f));
 		Player_->SetMapStartPos(float4(205.0f, 430.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);

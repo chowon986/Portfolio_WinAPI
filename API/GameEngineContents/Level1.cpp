@@ -9,6 +9,7 @@
 #include "Monster1.h"
 #include "Sparky.h"
 #include "BotUI.h"
+#include "MonBotUI.h"
 #include "ContentsEnum.h"
 #include "GameEngine/GameEngineImage.h"
 #include <GameEngine/GameEngineLevel.h>
@@ -177,7 +178,10 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Waddledee* Waddledee_ = CreateActor<Waddledee>((int)ORDER::MONSTER);
 		Waddledee_->SetPosition(float4(1200.0f, 430.0f));
-
+		MonsterStatus_ = CreateActor<MonBotUI>((int)ORDER::BOTUI);
+		MonsterStatus_->SetMonster(Waddledee_);
+		MonsterStatus_->Off();
+		Waddledee_->SetUI(MonsterStatus_);
 		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
 		Waddledee_->SetDieEffect(DieEffect_);
 	}
@@ -185,16 +189,22 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Monster1* Monster1_ = CreateActor<Monster1>((int)ORDER::MONSTER);
 		Monster1_->SetPosition(float4(2840.0f, 377.0f));
-
+		MonsterStatus_ = CreateActor<MonBotUI>((int)ORDER::BOTUI);
+		MonsterStatus_->SetMonster(Monster1_);
+		MonsterStatus_->Off();
 		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
 		Monster1_->SetDieEffect(DieEffect_);
+		Monster1_->SetUI(MonsterStatus_);
 	}
 
 	{
 		Monster* Sparky_ = CreateActor<Sparky>((int)ORDER::MONSTER);
 		Sparky_->SetPosition(float4(3780.0f, 380.0f));
-
+		MonsterStatus_ = CreateActor<MonBotUI>((int)ORDER::BOTUI);
+		MonsterStatus_->SetMonster(Sparky_);
+		MonsterStatus_->Off();
 		DieEffect* DieEffect_ = CreateActor<DieEffect>((int)ORDER::EFFECT);
 		Sparky_->SetDieEffect(DieEffect_);
+		Sparky_->SetUI(MonsterStatus_);
 	}
 }

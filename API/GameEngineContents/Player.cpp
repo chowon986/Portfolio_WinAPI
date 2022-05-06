@@ -229,6 +229,10 @@ void Player::SetState(KirbyState _KirbyState)
         break;
 
     case KirbyState::UP: // Animal 사용
+        if (GetKirbyClass() == KirbyClass::ANIMAL)
+        {
+            AnimalRenderer_->ChangeAnimation("Up");
+        }
         break;
     case KirbyState::DOWN:
         if (GetKirbyClass() == KirbyClass::SPARK)
@@ -720,9 +724,16 @@ void Player::DelayUpdate()
         SetKirbyClass(KirbyClass::ANIMAL);
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("Abandon"))
+    if (true == GameEngineInput::GetInst()->IsPress("Down") &&
+        KirbyClass::PIG != GetKirbyClass() &&
+        KirbyClass::ANIMAL == GetKirbyClass() &&
+        KirbyState::TRANSFORM != GetState() &&
+        KirbyState::SLIDE != GetState() &&
+        KirbyState::EATEN != GetState() &&
+        KirbyState::TAKEDAMAGE != GetState() &&
+        KirbyState::DIE != GetState())
     {
-        SetKirbyClass(KirbyClass::DEFAULT);
+        SetState(KirbyState::DOWN);
     }
 
     if (true == GameEngineInput::GetInst()->IsPress("Left") &&
@@ -814,17 +825,6 @@ void Player::DelayUpdate()
         SetState(KirbyState::UP);
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("Down") &&
-        KirbyClass::PIG != GetKirbyClass() &&
-        KirbyClass::ANIMAL == GetKirbyClass() &&
-        KirbyState::TRANSFORM != GetState() &&
-        KirbyState::SLIDE != GetState() &&
-        KirbyState::EATEN != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
-        KirbyState::DIE != GetState())
-    {
-        SetState(KirbyState::DOWN);
-    }
 
     if (true == GameEngineInput::GetInst()->IsDown("Slide") &&
         KirbyState::DOWN == GetState() &&
@@ -1221,15 +1221,6 @@ void Player::DelayUpdate()
         }
     }
 
-    // 능력 버리기
-    if (GetKirbyClass() != KirbyClass::DEFAULT)
-    {
-        if (true == GameEngineInput::GetInst()->IsUp("Abandon") || GetState() == KirbyState::DIE)
-        {            
-            SetKirbyClass(KirbyClass::DEFAULT);
-        }
-    }
-
     std::vector<GameEngineCollision*> Result;
     if (KirbyState::EAT != GetState() &&
         KirbyState::EATSTART != GetState() &&
@@ -1284,90 +1275,130 @@ void Player::CheckCollision()
 	if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect) &&
 		GetState() == KirbyState::OPENDOOR)
 	{
-		HP_COUNT = GetHPCount();
-		HP = GetHP();
-		KIRBYCLASS = GetKirbyClass();
-		GameEngine::GetInst().ChangeLevel("Level1_3");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level1_3");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-       HP_COUNT = GetHPCount();
-       HP = GetHP();
-       KIRBYCLASS = GetKirbyClass();
-       GameEngine::GetInst().ChangeLevel("Level1_4");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level1_4");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-       HP_COUNT = GetHPCount();
-       HP = GetHP();
-       GameEngine::GetInst().ChangeLevel("Cannon");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            GameEngine::GetInst().ChangeLevel("Cannon");
+        }
     }
     
     if (true == KirbyCol_->CollisionCheck("DoorCol2", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Level2");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level2");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-       HP_COUNT = GetHPCount();
-       HP = GetHP();
-       KIRBYCLASS = GetKirbyClass();
-       GameEngine::GetInst().ChangeLevel("Level2_2");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level2_2");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol2_3", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Level2_3");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level2_3");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol2_4", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Level2_4");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level2_4");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol2_5", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Level2_5");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level2_5");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("DoorCol3", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Level3");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Level3");
+        }
     }
 
     if (true == KirbyCol_->CollisionCheck("Boss", CollisionType::Rect, CollisionType::Rect) &&
         GetState() == KirbyState::OPENDOOR)
     {
-        HP_COUNT = GetHPCount();
-        HP = GetHP();
-        KIRBYCLASS = GetKirbyClass();
-        GameEngine::GetInst().ChangeLevel("Boss");
+        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+            GetRenderer()->IsEndAnimation())
+        {
+            HP_COUNT = GetHPCount();
+            HP = GetHP();
+            KIRBYCLASS = GetKirbyClass();
+            GameEngine::GetInst().ChangeLevel("Boss");
+        }
     }
 
     //if (true == KirbyCol_->CollisionCheck("CanCol", CollisionType::Rect, CollisionType::Rect))
@@ -1669,6 +1700,8 @@ void Player::Start()
         Renderer_->CreateAnimation("Normal.bmp", "Dance", 201, 207, 0.03f, true);
         Renderer_->CreateAnimation("Normal.bmp", "Dance1", 80, 80, 0.03f, true);
         Renderer_->CreateAnimation("Normal.bmp", "Die", 180, 95, 0.1f, true);
+
+        Renderer_->ChangeAnimation("IdleRight");
     }
 
 	{
@@ -1688,6 +1721,8 @@ void Player::Start()
 
 		PigRenderer_->CreateAnimation("Normal.bmp", "AttackRight", 74, 74, 0.1f, true);
 		PigRenderer_->CreateAnimation("Normal.bmp", "AttackLeft", 164, 167, 0.1f, true);
+
+        PigRenderer_->ChangeAnimation("IdleRight");
 
 	}
 
@@ -1738,8 +1773,10 @@ void Player::Start()
 		FireRenderer_->CreateAnimation("Fire.bmp", "TakeDamageRight", 549, 549, 0.1f, true);
 		FireRenderer_->CreateAnimation("Fire.bmp", "TakeDamageLeft", 562, 562, 0.1f, true);
 
-		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenRight", 546, 541, 0.1f, true);
-		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenLeft", 236, 231, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenRight", 197, 201, 0.1f, true);
+		FireRenderer_->CreateAnimation("Fire.bmp", "DoorOpenLeft", 507, 511, 0.1f, true);
+
+        FireRenderer_->ChangeAnimation("IdleRight");
     }
 
 	{
@@ -1776,6 +1813,8 @@ void Player::Start()
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpDownRight", 48, 49, 0.5f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpDownLeft", 258, 259, 0.5f, true);
 
+        AnimalRenderer_->CreateAnimation("Animal.bmp", "Up", 61, 63, 0.3f, true);
+
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "DownRight", 2, 2, 0.1f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "DownLeft", 212, 212, 0.1f, true);
 
@@ -1785,8 +1824,9 @@ void Player::Start()
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "TakeDamageRight", 399, 399, 0.1f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "TakeDamageLeft", 189, 189, 0.1f, true);
 
-		AnimalRenderer_->CreateAnimation("Animal.bmp", "DoorOpenRight", 54, 57, 0.1f, true);
-		AnimalRenderer_->CreateAnimation("Animal.bmp", "DoorOpenLeft", 264, 267, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "DoorOpenRight", 64, 67, 0.1f, true);
+		AnimalRenderer_->CreateAnimation("Animal.bmp", "DoorOpenLeft", 274, 277, 0.1f, true);
+        AnimalRenderer_->ChangeAnimation("IdleRight");
 
 	}
 
@@ -1842,6 +1882,7 @@ void Player::Start()
 
 		IceRenderer_->CreateAnimation("Ice.bmp", "DoorOpenRight", 75, 78, 0.1f, true);
 		IceRenderer_->CreateAnimation("Ice.bmp", "DoorOpenLeft", 164, 167, 0.1f, true);
+        IceRenderer_->ChangeAnimation("IdleRight");
 	}
 
 	{
@@ -1938,8 +1979,10 @@ void Player::Start()
         SparkRenderer_->CreateAnimation("Spark.bmp", "TakeDamageRight", 126, 126, 0.1f, true);
         SparkRenderer_->CreateAnimation("Spark.bmp", "TakeDamageLeft", 326, 326, 0.1f, true);
         
-        SparkRenderer_->CreateAnimation("Spark.bmp", "DoorOpenRight", 181, 185, 0.1f, true); // need to chk
-        SparkRenderer_->CreateAnimation("Spark.bmp", "DoorOpenLeft", 164, 167, 0.1f, true); // need to chk
+        SparkRenderer_->CreateAnimation("Spark.bmp", "DoorOpenRight", 181, 185, 0.1f, true); 
+        SparkRenderer_->CreateAnimation("Spark.bmp", "DoorOpenLeft", 381, 385, 0.1f, true); 
+
+        SparkRenderer_->ChangeAnimation("IdleRight");
 
     }
 
@@ -1972,6 +2015,5 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("Animal", '3');
         GameEngineInput::GetInst()->CreateKey("Ice", '4');
         //GameEngineInput::GetInst()->CreateKey("Sword", '3');
-        //GameEngineInput::GetInst()->CreateKey("AbandonClass", 'O');
      }
 }

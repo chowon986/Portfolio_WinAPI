@@ -20,6 +20,7 @@
 #include "Box.h"
 #include "RunEffect.h"
 #include "AbandonEffect.h"
+#include "MonBotUI.h"
 
 void Player::UpdateIdle()
 {
@@ -256,12 +257,12 @@ void Player::UpdateAttack()
         if (Dir_ == "Right")
         {
             AnimalCol_->On();
-            AnimalCol_->SetPivot(float4(30.0f, -15.0f));
+            AnimalCol_->SetPivot(float4(38.0f, -15.0f));
         }
         else if (Dir_ == "Left")
         {
             AnimalCol_->On();
-            AnimalCol_->SetPivot(float4(-30.0f, -15.0f));
+            AnimalCol_->SetPivot(float4(-38.0f, -15.0f));
         }
     }
 }
@@ -518,6 +519,7 @@ void Player::UpdateSlide()
             Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
             if (ColMonster != nullptr)
             {
+                Monster_->GetUI()->On();
                 ColMonster->SetHP(ColMonster->GetHP() - 1);
             }
         }
@@ -534,7 +536,8 @@ void Player::UpdateSlide()
             Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
             if (ColMonster != nullptr)
             {
-                ColMonster->SetHP(ColMonster->GetHP() - 2);
+                Monster_->GetUI()->On();
+                Monster_->SetHP(Monster_->GetHP() - 1);
             }
         }
     }
@@ -543,7 +546,6 @@ void Player::UpdateSlide()
 
 void Player::UpdateAbandon()
 {
-
 }
 
 void Player::UpdateEaten()

@@ -29,6 +29,7 @@ class Player;
 class GameEngineRenderer;
 class FireAttackEffect;
 class SparkAttackEffect;
+class MonBotUI;
 class Monster : public CharacterBase
 {
 public:
@@ -51,6 +52,7 @@ protected:
 	
 
 protected:
+	MonBotUI* MonStatus_;
 	float4 Pos_;
 	float4 Dir_;
 	float Speed_;
@@ -88,6 +90,8 @@ public:
 	{
 		DieEffect_ = _DieEffect;
 	}
+	void SetUI(MonBotUI* _MonStatus) { MonStatus_ = _MonStatus; }
+	MonBotUI* GetUI() { return MonStatus_; }
 
 private:
 	void Jump();

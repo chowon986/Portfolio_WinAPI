@@ -50,9 +50,11 @@ void Dedede::Start()
 	Renderer_->CreateAnimation("KingDedede.bmp", "DieLeft", 61, 63, 0.1f, true);
 	Renderer_->ChangeAnimation("WalkRight");
 
-	SetHP(10);
+	SetHP(13);
 	SetSpeed(30);
-	Collision_ = CreateCollision("BasicMonster", float4(150.0f, 180.0f), float4(0.0f, -90.0f));
+
+	Collision_-> SetScale(float4(150.0f, 180.0f));
+	Collision_->SetPivot(float4(0.0f, 45.0f));
 	//EffectRenderer_ = CreateRenderer("MonsterDie.bmp");
 	//GameEngineImage* EffectImage = EffectRenderer_->GetImage();
 	//EffectImage->CutCount(10, 3);

@@ -16,7 +16,7 @@
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
 #include "AbandonEffect.h"
-
+#include "MonBotUI.h"
 
 Boss::Boss()
 {
@@ -71,6 +71,11 @@ void Boss::DelayUpdate()
 		BossLevelStartRenderer_->SetAlpha(0);
 		BossLevelEndRenderer_->SetAlpha(255);
 	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Collision"))
+	{
+		IsDebugModeOn();
+	}
 }
 
 void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -99,6 +104,8 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		BossLevelEndRenderer_->CreateAnimation("BossLevelEnd.bmp", "End", 0, 11, 0.1f, true);
 		BossLevelEndRenderer_->ChangeAnimation("End");
 		BossLevelEndRenderer_->SetAlpha(0);
+
+
 	}
 
 	{
@@ -121,11 +128,17 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 		Player_->SetRunEffect(RunEffect_);
+
+
 	}
 
 	{
 		Dedede_ = CreateActor<Dedede>((int)ORDER::MONSTER);
 		Dedede_->SetPosition(float4(640.0f, 320.0f));
 		Dedede_->SetPlayer(Player_);
+
+		MonsterStatus_ = CreateActor<MonBotUI>((int)ORDER::BOTUI);
+		MonsterStatus_->SetMonster(Dedede_);
+		Dedede_->SetUI(MonsterStatus_);
 	}
 }

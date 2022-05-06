@@ -6,6 +6,7 @@ class Player;
 class BotUI;
 class GameEngineCollision;
 class GameEngineImage;
+class MonBotUI;
 class Level1 : public GameEngineLevelBase
 {
 public:
@@ -27,6 +28,7 @@ protected:
 private:
 	Player* Player_;
 	BotUI* PlayerStatus_;
+	MonBotUI* MonsterStatus_;
 	GameEngineCollision* DoorCol1_2;
 	GameEngineImage* ColMapImage_;
 

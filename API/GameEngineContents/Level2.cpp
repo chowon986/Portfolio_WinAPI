@@ -20,6 +20,7 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include "GameEngineBase/GameEngineSound.h"
+#include "IceItem.h"
 
 Level2::Level2()
 	: Player_(nullptr)
@@ -119,12 +120,8 @@ void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetRunEffect(RunEffect_);
 	}
 
-	Monster* SwrodItem = CreateActor<Monster>((int)ORDER::MONSTER);
-	GameEngineRenderer* SwrodItemRenderer = SwrodItem->CreateRenderer("SwordItem3.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(958.0f, 330.0f));
-	GameEngineImage* SwrodItemImage = SwrodItemRenderer->GetImage();
-	SwrodItemImage->CutCount(2, 1);
-	SwrodItemRenderer->CreateAnimation("SwordItem3.bmp", "SwordItem", 0, 1, 0.5f, true);
-	SwrodItemRenderer->ChangeAnimation("SwordItem");
+	IceItem* IceItem_ = CreateActor<IceItem>((int)ORDER::MONSTER);
+	IceItem_->SetPosition(float4(958.0f, 330.0f));
 
 	{
 		Background* Door = CreateActor<Background>((int)ORDER::BACKGROUND);

@@ -7,6 +7,7 @@
 #include "DieEffect.h"
 #include "FireAttackEffect.h"
 #include "SparkAttackEffect.h"
+#include "MonBotUI.h"
 
 
 Monster::Monster()
@@ -110,6 +111,8 @@ void Monster::Die()
 		{
 			if (true == Renderer_->IsEndAnimation())
 			{
+				GetUI()->Off();
+				Collision_->Off();
 				Death();
 
 				//if (DieEffect_ != nullptr)
@@ -132,6 +135,7 @@ void Monster::Die()
 				(Fire_ != nullptr && Fire_->GetPosition().x - GetPosition().x > 0) ||
 				(Spark_ != nullptr && Spark_->GetPosition().x - GetPosition().x > 0))
 			{
+				Collision_->Off();
 				Dir_ = float4::LEFT;
 				Renderer_->ChangeAnimation("DieLeft");
 			}
@@ -144,6 +148,7 @@ void Monster::Die()
 				(Spark_ != nullptr && Spark_->GetPosition().x - GetPosition().x <= 0))
 			{
 				Dir_ = float4::RIGHT;
+				Collision_->Off();
 				Renderer_->ChangeAnimation("DieRight");
 			}
 		}
@@ -155,6 +160,8 @@ void Monster::UpdateMove()
 
 	if (true == IceEndCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect))
 	{
+		GetUI()->Off();
+		Collision_->Off();
 		Death();
 		//EffectRenderer_->ChangeAnimation("DieEffect");
 		//EffectRenderer_->SetAlpha(255);
@@ -168,6 +175,8 @@ void Monster::UpdateMove()
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
+			GetUI()->Off();
+			Collision_->Off();
 			Death();
 		}
 		else
@@ -180,6 +189,8 @@ void Monster::UpdateMove()
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
+			GetUI()->Off();
+			Collision_->Off();
 			Death();
 		}
 		else

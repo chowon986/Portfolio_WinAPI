@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
+#include "MonBotUI.h"
 
 AttackEffect::AttackEffect()
 	: Collision_(nullptr)
@@ -83,6 +84,7 @@ void AttackEffect::StateUpdate()
 
 void AttackEffect::UpdateAttackEffectRight()
 {
+	Time_ += GameEngineTime::GetDeltaTime();
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(40.0f, 0.0f));
 	SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 100);
@@ -101,7 +103,8 @@ void AttackEffect::UpdateAttackEffectRight()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->SetHP(Monster_->GetHP() - 2);
+				Monster_->GetUI()->On();
+				Monster_->SetHP(Monster_->GetHP() - 1);
 			}
 		}
 	}
@@ -118,6 +121,7 @@ void AttackEffect::UpdateAttackEffectRight()
 
 void AttackEffect::UpdateAttackEffectLeft()
 {
+	Time_ += GameEngineTime::GetDeltaTime();
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(-150.0f, 0.0f));
 	SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 100);
@@ -136,7 +140,8 @@ void AttackEffect::UpdateAttackEffectLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->SetHP(Monster_->GetHP() - 2);
+				Monster_->GetUI()->On();
+				Monster_->SetHP(Monster_->GetHP() - 1);
 			}
 		}
 	}

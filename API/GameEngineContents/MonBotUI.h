@@ -26,21 +26,8 @@ private:
 	void Update() override;
 
 	float MinusHP_;
-	GameEngineRenderer* HP2_;
-	GameEngineRenderer* HP1_;
-	GameEngineRenderer* HP0_;
-
-	GameEngineRenderer* BossHP10_;
-	GameEngineRenderer* BossHP9_;
-	GameEngineRenderer* BossHP8_;
-	GameEngineRenderer* BossHP7_;
-	GameEngineRenderer* BossHP6_;
-	GameEngineRenderer* BossHP5_;
-	GameEngineRenderer* BossHP4_;
-	GameEngineRenderer* BossHP3_;
-	GameEngineRenderer* BossHP2_;
-	GameEngineRenderer* BossHP1_;
-	GameEngineRenderer* BossHP0_;
+	GameEngineRenderer* HP_;
+	GameEngineRenderer* BossHP_;
 
 
 	GameEngineRenderer* MonsterUI_;
@@ -51,6 +38,9 @@ private:
 	GameEngineRenderer* HPNumberRight_;
 	GameEngineImage* HPCountNum_;
 	Monster* Monster_;
+	float Time_;
+	bool MaxHPCheck_;
+	int MaxHP_;
 public:
 	void SetMonster(Monster* _Monster) { Monster_ = _Monster; }
 };

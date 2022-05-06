@@ -45,10 +45,7 @@
     <ClCompile Include="Tiktik.cpp">
       <Filter>Monster</Filter>
     </ClCompile>
-    <ClCompile Include="SwordItem.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="FireItem.cpp">
+    <ClCompile Include="IceItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="BigTreasureChest.cpp">
@@ -246,10 +243,7 @@
     <ClInclude Include="Tiktik.h">
       <Filter>Monster</Filter>
     </ClInclude>
-    <ClInclude Include="SwordItem.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="FireItem.h">
+    <ClInclude Include="IceItem.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="BigTreasureChest.h">

@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
+#include "MonBotUI.h"
 
 StarAttackEffect::StarAttackEffect()
 	:ColMapImage_(nullptr)
@@ -118,6 +119,7 @@ void StarAttackEffect::UpdateAttackStartRight()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
+				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
 				SetState(StarAttackEffectState::AttackEndRight);
 			}
@@ -153,7 +155,8 @@ void StarAttackEffect::UpdateAttackStartLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->SetHP(Monster_->GetHP() - 2);
+				Monster_->GetUI()->On();
+				Monster_->SetHP(Monster_->GetHP() - 1);
 				SetState(StarAttackEffectState::AttackEndRight);
 			}
 		}
