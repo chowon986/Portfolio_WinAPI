@@ -41,7 +41,6 @@ Player::Player()
     , IsGround_(false)
     , SwordCol_(nullptr)
     , SwordAttackEffect_(nullptr)
-    , Speed_(20.0f)
     , RunEffect_(nullptr)
     , PigRenderer_(nullptr)
     , PigImage_(nullptr)
@@ -61,6 +60,7 @@ Player::Player()
     , KirbyClass_(KirbyClass::DEFAULT)
     , GroundStarEffect_(nullptr)
     , AnimalCol_(nullptr)
+    , AttTime_(0.0f)
 {
 
 }
@@ -726,7 +726,6 @@ void Player::DelayUpdate()
 
     if (true == GameEngineInput::GetInst()->IsPress("Down") &&
         KirbyClass::PIG != GetKirbyClass() &&
-        KirbyClass::ANIMAL == GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::EATEN != GetState() &&
@@ -748,7 +747,7 @@ void Player::DelayUpdate()
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr)
 
@@ -768,7 +767,7 @@ void Player::DelayUpdate()
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr)
 
@@ -788,7 +787,7 @@ void Player::DelayUpdate()
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() && 
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr)
     {
@@ -806,7 +805,7 @@ void Player::DelayUpdate()
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr)
     {
@@ -818,7 +817,7 @@ void Player::DelayUpdate()
         KirbyClass::ANIMAL == GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
         KirbyState::SLIDE != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         KirbyState::DIE != GetState()
         /*need to chk RGB(,,)  */)
     {
@@ -831,7 +830,7 @@ void Player::DelayUpdate()
         KirbyClass::PIG != GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
         KirbyState::EATEN != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         KirbyState::DIE != GetState())
     {
         SetState(KirbyState::SLIDE);
@@ -841,7 +840,7 @@ void Player::DelayUpdate()
         KirbyClass::DEFAULT != GetKirbyClass() &&
         KirbyState::EATEN != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         KirbyState::DIE != GetState())
     {
         if (KirbyState::ATTACKSTAY != GetState())
@@ -880,7 +879,7 @@ void Player::DelayUpdate()
         KirbyState::EATEN != GetState() &&
         KirbyClass::PIG != GetKirbyClass() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         GetState() != KirbyState::DIE)
     {
         if (KirbyState::FLYSTAY != GetState())
@@ -928,7 +927,7 @@ void Player::DelayUpdate()
         KirbyClass::PIG != GetKirbyClass() &&
         KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         KirbyState::TRANSFORM != GetState())
     {
 
@@ -976,7 +975,7 @@ void Player::DelayUpdate()
         KirbyState::EATEN != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr) // 공중에서 점프 불가
     {
@@ -1009,7 +1008,7 @@ void Player::DelayUpdate()
         KirbyState::FLYATTACK != GetState() &&
         KirbyState::EATEND != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        KirbyState::TAKEDAMAGE != GetState() &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
         KirbyClass::DEFAULT == GetKirbyClass())
     {
         if (KirbyState::EAT != GetState())
@@ -1227,7 +1226,7 @@ void Player::DelayUpdate()
         KirbyState::EATEND != GetState() &&
         KirbyState::DIE != GetState() &&
         KirbyCol_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
-        Time_ >= 2)
+        Time_ >= 3)
     {
 		SetHP(GetHP() - 1);
 		Time_ = 0;

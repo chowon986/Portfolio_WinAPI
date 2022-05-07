@@ -132,16 +132,13 @@ private:
 	float Gravity_;
 	float JumpHeight_;
 	float Time_;
-	float Speed_;
+	float AttTime_;
 	GameEngineImage* ColMapImage_;
 	GameEngineLevel* Level_;
 	KirbyClass KirbyClass_;
 	KirbyState KirbyState_;
 	std::string Dir_;
 	bool IsGround_;
-
-
-	void SetSpeed(float _Speed) { Speed_ = _Speed; }
 
 	void ClassUpdate();
 

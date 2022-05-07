@@ -18,6 +18,8 @@ public:
 	MonBotUI& operator=(const MonBotUI& _Other) = delete;
 	MonBotUI& operator=(MonBotUI&& _Other) noexcept = delete;
 
+	void DelayOff();
+
 protected:
 
 private:
@@ -25,7 +27,8 @@ private:
 	void Render() override;
 	void Update() override;
 
-	float MinusHP_;
+	float DelayTime_;
+	float ElapsedTime_;
 	GameEngineRenderer* HP_;
 	GameEngineRenderer* BossHP_;
 
@@ -38,9 +41,8 @@ private:
 	GameEngineRenderer* HPNumberRight_;
 	GameEngineImage* HPCountNum_;
 	Monster* Monster_;
-	float Time_;
-	bool MaxHPCheck_;
-	int MaxHP_;
+	
+	bool PendingOff_;
 public:
 	void SetMonster(Monster* _Monster) { Monster_ = _Monster; }
 };

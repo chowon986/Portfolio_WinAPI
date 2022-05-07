@@ -18,6 +18,7 @@
 #include "AbandonEffect.h"
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngineContents/Fire.h>
 
 Level2_4::Level2_4()
 	: Player_(nullptr)
@@ -119,8 +120,8 @@ void Level2_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	{
-		Sword* Sword_ = CreateActor<Sword>((int)ORDER::MONSTER);
-		Sword_->SetPosition(float4(340.0f, 858.0f));
+		Fire* Fire_ = CreateActor<Fire>((int)ORDER::MONSTER);
+		Fire_->SetPosition(float4(340.0f, 1011.0f));
 	}
 
 	{

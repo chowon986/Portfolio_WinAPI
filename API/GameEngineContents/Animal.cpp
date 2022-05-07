@@ -206,7 +206,7 @@ void Animal::UpdateMove()
 				IceCol_->Off();
 				IceEndCol_->On();
 				float Direction = IceColActor->GetPosition().x - GetPosition().x;
-				Speed_ = 250.0f;
+				SetSpeed(250.0f);
 				if (Direction <= 0) // 몬스터가 오른쪽
 				{
 					Dir_ = float4::RIGHT;
@@ -220,5 +220,5 @@ void Animal::UpdateMove()
 		}
 	}
 
-	SetMove(Dir_* GameEngineTime::GetDeltaTime()* Speed_);
+	SetMove(Dir_* GameEngineTime::GetDeltaTime()* GetSpeed());
 }

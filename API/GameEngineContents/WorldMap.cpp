@@ -141,7 +141,6 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetColMapImage("WorldMapCol.bmp");
 	ColMapImage_ = GetColMapImage();
 
-	GameEngineLevelBase::MAJOR_LEVEL = 2;
 	Level_ = GameEngineLevelBase::MAJOR_LEVEL;
 	MajorLevel_ = GameEngineLevelBase::MAJOR_LEVEL;
 	{
@@ -162,7 +161,7 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 		Player_->SetDelayTime(DelayTime_);
-		Player_->GetRenderer()->ChangeAnimation("Dance");
+		//Player_->GetRenderer()->ChangeAnimation("Dance");
 
 		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);

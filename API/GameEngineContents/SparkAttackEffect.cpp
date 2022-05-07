@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
 #include "MonBotUI.h"
+#include <GameEngineContents/GameEngineLevelBase.h>
 
 SparkAttackEffect::SparkAttackEffect()
 {
@@ -77,8 +78,17 @@ void SparkAttackEffect::UpdateSparkAttackEffect()
 			if (Monster_ != nullptr)
 			{
 				Monster_->SetDir(float4::ZERO);
-				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}

@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
 #include "MonBotUI.h"
+#include <GameEngineContents/GameEngineLevelBase.h>
 
 FireAttackEffect::FireAttackEffect()
 	:Collision_(nullptr)
@@ -38,6 +39,7 @@ void FireAttackEffect::Start()
 
 void FireAttackEffect::Update()
 {
+	Time_ += GameEngineTime::GetDeltaTime();
 	StateUpdate();
 }
 
@@ -90,17 +92,27 @@ void FireAttackEffect::UpdateFireAttackEffectRight()
 	Collision_->On();
 
 	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
+		Time_ > 1.0f)
 	{
+		Time_ = 0.0f;
 		for (GameEngineCollision* Collision : Result)
 		{
 			GameEngineActor* ColActor = Collision->GetActor();
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
-				Monster_->SetDir(float4::ZERO);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}
@@ -123,17 +135,27 @@ void FireAttackEffect::UpdateFireAttackEffectLeft()
 	}
 
 	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
+		Time_ > 1.0f)
 	{
+		Time_ = 0.0f;
 		for (GameEngineCollision* Collision : Result)
 		{
 			GameEngineActor* ColActor = Collision->GetActor();
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
-				Monster_->SetDir(float4::ZERO);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}

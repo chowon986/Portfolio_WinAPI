@@ -78,5 +78,5 @@ void Brontobert::Walk()
 			Renderer_->ChangeAnimation("WalkLeft");
 		}
 	}
-	SetMove((Dir_ + UpDownDir_)* GameEngineTime::GetDeltaTime() * Speed_);
+	SetMove((Dir_ + UpDownDir_)* GameEngineTime::GetDeltaTime() * GetSpeed());
 }

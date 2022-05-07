@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
 #include "MonBotUI.h"
+#include <GameEngineContents/GameEngineLevelBase.h>
 
 StarAttackEffect::StarAttackEffect()
 	:ColMapImage_(nullptr)
@@ -119,9 +120,17 @@ void StarAttackEffect::UpdateAttackStartRight()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
-				SetState(StarAttackEffectState::AttackEndRight);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}
@@ -155,9 +164,17 @@ void StarAttackEffect::UpdateAttackStartLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
-				SetState(StarAttackEffectState::AttackEndRight);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}

@@ -134,11 +134,7 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Dedede_ = CreateActor<Dedede>((int)ORDER::MONSTER);
-		Dedede_->SetPosition(float4(640.0f, 320.0f));
+		Dedede_->SetPosition(float4(640.0f, 436.0f));
 		Dedede_->SetPlayer(Player_);
-
-		MonsterStatus_ = CreateActor<MonBotUI>((int)ORDER::BOTUI);
-		MonsterStatus_->SetMonster(Dedede_);
-		Dedede_->SetUI(MonsterStatus_);
 	}
 }

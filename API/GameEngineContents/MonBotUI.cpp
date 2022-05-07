@@ -6,9 +6,9 @@
 #include <string>
 
 MonBotUI::MonBotUI()
-	: MinusHP_(0)
-	, Time_(0.0f)
-	, MaxHPCheck_(false)
+	: ElapsedTime_(0.0f)
+	, DelayTime_(1.0f)
+	, PendingOff_(false)
 {
 }
 
@@ -16,6 +16,12 @@ MonBotUI::~MonBotUI()
 {
 }
 
+
+void MonBotUI::DelayOff()
+{
+	PendingOff_ = true;
+	ElapsedTime_ = 0.0f;
+}
 
 void MonBotUI::Start()
 {
@@ -54,26 +60,30 @@ void MonBotUI::Start()
 
 void MonBotUI::Update()
 {
-	if (MaxHPCheck_ == false)
+	if (true == PendingOff_)
 	{
-		MaxHP_ = Monster_->GetHP();
-		MaxHPCheck_ = true;
+		ElapsedTime_ += GameEngineTime::GetDeltaTime();
+		if (ElapsedTime_ > DelayTime_)
+		{
+			PendingOff_ = false;
+			Off();
+		}
 	}
-
-	Time_ = GameEngineTime::GetDeltaTime();
+	
 	if (Monster_ == nullptr)
 	{
 		return;
 	}
 
 	int HP = Monster_->GetHP();
-
+	int MaxHP_ = Monster_->GetMaxHP();		
 	if (MaxHP_ == 2)
 	{
 		BossHP_->SetAlpha(0);
 		switch (HP)
 		{
 		case 0:
+			Monster_ = nullptr;
 			HP_->SetAlpha(0);
 			break;
 		case 1:
@@ -96,6 +106,7 @@ void MonBotUI::Update()
 		switch (HP)
 		{
 		case 0:
+			Monster_ = nullptr;
 			BossHP_->SetAlpha(0);
 			break;
 		case 1:

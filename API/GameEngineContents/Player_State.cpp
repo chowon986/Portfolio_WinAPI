@@ -21,6 +21,7 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include "MonBotUI.h"
+#include <GameEngineContents/GameEngineLevelBase.h>
 
 void Player::UpdateIdle()
 {
@@ -127,7 +128,7 @@ void Player::UpdateWalk()
         RunEffect_->SetState(RunEffectState::None);
     }
 
-    SetMove(direction * GameEngineTime::GetDeltaTime() * Speed_);
+    SetMove(direction * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
 
 void Player::UpdateRun()
@@ -150,7 +151,7 @@ void Player::UpdateRun()
     }
 
 
-    SetMove(direction * GameEngineTime::GetDeltaTime() * (Speed_ * 2));
+    SetMove(direction * GameEngineTime::GetDeltaTime() * (GetSpeed() * 2));
 }
 
 void Player::UpdateFly()
@@ -187,7 +188,7 @@ void Player::UpdateFlyStay()
 
     JumpHeight_ = 0;
 
-    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+    SetMove(float4::UP * GameEngineTime::GetDeltaTime() * GetSpeed());
     UpdateWalk();
 }
 
@@ -511,16 +512,26 @@ void Player::UpdateSlide()
 
     std::vector<GameEngineCollision*> Result;
     if (true == KirbySlideCol_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
-        Time_ >= 1)
+        AttTime_ >= 1)
     {
-		Time_ = 0;
+        AttTime_ = 0;
         for (GameEngineCollision* Collision : Result)
         {
             Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
             if (ColMonster != nullptr)
             {
-                Monster_->GetUI()->On();
                 ColMonster->SetHP(ColMonster->GetHP() - 1);
+
+                if (Monster_->GetHP() > 0)
+                {
+                    GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+                    if (Level != nullptr)
+                    {
+                        MonBotUI* MonBotUI = Level->GetMonBotUI();
+                        MonBotUI->On();
+                        MonBotUI->SetMonster(Monster_);
+                    }
+                }
             }
         }
     }
@@ -528,16 +539,26 @@ void Player::UpdateSlide()
     std::vector<GameEngineCollision*> MonsterColResult;
     if ((true == AnimalCol_->CollisionResult("BasicMonster", MonsterColResult, CollisionType::Rect, CollisionType::Rect) ||
         true == SwordCol_->CollisionResult("BasicMonster", MonsterColResult, CollisionType::Rect, CollisionType::Rect))  &&
-        Time_ >= 1)
+        AttTime_ >= 1)
     {
-        Time_ = 0;
+        AttTime_ = 0;
         for (GameEngineCollision* Collision : MonsterColResult)
         {
             Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
             if (ColMonster != nullptr)
             {
-                Monster_->GetUI()->On();
-                Monster_->SetHP(Monster_->GetHP() - 1);
+                ColMonster->SetHP(ColMonster->GetHP() - 1);
+
+                if (Monster_->GetHP() > 0)
+                {
+                    GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+                    if (Level != nullptr)
+                    {
+                        MonBotUI* MonBotUI = Level->GetMonBotUI();
+                        MonBotUI->On();
+                        MonBotUI->SetMonster(Monster_);
+                    }
+                }
             }
         }
     }

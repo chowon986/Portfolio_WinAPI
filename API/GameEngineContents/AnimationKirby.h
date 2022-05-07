@@ -43,7 +43,6 @@ private:
 	AnimationKirbyClass Class_;
 	float4 StartPos_;
 	float4 Dir_;
-	float Speed_;
 	float Time_;
 
 

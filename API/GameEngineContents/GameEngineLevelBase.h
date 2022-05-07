@@ -3,6 +3,7 @@
 
 class GameEngineRenderer;
 class GameEngineSoundPlayer;
+class MonBotUI;
 class GameEngineLevelBase : public GameEngineLevel
 {
 public:
@@ -17,6 +18,9 @@ public:
 	GameEngineLevelBase& operator=(const GameEngineLevelBase& _Other) = delete;
 	GameEngineLevelBase& operator=(GameEngineLevelBase&& _Other) noexcept = delete;
 
+public:
+	MonBotUI* GetMonBotUI() { return MonsterStatus_; }
+
 protected:
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
@@ -26,6 +30,7 @@ protected:
 
 protected:
 	GameEngineRenderer* AlphaRenderer_;
+	MonBotUI* MonsterStatus_;
 	float DelayTime_;
 	float ElapsedTime_;
 };

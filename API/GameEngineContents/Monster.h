@@ -41,12 +41,15 @@ public:
 	Monster& operator=(const Monster& _Other) = delete;
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
+	virtual void SetHP(int _HP) override;
+	virtual int GetMaxHP() { return 2; }
+
 protected:
 	virtual bool IsDie();
 	virtual void Die();
 	virtual void UpdateMove();
 	virtual bool CanWalk();
-	virtual void Walk();
+	virtual void Walk();	
 	void Start();
 	void Render();
 	
@@ -55,7 +58,6 @@ protected:
 	MonBotUI* MonStatus_;
 	float4 Pos_;
 	float4 Dir_;
-	float Speed_;
 	float Time_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
@@ -90,8 +92,6 @@ public:
 	{
 		DieEffect_ = _DieEffect;
 	}
-	void SetUI(MonBotUI* _MonStatus) { MonStatus_ = _MonStatus; }
-	MonBotUI* GetUI() { return MonStatus_; }
 
 private:
 	void Jump();

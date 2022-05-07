@@ -123,8 +123,6 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None2", 14, 14, 0.03f, true);
 		//CannonRenderer_->ChangeAnimation("None1");
 	}
-
-	GameEngineInput::GetInst()->CreateKey("Stop", VK_SPACE);
 }
 
 void Cannon::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -155,7 +153,7 @@ void Cannon::DelayUpdate()
 		std::string AnimationName = "Can" + std::to_string(Index);
 		CanRenderer_->ChangeAnimation(AnimationName);
 
-		if (true == GameEngineInput::GetInst()->IsDown("Stop"))
+		if (true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
 		{
 			Rotation_ = false;
 			Index_ = Index;

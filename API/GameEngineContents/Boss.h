@@ -7,7 +7,6 @@ class GameEngineImage;
 class GameEngineRenderer;
 class BotUI;
 class Dedede;
-class MonBotUI;
 class Boss : public GameEngineLevelBase
 {
 public:
@@ -36,6 +35,5 @@ private:
 	Player* Player_;
 	BotUI* PlayerStatus_;
 	Dedede* Dedede_;
-	MonBotUI* MonsterStatus_;
 };
 

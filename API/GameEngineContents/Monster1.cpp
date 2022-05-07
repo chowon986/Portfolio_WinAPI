@@ -84,7 +84,7 @@ void Monster1::UpdateAttack()
 		EatRangeCol_->SetPivot(float4(50.0f, -20.0f));
 		if (true == Renderer_->IsAnimationName("EatStartRight") && Player_->GetKirbyClass() == KirbyClass::DEFAULT)
 		{
-			Player_->SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_ * 10);
+			Player_->SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * GetSpeed() * 10);
 		}
 	}
 
@@ -94,7 +94,7 @@ void Monster1::UpdateAttack()
 		EatRangeCol_->SetPivot(float4(-50.0f, -20.0f));
 		if (true == Renderer_->IsAnimationName("EatStartLeft") && Player_->GetKirbyClass() == KirbyClass::DEFAULT)
 		{
-			Player_->SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_ * 10);
+			Player_->SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * GetSpeed() * 10);
 		}
 	}
 

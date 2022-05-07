@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <vector>
 #include "MonBotUI.h"
+#include <GameEngineContents/GameEngineLevelBase.h>
 
 AttackEffect::AttackEffect()
 	: Collision_(nullptr)
@@ -103,8 +104,17 @@ void AttackEffect::UpdateAttackEffectRight()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->GetUI()->On();
 				Monster_->SetHP(Monster_->GetHP() - 1);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}
@@ -140,8 +150,16 @@ void AttackEffect::UpdateAttackEffectLeft()
 			Monster* Monster_ = dynamic_cast<Monster*>(ColActor);
 			if (Monster_ != nullptr)
 			{
-				Monster_->GetUI()->On();
-				Monster_->SetHP(Monster_->GetHP() - 1);
+				if (Monster_->GetHP() > 0)
+				{
+					GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+					if (Level != nullptr)
+					{
+						MonBotUI* MonBotUI = Level->GetMonBotUI();
+						MonBotUI->On();
+						MonBotUI->SetMonster(Monster_);
+					}
+				}
 			}
 		}
 	}

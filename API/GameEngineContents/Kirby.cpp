@@ -139,7 +139,7 @@ void Kirby::GameInit()
     CreateLevel<EndingLevel>("Ending");
     CreateLevel<GameOver>("GameOver");
 
-    ChangeLevel("Level2");
+    ChangeLevel("Boss");
 }
 
 void Kirby::GameLoop()

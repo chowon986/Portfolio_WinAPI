@@ -1,8 +1,9 @@
 #include "Monster.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
-#include "Player.h"
 #include <GameEngine/GameEngineCollision.h>
+#include "Player.h"
+#include "GameEngineLevelBase.h"
 #include "IceAttackEffect.h"
 #include "DieEffect.h"
 #include "FireAttackEffect.h"
@@ -15,7 +16,6 @@ Monster::Monster()
 	, MonsterClass_(MonsterClass::DEFAULT)
 	, Player_(nullptr)
 	, Dir_(float4::RIGHT)
-	, Speed_(20.0f)
 	, Time_(0.0f)
 	, Collision_(nullptr)
 	, Renderer_(nullptr)
@@ -51,7 +51,26 @@ void Monster::Walk()
 				Renderer_->ChangeAnimation("WalkLeft");
 			}
 		}
-		SetMove(Dir_ * GameEngineTime::GetDeltaTime() * Speed_);
+		SetMove(Dir_ * GameEngineTime::GetDeltaTime() * GetSpeed());
+	}
+}
+
+void Monster::SetHP(int _HP)
+{
+	CharacterBase::SetHP(_HP);
+
+	if (GetHP() <= 0)
+	{
+		GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
+		if (Level != nullptr)
+		{
+			MonBotUI* MonBotUI = Level->GetMonBotUI();
+			if (MonBotUI != nullptr)
+			{
+				MonBotUI->DelayOff();
+			}
+		}
+		
 	}
 }
 
@@ -111,7 +130,6 @@ void Monster::Die()
 		{
 			if (true == Renderer_->IsEndAnimation())
 			{
-				GetUI()->Off();
 				Collision_->Off();
 				Death();
 
@@ -160,7 +178,6 @@ void Monster::UpdateMove()
 
 	if (true == IceEndCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect))
 	{
-		GetUI()->Off();
 		Collision_->Off();
 		Death();
 		//EffectRenderer_->ChangeAnimation("DieEffect");
@@ -175,7 +192,6 @@ void Monster::UpdateMove()
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
-			GetUI()->Off();
 			Collision_->Off();
 			Death();
 		}
@@ -189,7 +205,6 @@ void Monster::UpdateMove()
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
-			GetUI()->Off();
 			Collision_->Off();
 			Death();
 		}
@@ -376,7 +391,7 @@ void Monster::UpdateMove()
 				IceCol_->Off();
 				IceEndCol_->On();
 				float Direction = IceColActor->GetPosition().x - GetPosition().x;
-				Speed_ = 250.0f;
+				SetSpeed(250.0f);
 				if (Direction <= 0) // 몬스터가 오른쪽
 				{
 					Dir_ = float4::RIGHT;
