@@ -1,4 +1,5 @@
 #include "Dedede.h"
+#include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
@@ -61,8 +62,8 @@ void Dedede::Start()
 	Renderer_->CreateAnimation("KingDedede.bmp", "FlyDownAttackLeft", 42, 42, 0.1f, true);
 
 
-	Renderer_->CreateAnimation("KingDedede.bmp", "DieRight", 29, 31, 0.1f, true);
-	Renderer_->CreateAnimation("KingDedede.bmp", "DieLeft", 61, 63, 0.1f, true);
+	Renderer_->CreateAnimation("KingDedede.bmp", "DieRight", 29, 31, 0.3f, true);
+	Renderer_->CreateAnimation("KingDedede.bmp", "DieLeft", 61, 63, 0.3f, true);
 	Renderer_->ChangeAnimation("WalkRight");
 
 	SetHP(13);
@@ -93,6 +94,20 @@ void Dedede::DelayUpdate()
 
 void Dedede::UpdateMove()
 {
+	if (IsDie())
+	{
+		if (GetState() != DededeState::DIE)
+		{
+			SetState(DededeState::DIE);
+		}
+		
+		if (Renderer_->IsEndAnimation())
+		{
+			//GameEngine::GetInst().ChangeLevel("EndingStory");
+		}
+		return;
+	}
+
 	// 3초에 한 번씩
 	if (Time_ > 3.0f)
 	{

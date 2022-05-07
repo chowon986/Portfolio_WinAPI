@@ -97,6 +97,7 @@ void AbandonEffect::UpdateAbandonEffectRight()
 	SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 100);
 	Collision_->SetScale(float4(50.0f, 40.0f));
 	Collision_->On();
+	Renderer_->On();
 
 	if (Time_ > 5.0f)
 	{
@@ -120,6 +121,7 @@ void AbandonEffect::UpdateAbandonEffectLeft()
 	SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 100);
 	Collision_->SetScale(float4(50.0f, 40.0f));
 	Collision_->On();
+	Renderer_->On();
 
 	if (Time_ > 5.0f)
 	{
@@ -146,7 +148,7 @@ void AbandonEffect::UpdateNone()
 	{
 		Collision_->Off();
 		Renderer_->ChangeAnimation("Abandon");
-		Death(1.2);
+		Renderer_->Off();
 		Time_ = 0;
 	}
 }

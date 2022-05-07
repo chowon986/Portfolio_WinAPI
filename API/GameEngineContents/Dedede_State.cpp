@@ -28,7 +28,6 @@ void Dedede::UpdateJumpDown()
 
 void Dedede::UpdateAttack()
 {
-	SetMove(Dir_ * GameEngineTime::GetDeltaTime() * GetSpeed());
 }
 
 void Dedede::UpdateYell()

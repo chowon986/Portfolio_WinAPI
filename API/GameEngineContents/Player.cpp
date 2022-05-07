@@ -72,6 +72,7 @@ Player::~Player()
 void Player::SetKirbyClass(KirbyClass _KirbyClass)
 {
     KirbyClass_ = _KirbyClass;
+    KIRBYCLASS = _KirbyClass;
     ClassUpdate();
 }
 
@@ -1265,8 +1266,7 @@ void Player::CheckCollision()
 			GetRenderer()->IsEndAnimation())
 		{
 			HP_COUNT = GetHPCount();
-			HP = GetHP();
-			KIRBYCLASS = GetKirbyClass();
+			HP = GetHP();			
 			GameEngine::GetInst().ChangeLevel("Level1_2");
 		}
 	}
@@ -1279,7 +1279,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level1_3");
         }
     }
@@ -1292,7 +1291,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level1_4");
         }
     }
@@ -1317,7 +1315,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level2");
         }
     }
@@ -1330,7 +1327,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level2_2");
         }
     }
@@ -1343,7 +1339,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level2_3");
         }
     }
@@ -1356,7 +1351,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level2_4");
         }
     }
@@ -1369,7 +1363,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level2_5");
         }
     }
@@ -1382,7 +1375,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Level3");
         }
     }
@@ -1395,7 +1387,6 @@ void Player::CheckCollision()
         {
             HP_COUNT = GetHPCount();
             HP = GetHP();
-            KIRBYCLASS = GetKirbyClass();
             GameEngine::GetInst().ChangeLevel("Boss");
         }
     }
