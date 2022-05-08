@@ -619,10 +619,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("JumpDown" + Dir_);
         }
-
         break;
-
-
 
     case KirbyState::SLIDE:
         if (GetKirbyClass() == KirbyClass::SPARK)
@@ -695,7 +692,6 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("DoorOpen" + Dir_);
         }
-        ///////////Sound/////////
         break;
     default:
         break;
