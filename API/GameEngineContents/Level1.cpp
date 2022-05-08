@@ -11,7 +11,7 @@
 #include "BotUI.h"
 #include "MonBotUI.h"
 #include "ContentsEnum.h"
-#include "GameEngine/GameEngineImage.h"
+#include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineCollision.h>
@@ -24,7 +24,7 @@
 #include "SparkAttackEffect.h"
 #include "DieEffect.h"
 #include "RunEffect.h"
-#include "GameEngineBase/GameEngineSound.h"
+#include <GameEngineBase/GameEngineSound.h>
 #include "TransformEffect.h"
 #include "GroundStarEffect.h"
 
@@ -165,12 +165,12 @@ void Level1::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
+		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 		Player_->SetRunEffect(RunEffect_);
-		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetGroundStarEffect(GroundStarEffect_);
 		Player_->SetAbandonEffect(AbandonEffect_);
 	}

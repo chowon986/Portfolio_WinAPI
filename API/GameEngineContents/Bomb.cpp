@@ -5,7 +5,7 @@
 #include "SparkAttackEffect.h"
 #include "FireAttackEffect.h"
 #include "IceAttackEffect.h"
-
+#include <GameEngineBase/GameEngineSound.h>
 
 Bomb::Bomb()
 	:Obstruction()
@@ -39,6 +39,7 @@ void Bomb::ColUpdate()
 	std::vector<GameEngineCollision*> Result;
 	if (true == Collision_->CollisionResult("KirbySlideCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{
+		GameEngineSound::SoundPlayOneShot("Bomb.mp3", 6);
 		for (GameEngineCollision* Collision : Result)
 		{
 			Player* Player_ = dynamic_cast<Player*>(Collision->GetActor());

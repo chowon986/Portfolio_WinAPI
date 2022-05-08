@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineLevelBase.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 class Player;
 class Background;
@@ -7,6 +8,8 @@ class GameEngineImage;
 class GameEngineRenderer;
 class BotUI;
 class Dedede;
+class GameEngineSound;
+class StarMonster;
 class Boss : public GameEngineLevelBase
 {
 public:
@@ -21,6 +24,7 @@ public:
 protected:
 	void Loading() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 	void DelayUpdate() override;
 
@@ -35,5 +39,7 @@ private:
 	Player* Player_;
 	BotUI* PlayerStatus_;
 	Dedede* Dedede_;
+	StarMonster* StarMonster_;
+	GameEngineSoundPlayer BgmPlayer;
 };
 

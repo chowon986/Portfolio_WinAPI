@@ -19,6 +19,24 @@
 
 WorldMap::WorldMap()
 	: Level_(0)
+	, BombRenderer_(nullptr)
+	, ChooseLevel1_(nullptr)
+	, ChooseLevel2_(nullptr)
+	, EffectSoundPlay_(true)
+	, ExplainRenderer2_(nullptr)
+	, ExplainRenderer3_(nullptr)
+	, ExplainRenderer4_(nullptr)
+	, ExplainRenderer_(nullptr)
+	, LittleStarRenderer(nullptr)
+	, LittleStarRenderer2(nullptr)
+	, MajorLevel_(1)
+	, Player2_(nullptr)
+	, PlayerStatus2_(nullptr)
+	, PlayerStatus_(nullptr)
+	, Player_(nullptr)
+	, Star1_(nullptr)
+	, WorldMapStarRenderer1(nullptr)
+	, WorldMapStarRenderer2(nullptr)
 {
 }
 
@@ -40,6 +58,11 @@ void WorldMap::DelayUpdate()
 	{
 		if (MajorLevel_ == 1)
 		{
+			if (EffectSoundPlay_ == true)
+			{
+			GameEngineSound::SoundPlayOneShot("Transform.wav", 0);
+			EffectSoundPlay_ = false;
+			}
 			LittleStarRenderer->On();
 			LittleStarRenderer2->On();
 			WorldMapStarRenderer1->On();
@@ -50,6 +73,11 @@ void WorldMap::DelayUpdate()
 
 		else if (MajorLevel_ == 2)
 		{
+			if (EffectSoundPlay_ == true)
+			{
+				GameEngineSound::SoundPlayOneShot("Transform.wav", 0);
+				EffectSoundPlay_ = false;
+			}
 			LittleStarRenderer->On();
 			LittleStarRenderer2->On();
 			WorldMapStarRenderer1->On();
@@ -67,6 +95,8 @@ void WorldMap::DelayUpdate()
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("Right"))
 		{
+			GameEngineSound::SoundPlayOneShot("Jump.wav", 0);
+
 			Level_++;
 			if (Level_ > GameEngineLevelBase::MAJOR_LEVEL + 1)
 			{
@@ -80,6 +110,8 @@ void WorldMap::DelayUpdate()
 
 		if (true == GameEngineInput::GetInst()->IsDown("Left"))
 		{
+			GameEngineSound::SoundPlayOneShot("Jump.wav", 0);
+
 			Level_--;
 			if (Level_ < 1)
 			{
@@ -113,16 +145,19 @@ void WorldMap::DelayUpdate()
 
 		if (3 == Level_ && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
 		{
-			GameEngine::GetInst().ChangeLevel("Boss");
+			GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+			GameEngine::GetInst().ChangeLevel("Level3");
 		}
 
 		if (2 == Level_ && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
 		{
+			GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
 			GameEngine::GetInst().ChangeLevel("Level2");
 		}
 
 		if (1 == Level_ && true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
 		{
+			GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
 			GameEngine::GetInst().ChangeLevel("Level1");
 		}
 	}
@@ -130,6 +165,9 @@ void WorldMap::DelayUpdate()
 
 void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+
+	EffectSoundPlay_ = true;
+
 	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	DelayTime_ = 1.0f;
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("SelectStage.mp3");
@@ -161,6 +199,7 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 		Player_->SetDelayTime(DelayTime_);
+		Player_->GetRenderer()->ChangeAnimation("JumpDownRight");
 		//Player_->GetRenderer()->ChangeAnimation("Dance");
 
 		Player_->SetAbandonEffect(AbandonEffect_);

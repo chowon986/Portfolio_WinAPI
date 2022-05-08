@@ -183,7 +183,6 @@
     <ClInclude Include="DanceStage.h" />
     <ClInclude Include="Dedede.h" />
     <ClInclude Include="DieEffect.h" />
-    <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="EndingStory.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="FireAttackEffect.h" />
@@ -224,6 +223,7 @@
     <ClInclude Include="SparkAttackEffect.h" />
     <ClInclude Include="Sparky.h" />
     <ClInclude Include="StarAttackEffect.h" />
+    <ClInclude Include="StarMonster.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="SwordAttackEffect.h" />
     <ClInclude Include="IceItem.h" />
@@ -263,7 +263,6 @@
     <ClCompile Include="Dedede.cpp" />
     <ClCompile Include="Dedede_State.cpp" />
     <ClCompile Include="DieEffect.cpp" />
-    <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="EndingStory.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="FireAttackEffect.cpp" />
@@ -305,6 +304,7 @@
     <ClCompile Include="SparkAttackEffect.cpp" />
     <ClCompile Include="Sparky.cpp" />
     <ClCompile Include="StarAttackEffect.cpp" />
+    <ClCompile Include="StarMonster.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SwordAttackEffect.cpp" />
     <ClCompile Include="IceItem.cpp" />

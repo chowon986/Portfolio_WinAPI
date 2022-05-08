@@ -22,6 +22,8 @@
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
 #include "AbandonEffect.h"
+#include "TransformEffect.h"
+
 
 Level1_2::Level1_2()
 	: Player_(nullptr)
@@ -110,6 +112,7 @@ void Level1_2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
 
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetAbandonEffect(AbandonEffect_);
@@ -123,6 +126,7 @@ void Level1_2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetFireAttackEffect(FireAttackEffect_);
 		Player_->SetSparkAttackEffect(SparkAttackEffect_);
 		Player_->SetRunEffect(RunEffect_);
+		Player_->SetTransformEffect(TransformEffect_);
 
 	}
 

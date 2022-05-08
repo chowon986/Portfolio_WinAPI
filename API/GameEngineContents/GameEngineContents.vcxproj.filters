@@ -162,9 +162,6 @@
     <ClCompile Include="WorldMap.cpp">
       <Filter>Level\01 Play</Filter>
     </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
-      <Filter>Level\02 Ending</Filter>
-    </ClCompile>
     <ClCompile Include="EndingStory.cpp">
       <Filter>Level\02 Ending</Filter>
     </ClCompile>
@@ -196,6 +193,9 @@
       <Filter>Kirby</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineLevelBase.cpp" />
+    <ClCompile Include="StarMonster.cpp">
+      <Filter>Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CharacterBase.h" />
@@ -357,9 +357,6 @@
     <ClInclude Include="WorldMap.h">
       <Filter>Level\01 Play</Filter>
     </ClInclude>
-    <ClInclude Include="EndingLevel.h">
-      <Filter>Level\02 Ending</Filter>
-    </ClInclude>
     <ClInclude Include="EndingStory.h">
       <Filter>Level\02 Ending</Filter>
     </ClInclude>
@@ -388,6 +385,9 @@
       <Filter>Kirby</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineLevelBase.h" />
+    <ClInclude Include="StarMonster.h">
+      <Filter>Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

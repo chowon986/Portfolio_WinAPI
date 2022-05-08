@@ -85,6 +85,7 @@ void Fire::UpdateAttack()
 	{
 		return;
 	}
+
 	std::vector<GameEngineCollision*> Result;
 	if (AttackRangeCol_->CollisionResult("KirbyCol", Result, CollisionType::Rect, CollisionType::Rect))
 	{
@@ -134,7 +135,7 @@ void Fire::UpdateAttack()
 			SetPlayer(ColPlayer);
 			if (ColPlayer != nullptr)
 			{
-				if (AttackTime_ > 1.0f)
+				if (AttackTime_ > 3.0f)
 				{
 					AttackTime_ = 0.0f;
 					ColPlayer->SetHP(ColPlayer->GetHP() - 1);

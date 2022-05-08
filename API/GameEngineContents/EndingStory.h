@@ -1,7 +1,9 @@
 #pragma once
 #include "GameEngineLevelBase.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 class VideoPlayer;
+class GameEngineSoundPlayer;
 class EndingStory : public GameEngineLevelBase
 {
 public:
@@ -20,5 +22,7 @@ protected:
 
 private:
 	VideoPlayer* EndingVideo_;
+	GameEngineSoundPlayer BgmPlayer;
+
 };
 

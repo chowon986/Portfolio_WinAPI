@@ -14,6 +14,7 @@ FireAttackEffect::FireAttackEffect()
 	,FireAttackEffectState_(FireAttackEffectState::None)
 	,Image_(nullptr)
 	,Renderer_(nullptr)
+	,Time_(0.0f)
 {
 
 }

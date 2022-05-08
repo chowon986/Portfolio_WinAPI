@@ -1,6 +1,8 @@
 #include "TreasureChest.h"
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include "Player.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 TreasureChest::TreasureChest()
 	:Monster()
@@ -19,4 +21,18 @@ void TreasureChest::Start()
 
 void TreasureChest::Update()
 {
+	std::vector <GameEngineCollision*> ColResult;
+	if (true == Collision_->CollisionResult("KirbyCol", ColResult, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* Collision : ColResult)
+		{
+			GameEngineActor* Actor = Collision->GetActor();
+			Player* Kirby = dynamic_cast<Player*>(Actor);
+			if (nullptr != Kirby)
+			{
+				GameEngineSound::SoundPlayOneShot("EatItem.wav", 0);
+				Death();
+			}
+		}
+	}
 }

@@ -22,6 +22,8 @@
 #include "AbandonEffect.h"
 #include "MonBotUI.h"
 #include <GameEngineContents/GameEngineLevelBase.h>
+#include <GameEngineBase/GameEngineSound.h>
+
 
 void Player::UpdateIdle()
 {
@@ -102,10 +104,13 @@ void Player::UpdateTakeDamage()
             if (Dir_ == "Right")
             {
                 AbandonEffect_->SetState(AbandonEffectState::Left);
+                /////////////////Sound////////////////////
             }
             else if (Dir_ == "Left")
             {
                 AbandonEffect_->SetState(AbandonEffectState::Right);
+                /////////////////Sound////////////////////
+
             }
         }
     }
@@ -221,7 +226,7 @@ void Player::UpdateAttack()
     {
         if (StarAttackEffect_ != nullptr)
         {
-            StarAttackEffect_->SetPosition(GetPosition()); // need to chk : the pos;
+            StarAttackEffect_->SetPosition(GetPosition());
             if (Dir_ == "Right")
             {
                 StarAttackEffect_->SetState(StarAttackEffectState::AttackStartRight);
@@ -258,12 +263,12 @@ void Player::UpdateAttack()
         if (Dir_ == "Right")
         {
             AnimalCol_->On();
-            AnimalCol_->SetPivot(float4(38.0f, -15.0f));
+            AnimalCol_->SetPivot(float4(40.0f, -15.0f));
         }
         else if (Dir_ == "Left")
         {
             AnimalCol_->On();
-            AnimalCol_->SetPivot(float4(-38.0f, -15.0f));
+            AnimalCol_->SetPivot(float4(-40.0f, -15.0f));
         }
     }
 }
@@ -362,6 +367,38 @@ void Player::UpdateEat()
                 if (Effect_ != nullptr)
                 {
                     Effect_->SetState(AbandonEffectState::Eaten);
+                    Monster_ = nullptr;
+                }
+
+                if (Monster_ != nullptr)
+                {
+                    if (AbandonEffect_ != nullptr)
+                    {
+                        AbandonEffect_->SetMonsterClass(MonsterClass::NONE);
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    std::vector <GameEngineCollision*> StarMonColResult;
+    if (true == KirbyEatCol_->CollisionResult("StarMonster", StarMonColResult, CollisionType::Rect, CollisionType::Rect))
+    {
+        for (GameEngineCollision* Collision : StarMonColResult)
+        {
+            GameEngineActor* Actor = Collision->GetActor();
+            Monster_ = dynamic_cast<Monster*>(Actor);
+            if (nullptr != Monster_)
+            {
+                float4 Pos = GetPosition() - Actor->GetPosition();
+                if (Pos.x > 0) // 내가 오른쪽
+                {
+                    Actor->SetMove(Pos * GameEngineTime::GetDeltaTime() * 5);
+                }
+                if (Pos.x < 0) // 내가 왼쪽 
+                {
+                    Actor->SetMove(Pos * GameEngineTime::GetDeltaTime() * 5);
                 }
             }
         }
@@ -406,6 +443,7 @@ void Player::UpdateAttackStay()
             IceAttackEffect_->On();
             IceAttackEffect_->SetState(IceAttackEffectState::IceAttackEffectLeft);
         }
+
     }
 
     if (FireAttackEffect_ != nullptr && GetKirbyClass() == KirbyClass::FIRE)
@@ -522,41 +560,14 @@ void Player::UpdateSlide()
             {
                 ColMonster->SetHP(ColMonster->GetHP() - 1);
 
-                if (Monster_->GetHP() > 0)
+                if (ColMonster->GetHP() > 0)
                 {
                     GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
                     if (Level != nullptr)
                     {
                         MonBotUI* MonBotUI = Level->GetMonBotUI();
                         MonBotUI->On();
-                        MonBotUI->SetMonster(Monster_);
-                    }
-                }
-            }
-        }
-    }
-
-    std::vector<GameEngineCollision*> MonsterColResult;
-    if ((true == AnimalCol_->CollisionResult("BasicMonster", MonsterColResult, CollisionType::Rect, CollisionType::Rect) ||
-        true == SwordCol_->CollisionResult("BasicMonster", MonsterColResult, CollisionType::Rect, CollisionType::Rect))  &&
-        AttTime_ >= 1)
-    {
-        AttTime_ = 0;
-        for (GameEngineCollision* Collision : MonsterColResult)
-        {
-            Monster* ColMonster = dynamic_cast<Monster*>(Collision->GetActor());
-            if (ColMonster != nullptr)
-            {
-                ColMonster->SetHP(ColMonster->GetHP() - 1);
-
-                if (Monster_->GetHP() > 0)
-                {
-                    GameEngineLevelBase* Level = dynamic_cast<GameEngineLevelBase*>(GetLevel());
-                    if (Level != nullptr)
-                    {
-                        MonBotUI* MonBotUI = Level->GetMonBotUI();
-                        MonBotUI->On();
-                        MonBotUI->SetMonster(Monster_);
+                        MonBotUI->SetMonster(ColMonster);
                     }
                 }
             }

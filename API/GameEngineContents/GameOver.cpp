@@ -33,11 +33,16 @@ void GameOver::DelayUpdate()
 
 void GameOver::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	BgmPlayer = GameEngineSound::SoundPlayControl("GameOver.mp3");
+
 	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	{
 		Background* GameOver = CreateActor<Background>((int)ORDER::BACKGROUND);
 		GameOver->CreateRenderer("GameOver.bmp");
 	}
+}
 
-
+void GameOver::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
+	BgmPlayer.Stop();
 }

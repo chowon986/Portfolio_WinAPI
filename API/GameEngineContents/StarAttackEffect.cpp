@@ -13,6 +13,7 @@ StarAttackEffect::StarAttackEffect()
 	,Collision_(nullptr)
 	,Renderer_(nullptr)
 	,StarAttackEffectState_(StarAttackEffectState::None)
+	, Time_(0.0f)
 {
 	
 }
@@ -39,6 +40,7 @@ void StarAttackEffect::Start()
 
 void StarAttackEffect::Update()
 {
+	Time_ += GameEngineTime::GetDeltaTime();
 	StateUpdate();
 }
 
@@ -95,7 +97,7 @@ void StarAttackEffect::UpdateAttackStartRight()
 {
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(20.0f, 0.0f));
-	SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 100);
+	SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 200);
 	Collision_->SetScale(float4(50.0f,40.0f));
 	Collision_->SetPivot(float4(20.0f, -30.0f));
 
@@ -112,8 +114,10 @@ void StarAttackEffect::UpdateAttackStartRight()
 	}
 
 	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
+		Time_ > 3.0f)
 	{
+		Time_ = 0.0f;
 		for (GameEngineCollision* Collision : Result)
 		{
 			GameEngineActor* ColActor = Collision->GetActor();
@@ -140,7 +144,7 @@ void StarAttackEffect::UpdateAttackStartLeft()
 {
 	Renderer_->SetAlpha(255);
 	Renderer_->SetPivot(float4(-20.0f, 0.0f));
-	SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 100);
+	SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * 200);
 	Collision_->SetScale(float4(50.0f, 40.0f));
 	Collision_->SetPivot(float4(-20.0f, -30.0f));
 	
@@ -156,8 +160,10 @@ void StarAttackEffect::UpdateAttackStartLeft()
 	}
 
 	std::vector<GameEngineCollision*> Result;
-	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
+		Time_ > 3.0f )
 	{
+		Time_ = 0.0f;
 		for (GameEngineCollision* Collision : Result)
 		{
 			GameEngineActor* ColActor = Collision->GetActor();

@@ -17,6 +17,9 @@
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
 #include "AbandonEffect.h"
+#include "TransformEffect.h"
+#include <GameEngineBase/GameEngineSound.h>
+
 
 Level3::Level3()
 	: Player_(nullptr)
@@ -37,6 +40,7 @@ void Level3::Loading()
 
 void Level3::DelayUpdate()
 {
+
 	SetCameraPos(Player_->GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
 	if (0 >= GetCameraPos().x)
@@ -79,6 +83,7 @@ void Level3::DelayUpdate()
 
 void Level3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	LEVEL_BGM = GameEngineSound::SoundPlayControl("Stage3.mp3");
 	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetMapSizeX(768);
 	SetMapSizeY(576);
@@ -120,4 +125,9 @@ void Level3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 
+}
+
+void Level3::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
+	LEVEL_BGM.Stop();
 }

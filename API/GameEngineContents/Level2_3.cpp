@@ -17,6 +17,8 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include <GameEngine/GameEngineImage.h>
+#include "TransformEffect.h"
+
 
 Level2_3::Level2_3()
 	: Player_(nullptr)
@@ -104,6 +106,8 @@ void Level2_3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
+		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);

@@ -18,46 +18,17 @@ void EndingStory::Loading()
 
 void EndingStory::DelayUpdate()
 {
-	if (0 >= GetCameraPos().x)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = 0;
-		SetCameraPos(CurCameraPos);
-	}
-
-	if (0 >= GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = 0;
-		SetCameraPos(CurCameraPos);
-	}
-
-	float CameraRectX = 768;
-	float CameraRectY = 576;
-
-	if (GetMapSizeX() <= GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.x = static_cast<int>(GetCameraPos().ix() - (GetCameraPos().ix() + CameraRectX - GetMapSizeX()));
-		SetCameraPos(CurCameraPos);
-	}
-
-	if (GetMapSizeY() <= GetCameraPos().y + CameraRectY)
-	{
-		float4 CurCameraPos = GetCameraPos();
-		CurCameraPos.y = static_cast<int>(GetCameraPos().iy() - (GetCameraPos().iy() + CameraRectY - GetMapSizeY()));
-		SetCameraPos(CurCameraPos);
-	}
-
 	if (true == EndingVideo_->IsVideoFinished())
 	{
+		BgmPlayer.Stop();
 		GameEngine::GetInst().ChangeLevel("Title");
 	}
 }
 
 void EndingStory::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	BgmPlayer = GameEngineSound::SoundPlayControl("EndingStory.mp3");
 	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
-	VideoPlayer* EndingVideo = CreateActor<VideoPlayer>();
-	EndingVideo->SetInfo("ending_frame_", 0, 1030, 60);
+	EndingVideo_ = CreateActor<VideoPlayer>();
+	EndingVideo_->SetInfo("ending_frame_", 0, 1030, 60);
 }

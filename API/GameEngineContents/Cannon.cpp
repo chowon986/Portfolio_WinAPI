@@ -26,11 +26,9 @@
 
 Cannon::Cannon()
 	:CanCol_(nullptr)
-	, CannonRenderer_(nullptr)
 	, CanRenderer_(nullptr)
 	, PlayerRenderer_(nullptr)
 	, Player_(nullptr)
-	, TomatoRenderer_(nullptr)
 	, Rotation_(false)
 	, Index_(-1)
 {
@@ -64,28 +62,19 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		CanRenderer_ = Can->CreateRenderer("can.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 30.0f));
 		GameEngineImage* CanImage = CanRenderer_->GetImage();
 		CanImage->CutCount(4, 2);
-		CanRenderer_->CreateAnimation("can.bmp", "Can0", 0, 0, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can1", 1, 1, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can2", 2, 2, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can3", 3, 3, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can4", 4, 4, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can5", 5, 5, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can6", 6, 6, 0.08f, false);
-		CanRenderer_->CreateAnimation("can.bmp", "Can7", 7, 7, 0.08f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can0", 0, 0, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can1", 1, 1, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can2", 2, 2, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can3", 3, 3, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can4", 4, 4, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can5", 5, 5, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can6", 6, 6, 0.1f, false);
+		CanRenderer_->CreateAnimation("can.bmp", "Can7", 7, 7, 0.1f, false);
 
 		CanRenderer_->ChangeAnimation("Can0");
 		CanCol_ = Can->CreateCollision("CanCol", float4(50.0f, 10.0f), float4(0.0f, 30.0f));
 
 	}
-	{
-		Background* Tomato_ = CreateActor<Background>((int)ORDER::BACKGROUND);
-		TomatoRenderer_ = Tomato_->CreateRenderer("Tomato.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(-5.0f, -235.0f));
-		GameEngineImage* TomatoImage = TomatoRenderer_->GetImage();
-		TomatoImage->CutCount(1, 1);
-		TomatoRenderer_->CreateAnimation("Tomato.bmp", "Tomato", 0, 0, 0.1f, true);
-		TomatoRenderer_->ChangeAnimation("Tomato");
-	}
-
 
 	{
 		StarAttackEffect* StarAttackEffect_ = CreateActor<StarAttackEffect>((int)ORDER::EFFECT);
@@ -96,13 +85,14 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
 		GroundStarEffect* GroundStarEffect_ = CreateActor<GroundStarEffect>((int)ORDER::EFFECT);
-		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
-		Player_->SetAbandonEffect(AbandonEffect_);
+
+		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetPosition(float4(384.0f, 0.0f));
 		PlayerRenderer_ = Player_->GetRenderer();
 		PlayerRenderer_->ChangeAnimation("JumpDownRight");
 
+		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);
@@ -112,16 +102,16 @@ void Cannon::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetGroundStarEffect(GroundStarEffect_);
 		Player_->SetDelayTime(DelayTime_);
-
-
-		//Background* CannonEffect_ = CreateActor<Background>((int)ORDER::BACKGROUND);
-		//CannonRenderer_ = CannonEffect_->CreateRenderer("MonsterDie.bmp", static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot::CENTER, float4(0.0f, 20.0f));
-		//GameEngineImage* CannonImage = CannonRenderer_->GetImage();
-		//CannonImage->CutCount(10, 3);
-		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "Cannon", 14, 20, 0.03f, true);
-		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None1", 14, 14, 0.03f, true);
-		//CannonRenderer_->CreateAnimation("MonsterDie.bmp", "None2", 14, 14, 0.03f, true);
-		//CannonRenderer_->ChangeAnimation("None1");
+		
+		AbandonEffect_->Off();
+		StarAttackEffect_->Off();
+		AttackEffect_->Off();
+		IceAttackEffect_->Off();
+		FireAttackEffect_->Off();
+		SparkAttackEffect_->Off();
+		RunEffect_->Off();
+		TransformEffect_->Off();
+		GroundStarEffect_->Off();
 	}
 }
 
@@ -155,13 +145,14 @@ void Cannon::DelayUpdate()
 
 		if (true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
 		{
+			GameEngineSound::SoundPlayOneShot("Bomb.mp3", 0);
 			Rotation_ = false;
 			Index_ = Index;
 			Player_->SetGravity(0.0f);
 		}
 	}
 
-	float deltaMove = GameEngineTime::GetDeltaTime() * 500;
+	float deltaMove = GameEngineTime::GetDeltaTime() * 600;
 	switch (Index_)
 	{
 	case 0:		

@@ -17,6 +17,7 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include "MonBotUI.h"
+#include "StarMonster.h"
 
 Boss::Boss()
 {
@@ -80,6 +81,8 @@ void Boss::DelayUpdate()
 
 void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	BgmPlayer = GameEngineSound::SoundPlayControl("Dedede.mp3");
+
 	GameEngineLevelBase::LevelChangeStart(_PrevLevel);
 	SetColMapImage("BossColMap.bmp");
 	ColMapImage_ = GetColMapImage();
@@ -136,5 +139,15 @@ void Boss::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Dedede_ = CreateActor<Dedede>((int)ORDER::MONSTER);
 		Dedede_->SetPosition(float4(640.0f, 436.0f));
 		Dedede_->SetPlayer(Player_);
+		
+		StarMonster_ = CreateActor<StarMonster>((int)ORDER::MONSTER);
+		StarMonster_->SetPosition(Dedede_->GetPosition());
+		Dedede_->SetStarMonster(StarMonster_);
+		StarMonster_->Off();
 	}
+}
+
+void Boss::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
+	BgmPlayer.Stop();
 }

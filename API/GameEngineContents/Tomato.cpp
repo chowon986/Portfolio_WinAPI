@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Player.h"
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 Tomato::Tomato()
 {
@@ -29,6 +30,7 @@ void Tomato::Update()
 			if (nullptr != Kirby)
 			{
 				Kirby->SetHP(10);
+				GameEngineSound::SoundPlayOneShot("EatItem.wav", 0);
 				Death();
 			}
 		}

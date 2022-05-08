@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineImage.h>
+#include "StarMonster.h"
 
 void Dedede::UpdateIdle()
 {

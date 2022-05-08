@@ -3,6 +3,7 @@
 #include "Player.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 IceItem::IceItem()
 {
@@ -34,6 +35,7 @@ void IceItem::Update()
 			if (nullptr != Kirby)
 			{
 				Kirby->SetKirbyClass(KirbyClass::ICE);
+				GameEngineSound::SoundPlayOneShot("EatItem.wav", 0);
 				Death();
 			}
 		}

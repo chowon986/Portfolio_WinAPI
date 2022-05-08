@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "Player.h"
 #include "IceAttackEffect.h"
+#include "StarMonster.h"
 
 Dedede::Dedede()
 	: Monster()
@@ -13,6 +14,7 @@ Dedede::Dedede()
 	, FlyAttackTime_(0.0f)
 	, FlyUpTime_(0.0f)
 	, JumpTime_(0.0f)
+	, StarTime_(3.0f)
 	, DededeState_(DededeState::IDLE)
 {
 	SetMonsterClass(MonsterClass::BOSS);
@@ -68,9 +70,10 @@ void Dedede::Start()
 
 	SetHP(13);
 	SetSpeed(100.f);
-
 	Collision_->SetScale(float4(150.0f, 180.0f));
 	Collision_->SetPivot(float4(0, -85));
+
+	HammerCol_ = CreateCollision("Hammer", float4(50.0f, 50.0f), float4(0.0f, 0.0f));
 	//EffectRenderer_ = CreateRenderer("MonsterDie.bmp");
 	//GameEngineImage* EffectImage = EffectRenderer_->GetImage();
 	//EffectImage->CutCount(10, 3);
@@ -87,6 +90,7 @@ void Dedede::DelayUpdate()
 {
 	Time_ += GameEngineTime::GetDeltaTime();
 	AttTime_ += GameEngineTime::GetDeltaTime();
+	StarTime_ += GameEngineTime::GetDeltaTime();
 	Die();
 	UpdateMove();
 	StateUpdate();
@@ -103,7 +107,7 @@ void Dedede::UpdateMove()
 		
 		if (Renderer_->IsEndAnimation())
 		{
-			//GameEngine::GetInst().ChangeLevel("EndingStory");
+			GameEngine::GetInst().ChangeLevel("EndingStory");
 		}
 		return;
 	}
@@ -201,6 +205,7 @@ void Dedede::UpdateMove()
 	if (GetState() == DededeState::ATTACK && Renderer_->IsEndAnimation())
 	{
 		SetState(DededeState::IDLE);
+
 	}
 	else if (GetState() == DededeState::JUMPDOWN && Renderer_->IsEndAnimation())
 	{
@@ -215,12 +220,23 @@ void Dedede::SetState(DededeState _DededeState)
 	{
 	case DededeState::IDLE:
 		Renderer_->ChangeAnimation("Idle" + Direction_);
+		HammerCol_->Off();
 		break;
 	case DededeState::WALK:
 		Renderer_->ChangeAnimation("Walk" + Direction_);
 		break;
 	case DededeState::ATTACK:
 		Renderer_->ChangeAnimation("Attack" + Direction_);
+		if (Direction_ == "Right")
+		{
+			HammerCol_->On();
+			HammerCol_->SetPivot(float4(80.0f, -25.0f));
+		}
+		if (Direction_ == "Left")
+		{
+			HammerCol_->On();
+			HammerCol_->SetPivot(float4(-80.0f, -25.0f));
+		}
 		break;
 	case DededeState::DIE:
 		Renderer_->ChangeAnimation("Die" + Direction_);
@@ -244,6 +260,18 @@ void Dedede::SetState(DededeState _DededeState)
 		break;
 	case DededeState::JUMPDOWN:
 		Renderer_->ChangeAnimation("JumpDown" + Direction_);
+		if (Direction_ == "Right" && StarTime_ > 3.0f)
+		{
+			StarMonster_->On();
+			StarTime_ = 0.0f;
+			StarMonster_->SetPosition(float4(GetPosition().x + 200, GetPosition().y));
+		}
+		if (Direction_ == "Left" && StarTime_ > 3.0f)
+		{
+			StarMonster_->On();
+			StarTime_ = 0.0f;
+			StarMonster_->SetPosition(float4(GetPosition().x - 200, GetPosition().y));
+		}
 		break;
 	case DededeState::YELL:
 		Renderer_->ChangeAnimation("Yell" + Direction_);

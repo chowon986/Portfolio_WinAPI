@@ -32,7 +32,15 @@ void GroundStarEffect::Start()
 	Renderer_->CreateAnimation("MonsterDie.bmp", "GroundStar", 11, 11, 1.0f, true);
 	Renderer_->CreateAnimation("MonsterDie.bmp", "None", 24, 24, 0.1f, true);
 
+	Renderer2_ = CreateRenderer("Abandon.bmp");
+	GameEngineImage* GroundStarImage2 = Renderer2_->GetImage();
+	GroundStarImage2->CutCount(5, 1);
+	Renderer2_->CreateAnimation("Abandon.bmp", "None", 0, 4, 0.1f, true);
+	Renderer2_->ChangeAnimation("None");
+	Renderer2_->Off();
+
 	Renderer_->ChangeAnimation("None");
+	SetState(GroundStarEffectState::None);
 }
 
 void GroundStarEffect::Update()
@@ -53,6 +61,9 @@ void GroundStarEffect::SetState(GroundStarEffectState _GroundStarEffectState)
 	case GroundStarEffectState::None:
 		Renderer_->ChangeAnimation("None");
 		break;
+	case GroundStarEffectState::Abandon:
+		Renderer2_->On();
+		Renderer2_->ChangeAnimation("None");
 	}
 
 	StateUpdate();
@@ -85,7 +96,15 @@ void GroundStarEffect::UpdateGroundStarEffect()
 	Renderer_->SetPivot(float4(0.0f, 10.0f));
 	if (true == Renderer_->IsEndAnimation())
 	{
-		SetState(GroundStarEffectState::None);
+		SetState(GroundStarEffectState::Abandon);
+	}
+}
+
+void GroundStarEffect::UpdateAbandon()
+{
+	if (true == Renderer2_->IsAnimationName("None") && true == Renderer2_->IsEndAnimation())
+	{
+		Renderer2_->Off();
 	}
 }
 

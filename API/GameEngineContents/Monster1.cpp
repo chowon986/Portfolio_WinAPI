@@ -192,6 +192,7 @@ void Monster1::UpdateAttack()
 void Monster1::UpdateMove()
 {
 	Monster::UpdateMove();
+
 	std::vector<GameEngineCollision*> ColResult;
 	while (true == Collision_->CollisionResult("Obstruction", ColResult, CollisionType::Rect, CollisionType::Rect))
 	{

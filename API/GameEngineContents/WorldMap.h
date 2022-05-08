@@ -42,5 +42,6 @@ private:
 	GameEngineSoundPlayer BgmPlayer_;
 	int Level_;
 	int MajorLevel_;
+	bool EffectSoundPlay_;
 };
 

@@ -39,4 +39,5 @@ private:
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 	GameEngineImage* Image_;
+
 };

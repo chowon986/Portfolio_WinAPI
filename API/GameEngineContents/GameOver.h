@@ -1,7 +1,10 @@
 #pragma once
 #include "GameEngineLevelBase.h"
+#include <GameEngineBase/GameEngineSound.h>
+
 
 class GameEngineImage;
+class GameEngineSoundPlayer;
 class GameOver : public GameEngineLevelBase
 {
 public:
@@ -17,7 +20,9 @@ protected:
 	void Loading() override;
 	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
+	GameEngineSoundPlayer BgmPlayer;
 };
 

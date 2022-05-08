@@ -232,7 +232,10 @@ void Player::SetState(KirbyState _KirbyState)
     case KirbyState::UP: // Animal 사용
         if (GetKirbyClass() == KirbyClass::ANIMAL)
         {
+            if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)))
+            {
             AnimalRenderer_->ChangeAnimation("Up");
+            }
         }
         break;
     case KirbyState::DOWN:
@@ -254,7 +257,15 @@ void Player::SetState(KirbyState _KirbyState)
         }
         if (GetKirbyClass() == KirbyClass::ANIMAL)
         {
+            if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)))
+            {
+                AnimalRenderer_->ChangeAnimation("Down");
+            }
+            else
+            {
             AnimalRenderer_->ChangeAnimation("Down" + Dir_);
+
+            }
         }
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
@@ -281,7 +292,14 @@ void Player::SetState(KirbyState _KirbyState)
         }
         if (GetKirbyClass() == KirbyClass::ANIMAL)
         {
-            AnimalRenderer_->ChangeAnimation("Walk" + Dir_);
+            if (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)))
+            {
+                AnimalRenderer_->ChangeAnimation("GroundWalk" + Dir_);
+            }
+            else
+            {
+                AnimalRenderer_->ChangeAnimation("Walk" + Dir_);
+            }
         }
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
@@ -291,7 +309,6 @@ void Player::SetState(KirbyState _KirbyState)
         {
             PigRenderer_->ChangeAnimation("Walk" + Dir_);
         }
-
         break;
 
     case KirbyState::RUN:
@@ -319,7 +336,6 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Run" + Dir_);
         }
-
         break;
 
 
@@ -348,7 +364,6 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Fly" + Dir_);
         }
-
         break;
 
     case KirbyState::FLYSTAY:
@@ -379,7 +394,6 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("FlyAttack" + Dir_);
         }
-
         break;
 
     case KirbyState::FLYEND:
@@ -407,9 +421,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("FlyEnd" + Dir_);
         }
-
         break;
-
 
     case KirbyState::EATSTART:
         if (GetKirbyClass() == KirbyClass::DEFAULT)
@@ -432,7 +444,6 @@ void Player::SetState(KirbyState _KirbyState)
         }
         break;
 
-
     case KirbyState::ATTACK:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
@@ -441,6 +452,7 @@ void Player::SetState(KirbyState _KirbyState)
         if (GetKirbyClass() == KirbyClass::PIG)
         {
             PigRenderer_->ChangeAnimation("Attack" + Dir_);
+            GameEngineSound::SoundPlayOneShot("StarAttack2.mp3", 0);
         }
         if (GetKirbyClass() == KirbyClass::ICE)
         {
@@ -458,13 +470,13 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("Attack" + Dir_);
         }
-
         break;
 
     case KirbyState::ATTACKSTAY:
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
             SparkRenderer_->ChangeAnimation("AttackStay" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Spark.wav", 2);
         }
         if (GetKirbyClass() == KirbyClass::PIG)
         {
@@ -473,12 +485,13 @@ void Player::SetState(KirbyState _KirbyState)
         if (GetKirbyClass() == KirbyClass::ICE)
         {
             IceRenderer_->ChangeAnimation("AttackStay" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Ice.wav", 2);
         }
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
-            FireRenderer_->ChangeAnimation("AttackStay" + Dir_);
+            FireRenderer_->ChangeAnimation("AttackStay" + Dir_);   
+            GameEngineSound::SoundPlayOneShot("Fire.wav", 1);
         }
-
         break;
 
     case KirbyState::TRANSFORM:
@@ -517,6 +530,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("TakeDamage" + Dir_);
         }
+        ///////////Sound/////////
         break;
 
     case KirbyState::JUMPUP:
@@ -544,7 +558,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("JumpUp" + Dir_);
         }
-
+        GameEngineSound::SoundPlayOneShot("Jump.wav");
         break;
 
     case KirbyState::JUMPING:
@@ -638,6 +652,7 @@ void Player::SetState(KirbyState _KirbyState)
             StartPos_ = GetPosition();
             FireRenderer_->ChangeAnimation("Slide" + Dir_);
         }
+        ///////////Sound/////////
 
         break;
 
@@ -649,6 +664,7 @@ void Player::SetState(KirbyState _KirbyState)
 		AnimalRenderer_->SetAlpha(0);
 		FireRenderer_->SetAlpha(0);
 		Renderer_->ChangeAnimation("Die");
+        ///////////Sound/////////
         JumpHeight_ = 200;
         StartPos_ = GetPosition();
 		break;
@@ -674,6 +690,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("DoorOpen" + Dir_);
         }
+        ///////////Sound/////////
         break;
     default:
         break;
@@ -748,7 +765,7 @@ void Player::DelayUpdate()
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.0f && Time_ < 3.0f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr)
 
@@ -768,7 +785,7 @@ void Player::DelayUpdate()
         KirbyState::FLY != GetState() &&
         KirbyState::SLIDE != GetState() &&
         KirbyState::TRANSFORM != GetState() &&
-        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.f && Time_ < 3.f)) &&
+        (KirbyState::TAKEDAMAGE != GetState() || (Time_ > 1.0f && Time_ < 3.0f)) &&
         true == IsGround_ &&
         ColMapImage_ != nullptr)
 
@@ -1024,7 +1041,8 @@ void Player::DelayUpdate()
 
         if (KirbyState::EAT == GetState() &&
             (true == KirbyCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect) ||
-            true == KirbyCol_->CollisionCheck("AbandonEffect", CollisionType::Rect, CollisionType::Rect)))
+            true == KirbyCol_->CollisionCheck("AbandonEffect", CollisionType::Rect, CollisionType::Rect) ||
+                true == KirbyCol_->CollisionCheck("StarMonster", CollisionType::Rect, CollisionType::Rect)))
         {
             SetState(KirbyState::EATEND);
         }
@@ -1077,7 +1095,7 @@ void Player::DelayUpdate()
 				SetMove(float4::UP);
 			}
 
-            if (GetKirbyClass() != KirbyClass::ANIMAL)
+            if (GetKirbyClass() != KirbyClass::ANIMAL && GetLevel()->GetNameCopy() != "Cannon")
             {
                 SetGravity(5.0f);                
                 
@@ -1093,7 +1111,10 @@ void Player::DelayUpdate()
             }
             else
             {
+                if (GetLevel()->GetNameCopy() != "Cannon")
+                {
                 SetGravity(5.0f);
+                }
             }
             
 
@@ -1171,7 +1192,10 @@ void Player::DelayUpdate()
     // 떠 있을 때
     else
     {
+    if(GetLevel()->GetNameCopy() != "Cannon")
+    {
         SetGravity(5.0f);
+    }
         IsGround_ = false;
         if (GetState() != KirbyState::FLYSTAY &&
             GetState() != KirbyState::DIE &&
@@ -1254,265 +1278,286 @@ void Player::CorrectPos()
 
 void Player::CheckCollision()
 {
-    if (true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
+    if (GetLevel()->GetNameCopy() != "Cannon")
     {
-        SetState(KirbyState::OPENDOOR);
-    }
-
-	if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect) &&
-		GetState() == KirbyState::OPENDOOR)
-	{
-		if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-			GetRenderer()->IsEndAnimation())
-		{
-			HP_COUNT = GetHPCount();
-			HP = GetHP();			
-			GameEngine::GetInst().ChangeLevel("Level1_2");
-		}
-	}
-
-	if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect) &&
-		GetState() == KirbyState::OPENDOOR)
-	{
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
+        if (true == GameEngineInput::GetInst()->IsDown("OpenDoor"))
         {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level1_3");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level1_4");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Cannon");
-        }
-    }
-    
-    if (true == KirbyCol_->CollisionCheck("DoorCol2", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level2");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level2_2");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_3", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level2_3");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_4", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level2_4");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("DoorCol2_5", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level2_5");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("DoorCol3", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Level3");
-        }
-    }
-
-    if (true == KirbyCol_->CollisionCheck("Boss", CollisionType::Rect, CollisionType::Rect) &&
-        GetState() == KirbyState::OPENDOOR)
-    {
-        if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
-            GetRenderer()->IsEndAnimation())
-        {
-            HP_COUNT = GetHPCount();
-            HP = GetHP();
-            GameEngine::GetInst().ChangeLevel("Boss");
-        }
-    }
-
-    //if (true == KirbyCol_->CollisionCheck("CanCol", CollisionType::Rect, CollisionType::Rect))
-    //{
-    //    KirbyCol_->Off();
-    //}
-
-    if (ColMapImage_ != nullptr &&
-        GetState() != KirbyState::DIE &&
-		(RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
-	     RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25))))
-    {
-        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
-               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
-        {
-            SetMove(float4::LEFT);
-        }
-    }
-
-    if (ColMapImage_ != nullptr &&
-        GetState() != KirbyState::DIE &&
-        (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
-        RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f))))
-    {
-        while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
-               RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f)))
-        {
-            SetMove(float4::RIGHT);
-        }
-    }
-
-    if (ColMapImage_ != nullptr &&
-        GetState() != KirbyState::DIE &&
-        GetKirbyClass() != KirbyClass::ANIMAL &&
-        true == KirbyCol_->CollisionCheck("MoveGround", CollisionType::Rect, CollisionType::Rect) &&
-        (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
-            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y))))
-    {
-        while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
-            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
-        {
-            SetMove(float4::LEFT);
-        }
-    }
-
-    if (ColMapImage_ != nullptr &&
-        GetState() != KirbyState::DIE &&
-        GetKirbyClass() != KirbyClass::ANIMAL &&
-        true == KirbyCol_->CollisionCheck("MoveGround", CollisionType::Rect, CollisionType::Rect) &&
-        (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y)) &&
-            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y))))
-    {
-        while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y)) &&
-            RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y - 25)))
-        {
-            SetMove(float4::RIGHT);
-        }
-    }
-
-    if (GetPosition().x < 0 && GetState() != KirbyState::DIE)
-    {
-        SetPosition(float4(0, GetPosition().y));
-    }
-
-    if (GetPosition().x > GetLevel()->GetMapSizeX() && GetState() != KirbyState::DIE)
-    {
-        SetPosition(float4(GetLevel()->GetMapSizeX()-1.0f, GetPosition().y));
-    }
-
-    if (GetPosition().y < 70)
-    {
-        SetPosition(float4(GetPosition().x, 70));
-    }
-
-    if (RGB(16, 184, 152) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
-    {
-        if (HPCount_ == 0)
-        {
-            GameEngine::GetInst().ChangeLevel("GameOver");
+            SetState(KirbyState::OPENDOOR);
         }
 
-        if (HPCount_ != 0)
+        if (true == KirbyCol_->CollisionCheck("DoorCol1_2", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
         {
-			--HPCount_;
-			SetHP(10);
-			SetPosition(StartPos_);
-        }
-
-    }
-
-
-    std::vector<GameEngineCollision*> ColResult;
-    while (true == KirbyCol_->CollisionResult("Obstruction", ColResult, CollisionType::Rect, CollisionType::Rect))
-    {
-        for (GameEngineCollision* BoxCollision : ColResult)
-        {
-            GameEngineActor* CollisionActor = BoxCollision->GetActor();
-            if (CollisionActor != nullptr)
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
             {
-                float XDir = CollisionActor->GetPosition().x - GetPosition().x;
-                float YDir = CollisionActor->GetPosition().y - GetPosition().y;
-            
-                if (YDir > 0)
-                {
-                    SetMove(float4::UP);
-                }
-                else if (XDir <= 0)
-                {
-                    SetMove(float4::RIGHT);
-                }
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+                GameEngine::GetInst().ChangeLevel("Level1_2");
+            }
+        }
 
-                else if (XDir > 0)
-                {
-                    SetMove(float4::LEFT);
-                }
+        if (true == KirbyCol_->CollisionCheck("DoorCol1_3", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+                GameEngine::GetInst().ChangeLevel("Level1_3");
+            }
+        }
 
-                else if (YDir <= 0)
+        if (true == KirbyCol_->CollisionCheck("DoorCol1_4", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+                GameEngine::GetInst().ChangeLevel("Level1_4");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("Cannon", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Cannon");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("DoorCol2", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Level2");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("DoorCol2_2", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Level2_2");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("DoorCol2_3", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Level2_3");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("DoorCol2_4", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Level2_4");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("DoorCol2_5", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Level2_5");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("DoorCol3", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Level3");
+            }
+        }
+
+        if (true == KirbyCol_->CollisionCheck("Boss", CollisionType::Rect, CollisionType::Rect) &&
+            GetState() == KirbyState::OPENDOOR)
+        {
+            if ((GetRenderer()->IsAnimationName("DoorOpenRight") || GetRenderer()->IsAnimationName("DoorOpenLeft")) &&
+                GetRenderer()->IsEndAnimation())
+            {
+                HP_COUNT = GetHPCount();
+                HP = GetHP();
+                GameEngineSound::SoundPlayOneShot("Enter.wav", 0);
+
+                GameEngine::GetInst().ChangeLevel("Boss");
+            }
+        }
+
+        //if (true == KirbyCol_->CollisionCheck("CanCol", CollisionType::Rect, CollisionType::Rect))
+        //{
+        //    KirbyCol_->Off();
+        //}
+
+        if (ColMapImage_ != nullptr &&
+            GetState() != KirbyState::DIE &&
+            (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+                RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25))))
+        {
+            while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+                RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
+            {
+                SetMove(float4::LEFT);
+            }
+        }
+
+        if (ColMapImage_ != nullptr &&
+            GetState() != KirbyState::DIE &&
+            (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
+                RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f))))
+        {
+            while (RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y)) &&
+                RGB(0, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20.0f), int(GetPosition().y - 25.0f)))
+            {
+                SetMove(float4::RIGHT);
+            }
+        }
+
+        if (ColMapImage_ != nullptr &&
+            GetState() != KirbyState::DIE &&
+            GetKirbyClass() != KirbyClass::ANIMAL &&
+            true == KirbyCol_->CollisionCheck("MoveGround", CollisionType::Rect, CollisionType::Rect) &&
+            (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+                RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y))))
+        {
+            while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y)) &&
+                RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x + 20), int(GetPosition().y - 25)))
+            {
+                SetMove(float4::LEFT);
+            }
+        }
+
+        if (ColMapImage_ != nullptr &&
+            GetState() != KirbyState::DIE &&
+            GetKirbyClass() != KirbyClass::ANIMAL &&
+            true == KirbyCol_->CollisionCheck("MoveGround", CollisionType::Rect, CollisionType::Rect) &&
+            (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y)) &&
+                RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y))))
+        {
+            while (RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y)) &&
+                RGB(255, 0, 0) == ColMapImage_->GetImagePixel(int(GetPosition().x - 20), int(GetPosition().y - 25)))
+            {
+                SetMove(float4::RIGHT);
+            }
+        }
+
+        if (GetPosition().x < 0 && GetState() != KirbyState::DIE)
+        {
+            SetPosition(float4(0, GetPosition().y));
+        }
+
+        if (GetPosition().x > GetLevel()->GetMapSizeX() && GetState() != KirbyState::DIE)
+        {
+            SetPosition(float4(GetLevel()->GetMapSizeX() - 1.0f, GetPosition().y));
+        }
+
+        if (GetPosition().y < 70)
+        {
+            SetPosition(float4(GetPosition().x, 70));
+        }
+
+        if (RGB(16, 184, 152) == ColMapImage_->GetImagePixel(GetPosition() + float4::DOWN))
+        {
+            if (HPCount_ == 0)
+            {
+                GameEngine::GetInst().ChangeLevel("GameOver");
+            }
+
+            if (HPCount_ != 0)
+            {
+                --HPCount_;
+                SetHP(10);
+                SetPosition(StartPos_);
+            }
+
+        }
+
+
+        std::vector<GameEngineCollision*> ColResult;
+        while (true == KirbyCol_->CollisionResult("Obstruction", ColResult, CollisionType::Rect, CollisionType::Rect))
+        {
+            for (GameEngineCollision* BoxCollision : ColResult)
+            {
+                GameEngineActor* CollisionActor = BoxCollision->GetActor();
+                if (CollisionActor != nullptr)
                 {
-                    SetMove(float4::DOWN);
+                    float XDir = CollisionActor->GetPosition().x - GetPosition().x;
+                    float YDir = CollisionActor->GetPosition().y - GetPosition().y;
+
+                    if (YDir > 0)
+                    {
+                        SetMove(float4::UP);
+                    }
+                    else if (XDir <= 0)
+                    {
+                        SetMove(float4::RIGHT);
+                    }
+
+                    else if (XDir > 0)
+                    {
+                        SetMove(float4::LEFT);
+                    }
+
+                    else if (YDir <= 0)
+                    {
+                        SetMove(float4::DOWN);
+                    }
                 }
             }
         }
     }
-
 }
 
 
@@ -1633,7 +1678,7 @@ void Player::Start()
         KirbyCol_ = CreateCollision("KirbyCol", float4(50.0f, 50.0f), float4(0.0f, -25.0f));
         KirbyEatCol_ = CreateCollision("KirbyEatCol", float4(0.0f, 0.0f), float4(0.0f, 0.0f));
         KirbySlideCol_ = CreateCollision("KirbySlideCol", float4(30.0f, 30.0f), float4(0.0f, 0.0f));
-        AnimalCol_ = CreateCollision("AnimalCol", float4(35.0f, 35.0f), float4(0.0f, 0.0f));
+        AnimalCol_ = CreateCollision("AnimalCol", float4(40.0f, 40.0f), float4(0.0f, 0.0f));
         SwordCol_ = CreateCollision("SwordCol", float4(100.0f, 150.0f), float4(0.0f, 0.0f));
 
         Renderer_ = CreateRenderer("Normal.bmp");
@@ -1781,6 +1826,9 @@ void Player::Start()
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "WalkRight", 20, 29, 0.1f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "WalkLeft", 230, 239, 0.1f, true);
 
+        AnimalRenderer_->CreateAnimation("Animal.bmp", "GroundWalkRight", 152, 156, 0.1f, true);
+        AnimalRenderer_->CreateAnimation("Animal.bmp", "GroundWalkLeft", 262, 266, 0.1f, true);
+
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "RunRight", 31, 38, 0.1f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "RunLeft", 241, 248, 0.1f, true);
 
@@ -1803,7 +1851,8 @@ void Player::Start()
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpDownRight", 48, 49, 0.5f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "JumpDownLeft", 258, 259, 0.5f, true);
 
-        AnimalRenderer_->CreateAnimation("Animal.bmp", "Up", 61, 63, 0.3f, true);
+        AnimalRenderer_->CreateAnimation("Animal.bmp", "Up", 61, 63, 0.1f, true);
+        AnimalRenderer_->CreateAnimation("Animal.bmp", "Down", 160, 162, 0.1f, true);
 
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "DownRight", 2, 2, 0.1f, true);
 		AnimalRenderer_->CreateAnimation("Animal.bmp", "DownLeft", 212, 212, 0.1f, true);

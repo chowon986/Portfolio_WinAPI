@@ -178,7 +178,6 @@ void Monster::UpdateMove()
 
 	if (true == IceEndCol_->CollisionCheck("BasicMonster", CollisionType::Rect, CollisionType::Rect))
 	{
-		Collision_->Off();
 		Death();
 		//EffectRenderer_->ChangeAnimation("DieEffect");
 		//EffectRenderer_->SetAlpha(255);
@@ -192,7 +191,6 @@ void Monster::UpdateMove()
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
-			Collision_->Off();
 			Death();
 		}
 		else
@@ -205,7 +203,6 @@ void Monster::UpdateMove()
 	{
 		if (true == Renderer_->IsAnimationName("Ice"))
 		{
-			Collision_->Off();
 			Death();
 		}
 		else
@@ -337,6 +334,31 @@ void Monster::UpdateMove()
 		}
 	}
 
+	std::vector<GameEngineCollision*> AnimalAttackColResult;
+	if (true == Collision_->CollisionResult("AnimalCol", AnimalAttackColResult, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (GameEngineCollision* Collision : AnimalAttackColResult)
+		{
+			Player* Player_ = dynamic_cast<Player*>(Collision->GetActor());
+			SetPlayer(Player_);
+			if (Player_ != nullptr)
+			{
+				float Direction = Player_->GetPosition().x - GetPosition().x;
+				if (Direction <= 0) // 몬스터가 오른쪽
+				{
+					Renderer_->ChangeAnimation("CollisionRight");
+					SetHP(GetHP() - 1);
+				}
+
+				else // 몬스터가 왼쪽
+				{
+					Renderer_->ChangeAnimation("CollisionLeft");
+					SetHP(GetHP() - 1);
+				}
+			}
+		}
+	}
+
 	std::vector<GameEngineCollision*> SparkAttackColResult;
 	if (true == Collision_->CollisionResult("SparkAttackCol", SparkAttackColResult, CollisionType::Rect, CollisionType::Rect))
 	{
@@ -378,6 +400,7 @@ void Monster::UpdateMove()
 		}
 	}
 
+
 	std::vector<GameEngineCollision*> IceResult;
 	if (true == IceCol_->CollisionResult("KirbyCol", IceResult, CollisionType::Rect, CollisionType::Rect) && true == Renderer_->IsAnimationName("Ice"))
 	{
@@ -391,7 +414,7 @@ void Monster::UpdateMove()
 				IceCol_->Off();
 				IceEndCol_->On();
 				float Direction = IceColActor->GetPosition().x - GetPosition().x;
-				SetSpeed(250.0f);
+				SetSpeed(500.0f);
 				if (Direction <= 0) // 몬스터가 오른쪽
 				{
 					Dir_ = float4::RIGHT;

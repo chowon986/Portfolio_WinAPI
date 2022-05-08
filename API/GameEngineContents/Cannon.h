@@ -29,8 +29,6 @@ protected:
 private:
 	GameEngineRenderer* CanRenderer_;
 	GameEngineRenderer* PlayerRenderer_;
-	GameEngineRenderer* CannonRenderer_;
-	GameEngineRenderer* TomatoRenderer_;
 	GameEngineCollision* CanCol_;
 	Player* Player_;
 	float4 PrevPos_;

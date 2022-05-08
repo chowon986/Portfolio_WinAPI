@@ -21,6 +21,8 @@
 #include "AbandonEffect.h"
 #include "GameEngineBase/GameEngineSound.h"
 #include "IceItem.h"
+#include "TransformEffect.h"
+
 
 Level2::Level2()
 	: Player_(nullptr)
@@ -100,7 +102,7 @@ void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(45, 320));
+		Player_->SetPosition(float4(100, 436));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 
@@ -111,6 +113,8 @@ void Level2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
+		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);

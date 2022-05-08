@@ -22,6 +22,7 @@ class GameEngineCollision;
 class GameEngineRenderer;
 class GameEngineLevel;
 class Player;
+class StarMonster;
 class Dedede : public Monster
 {
 public:
@@ -54,6 +55,10 @@ public:
 	void UpdateFlyDown();
 	void UpdateFlyDownAttack();
 	void UpdateDie();
+	void SetStarMonster(StarMonster* _StarMonster)
+	{
+		StarMonster_ = _StarMonster;
+	}
 
 protected:
 
@@ -66,9 +71,11 @@ private:
 	float FlyUpTime_;
 	float FlyAttackTime_;
 	float JumpTime_;
+	float StarTime_;
 	DededeState DededeState_;
 	std::string Direction_;
-
+	StarMonster* StarMonster_;
+	GameEngineCollision* HammerCol_;
 
 private:
 };

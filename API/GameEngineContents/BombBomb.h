@@ -1,5 +1,6 @@
 #pragma once
 #include "Obstruction.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 class BombBomb : public Obstruction
 {

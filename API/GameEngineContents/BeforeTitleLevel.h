@@ -19,8 +19,6 @@ public:
 protected:
 	void Loading() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-	//void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
-
 	void DelayUpdate() override;
 
 private:

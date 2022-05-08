@@ -22,6 +22,9 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngineBase/GameEngineSound.h>
+#include "TransformEffect.h"
+
 
 Level2_5::Level2_5()
 	: Player_(nullptr)
@@ -101,7 +104,7 @@ void Level2_5::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	{
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
-		Player_->SetPosition(float4(4000.0f, 100.0f));
+		Player_->SetPosition(float4(100.0f, 100.0f));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
 
@@ -112,6 +115,8 @@ void Level2_5::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
+		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
@@ -187,4 +192,9 @@ void Level2_5::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	DoorStarImage->CutCount(6, 2);
 	DoorStarRenderer->CreateAnimation("BigDoorStar.bmp", "BigDoorStar", 0, 11, 0.05f, true);
 	DoorStarRenderer->ChangeAnimation("BigDoorStar");
+}
+
+void Level2_5::LevelChangeEnd(GameEngineLevel* _PrevLevel)
+{
+	LEVEL_BGM.Stop();
 }

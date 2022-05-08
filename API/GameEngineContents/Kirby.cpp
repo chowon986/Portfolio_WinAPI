@@ -16,7 +16,6 @@
 #include "Cannon.h"
 #include "DanceStage.h"
 #include "WorldMap.h"
-#include "EndingLevel.h"
 #include "EndingStory.h"
 #include "GameOver.h"
 #include <GameEngineBase/GameEngineWindow.h>
@@ -136,7 +135,6 @@ void Kirby::GameInit()
     CreateLevel<Level3>("Level3");
     CreateLevel<Boss>("Boss");
     CreateLevel<EndingStory>("EndingStory");
-    CreateLevel<EndingLevel>("Ending");
     CreateLevel<GameOver>("GameOver");
 
     ChangeLevel("Level2");

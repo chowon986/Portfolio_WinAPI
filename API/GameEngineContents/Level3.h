@@ -18,11 +18,11 @@ protected:
 	void Loading() override;
 	void DelayUpdate() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
 	Player* Player_;
 	BotUI* PlayerStatus_;
 	GameEngineCollision* Boss;
-
 };
 

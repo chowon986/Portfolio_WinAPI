@@ -44,4 +44,5 @@ private:
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
+	float Time_;
 };

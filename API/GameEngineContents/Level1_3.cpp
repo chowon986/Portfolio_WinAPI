@@ -17,6 +17,7 @@
 #include "FireAttackEffect.h"
 #include "RunEffect.h"
 #include "AbandonEffect.h"
+#include "TransformEffect.h"
 
 
 
@@ -101,12 +102,13 @@ void Level1_3::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		SparkAttackEffect* SparkAttackEffect_ = CreateActor<SparkAttackEffect>((int)ORDER::EFFECT);
 		RunEffect* RunEffect_ = CreateActor<RunEffect>((int)ORDER::EFFECT);
 		AbandonEffect* AbandonEffect_ = CreateActor<AbandonEffect>((int)ORDER::EFFECT);
+		TransformEffect* TransformEffect_ = CreateActor<TransformEffect>((int)ORDER::EFFECT);
 		Player_ = CreateActor<Player>((int)ORDER::PLAYER);
 		Player_->SetAbandonEffect(AbandonEffect_);
 		Player_->SetPosition(float4(45, 960));
 		PlayerStatus_ = CreateActor<BotUI>((int)ORDER::BOTUI);
 		PlayerStatus_->SetPlayer(Player_);
-
+		Player_->SetTransformEffect(TransformEffect_);
 		Player_->SetStarAttackEffect(StarAttackEffect_);
 		Player_->SetAttackEffect(AttackEffect_);
 		Player_->SetIceAttackEffect(IceAttackEffect_);

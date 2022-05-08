@@ -4,6 +4,7 @@
 enum class GroundStarEffectState
 {
 	GroundStarEffect,
+	Abandon,
 	None,
 };
 
@@ -25,6 +26,7 @@ private:
 	void StateUpdate();
 	void UpdateGroundStarEffect();
 	void UpdateNone();
+	void UpdateAbandon();
 
 
 protected:
@@ -36,6 +38,7 @@ private:
 	GroundStarEffectState GroundStarEffectState_;
 	GameEngineImage* ColMapImage_;
 	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* Renderer2_;
 	GameEngineCollision* Collision_;
 	GameEngineImage* Image_;
 };
