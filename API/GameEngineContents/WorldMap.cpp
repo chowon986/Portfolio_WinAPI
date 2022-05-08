@@ -366,5 +366,7 @@ void WorldMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void WorldMap::LevelChangeEnd(GameEngineLevel* _PrevLevel)
 {
+	Player_->Death();
 	BgmPlayer_.Stop();
+	PlayerStatus_->Death();
 }

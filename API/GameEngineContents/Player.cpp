@@ -509,28 +509,33 @@ void Player::SetState(KirbyState _KirbyState)
         if (GetKirbyClass() == KirbyClass::SPARK)
         {
             SparkRenderer_->ChangeAnimation("TakeDamage" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Bomb.mp3");
         }
         if (GetKirbyClass() == KirbyClass::DEFAULT)
         {
             Renderer_->ChangeAnimation("TakeDamage" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Bomb.mp3");
         }
         if (GetKirbyClass() == KirbyClass::ICE)
         {
             IceRenderer_->ChangeAnimation("TakeDamage" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Bomb.mp3");
         }
         if (GetKirbyClass() == KirbyClass::SWORD)
         {
             SwordRenderer_->ChangeAnimation("TakeDamage" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Bomb.mp3");
         }
         if (GetKirbyClass() == KirbyClass::ANIMAL)
         {
             AnimalRenderer_->ChangeAnimation("TakeDamage" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Bomb.mp3");
         }
         if (GetKirbyClass() == KirbyClass::FIRE)
         {
             FireRenderer_->ChangeAnimation("TakeDamage" + Dir_);
+            GameEngineSound::SoundPlayOneShot("Bomb.mp3");
         }
-        ///////////Sound/////////
         break;
 
     case KirbyState::JUMPUP:

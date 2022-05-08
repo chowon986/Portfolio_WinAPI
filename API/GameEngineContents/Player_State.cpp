@@ -23,6 +23,8 @@
 #include "MonBotUI.h"
 #include <GameEngineContents/GameEngineLevelBase.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngineContents/StarMonster.h>
+#include <GameEngineContents/Dedede.h>
 
 
 void Player::UpdateIdle()
@@ -349,6 +351,11 @@ void Player::UpdateEat()
         for (GameEngineCollision* Collision : ColResult)
         {
             GameEngineActor* Actor = Collision->GetActor();
+            Dedede* Dedede_ = dynamic_cast<Dedede*>((Actor));
+            if (Dedede_ != nullptr)
+            {
+                continue;
+            }
             Monster_ = dynamic_cast<Monster*>(Actor);
             AbandonEffect* Effect_ = dynamic_cast<AbandonEffect*>(Actor);
             if (nullptr != Monster_ ||
@@ -410,7 +417,14 @@ void Player::UpdateEatEnd()
     if (nullptr != Monster_)
     {
         MonClass_ = Monster_->GetMonsterClass();
+        if (StarMonster* StarMonster_ = dynamic_cast<StarMonster*>(Monster_))
+        {
+            StarMonster_->Off();
+        }
+        else
+        {
         Monster_->Death();
+        }
         Monster_ = nullptr;
     }
 

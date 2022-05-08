@@ -146,6 +146,5 @@ void Level2_4::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void Level2_4::LevelChangeEnd(GameEngineLevel* _PrevLevel)
 {
-	LEVEL_BGM.Stop();
 }
 

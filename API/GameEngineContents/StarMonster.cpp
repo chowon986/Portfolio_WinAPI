@@ -25,7 +25,7 @@ void StarMonster::Start()
 	Renderer_ = CreateRenderer("AttackEffect.bmp");
 	GameEngineImage* Image = Renderer_->GetImage();
 	Image->CutCount(8, 2);
-	Renderer_->CreateAnimation("AttackEffect.bmp", "Star", 1, 1, 0.3f, true);
+	Renderer_->CreateAnimation("AttackEffect.bmp", "Star", 0, 3, 0.3f, true);
 	Renderer_->ChangeAnimation("Star");
 	Collision_ = CreateCollision("StarMonster", float4(50.0f, 50.0f), float4(0.0f, -25.0f));
 }
