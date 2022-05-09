@@ -23,6 +23,7 @@
 #include "RunEffect.h"
 #include "AbandonEffect.h"
 #include "TransformEffect.h"
+#include "HPUp.h"
 
 
 Level1_2::Level1_2()
@@ -151,6 +152,9 @@ void Level1_2::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		Box_4->SetPosition(float4(2475.0f, 270.0f));
 		Box_5->SetPosition(float4(2525.0f, 270.0f));
 		Box_6->SetPosition(float4(2575.0f, 270.0f));
+
+		HPUp* HPUp_ = CreateActor<HPUp>((int)ORDER::ITEM);
+		HPUp_->SetPosition(float4(2475.0f, 355.0f));
 	}
 
 	{

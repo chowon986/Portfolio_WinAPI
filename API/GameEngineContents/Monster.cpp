@@ -110,6 +110,14 @@ void Monster::Start()
 	LeftDirCol_ = CreateCollision("LeftDirCol", float4(10.0f, 50.0f), float4(-80.0f, -30.0f));
 	IceCol_->Off();
 	IceEndCol_->Off();
+
+	DieRenderer_ = CreateRenderer("MonsterDi.bmp");
+	GameEngineImage* DieImage_ = DieRenderer_->GetImage();
+	DieImage_->CutCount(12, 2);
+	DieRenderer_->CreateAnimation("MonsterDi.bmp", "Die", 0, 23, 0.05f, true);
+	DieRenderer_->CreateAnimation("MonsterDi.bmp", "None", 14, 14, 0.03f, true);
+	DieRenderer_->ChangeAnimation("None");
+	DieRenderer_->SetOrder(7);
 }
 
 void Monster::Render()
@@ -118,10 +126,6 @@ void Monster::Render()
 
 void Monster::Die()
 {
-	//if (Player_ == nullptr)
-	//{
-	//	return;
-	//}
 
 	if (true == IsDie())
 	{
@@ -132,18 +136,6 @@ void Monster::Die()
 			{
 				Collision_->Off();
 				Death();
-
-				//if (DieEffect_ != nullptr)
-				//{
-				//	DieEffect_->SetState(DieEffectState::DieEffect);
-				//	DieEffect_->SetPosition(GetPosition());
-				//}
-				//EffectRenderer_->SetAlpha(255);
-				//EffectRenderer_->ChangeAnimation("DieEffect");
-				//if (EffectRenderer_->IsEndAnimation())
-				//{
-				//	EffectRenderer_->SetAlpha(0);
-				//}
 			}
 		}
 
@@ -156,7 +148,10 @@ void Monster::Die()
 				Collision_->Off();
 				Dir_ = float4::LEFT;
 				Renderer_->ChangeAnimation("DieLeft");
+				DieRenderer_->ChangeAnimation("Die");
+				DieRenderer_->SetPivot(float4(0.0f, 60.0f));
 			}
+
 		}
 
 		if (true != Renderer_->IsAnimationName("DieRight"))
@@ -168,7 +163,15 @@ void Monster::Die()
 				Dir_ = float4::RIGHT;
 				Collision_->Off();
 				Renderer_->ChangeAnimation("DieRight");
+				DieRenderer_->ChangeAnimation("Die");
+				DieRenderer_->SetPivot(float4(0.0f, 60.0f));
 			}
+		}
+
+		if (DieRenderer_->IsAnimationName("Die") &&
+			DieRenderer_->IsEndAnimation())
+		{
+			DieRenderer_->ChangeAnimation("None");
 		}
 	}
 }

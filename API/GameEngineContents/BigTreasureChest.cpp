@@ -18,9 +18,4 @@ void BigTreasureChest::Start()
 
 void BigTreasureChest::DelayUpdate()
 {
-	if (true == BigTreasureChestCol_->CollisionCheck("KirbyCol", CollisionType::Rect, CollisionType::Rect))
-	{
-		//BigTreasureChestCount + 1;
-		Death();
-	}
 }

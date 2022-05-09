@@ -99,6 +99,7 @@ private:
 	void GetPos(float4 _Pos);
 	void SetState(MonsterState _PrevState);
 	DieEffect* DieEffect_;
+	GameEngineRenderer* DieRenderer_;
 
 public:
 	void SetPlayer(Player* _Player) { Player_ = _Player; }

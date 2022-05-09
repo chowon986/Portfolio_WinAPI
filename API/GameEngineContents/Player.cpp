@@ -421,6 +421,7 @@ void Player::SetState(KirbyState _KirbyState)
         {
             FireRenderer_->ChangeAnimation("FlyEnd" + Dir_);
         }
+        GameEngineSound::SoundPlayOneShot("Flyattack.wav");
         break;
 
     case KirbyState::EATSTART:
