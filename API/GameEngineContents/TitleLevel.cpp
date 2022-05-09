@@ -24,7 +24,7 @@ void TitleLevel::Loading()
 
 void TitleLevel::DelayUpdate()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChange") || true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
 		GameEngine::GetInst().ChangeLevel("IntroStory");
 	}
