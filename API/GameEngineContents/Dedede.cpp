@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "IceAttackEffect.h"
 #include "StarMonster.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 Dedede::Dedede()
 	: Monster()
@@ -96,6 +97,7 @@ void Dedede::UpdateMove()
 	{
 		if (GetState() != DededeState::DIE)
 		{
+			GameEngineSound::SoundPlayOneShot("BombBomb.mp3", 0);
 			SetState(DededeState::DIE);
 		}
 		
