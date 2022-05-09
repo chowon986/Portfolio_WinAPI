@@ -21,7 +21,7 @@ void IntroStory::Loading()
 
 void IntroStory::DelayUpdate()
 {
-	if (true == IntroVideo_->IsVideoFinished())
+	if (true == IntroVideo_->IsVideoFinished() || true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
 		BgmPlayer.Stop();
 		GameEngine::GetInst().ChangeLevel("Level1");

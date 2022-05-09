@@ -729,10 +729,6 @@ void Player::DelayUpdate()
         SetKirbyClass(KirbyClass::FIRE);
     }
 
-    if (true == GameEngineInput::GetInst()->IsPress("BossMap"))
-    {
-        GameEngine::GetInst().ChangeLevel("Boss");
-    }
 
     if (true == GameEngineInput::GetInst()->IsPress("Animal"))
     {
@@ -2047,7 +2043,6 @@ void Player::Start()
         GameEngineInput::GetInst()->CreateKey("Attack", 'C');
         GameEngineInput::GetInst()->CreateKey("Transform", 'V');
         GameEngineInput::GetInst()->CreateKey("OpenDoor", VK_SPACE);
-        GameEngineInput::GetInst()->CreateKey("BossMap", '7');
         
         
         GameEngineInput::GetInst()->CreateKey("ResetPos", 'P');

@@ -18,7 +18,7 @@ void EndingStory::Loading()
 
 void EndingStory::DelayUpdate()
 {
-	if (true == EndingVideo_->IsVideoFinished())
+	if (true == EndingVideo_->IsVideoFinished() || true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
 		BgmPlayer.Stop();
 		GameEngine::GetInst().ChangeLevel("Title");

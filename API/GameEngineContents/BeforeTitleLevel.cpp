@@ -36,7 +36,7 @@ void BeforeTitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void BeforeTitleLevel::DelayUpdate()
 {
-	if (true == BeforeTitleVideo_->IsVideoFinished())
+	if (true == BeforeTitleVideo_->IsVideoFinished() || true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
 		BgmPlayer.Stop();
 		GameEngine::GetInst().ChangeLevel("Title");
