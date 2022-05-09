@@ -117,7 +117,7 @@ void Monster::Start()
 	DieRenderer_->CreateAnimation("MonsterDi.bmp", "Die", 0, 23, 0.05f, true);
 	DieRenderer_->CreateAnimation("MonsterDi.bmp", "None", 14, 14, 0.03f, true);
 	DieRenderer_->ChangeAnimation("None");
-	DieRenderer_->SetOrder(7);
+	DieRenderer_->SetOrder(9);
 }
 
 void Monster::Render()

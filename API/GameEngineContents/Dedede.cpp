@@ -28,7 +28,7 @@ void Dedede::Start()
 {
 	Monster::Start();
 
-	Renderer_ = CreateRenderer("KingDedede.bmp", 2147483646, RenderPivot::CENTER, float4(0, -120));
+	Renderer_ = CreateRenderer("KingDedede.bmp", 5, RenderPivot::CENTER, float4(0, -120));
 	GameEngineImage* Image = Renderer_->GetImage();
 	Image->CutCount(10, 7);
 	Renderer_->CreateAnimation("KingDedede.bmp", "IdleRight", 0, 3, 0.2f, true);
@@ -74,12 +74,6 @@ void Dedede::Start()
 	Collision_->SetPivot(float4(0, -85));
 
 	HammerCol_ = CreateCollision("Hammer", float4(50.0f, 50.0f), float4(0.0f, 0.0f));
-	//EffectRenderer_ = CreateRenderer("MonsterDie.bmp");
-	//GameEngineImage* EffectImage = EffectRenderer_->GetImage();
-	//EffectImage->CutCount(10, 3);
-	//EffectRenderer_->CreateAnimation("MonsterDie.bmp", "DieEffect", 0, 24, 0.05f, true);
-	//EffectRenderer_->ChangeAnimation("DieEffect");
-	//EffectRenderer_->SetAlpha(0);
 
 	Dir_ = float4::LEFT;
 	Direction_ = "Left";

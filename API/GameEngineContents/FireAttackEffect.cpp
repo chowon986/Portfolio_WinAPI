@@ -94,7 +94,7 @@ void FireAttackEffect::UpdateFireAttackEffectRight()
 
 	std::vector<GameEngineCollision*> Result;
 	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
-		Time_ > 1.0f)
+		Time_ > 0.5f)
 	{
 		Time_ = 0.0f;
 		for (GameEngineCollision* Collision : Result)
@@ -137,7 +137,7 @@ void FireAttackEffect::UpdateFireAttackEffectLeft()
 
 	std::vector<GameEngineCollision*> Result;
 	if (true == Collision_->CollisionResult("BasicMonster", Result, CollisionType::Rect, CollisionType::Rect) &&
-		Time_ > 1.0f)
+		Time_ > 0.5f)
 	{
 		Time_ = 0.0f;
 		for (GameEngineCollision* Collision : Result)
