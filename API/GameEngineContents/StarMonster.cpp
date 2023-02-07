@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "IceAttackEffect.h"
+#include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>

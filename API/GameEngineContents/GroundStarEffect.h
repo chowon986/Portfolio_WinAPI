@@ -8,6 +8,7 @@ enum class GroundStarEffectState
 	None,
 };
 
+class GameEngineImage;
 class GroundStarEffect : public GameEngineActor
 {
 public:

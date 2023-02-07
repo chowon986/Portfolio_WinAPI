@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
 #include <string>
+#include "GameEngineActor.h"
 
 class GameEngineActor;
 struct ChangeOrderItem
@@ -15,7 +16,6 @@ struct ChangeOrderItem
 };
 
 class GameEngine;
-class GameEngineActor;
 class GameEngineCollision;
 class GameEngineRenderer;
 class GameEngineImage;

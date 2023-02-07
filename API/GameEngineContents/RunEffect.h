@@ -8,6 +8,7 @@ enum class RunEffectState
 	None,
 };
 
+class GameEngineImage;
 class RunEffect : public GameEngineActor
 {
 public:

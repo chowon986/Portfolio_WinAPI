@@ -7,6 +7,7 @@ enum class SparkAttackEffectState
 	None
 };
 
+class GameEngineImage;
 class SparkAttackEffect : public GameEngineActor
 {
 public:

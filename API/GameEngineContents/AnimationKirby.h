@@ -10,6 +10,7 @@ enum class AnimationKirbyClass
 	STAR,
 };
 
+class GameEngineImage;
 class AnimationKirby : public CharacterBase
 {
 

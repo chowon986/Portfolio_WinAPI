@@ -8,6 +8,7 @@ enum class FireAttackEffectState
 	None,
 };
 
+class GameEngineImage;
 class FireAttackEffect : public GameEngineActor
 {
 public:

@@ -8,6 +8,7 @@ enum class IceAttackEffectState
 	None,
 };
 
+class GameEngineImage;
 class IceAttackEffect : public GameEngineActor
 {
 public:

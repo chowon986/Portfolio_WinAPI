@@ -1,5 +1,6 @@
 #include "BigBomb.h"
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineMath.h>

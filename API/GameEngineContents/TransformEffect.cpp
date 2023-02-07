@@ -1,5 +1,6 @@
 #include "TransformEffect.h"
 #include "Monster.h"
+#include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>

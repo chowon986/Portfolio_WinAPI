@@ -10,6 +10,7 @@ enum class StarAttackEffectState
 	None,
 };
 
+class GameEngineImage;
 class StarAttackEffect : public GameEngineActor
 {
 public:
